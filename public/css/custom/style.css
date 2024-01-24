@@ -1,0 +1,136 @@
+:root {
+    --primary: #5B3C88;
+    --btn: #413B87;
+  }
+
+#example  a {
+    padding: 3px 6px;
+    background: #593bdb1a;
+    margin-right: 2px;
+}
+
+#example  a i{
+    color: #593bdb;
+}
+
+#example .actions{
+    display: flex;
+    flex-direction: row;
+}
+
+.bg-btn{
+    background: var(--btn);
+}
+
+.bg-primary{
+    background: var(--primary);
+}
+
+
+.bt {
+    cursor: pointer;
+}
+
+.bt:hover{
+    background: var(--primary);
+}
+
+.error-message, .supplier-msg{
+    font-size: 11px;
+    color: red;
+    font-style: italic;
+}
+
+.supplier-msg{
+    position: absolute;
+    margin-top: 8%;
+}
+
+.counter span{
+    padding: 10px;
+    font-weight: 400;
+    border-radius: 100%;
+}
+
+.counter #totalIn{
+    color: red;
+    position: absolute;
+    font-style: normal;
+}
+
+.input-group #search-box{
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 2px solid var(--primary);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding: 20px 15px;
+}
+
+.search_ button {
+    position: absolute;
+    left: -10px;
+}
+
+table tr input {
+    width: 50px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #f2f2f5;
+}
+
+.text-primary{color: var(--primary)}
+
+table .subtotal, table .price{width: 75px;}
+
+table .actions{
+display: flex;
+flex-direction: row;
+width: 100px;
+}
+
+table .actions i{
+    padding: 5px;
+    color: #555555;
+    margin-right: 6px;
+    opacity: 50%;
+}
+
+table .actions i:hover{cursor: pointer;color: #111111;}
+
+#cart-header{display: none;}
+
+.bg-logo{background: #413B87;}
+
+.side-left-header{
+    padding-bottom: 10px;
+}
+.details .info-sale{
+    border: 1px dotted #c0c0c0;
+    
+}
+
+.details .info-sale div{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 5px;
+}
+
+.details .info-sale div:first-of-type{color: #888787;}
+.details .info-sale div:last-of-type{ 
+    color: #7Ed321;
+    font-weight: bold;
+    background: #DEF2dB;
+}
+
+.finish-btn{
+    display: flex;
+    justify-content: center;
+    margin-top: -5px !important;
+}
+.save-sale{
+    padding: 7px 25px;
+    border: none;
+    border-radius:4px;
+}

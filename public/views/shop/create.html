@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PALMA - Compras</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon.png">
+    <!-- Datatable -->
+    <link href="../../vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!-- Include Bootstrap Icons CSS -->
+<!-- <link href="../../fonts/fontawesome-free-6.2.1-web/css/all.css" rel="stylesheet"> -->
+
+
+    <!-- Custom Stylesheet -->
+    <link href="../../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/custom/style.css">
+    
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header bg-logo">
+            <a href="../home/index.html" class="brand-logo">
+                <!-- <img class="logo-abbr" src="../../images/logo.png" style="width: 100px;" alt="logo"> -->
+                <img src="../../images/logo.png" alt="">
+               
+            </a>
+
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
+                            <div class="search_bar dropdown">
+                                <span class="search_icon p-3 c-pointer" data-toggle="dropdown">
+                                    <i class="mdi mdi-magnify"></i>
+                                </span>
+                                <div class="dropdown-menu p-0 m-0">
+                                    <form>
+                                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+              
+                        <ul class="navbar-nav header-right">
+                            <li class="nav-item dropdown notification_dropdown">
+                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                    <i class="mdi mdi-bell"></i>
+                                    <div class="pulse-css"></div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <ul class="list-unstyled">
+                                        <li class="media dropdown-item">
+                                            <span class="success"><i class="ti-user"></i></span>
+                                            <div class="media-body">
+                                                <a href="#">
+                                                    <p><strong>Martin</strong> has added a <strong>customer</strong> Successfully
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <span class="notify-time">3:20 am</span>
+                                        </li>
+                                        <li class="media dropdown-item">
+                                            <span class="primary"><i class="ti-shopping-cart"></i></span>
+                                            <div class="media-body">
+                                                <a href="#">
+                                                    <p><strong>Jennifer</strong> purchased Light Dashboard 2.0.</p>
+                                                </a>
+                                            </div>
+                                            <span class="notify-time">3:20 am</span>
+                                        </li>
+                                        <li class="media dropdown-item">
+                                            <span class="danger"><i class="ti-bookmark"></i></span>
+                                            <div class="media-body">
+                                                <a href="#">
+                                                    <p><strong>Robin</strong> marked a <strong>ticket</strong> as unsolved.
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <span class="notify-time">3:20 am</span>
+                                        </li>
+                                        <li class="media dropdown-item">
+                                            <span class="primary"><i class="ti-heart"></i></span>
+                                            <div class="media-body">
+                                                <a href="#">
+                                                    <p><strong>David</strong> purchased Light Dashboard 1.0.</p>
+                                                </a>
+                                            </div>
+                                            <span class="notify-time">3:20 am</span>
+                                        </li>
+                                        <li class="media dropdown-item">
+                                            <span class="success"><i class="ti-image"></i></span>
+                                            <div class="media-body">
+                                                <a href="#">
+                                                    <p><strong> James.</strong> has added a<strong>customer</strong> Successfully
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <span class="notify-time">3:20 am</span>
+                                        </li>
+                                    </ul>
+                                    <a class="all-notification" href="#">See all notifications <i
+                                            class="ti-arrow-right"></i></a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown header-profile">
+                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                    <i class="mdi mdi-account"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="./app-profile.html" class="dropdown-item">
+                                        <i class="icon-user"></i>
+                                        <span class="ml-2">Perfil </span>
+                                    </a>
+                                    <a href="./email-inbox.html" class="dropdown-item">
+                                        <i class="icon-envelope-open"></i>
+                                        <span class="ml-2">Inbox </span>
+                                    </a>
+                                    <a href="./page-login.html" class="dropdown-item">
+                                        <i class="icon-key"></i>
+                                        <span class="ml-2">Sair </span>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+              </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="quixnav" id="quixnav">
+
+        </div>
+
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0">
+                        <div class="welcome-text">
+                            <h4>REGISTAR NOVA COMPRA</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Compras</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Registar</a></li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- row -->
+                <div class="row">
+                    <div class="col-xl-12 col-xxl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Dados do produto</h4>
+                                <div class="counter d-flex justify-content-end">
+                                     <i id="totalIn"></i>
+                                    
+                                </div>
+
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    <form>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3">
+                                                <label>Código</label>
+                                                <input type="text" id="barcode" class="form-control" placeholder="Código de produto" autofocus>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label>Nr de Factura</label>
+                                                <input type="text" id="invoice" class="form-control" placeholder="Número de factura" autofocus>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Nome do produto <i style="color: red;">*</i> </label>
+                                                <input type="text" id="name" class="form-control" placeholder="Digite aqui" required>
+                                            </div>
+                                           
+                                           
+                                            <div class="form-group col-md-3">
+                                                <label>Valor de compra <i style="color: red;">*</i></label>
+                                                <input type="text" id="shop" class="form-control" placeholder="Digite aqui">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label>Valor de venda <i style="color: red;">*</i></label>
+                                                <input type="text" id="sell" class="form-control" placeholder="Digite aqui">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label>Quantidade <i style="color: red;">*</i></label>
+                                                <input type="number" id="quantity" class="form-control" placeholder="Digite aqui">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label>Data de validade</label>
+                                                <input type="date" id="expiresIn" class="form-control" placeholder="Digite aqui">
+                                            </div>
+                                          
+                                            <div class="form-group col-md-6 mt-4 input-group">
+                                                    <div class="input-group-prepend bg-primary" data-toggle="modal" data-target="#addCategory">
+                                                        <div class="input-group-text bg-btn bt">+</div>
+                                                    </div>
+                                                    <select id="categories" name="categories" class="form-control">
+                                                        <option value="" selected disabled>Selecione a categoria</option>
+                                                    </select>
+                                            </div>
+
+                                            <div class="form-group col-md-6 mt-4 input-group">
+                                                
+                                                <div class="input-group- bg-primary2" data-toggle="modal" data-target="#addSupplier">
+                                                    <div class="input-group-text bg-btn bt" >+</div>
+                                                </div>
+                                                <select id="suppliers" name="suppliers" class="form-control">
+                                                    <option value="" selected disabled>Selecione o fornecedor</option>
+                                                </select>
+                                            </div>
+                                            
+                                        </div>
+                                      
+                                        <div class="form-group d-flex justify-content-end">
+                                            <a href="#" style="color: #3B4E87; font-weight: 400;" data-toggle="modal" data-target="#addProduct"><i class="fas fa-plus-circle"></i> Adicionar produto</a>
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Supplier and category -->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    <form>
+                                        <div class="row">
+                                            <div class="form-group col-md-12 mt-3 px-3 d-flex justify-content-between">
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                                                    <label class="form-check-label" for="flexSwitchCheckChecked">Imprimir código de barra</label>
+                                                </div>
+                                                
+                                                <div>
+                                                    <button type="submit" id="registerBtn" class="btn bg-btn">Registar compra</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        
+                       
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+      
+        <!-- Modal section -->
+         <!-- Add product modal -->
+ <div class="modal fade lg" id="addProduct">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content px-3">
+            <div class="modal-header">
+                <h5 class="modal-title">Adicionar produto à compra</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Código</label>
+                            <input type="text" id="barcode1" class="form-control" placeholder="Digite aqui" autofocus>
+                        </div>
+                      
+                        <div class="form-group col-md-12">
+                            <label>Nome do produto <i style="color: red;">*</i> </label>
+                            <input type="text" id="name1" class="form-control" placeholder="Digite aqui" required>
+                        </div>
+                       
+                        <div class="form-group col-md-6">
+                            <label>Valor de compra <i style="color: red;">*</i></label>
+                            <input type="text" id="shop1" class="form-control" placeholder="Digite aqui">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Valor de venda <i style="color: red;">*</i></label>
+                            <input type="text" id="sell1" class="form-control" placeholder="Digite aqui">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Quantidade <i style="color: red;">*</i></label>
+                            <input type="number" id="quantity1" class="form-control" placeholder="Digite aqui">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Data de validade</label>
+                            <input type="date" id="expiresIn1" class="form-control" placeholder="Digite aqui">
+                        </div>
+                        <div class="form-group col-md-12 mt-2 input-group">
+                            <div class="input-group-prepend bg-primary" id="addCategoryModal">
+                                <div class="input-group-text bg-btn bt">+</div>
+                            </div>
+                            <select id="categoryName1" name="categoryName1" class="form-control">
+                                <option value="" selected disabled>Selecione a categoria</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="addPurchase">Adicionar produto</button>
+            </div>
+        </div>
+    </div>
+</div> 
+<!-- Add product Modal end -->
+
+
+<!-- Add supplier modal start -->
+<div class="modal fade lg" id="addSupplier">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content px-3">
+            <div class="modal-header">
+                <h5 class="modal-title">Registar novo fornecedor <h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Nome <i style="color: red;">*</i></label>
+                            <input type="text" id="supplierName" class="form-control" placeholder="Digite o nome do fornecedor">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>E-mail </label>
+                            <input type="text" id="email" class="form-control" placeholder="Digite o e-mail" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Contacto </label>
+                            <input type="text" id="contact" class="form-control" placeholder="Digite o contacto" required>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary" data-dismiss="modal">Registar</button>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<!-- Add supplier modal end -->
+
+
+<!-- Start category modal -->
+<div class="row">
+<div class="modal fade lg " id="addCategory">
+    <div class="modal-dialog modal-dialog-centered" >
+        <div class="modal-content px-3">
+            <div class="modal-header">
+                <h5 class="modal-title">Registar nova categoria <h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-row col-md-12 p-0">
+                        <div class="form-group col-md-12 p-0">
+                            <label>Nome <i style="color: red;">*</i></label>
+                            <input type="text" id="categoryName" class="form-control" placeholder="Digite o nome da categoria">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Registar</button>
+            </div>
+        </div>
+    </div>
+</div> 
+</div>
+
+<!-- End category modal -->
+
+<div class="footer">
+    <div class="copyright">
+        <p>Copyright © &amp; Desenhado pela <a href="#" target="_blank">Web Soluções Gráfica </a> 2019</p>
+    </div>
+</div>
+     
+    
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="../../vendor/global/global.min.js"></script>
+    <script src="../js/custom/shop/create.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../../js/quixnav-init.js"></script>
+    <script src="../../js/custom.min.js"></script>
+
+        <!-- Sweet alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+</body>
+
+</html>

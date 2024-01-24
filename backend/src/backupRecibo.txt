@@ -1,0 +1,75 @@
+
+// //Thermal printer
+// import express, { Request, Response } from 'express';
+// import fs from 'fs';
+// import path from 'path';
+// import PDFDocument from 'pdfkit';
+// import { exec, ChildProcess } from 'child_process';
+
+// const app = express();
+// const port = 3000;
+
+// app.get('/api/recibo', async (req: Request, res: Response) => {
+//   const filePath = path.join(__dirname, 'recibo.pdf');
+//   const doc = new PDFDocument();
+
+//   // Crie um stream de saída usando fs.createWriteStream
+//   const outputStream = fs.createWriteStream(filePath);
+
+//   doc.font('Helvetica');
+//   doc.fontSize(16).text('Empresa XYZ', { align: 'center' });
+//   // ... Adicione o restante do conteúdo do recibo ...
+//   doc.fontSize(16).text('Empresa XYZ', { align: 'center' });
+//   doc.fontSize(12).text('-------------------------------');
+//   // doc.fontSize(12).text('Descrição            Valor', { bold: true });
+//   doc.fontSize(12).text('Item 1               R$ 10.00');
+//   doc.fontSize(12).text('Item 2               R$ 20.00');
+//   doc.fontSize(12).text('-------------------------------');
+  
+//   doc.fontSize(12).text('Total:               R$ 30.00');
+//   doc.fontSize(12).text('-------------------------------');
+  
+//   doc.fontSize(12).text('Obrigado por sua compra!', { align: 'center' });
+  
+//   // Adiciona algumas páginas em branco para cortar o papel
+//   for (let i = 0; i < 5; i++) {
+//     doc.addPage();
+//   }
+  
+//   // Finaliza o PDF e fecha o stream
+//   doc.end();
+
+//   try {
+//     await new Promise<void>((resolve, reject) => {
+//       outputStream.on('finish', resolve);
+//       outputStream.on('error', reject);
+//       doc.pipe(outputStream);
+//     });
+
+//     console.log('Recibo em PDF gerado com sucesso!');
+    
+//     // Abre o arquivo PDF com o leitor de PDF padrão
+//     const childProcess: ChildProcess = exec(`start ${filePath}`, (err, stdout, stderr) => {
+//       if (err) {
+//         console.error(`Erro ao abrir o arquivo PDF: ${err}`);
+//       }
+//     });
+
+//     // Adiciona um listener para o evento de fechamento do processo
+//     childProcess.on('close', (code) => {
+//       console.log(`O leitor de PDF foi fechado com o código de saída: ${code}`);
+//     });
+
+//     // Responda com uma mensagem indicando que o PDF está sendo gerado
+//     res.send('Gerando recibo em PDF...');
+//   } catch (error) {
+//     console.error(`Erro ao criar o PDF: ${error}`);
+//     res.status(500).send('Erro ao gerar o recibo em PDF.');
+//   }
+// });
+
+
+// app.listen(port, () => {
+//   console.log(`Servidor Express rodando na porta ${port}`);
+// });
+
