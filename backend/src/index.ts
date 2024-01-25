@@ -1,5 +1,6 @@
 
 const express = require('express');
+const cors = require('cors');
 // import { createBarcode } from './barcode/barcodeService';
 // import { productRouter } from './products/product.router';
 import { categoryRouter } from './categories/category.router';
@@ -13,6 +14,12 @@ import { SaleRouter } from './sales/sale.router';
 const port = 3000;
 const app = express();
 app.use(express.json());
+
+app.use(cors({
+  origin: 'http://localhost:8080', 
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+}));
 
 // app.use("/api/products", productRouter);
 app.use("/api/categories", categoryRouter);
