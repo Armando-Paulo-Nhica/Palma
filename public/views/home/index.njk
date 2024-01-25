@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,13 +6,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Palma - Nova venda </title>
+    <title>Palma </title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon.png">
-    <!-- Custom Stylesheet -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+    <link rel="stylesheet" href="../../vendor/owl-carousel/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../../vendor/owl-carousel/css/owl.theme.default.min.css">
+    <link href="../../vendor/jqvmap/css/jqvmap.min.css" rel="stylesheet">
     <link href="../../css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/custom/style.css">
-    
+
 </head>
 
 <body>
@@ -30,6 +33,7 @@
         Preloader end
     ********************-->
 
+
     <!--**********************************
         Main wrapper start
     ***********************************-->
@@ -39,7 +43,7 @@
             Nav header start
         ***********************************-->
         <div class="nav-header bg-logo">
-            <a href="../home/index.html" class="brand-logo">
+            <a href="/" class="brand-logo">
                 <!-- <img class="logo-abbr" src="../../images/logo.png" style="width: 100px;" alt="logo"> -->
                 <img src="../../images/logo.png" alt="">
                
@@ -58,7 +62,7 @@
         <!--**********************************
             Header start
         ***********************************-->
-        <div class="header" id="header">
+        <div class="header">
             <div class="header-content">
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
@@ -77,7 +81,6 @@
 
                         <ul class="navbar-nav header-right">
                             <li class="nav-item dropdown notification_dropdown">
-                                
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
                                     <i class="mdi mdi-bell"></i>
                                     <div class="pulse-css"></div>
@@ -171,7 +174,6 @@
         <div class="quixnav" id="quixnav">
 
         </div>
-
         <!--**********************************
             Sidebar end
         ***********************************-->
@@ -180,154 +182,145 @@
             Content body start
         ***********************************-->
         <div class="content-body">
+            <!-- row -->
             <div class="container-fluid">
-                <div class="row page-titles mx-0">
-                    <div class="col-sm-6 p-md-0">
-                        <div class="welcome-text">
-                            <h4>REGISTAR NOVA VENDA</h4>
-                            
-                        </div>
-                    </div>
-                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Venda</a></li>
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Registar</a></li>
-                        </ol>
-                    </div>
-                </div>
-             
-                <!-- row -->
                 <div class="row">
-                    <div class="col-xl-9 col-xxl-9 col-lg-9 col-sm-8">
-                           <!-- Search form start -->
-                            <div class="row page-titles mx-0 col-xl-12 col-xxl-12 col-lg-12 col-sm-12">
-                                <div class="col-xl-12 col-xxl-12 col-lg-12 col-sm-12 ">
-                                    <div class="card-header">
-                                        <h5 class="card-title" style="color: black;">Pesquise O produto</h5>
-                                    </div>
-                                    <div class="input-group mb-3 mt-3">
-                                        <input type="text" class="form-control" id="search-box" autofocus placeholder="Insira o código de barra ou o nome do produto">
-                                        <div class="input-group-append search_">
-                                            <button class="btn btn-primary px-3" id="searchProductBtn" type="button"><i class="fas fa-arrow-right"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Search form end -->
+                    <div class="col-lg-4 col-sm-6">
                         <div class="card">
-                            <div class="card-body">
-                                <!-- Table start -->
-                                <div class="col-xxl-12 col-xl-12">
-                                    <div class="card">
-                                        <div class="card-header" id="cart-header">
-                                            <h4 class="card-title">Carinho de compra</h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <!-- <div class="col-xxl-12 content" id="no-result"><span><i class="fas fa-triangle-exclamation mr-2"></i> Carinho de compras vazio</span></div> -->
-                                            <!-- accordiion -->
-                                           
-                                            <div id="accordion-six" class="accordion accordion-with-icon">
-                                                <div class="accordion__item">
-                                                    <div class="accordion__header collapsed" data-toggle="collapse" data-target="#with-icon_collapseTwo">
-                                                        <!-- <span class="accordion__header--icon"></span> -->
-                                                        <span class="mr-5"><i class="mdi mdi-cart lg"></i> <i style="font-style: normal; position: absolute; top: 1px; left: 20px; font-size: small; color: red;" id="counter-id">0</i> </span>
-                                                        <span class="accordion__header--text">Carinho de compras</span>
-                                                        <span class="accordion__header--indicator indicator_bordered"></span>
-                                                    </div>
-                                                    <div id="with-icon_collapseTwo" class="collapse accordion__body" data-parent="#accordion-six">
-                                                        <div class="accordion__body--text">
-                                                            <!-- Start table -->
-                                                            <div class="table-responsive my-0">
-                                                                <table class="table table-responsive-sm" id="table">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>#</th>
-                                                                            <th>Nome</th>
-                                                                            <th>Preço</th>
-                                                                            <th>Quant</th>
-                                                                            <th>Desc (%)</th>
-                                                                            <th>Subtotal</th>
-                                                                            <th>Acções</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody id="dta">
-                                                                        
-                                                                </table>
-                                                            </div>
-
-                                                            <!-- End table -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                        </div>
-
-                                            <!-- End accordion -->
-                                        </div>
-                                    </div>
+                            <div class="stat-widget-two card-body">
+                                <div class="stat-content">
+                                    <div class="stat-text">Total vendas - Hoje </div>
+                                    <div class="stat-digit"> MZN 8500.95</div>
                                 </div>
-                                <!-- Table end -->
-                            </div>
-                            <div class="card-footer">
-                                <p class="card-text d-inline">Ver o estoque</p>
-                                <a href="javascript:void()" class="card-link float-right">Ver todas vendas</a>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success w-85" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-xxl-3 col-lg-3 col-sm-4 ">
+                    <div class="col-lg-4 col-sm-6">
                         <div class="card">
-                            <div class="card-header side-left-header">
-                                <h5 class="card-title">Finalizar venda</h5>
+                            <div class="stat-widget-two card-body">
+                                <div class="stat-content">
+                                    <div class="stat-text">Total vendas - esta semana</div>
+                                    <div class="stat-digit"> MZN 7800.03 </div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary w-75" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
                             </div>
-                            <div class="card-body px-0">
-
-                                <div class="form-group col-xxl-12 col-xl-12 col-md-12 mx-0 input-group">
-                                    
-                                    <select id="categoryName1" name="categoryName1" class="form-control">
-                                        <option value="" selected disabled>Selecione o cliente</option>
-                                    </select>
-                                    <div class="input-group-prepend" id="addCategoryModal">
-                                        <div class="input-group-text bg-primary bt"><i class="fas fa-user" style="font-size: small;"></i> </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="card">
+                            <div class="stat-widget-two card-body">
+                                <div class="stat-content">
+                                    <div class="stat-text">Tarefas concluídas</div>
+                                    <div class="stat-digit"> <i class="fa fa-list"></i> 107</div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-warning w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <!-- /# column -->
+                </div>
+                <div class="row">
+                    <div class="col-xl-8 col-lg-8 col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Visão geral de vendas</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-8">
+                                        <div id="morris-bar-chart"></div>
                                     </div>
                                 </div>
-
-                                <div class="form-group col-xxl-12 col-xl-12 col-md-12 mx-0 details">
-                                    <div class="info-sale">
-                                        <div>
-                                            <span>Subtotal</span>
-                                            <span id="s-subtotal">0.00MT</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-xxl-6 col-xl-4 col-lg-6">
+                        <div class="card ">
+                            <div class="card-header">
+                                <h4 class="card-title">Produtos vendidos</h4>
+                                <div class="card-action">
+                                    <div class="dropdown custom-dropdown">
+                                        <div data-toggle="dropdown">
+                                            <i class="ti-more-alt"></i>
                                         </div>
-                                        <div>
-                                            <span>Desconto</span>
-                                            <span id="s-discount">0.00%</span>
-                                        </div>
-                                        <div>
-                                            <span>Total</span>
-                                            <span id="s-total">0.00MT</span>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#">Option 1</a>
+                                            <a class="dropdown-item" href="#">Option 2</a>
+                                            <a class="dropdown-item" href="#">Option 3</a>
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
-                            <div class="card-footer d-sm-flex finish-btn">
-                                <button class="btn-primary save-sale" id="saleBtn">Finalizar venda</button>
+                            <div class="card-body">
+                                <div class="chart py-4">
+                                    <canvas id="sold-product"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+
+                <!-- Timeline start -->
+
+                <div class="row">
+                    <div class="col-lg-12 col-xl-12 col-xxl-12 col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Actividades recentes</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="widget-timeline">
+                                    <ul class="timeline">
+                                        <li>
+                                            <div class="timeline-badge primary"></div>
+                                            <a class="timeline-panel text-muted" href="#">
+                                                <span>10 minutos atrás</span>
+                                                <h6 class="m-t-5">Abastecimento do estoque. Mais de 30 produtos foram adicionados no estoque</h6>
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <div class="timeline-badge warning">
+                                            </div>
+                                            <a class="timeline-panel text-muted" href="#">
+                                                <span>20 minutos atrás</span>
+                                                <h6 class="m-t-5">Registo de venda. Mais de 200 produtos foram vendidos</h6>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 
+
+                <!-- End of timeline -->
+    
             </div>
         </div>
         <!--**********************************
             Content body end
         ***********************************-->
 
+
         <!--**********************************
             Footer start
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank">websolucoesgrafica </a> 2019</p>
+                <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank">Quixkit</a> 2019</p>
+                <p>Distributed by <a href="https://themewagon.com/" target="_blank">Themewagon</a></p> 
             </div>
         </div>
         <!--**********************************
@@ -342,7 +335,7 @@
            Support ticket button end
         ***********************************-->
 
-        
+
     </div>
     <!--**********************************
         Main wrapper end
@@ -352,15 +345,61 @@
         Scripts
     ***********************************-->
     <!-- Required vendors -->
+    <!-- <script src="../../vendor/global/global.min.js"></script>
+
+    <script src="../../js/components.js"></script>
+    <script src="../../js/quixnav-init.js"></script>
     
+    <script src="../../js/custom.min.js"></script>
+    
+
+    <script src="../../vendor/gaugeJS/dist/gauge.min.js"></script>
+
+    
+    <script src="../../vendor/flot/jquery.flot.js"></script>
+    <script src="../../vendor/flot/jquery.flot.resize.js"></script>
+
+    
+    <script src="../../vendor/owl-carousel/js/owl.carousel.min.js"></script>
+
+    
+    <script src="../../vendor/jqvmap/js/jquery.vmap.min.js"></script>
+    <script src="../../vendor/jqvmap/js/jquery.vmap.usa.js"></script>
+    <script src="../../vendor/jquery.counterup/jquery.counterup.min.js"></script>
+
+
+    <script src="../../js/dashboard/dashboard-1.js"></script> -->
+
+
+
     <script src="../../vendor/global/global.min.js"></script>
-    <script src="../js/components.js"></script>
+    <script src="../../js/components.js"></script>
     <script src="../../js/quixnav-init.js"></script>
     <script src="../../js/custom.min.js"></script>
-    <script src="../js/custom/sale/validation.js"></script>
-    <script src="../js/custom/sale/index.js"></script>
+    
+    <!-- Chart =========== -->
+    <script src="../../vendor/raphael/raphael.min.js"></script>
+    <script src="../../vendor/morris/morris.min.js"></script> 
+
+    <script src="../../vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="../../vendor/chart.js/Chart.bundle.min.js"></script> 
+
+   <!-- <script src="../../vendor/flot/jquery.flot.js"></script> -->
+     <!-- <script src="../../vendor/flot/jquery.flot.resize.js"></script> -->
+
+    <script src="../../vendor/owl-carousel/js/owl.carousel.min.js"></script>
+
+    <script src="../../vendor/jqvmap/js/jquery.vmap.min.js"></script>
+    <script src="../../vendor/jqvmap/js/jquery.vmap.usa.js"></script>
+    <script src="../../vendor/jquery.counterup/jquery.counterup.min.js"></script>
+
+    <script src="../../js/dashboard/dashboard-1.js"></script>
+
+    <!-- Chart end =========== -->
+
       <!-- Sweet alert -->
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </body>
 
 </html>

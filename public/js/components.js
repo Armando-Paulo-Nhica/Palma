@@ -7,18 +7,18 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                 class="icon icon-payment"></i><span class="nav-text">Vendas</span></a>
         <ul aria-expanded="false">
-            <li><a href="${getRelativePath('sale/create.html')}"><i class="mdi mdi-circle-outline"></i> Registar nova</a></li>
-            <li><a href="${getRelativePath('sales/index.html')}"><i class="mdi mdi-circle-outline"></i> Visualizar histórico</a></li>
+            <li><a href="/sale/create"><i class="mdi mdi-circle-outline"></i> Registar nova</a></li>
+            <li><a href="#"><i class="mdi mdi-circle-outline"></i> Visualizar histórico</a></li>
             <li><a href="#"><i class="mdi mdi-circle-outline"></i> Relatório</a></li>
         </ul>
     </li>
 
     <li class="nav-label first">Abastecimento do Stock</li>
     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                class="icon icon-payment"></i><span class="nav-text">Aquisição</span></a>
+                class="icon icon-payment"></i><span class="nav-text">Aquisição de produtos</span></a>
         <ul aria-expanded="false">
-            <li><a href="${getRelativePath('shop/create.html')}"><i class="mdi mdi-circle-outline"></i> Registar entrada</a></li>
-            <li><a href="${getRelativePath('shop/index.html')}"><i class="mdi mdi-circle-outline"></i> Visualizar</a></li>
+            <li><a href="/product/create"><i class="mdi mdi-circle-outline"></i> Registar entrada</a></li>
+            <li><a href="/product/view"><i class="mdi mdi-circle-outline"></i> Visualizar</a></li>
             <li><a href="#"><i class="mdi mdi-circle-outline"></i> Relatório</a></li>
         </ul>
     </li>
@@ -28,7 +28,7 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
         class="icon icon-cart-simple"></i><span class="nav-text">Stock</span></a>
         <ul aria-expanded="false">
             <li><a href="#"><i class="mdi mdi-circle-outline"></i> Registar novo</a></li>
-            <li><a href="${getRelativePath('products/index.html')}"><i class="mdi mdi-circle-outline"></i> Visualizar</a></li>
+            <li><a href="#"><i class="mdi mdi-circle-outline"></i> Visualizar</a></li>
         </ul>
     </li>
 
@@ -77,13 +77,3 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
 </div>`;
 
 
-function getRelativePath(page) {
-    // Use window.location.pathname to get the current path
-    const currentPath = window.location.pathname;
-  
-    // Construct the relative path by joining rootPath with the page name
-    // Assuming you are two levels deep (src/views) before reaching sale/create.html
-    const relativePath = `${currentPath}/../../${page}`;
-  
-    return relativePath;
-  }

@@ -1,16 +1,35 @@
 const express = require('express');
+const nunjucks = require('nunjucks'); 
 const app = express();
-const path = require('path');
-const port = 3000;
-app.use(express.static(path.join(__dirname, 'public')));
-app.set('views', './public/views');
+const cors = require('cors');
 
-app.set('view engine', 'ejs');
+require('dotenv').config();
 
-app.get('/', (req, res) => {
-    // Render the 'index.html' file from the 'public/views' directory
-    res.sendFile(path.join(__dirname, 'public', 'views', 'home','index.html'));
-  });
+app.use(cors({
+  origin: 'http://localhost:8080', 
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+}));
+
+const saleRoutes = require('./routes/sale/index');
+const homeRoutes = require('./routes/home/index');
+const shopRoutes = require('./routes/shop/index');
+
+const port = 8080
+
+// Configure Nunjucks with the correct views path
+nunjucks.configure('public/views', {
+  autoescape: true,
+  express: app
+});
+
+
+app.use(express.static('public'));
+// Use the route files
+app.use('/', homeRoutes);
+app.use('/sale', saleRoutes);
+app.use('/product', shopRoutes);
+
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
