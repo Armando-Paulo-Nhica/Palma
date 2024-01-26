@@ -76,4 +76,6 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
 </ul>
 </div>`;
 
-
+document.getElementById("footer-info").innerHTML = `
+<p>By <a href="#" target="_blank">Web Soluções Gráfica | </a> info@websolucoesgrafica.co.mz | 2024</p>
+`;

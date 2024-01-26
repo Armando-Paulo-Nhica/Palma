@@ -148,6 +148,10 @@ if(isOk){
                 .then(data => {
                     if(!data.error){
                         swal("Mensagem", "Produto registado com sucesso!", "success");
+                        setTimeout(function () {
+                            window.location.href = '/product/view';
+                        }, 1000);
+                        
                     }
                     else
                     {

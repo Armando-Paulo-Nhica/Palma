@@ -45,15 +45,48 @@ export async function destroy(id: number){
 
 
 // update Sale
-export async function updateSale(id: number, newSaleData: Sale){
-	const sale = await db.sale.update({
-		where: {id: id}, 
-		data: {
-            totalAmount: newSaleData.totalAmount,
-            customerId: newSaleData.customerId,
-            employerId: newSaleData.employerId,
-            items:{create: newSaleData.items}
-            }
-	})
-	return sale;
+// export async function updateSale(id: number, newSaleData: Sale){
+// 	const sale = await db.sale.update({
+// 		where: {id: id}, 
+// 		data: {
+//             totalAmount: newSaleData.totalAmount,
+//             customerId: newSaleData.customerId,
+//             employerId: newSaleData.employerId,
+//             items:{create: newSaleData.items}
+//             }
+// 	})
+// 	return sale;
+// }
+
+
+export async function updateSale(id: number, newSaleData: Sale) {
+  try {
+    const sale = await db.sale.update({
+      where: { id: id },
+      data: {
+        totalAmount: newSaleData.totalAmount,
+        customerId: newSaleData.customerId,
+        employerId: newSaleData.employerId,
+        items: {
+          // Assuming SaleOrder data is directly provided in newSaleData.items
+          upsert: newSaleData.items.map(item => ({
+            where: { saleId_productId: { saleId: id, productId: item.productId } },
+            update: {
+              quantity: item.quantity,
+              subTotal: item.subTotal,
+            },
+            create: {
+              quantity: item.quantity,
+              subTotal: item.subTotal,
+              productId: item.productId,
+            },
+          })),
+        },
+      },
+    });
+
+    return sale;
+  } catch (error) {
+    throw error;
+  }
 }

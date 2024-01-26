@@ -21,17 +21,6 @@ type Purchase = {
   supplierId: number;
 };
 
-// type Produto = {
-//   id: number;
-//   name: string;
-//   sell: number;
-//   shop: number;
-//   quantity: number;
-//   expiresIn: string;
-//   categoryId: number;
-//   supplierId: number;
-// };
-
 type Shop = {
   id: number;
   invoice: number;
@@ -47,7 +36,7 @@ type Shop = {
       categoryId: number; 
       productId: number;
     }
-  ];
+  ]
 };
 
 // Create
@@ -164,6 +153,7 @@ for (const purchase of purchasesArray) {
 //   Get all purchases
 export async function findAll(){
 	const purchase = await db.purchase.findMany({
+    orderBy:{id: 'asc'},
     select:{
       id: true,
       invoice: true,
@@ -180,13 +170,23 @@ export async function findAll(){
 // Get single purchase
 export async function findById(id: number){
 	const purchase = await db.purchase.findUnique({
-        where: {id: id}, 
+        where: {id: id},
+         
         select: {
           id:true,
           totalShop:true,
           invoice: true,
           supplier: true,
-          purchases: true,
+          purchases:{
+            select:{
+              name:true,
+              sell:true,
+              shop:true,
+              quantity: true,
+              productId: true,
+              product:true,
+            }
+          },
           createdAt: true,
           updatedAt: true
         }})
@@ -199,75 +199,59 @@ export async function destroy(id: number){
 	return purchase;
 }
 
-// Update purchase
-export async function updatePurchase(shop: Shop, id: number) {
-  
-  return await db.purchase.update({
-    where:{id: id},
-    data:{
-          purchases:{create: shop.products}
-        }
-  })
-  // return await db.purchase.update({
-  //   where: { id: id },
-  //   data: {
+export async function updatePurchase(data: Shop, id: number) {
+  try {
+    const purchase = await db.purchase.update({
+      where: { id: id },
+      data: {
+        invoice: data.invoice,
+        totalShop: data.totalShop,
+        supplierId: data.supplierId,
+        purchases: {
+          update: data.products.map(item => ({
+            where: { purchaseId_productId: { purchaseId: id, productId: item.productId } },
+            data: {
+              name: item.name,
+              sell: item.sell,
+              shop: item.shop,
+              quantity: item.quantity,
+              expiresIn: item.expiresIn,
+              product: {
+                update: {
+                  where: { id: item.productId },
+                  data: {
+                    name: item.name,
+                    sell: item.sell,
+                    shop: item.shop,
+                    quantity: item.quantity,
+                    expiresIn: item.expiresIn,
+                    categoryId: item.categoryId,
+                  },
+                },
+              },
+            },
+          }))
+        
+        },
+      },
+      include: {
+        purchases: {
+          include: {
+            product: true,
+          },
+        },
+      },
+    });
 
-  //     purchases: {
-  //       create: shop.products.map(product => ({
-  //         name: product.name,
-  //         sell: product.sell,
-  //         shop: product.shop,
-  //         quantity: product.quantity,
-  //         expiresIn: product.expiresIn,
-  //         categoryId: product.categoryId,
-  //         productId: product.productId,
-  //       })),
-  //     },
-  //   },
-  // });
-
-//   const purchaseData = await db.purchase.update({
-//     where: {id: 4},
-//     data: {supplierId: dados.supplierId}
-//   });
-
-//   const createdProduct = await db.product.update({
-//     where:{id: prodId},
-//     data: {
-//       name: dados.name,
-//       sell: dados.sell,
-//       shop: dados.shop,
-//       quantity: dados.quantity,
-//       expiresIn: dados.expiresIn,
-//       categoryId: dados.categoryId
-//     },
-//   });
-
-//   const updatedPurchaseProduct = await db.purchaseProduct.update({
-//     where: {
-//       purchaseId_productId: {
-//         purchaseId: purchId,
-//         productId: prodId,
-//       },
-//     },
-//     data: {
-//       name: dados.name,
-//       sell: dados.sell,
-//       shop: dados.shop,
-//       quantity: dados.quantity,
-//       expiresIn: dados.expiresIn
-//     },
-//   });
-  
-// const updateResults = {
-//   purchaseData,
-//   createdProduct,
-//   updatedPurchaseProduct
-// };
-  
-// return updateResults;
-
+    return purchase;
+  } catch (error) {
+    
+    throw error; 
+  }
 }
+
+
+
 
 
   

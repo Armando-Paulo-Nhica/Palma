@@ -44,7 +44,7 @@ model Category {
 model Product {
   
   id         BigInt         @id @default(autoincrement())
-  name       String      @unique @db.VarChar(35)
+  name       String      @unique @db.VarChar(100)
   barcode    BigInt      @unique
   sell  Decimal     @db.Decimal(12, 2)
   shop Decimal     @db.Decimal(12, 2)
@@ -61,7 +61,7 @@ model Product {
 }
 
 model PurchaseProduct{
-  name  String    @db.VarChar(50)
+  name  String    @db.VarChar(100)
   sell  Decimal       @db.Decimal(12, 2)
   shop Decimal        @db.Decimal(12, 2)
   quantity Int
@@ -100,7 +100,7 @@ model Supplier {
 }
 
 model Sale {
-  id          BigInt         @id @default(autoincrement())
+  id          BigInt      @id @default(autoincrement())
   totalAmount Decimal     @db.Decimal(12, 2)
   createdAt   DateTime    @default(now())
   customerId  Int?        

@@ -69,6 +69,7 @@ purchaseRouter.put("/:id", async(request: Request, response: Response) =>{
 	
 	try {
 		const purch = await PurchaseService.updatePurchase(request.body, id);
+		// return purch;
 		return response.status(200).json({error: false, msg: "Alterações feitas com sucesso"});
 		
 	} catch (error: any) {

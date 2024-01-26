@@ -7,6 +7,7 @@ $(document).ready(function() {
   var dataTable;
   var categories = [];
   var suppliers = [];
+  var isNull = false;
   //Catch the id
   $('#shop').on('click', '[data-rowid]', function(event) {
       event.preventDefault();
@@ -43,13 +44,12 @@ function setPurchaseValues() {
             var productHtml = `
                         <div class="form-group mt-4 input-group col-md-12 col-xxl-12 col-xl-12">
                             <select id="supplier" class="form-control" required>
-                                <option value="" selected disabled>Selecione O fornecedor</option>
-                                ${suppliers.map(item => `<option value="${item.id}" >${item.name}</option>`).join('')}
+                                ${suppliers.map(item => `<option value="${item.id}" ${item.id == data.supplier.id ? 'selected' : ''}>${item.name}</option>`).join('')}
                             </select>
                         </div>
                         <div class="form-group col-md-12 col-xxl-12 col-xl-12">
                             <label>Número de factura</label>
-                            <input type="text" id="invoice" value="${data.invoice}" class="form-control" >
+                            <input type="number" id="invoice" value="${data.invoice}" class="form-control" >
                         </div>
                         <input type="hidden" id="idPurchase" value="${data.id}">
                     `;
@@ -82,10 +82,11 @@ function setPurchaseValues() {
                             <div class="input-group-prepend bg-primary" data-toggle="modal" data-target="#addCategory">
                                 <div class="input-group-text bg-btn bt">+</div>
                             </div>
-                            <select name="categories" id="categoryId`+(counter + 1)+`" class="form-control categories">
-                                <option value="" selected disabled>Selecione a categoria</option>
-                                ${categories.map(item => `<option value="${item.id}" >${item.name}</option>`).join('')}
+                            
+                            <select name="categories" id="categoryId${counter + 1}" class="form-control categories">
+                                ${categories.map(item => `<option value="${item.id}" ${item.id === data.purchases[i].product.categoryId ? 'selected' : ''}>${item.name}</option>`).join('')}
                             </select>
+
                     </div>
                     <input type="hidden" id="productId`+(counter + 1)+`" value="${data.purchases[i].productId}">
                 </div>
@@ -132,12 +133,13 @@ function setPurchaseValues() {
 //   Edit purchase
 $("#edit-purchase-btn").click(function() {
     var purchase = {
-      invoice: $("#invoice").val(),
+      invoice: parseInt($("#invoice").val(), 10),
       totalShop: 0,
-      supplierId: $("#supplier").val(),
+      supplierId: parseInt($("#supplier").val(), 10),
       products: []
     };
-  
+
+
     for (var i = 0; i < counter; i++) {
         purchase.totalShop += ($("#quantity" + (i+1)).val() * $("#shop" + (i+1)).val());
   
@@ -146,9 +148,13 @@ $("#edit-purchase-btn").click(function() {
       const sell = $("#sell" + (i+1)).val();
       const shop = $("#shop" + (i+1)).val();
       const expiresIn = $("#expiresIn" + (i+1)).val(); 
-      const categoryId = $("#categoryId" + (i+1)).val();
-      const productId = $("#productId"+(i+1)).val();
-  
+      const categoryId = parseInt($("#categoryId" + (i+1)).val(), 10);
+      const productId = parseInt($("#productId"+(i+1)).val(), 10);
+
+      if($("#name" + (i+1)).val() == ''){isNull = true;}
+      if($("#sell" + (i+1)).val() == ''){isNull = true;}
+      if($("#quantity" + (i+1)).val() == ''){isNull = true;}
+    
       purchase.products.push({
         name,
         sell,
@@ -160,10 +166,15 @@ $("#edit-purchase-btn").click(function() {
       });
     }
     
-    const id = $("#idPurchase").val();
-    updatePurchase(purchase, id);
-    counter = 0;
-    $("#editModal").modal("hide");
+    if(isNull == false){
+        const id = $("#idPurchase").val();
+        updatePurchase(purchase, id);
+        counter = 0;
+        $("#editModal").modal("hide");
+    }
+    swal("Mensagem", "Preencha todos os campos!", "error");
+    isNull = false;
+    
   });
   
 
@@ -182,12 +193,8 @@ function updatePurchase(purchaseData, id) {
     fetch(`${baseUrl}/purchases/${id}`, requestOptions)
         .then(response => response.json())
         .then(data => {
-            if (!data.error) {
                 swal("Mensagem", "Produto registado com sucesso!", "success");
-            } else {
-                swal("Mensagem", "Operação falhou, contacte a equipe técnica!", "error");
-            }
-
+                loadAll();
         })
         .catch(error => {
             console.error('Error:', error);
@@ -204,19 +211,31 @@ function updatePurchase(purchaseData, id) {
           }
           
           dataTable = $('#shop').DataTable({
+            lengthMenu: [5,10, 25, 50, 75, 100],
+            language: {
+                lengthMenu: 'Mostrar _MENU_ entradas',
+                paginate: {
+                    next: '<i class="fas fa-arrow-right"></i>', 
+                    previous: '<i class="fas fa-arrow-left"></i>'},
+                    info: 'Ver _START_ à _END_ de _TOTAL_ entradas'
+            },
               data: data,
               columns: [
                 { data: 'invoice' },
                 { data: 'totalShop' },
                 { data: 'supplier.name' },
-                { data: 'supplier.contact' },
+                {
+                    data: 'supplier.contact',
+                    render: function(data, type, row) {
+                        return data ? data : '--------------';
+                    }
+                },
                 { data: 'createdAt' },
                   {
                       data: null, // Placeholder for delete button
                       render: function(data, type, row) {
                           return '<div class="actions"><a href="#" data-toggle="modal" data-target="#deleteModal" data-rowid="' + row.id + '"><i class="mdi mdi-delete md text-danger"></i></a>' +
-                              '<a href="#" data-toggle="modal" data-target="#editModal" class="edit-btn" data-rowid="' + row.id + '"><i class="mdi mdi-pen"></i></a>' +
-                              '<a href="#" data-toggle="modal" data-target="#detailModal" class="edit-btn"  data-rowid="' + row.id + '"><i class="fas fa-ellipsis-h"></i></a></div>';
+                              '<a href="#" data-toggle="modal" data-target="#editModal" class="edit-btn" data-rowid="' + row.id + '"><i class="mdi mdi-pen"></i></a>';
                       }
                   },
                   // Add more columns as needed
@@ -240,14 +259,18 @@ function updatePurchase(purchaseData, id) {
                   { data: 'invoice' },
                   { data: 'totalShop' },
                   { data: 'supplier.name' },
-                  { data: 'supplier.contact' },
+                  {
+                    data: 'supplier.contact',
+                    render: function(data, type, row) {
+                        return data ? data : 'vazio';
+                    }
+                },
                   { data: 'createdAt' },
                   {
                       data: null, // Placeholder for delete button
                       render: function(data, type, row) {
                           return '<div class="actions"><a href="#" data-toggle="modal" data-target="#deleteModal" data-rowid="' + row.id + '"><i class="mdi mdi-delete md text-danger"></i></a>' +
-                              '<a href="#" data-toggle="modal" data-target="#editModal" class="edit-btn" data-rowid="' + row.id + '"><i class="mdi mdi-pen"></i></a>' +
-                              '<a href="#" data-toggle="modal" data-target="#detailModal" class="edit-btn" data-rowid="' + row.id + '"><i class="fas fa-ellipsis-h"></i></a></div>';
+                              '<a href="#" data-toggle="modal" data-target="#editModal" class="edit-btn" data-rowid="' + row.id + '"><i class="mdi mdi-pen"></i></a>';
                       }
                   },
                   // Add more columns as needed
