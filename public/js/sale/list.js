@@ -9,16 +9,16 @@ $(document).ready(function() {
   var suppliers = [];
   var isNull = false;
   //Catch the id
-  $('#shop').on('click', '[data-rowid]', function(event) {
+  $('#sell').on('click', '[data-rowid]', function(event) {
       event.preventDefault();
       rowId = $(this).data('rowid');
-      setPurchaseValues();
-      viewPaurchaseProducts();
+      setSaleValues();
+      viewSaleProducts();
   });
 
   //Delete the purchase
   $("#deleteBtn").click(function(){
-        fetch(baseUrl+'/purchases/' + rowId, {
+        fetch(baseUrl+'/sales/' + rowId, {
           method: 'DELETE',
           headers: {
               'Content-Type': 'application/json',
@@ -26,7 +26,13 @@ $(document).ready(function() {
       })
           .then(response => response.json())
           .then(data => {
-              loadAll();
+        
+                swal("Mensagem", "Venda eliminada com sucesso!", "success");
+                loadAll();
+                setTimeout(() => {
+                    swal.close();
+                  }, 1000);
+              
           })
           .catch(error => {
               // Handle error if needed
@@ -36,60 +42,45 @@ $(document).ready(function() {
   })
 
 // Setting values to modal
-function setPurchaseValues() {
-    fetch(`${baseUrl}/purchases/${rowId}`)
+function setSaleValues() {
+    fetch(`${baseUrl}/sales/${rowId}`)
         .then(response => response.json())
         .then(data => {
-            const productsContainer = $("#editPurch");
+            const productsContainer = $("#editSale");
             productsContainer.empty(); // Clear existing content
             var productHtml = `
-                        <div class="form-group mt-4 input-group col-md-12 col-xxl-12 col-xl-12">
-                            <select id="supplier" class="form-control" required>
-                                ${suppliers.map(item => `<option value="${item.id}" ${item.id == data.supplier.id ? 'selected' : ''}>${item.name}</option>`).join('')}
-                            </select>
+                        <div class="form-group col-md-6 col-xxl-6 col-xl-6 mb-5">
+                            <label>Referência da venda</label>
+                            <input type="number" value="${data.id}" class="form-control" readonly>
                         </div>
-                        <div class="form-group col-md-12 col-xxl-12 col-xl-12">
-                            <label>Número de factura</label>
-                            <input type="number" id="invoice" value="${data.invoice}" class="form-control" >
+                        <div class="form-group col-md-6 col-xxl-6 col-xl-6 mb-5">
+                            <label>Total pago</label>
+                            <input type="number" value="${data.totalAmount}" class="form-control" readonly>
                         </div>
-                        <input type="hidden" id="idPurchase" value="${data.id}">
+                        <input type="hidden" value="${data.id}" class="form-control">
                     `;
                 productsContainer.append(productHtml);
                
-            for(let i = 0; i< data.purchases.length; i++){
+            for(let i = 0; i< data.items.length; i++){
                 productHtml = `<div class="row mx-2 mb-3" style="box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;">
-                        <div class="form-group col-md-12 col-xxl-12 col-xl-12">
-                            <label>Nome do produto</label>
-                            <input type="text" id="name`+ (counter + 1) +`" value="${data.purchases[i].name}" class="form-control" >
-                        </div>
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6">
-                            <label>Valor de compra</label>
-                            <input type="number" min="1" id="shop`+(counter + 1)+`" value="${data.purchases[i].shop}" class="form-control" >
+                            <label>Nome do produto</label>
+                            <input type="text" id="name`+ (counter + 1) +`" value="${data.items[i].product.name}" class="form-control" readonly>
                         </div>
+                        
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6">
                             <label>Valor de venda</label>
-                            <input type="number" min="1" id="sell`+(counter + 1)+`" value="${data.purchases[i].sell}" class="form-control" >
+                            <input type="number" min="1" id="sell`+(counter + 1)+`" value="${data.items[i].product.sell}" class="form-control"readonly >
                         </div>
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6">
                             <label>Quantidade   </label>
-                            <input type="number" min="1" id="quantity`+(counter + 1)+`" value="${data.purchases[i].quantity}" class="form-control" >
+                            <input type="number" min="1" id="quantity`+(counter + 1)+`" value="${data.items[i].product.quantity}" class="form-control" >
                         </div>
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6">
-                            <label>Data validade   </label>
-                            <input type="date" id="expiresIn`+(counter + 1)+`" class="form-control" >
+                            <label>Subtotal</label>
+                            <input type="number" id="subtotal`+(counter + 1)+`" value = "${data.items[i].subTotal}" class="form-control" readonly>
                         </div>
-                    
-                    <div class="form-group col-md-6 mt-4 input-group col-md-12 col-xxl-12 col-xl-12">
-                            <div class="input-group-prepend bg-primary" data-toggle="modal" data-target="#addCategory">
-                                <div class="input-group-text bg-btn bt">+</div>
-                            </div>
-                            
-                            <select name="categories" id="categoryId${counter + 1}" class="form-control categories">
-                                ${categories.map(item => `<option value="${item.id}" ${item.id === data.purchases[i].product.categoryId ? 'selected' : ''}>${item.name}</option>`).join('')}
-                            </select>
-
-                    </div>
-                    <input type="hidden" id="productId`+(counter + 1)+`" value="${data.purchases[i].productId}">
+                        <input type="hidden" id="productId`+(counter + 1)+`" value="${data.items[i].product.id}">
                 </div>
                 `;
                 productsContainer.append(productHtml);
@@ -101,66 +92,54 @@ function setPurchaseValues() {
         })
         .catch(error => console.error('Error fetching data:', error));
 
-
-      
 }
 
 
 // View purchase products
-// Setting values to modal
-function viewPaurchaseProducts() {
-    fetch(`${baseUrl}/purchases/${rowId}`)
+function viewSaleProducts() {
+    fetch(`${baseUrl}/sales/${rowId}`)
         .then(response => response.json())
         .then(data => {
-            const productsContainer = $("#viewProducts");
+            const productsContainer = $("#saleItems");
             productsContainer.empty(); // Clear existing content
             var productHtml = `
-                        <div class="form-group mt-4 input-group col-md-12 col-xxl-12 col-xl-12">
-                            <select class="form-control" disabled>
-                                ${suppliers.map(item => `<option value="${item.id}" ${item.id == data.supplier.id ? 'selected' : ''}>${item.name}</option>`).join('')}
-                            </select>
+            
+                        <div class="form-group col-md-6 col-xxl-6 col-xl-6 mb-5">
+                            <label>Número de recibo</label>
+                            <input type="number" value="${data.id}" class="form-control" readonly>
                         </div>
-                        <div class="form-group col-md-12 col-xxl-12 col-xl-12">
-                            <label>Número de factura</label>
-                            <input type="number" value="${data.invoice}" class="form-control" readonly>
+                        <div class="form-group col-md-6 col-xxl-6 col-xl-6 mb-5">
+                            <label>Total pago</label>
+                            <input type="number" id="totalAmount" value="${data.totalAmount}" class="form-control" readonly>
                         </div>
+                        
                         
                     `;
                 productsContainer.append(productHtml);
                
-            for(let i = 0; i< data.purchases.length; i++){
+            for(let i = 0; i< data.items.length; i++){
                 productHtml = `<div class="row mx-2 mb-3" style="box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;">
                         <div class="form-group col-md-12 col-xxl-12 col-xl-12">
                             <label>Nome do produto</label>
-                            <input type="text" value="${data.purchases[i].name}" class="form-control" readonly>
+                            <input type="text"  value="${data.items[i].product.name}" class="form-control" readonly>
                         </div>
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6">
-                            <label>Valor de compra</label>
-                            <input type="number" value="${data.purchases[i].shop}" class="form-control" readonly>
+                            <label>Preço</label>
+                            <input type="number" value="${data.items[i].product.sell}" class="form-control" readonly>
                         </div>
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6">
-                            <label>Valor de venda</label>
-                            <input type="number" value="${data.purchases[i].sell}" class="form-control" readonly>
+                            <label>Quantidade</label>
+                            <input type="number" value="${data.items[i].quantity}" class="form-control" readonly>
                         </div>
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6">
-                            <label>Quantidade   </label>
-                            <input type="number" value="${data.purchases[i].quantity}" class="form-control" readonly>
+                            <label>Subtotal </label>
+                            <input type="number" value="${data.items[i].subTotal}" class="form-control" readonly>
                         </div>
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6">
-                            <label>Data validade   </label>
-                            <input type="date"  class="form-control" readonly>
+                            <label>Data de venda   </label>
+                            <input type="text" class="form-control" value="${formatDateTime(data.createdAt)}" readonly>
                         </div>
                     
-                    <div class="form-group col-md-6 mt-4 input-group col-md-12 col-xxl-12 col-xl-12">
-                            <div class="input-group-prepend bg-primary" data-toggle="modal" data-target="#addCategory">
-                                <div class="input-group-text bg-btn bt">+</div>
-                            </div>
-                            
-                            <select name="categories" id="categoryId${counter + 1}" class="form-control categories" disabled>
-                                ${categories.map(item => `<option value="${item.id}" ${item.id === data.purchases[i].product.categoryId ? 'selected' : ''}>${item.name}</option>`).join('')}
-                            </select>
-
-                    </div>
                     
                 </div>
                 `;
@@ -177,6 +156,21 @@ function viewPaurchaseProducts() {
       
 }
 
+
+// Format date
+function formatDateTime(dateString) {
+    const options = {
+      day: '2-digit',
+      month: '2-digit',
+      year: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    };
+  
+    const formattedDate = new Date(dateString).toLocaleString('en-GB', options);
+    return formattedDate;
+  }
 
 
   // Fill the modal to edit
@@ -205,14 +199,13 @@ function viewPaurchaseProducts() {
 
 
 //   Edit purchase
-$("#edit-purchase-btn").click(function() {
+$("#edit-sale-btn").click(function() {
     var purchase = {
-      invoice: parseInt($("#invoice").val(), 10),
-      totalShop: 0,
-      supplierId: parseInt($("#supplier").val(), 10),
-      products: []
+      totalAmount: parseFloat($("#totalAmount").val()).toFixed(2),
+      customerId: 1,
+      employerId: 1,
+      items: []
     };
-
 
     for (var i = 0; i < counter; i++) {
         purchase.totalShop += ($("#quantity" + (i+1)).val() * $("#shop" + (i+1)).val());
@@ -277,14 +270,14 @@ function updatePurchase(purchaseData, id) {
 }
 
   //Set data to datatable
-  fetch(baseUrl+'/purchases')
+  fetch(baseUrl+'/sales')
       .then(response => response.json())
       .then(data => {
          if (dataTable) {
             dataTable.destroy();
           }
-          
-          dataTable = $('#shop').DataTable({
+         
+          dataTable = $('#sell').DataTable({
             lengthMenu: [5,10, 25, 50, 75, 100],
             ordering: false,
             language: {
@@ -296,11 +289,11 @@ function updatePurchase(purchaseData, id) {
             },
               data: data,
               columns: [
-                { data: 'invoice' },
-                { data: 'totalShop' },
-                { data: 'supplier.name' },
+                { data: 'id' },
+                { data: 'totalAmount' },
+                { data: 'employer.fullname' },
                 {
-                    data: 'supplier.contact',
+                    data: 'customer.fullname',
                     render: function(data, type, row) {
                         return data ? data : '----------------';
                     }
@@ -336,21 +329,30 @@ function updatePurchase(purchaseData, id) {
 
   //Load all purchases
   function loadAll(){ 
-    fetch(baseUrl+'/purchases')
+    fetch(baseUrl+'/sales')
       .then(response => response.json())
       .then(data => {
-         // Destroy the existing DataTable instance before reinitializing
          if (dataTable) {
             dataTable.destroy();
           }
-          dataTable = $('#shop').DataTable({
+         
+          dataTable = $('#sell').DataTable({
+            lengthMenu: [5,10, 25, 50, 75, 100],
+            ordering: false,
+            language: {
+                lengthMenu: 'Mostrar _MENU_ entradas',
+                paginate: {
+                    next: '<i class="fas fa-arrow-right"></i>', 
+                    previous: '<i class="fas fa-arrow-left"></i>'},
+                    info: 'Ver _START_ à _END_ de _TOTAL_ entradas'
+            },
               data: data,
               columns: [
-                  { data: 'invoice' },
-                  { data: 'totalShop' },
-                  { data: 'supplier.name' },
-                  {
-                    data: 'supplier.contact',
+                { data: 'id' },
+                { data: 'totalAmount' },
+                { data: 'employer.fullname' },
+                {
+                    data: 'customer.fullname',
                     render: function(data, type, row) {
                         return data ? data : '----------------';
                     }
@@ -370,14 +372,14 @@ function updatePurchase(purchaseData, id) {
                     }
                   },
                   {
-                    data: null, // Placeholder for delete button
-                    render: function(data, type, row) {
-                        return '<div class="actions"><a href="#" data-toggle="modal" data-target="#detailModal" class="edit-btn"  data-rowid="' + row.id + '"><i class="fas fa-ellipsis-h"></i></a>' +
-                            '<a href="#" data-toggle="modal" data-target="#editModal" class="edit-btn" data-rowid="' + row.id + '"><i class="fas fa-pen-to-square"></i></a>'+
-                            '<a href="#" data-toggle="modal" data-target="#deleteModal" data-rowid="' + row.id + '"><i class="mdi mdi-delete md text-danger"></i></a></div>'
-                            ;
-                    }
-                },
+                      data: null, // Placeholder for delete button
+                      render: function(data, type, row) {
+                          return '<div class="actions"><a href="#" data-toggle="modal" data-target="#detailModal" class="edit-btn"  data-rowid="' + row.id + '"><i class="fas fa-ellipsis-h"></i></a>' +
+                              '<a href="#" data-toggle="modal" data-target="#editModal" class="edit-btn" data-rowid="' + row.id + '"><i class="fas fa-pen-to-square"></i></a>'+
+                              '<a href="#" data-toggle="modal" data-target="#deleteModal" data-rowid="' + row.id + '"><i class="mdi mdi-delete md text-danger"></i></a></div>'
+                              ;
+                      }
+                  },
                   // Add more columns as needed
               ]
           });

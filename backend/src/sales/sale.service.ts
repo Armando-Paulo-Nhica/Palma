@@ -14,7 +14,8 @@ type Sale = {
 export async function findAll(){
 	const sale = await db.sale.findMany(
             {
-                select: {id: true, totalAmount: true, createdAt: true, items: {select: {quantity: true, subTotal: true, prodduct: true}}}
+              orderBy: {id: 'desc'},
+                select: {id: true, customer:true, employer: true, totalAmount: true, createdAt: true, items: {select: {quantity: true, subTotal: true, product: true}}}
             }
         )
 	return sale;
@@ -22,7 +23,7 @@ export async function findAll(){
 
 // Get single sale
 export async function findById(id: number){
-	const sale = await db.sale.findUnique({where: {id: id}, select: {id: true, totalAmount: true, createdAt: true, items: {select: {quantity: true, subTotal: true, prodduct: true}}}})
+	const sale = await db.sale.findUnique({where: {id: id},  select: {id: true, totalAmount: true, createdAt: true, items: {select: {quantity: true, subTotal: true, product: true}}}})
 	return sale;
 }
 
@@ -42,21 +43,6 @@ export async function destroy(id: number){
 	const sale = await db.sale.delete({where: {id: id}})
 	return sale;
 }
-
-
-// update Sale
-// export async function updateSale(id: number, newSaleData: Sale){
-// 	const sale = await db.sale.update({
-// 		where: {id: id}, 
-// 		data: {
-//             totalAmount: newSaleData.totalAmount,
-//             customerId: newSaleData.customerId,
-//             employerId: newSaleData.employerId,
-//             items:{create: newSaleData.items}
-//             }
-// 	})
-// 	return sale;
-// }
 
 
 export async function updateSale(id: number, newSaleData: Sale) {
