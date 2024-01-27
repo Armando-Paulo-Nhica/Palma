@@ -150,7 +150,7 @@ if(isOk){
                         swal("Mensagem", "Produto registado com sucesso!", "success");
                         setTimeout(function () {
                             window.location.href = '/product/view';
-                        }, 1000);
+                        }, 500);
                         
                     }
                     else

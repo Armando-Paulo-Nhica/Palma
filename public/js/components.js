@@ -8,7 +8,7 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
                 class="icon icon-payment"></i><span class="nav-text">Vendas</span></a>
         <ul aria-expanded="false">
             <li><a href="/sale/create"><i class="mdi mdi-circle-outline"></i> Registar nova</a></li>
-            <li><a href="#"><i class="mdi mdi-circle-outline"></i> Visualizar histórico</a></li>
+            <li><a href="/sale/view"><i class="mdi mdi-circle-outline"></i> Visualizar</a></li>
             <li><a href="#"><i class="mdi mdi-circle-outline"></i> Relatório</a></li>
         </ul>
     </li>
@@ -77,5 +77,5 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
 </div>`;
 
 document.getElementById("footer-info").innerHTML = `
-<p>By <a href="#" target="_blank">Web Soluções Gráfica | </a> info@websolucoesgrafica.co.mz | 2024</p>
+<p>By <a href="#" target="_blank"> <i style="font-weight: bold">Web Soluções Gráfica</i> | </a> info@websolucoesgrafica.co.mz | 2024</p>
 `;

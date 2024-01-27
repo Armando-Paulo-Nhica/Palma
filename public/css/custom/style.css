@@ -90,14 +90,22 @@ flex-direction: row;
 width: 100px;
 }
 
-table .actions i{
+table .actions a i{
     padding: 5px;
-    color: #555555;
+    /* color: #555555; */
+    color: var(--primary);
+
     margin-right: 6px;
-    opacity: 50%;
+    opacity: 90%;
+}
+.gute{margin-right: 7px;}
+table .actions a{
+    background:  #593bdb1a;
+    padding: 3px;
+    margin-right: 4px;
 }
 
-table .actions i:hover{cursor: pointer;color: #111111;}
+table .actions i:hover{cursor: pointer;color: var(--primary);}
 
 #cart-header{display: none;}
 

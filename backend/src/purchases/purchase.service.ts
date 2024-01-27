@@ -153,7 +153,7 @@ for (const purchase of purchasesArray) {
 //   Get all purchases
 export async function findAll(){
 	const purchase = await db.purchase.findMany({
-    orderBy:{id: 'asc'},
+    orderBy:{id: 'desc'},
     select:{
       id: true,
       invoice: true,

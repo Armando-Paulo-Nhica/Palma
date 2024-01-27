@@ -174,7 +174,7 @@ function displaySales(product) {
     row += "<td><input type='text' class='qty' value='1'/></td>";
     row += "<td><input type='text' class='discount' value='0'/></td>";
     row += "<td><input type='text' value="+product.sell+" readonly class='subtotal'></td>";
-    row += "<td class='actions'> <i class='fas fa-plus' onClick='addQty(this)'></i> <i class='fas fa-minus' onClick='reduceQty(this)'></i> <i class='fas fa-trash' onClick='deleteRow(this)'></i></td>";
+    row += "<td class='actions'> <i class='fas fa-plus gute' onClick='addQty(this)'></i> <i class='fas fa-minus gute' onClick='reduceQty(this)'></i> <i class='fas fa-trash gute' onClick='deleteRow(this)'></i></td>";
     row += "</tr>";
 
     $("#dta").append(row);
@@ -310,11 +310,6 @@ $('#table').on('focus', '.discount', function() {$(this).select();});
 
 // Delete row
 function deleteRow(elem) {
-  //  swal("Eliminar o produto?", {
-  //   dangerMode: true,
-  //   buttons: true,
-  //   timer: 3000,
-  // });
   var row = $(elem).closest("tr");
   var index = row.find("th").text();
   sale.splice(index, 1);
@@ -344,6 +339,9 @@ $("#saleBtn").click(function(){
       .then(data => {
           if(!data.error){
               swal("Mensagem", "Venda registada com sucesso!", "success");
+                        setTimeout(function () {
+                            window.location.href = '/sale/view';
+                        }, 500);
               $("#counter-id").text("");
               counter = 0;
               sale = [];
