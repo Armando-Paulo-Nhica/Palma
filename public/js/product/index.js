@@ -82,13 +82,10 @@ function createProduct(data){
         .then(response => response.json())
         .then(data => {
             if(!data.error){
-                swal({
-                    title: "Mensagem",
-                    text: "Novo produto foi registado com sucesso!",
-                    icon: "success",
-                    timer: 2500,  // Set the time delay in milliseconds
-                    buttons: false  // Disable the "OK" button
-                  });
+                swal("Mensagem", "Novo produto foi registado com sucesso!", "success");
+                        setTimeout(function () {
+                            window.location.href = '/stock/view';
+                        }, 500);
             }
             else
             {

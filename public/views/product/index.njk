@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>PALMA - Vendas</title>
+    <title>PALMA - Stock</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon.png">
     <!-- Datatable -->
@@ -28,7 +28,7 @@
             <div class="sk-child sk-bounce2"></div>
             <div class="sk-child sk-bounce3"></div>
         </div>
-    </div>
+    </div
     <!--*******************
         Preloader end
     ********************-->
@@ -187,13 +187,13 @@
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>VENDAS FINALIZADAS</h4>
+                            <h4>CONTROLE DE STOCK</h4>
                             
                         </div>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Vendas</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Stock</a></li>
                             <li class="breadcrumb-item active"><a href="javascript:void(0)">Visualizar</a></li>
                         </ol>
                     </div>
@@ -205,29 +205,33 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Todas Vendas</h4>
+                                <h4 class="card-title">Todos Produtos</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="sell" class="display" style="min-width: 845px">
+                                    <table id="stock" class="display" style="min-width: 845px">
                                         <thead>
                                             <tr>
-                                                <th>Nr de Recibo</th>
-                                                <th>Total venda</th>
-                                                <th>Funcionário</th>
-                                                <th>Cliente</th>
-                                                <th>Data de venda</th>
+                                                <th>Código</th>
+                                                <th>Nome</th>
+                                                <th>V. compra</th>
+                                                <th>V. venda</th>
+                                                <th>Quant</th>
+                                                <th>Entrada</th>
+                                                <th>Expiração</th>
                                                 <th>Actions</th>
                                         </thead>
                                         <tbody>
                                         </tbody>
                                          <tfoot>
                                             <tr>
-                                                <th>Nr de Recibo</th>
-                                                <th>Total venda</th>
-                                                <th>Funcionário</th>
-                                                <th>Cliente</th>
-                                                <th>Data de venda</th>
+                                                <th>Código</th>
+                                                <th>Nome</th>
+                                                <th>V. compra</th>
+                                                <th>V. venda</th>
+                                                <th>Quant</th>
+                                                <th>Entrada</th>
+                                                <th>Expiração</th>
                                                 <th>Actions</th>
                                                 
                                             </tr>
@@ -268,71 +272,45 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Editar Venda</h5>
+                <h5 class="modal-title">Editar Produto</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
             <div class="modal-body">
             <!-- Edit purchase -->
-                    <div class="form-row row" id="editSale">
+                    <div class="form-row row" id="editStock">
                        
                     </div>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="edit-sale-btn">Salvar alterações</button>
+                <button type="button" class="btn btn-primary" id="edit-stock-btn">Salvar alterações</button>
             </div>
         </div>
     </div>
  </div> 
 <!-- Modal edit end -->
 
- <!-- Modal details start -->
- <div class="modal fade" id="detailModal">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Produtos Vendidos</h5>
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                </button>
-            </div>
-             <div class="modal-body">
-                 <!-- View products -->
-                    <div class="form-row row" id="saleItems">
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                
-            </div>
-        </div>
+<!--**********************************
+    Content body end
+***********************************-->
+
+<div class="footer">
+    <div class="copyright " id="footer-info">
+        
     </div>
-</div> 
-<!-- Modal edit end -->
-        <!--**********************************
-            Content body end
-        ***********************************-->
-    
-       <div class="footer">
-            <div class="copyright " id="footer-info">
-                
-            </div>
-        </div>
+</div>
  
 
         
     </div>
    
-
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <script src="../../vendor/global/global.min.js"></script>
-<script src="../../js/sale/list.js"></script>
-<!-- <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script> -->
-<script src="../../js/datatable/datatable.js"></script> 
-<!-- <script src="../../vendor/global/global.min.js"></script> -->
+<script src="../../js/product/list.js"></script>
 <script src="../../js/components.js"></script>
 <script src="../../js/quixnav-init.js"></script>
 <script src="../../js/custom.min.js"></script>
+
 
 <!-- Datatable -->
 <script src="../../vendor/datatables/js/jquery.dataTables.min.js"></script> 
