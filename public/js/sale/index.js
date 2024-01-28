@@ -69,7 +69,9 @@ async function findProductByName(name){
     .then(data => {
       if (data != null) {
               $(this).val("");
-              $("#with-icon_collapseTwo").collapse("toggle");
+              // $("#with-icon_collapseTwo").collapse("toggle");
+              $("#with-icon_collapseTwo").collapse("show");
+
               $(this).attr("placeholder", barcode);
               // Check if the product already exists
               for (var i = 0; i < sale.length; i++) {
@@ -366,7 +368,7 @@ $("#saleBtn").click(function(){
 function transformJson() {
   const outputJson = {
     totalAmount: 0,
-    customerId: 2,
+    customerId: 1,
     employerId: 1,
     items: []
   };

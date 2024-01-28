@@ -27,8 +27,8 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
         class="icon icon-cart-simple"></i><span class="nav-text">Stock</span></a>
         <ul aria-expanded="false">
-            <li><a href="#"><i class="mdi mdi-circle-outline"></i> Registar novo</a></li>
-            <li><a href="#"><i class="mdi mdi-circle-outline"></i> Visualizar</a></li>
+            <li><a href="/stock/create"><i class="mdi mdi-circle-outline"></i> Registar novo</a></li>
+            <li><a href="/stock/view"><i class="mdi mdi-circle-outline"></i> Visualizar</a></li>
         </ul>
     </li>
 

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>PALMA - Compras</title>
+    <title>PALMA - Stock</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon.png">
     <!-- Datatable -->
@@ -190,13 +190,13 @@
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>REGISTAR NOVA COMPRA</h4>
+                            <h4>REGISTAR NOVO PRODUTO</h4>
                         </div>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Compras</a></li>
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Registar</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Produtos</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Novo</a></li>
                         </ol>
                     </div>
                 </div>
@@ -206,80 +206,57 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Dados do produto</h4>
-                                <div class="counter d-flex justify-content-end">
-                                     <i id="totalIn"></i>
-                                    
-                                </div>
-
+                            
                             </div>
                             <div class="card-body">
                                 <div class="basic-form">
                                     <form>
 
                                         <div class="form-row">
-                                            <div class="form-group col-md-3">
+                                            <div class="form-group col-md-6">
                                                 <label>Código</label>
                                                 <input type="text" id="barcode" class="form-control" placeholder="Código de produto" autofocus>
                                             </div>
-                                            <div class="form-group col-md-3">
-                                                <label>Nr de Factura</label>
-                                                <input type="text" id="invoice" class="form-control" placeholder="Número de factura" autofocus>
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label>Nome do produto <i style="color: red;">*</i> </label>
-                                                <input type="text" id="name" class="form-control" placeholder="Digite aqui" required>
-                                            </div>
-                                           
-                                           
-                                            <div class="form-group col-md-3">
-                                                <label>Valor de compra <i style="color: red;">*</i></label>
-                                                <input type="text" id="shop" class="form-control" placeholder="Digite aqui">
-                                            </div>
-                                            <div class="form-group col-md-3">
+                                             <div class="form-group col-md-6">
                                                 <label>Valor de venda <i style="color: red;">*</i></label>
                                                 <input type="text" id="sell" class="form-control" placeholder="Digite aqui">
                                             </div>
-                                            <div class="form-group col-md-3">
+                                            
+                                            <div class="form-group col-md-12">
+                                                <label>Nome do produto <i style="color: red;">*</i> </label>
+                                                <input type="text" id="name" class="form-control" placeholder="Digite aqui" required>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
                                                 <label>Quantidade <i style="color: red;">*</i></label>
                                                 <input type="number" min="1" id="quantity" class="form-control" placeholder="Digite aqui">
                                             </div>
-                                            <div class="form-group col-md-3">
+                                            <div class="form-group col-md-6">
                                                 <label>Data de validade</label>
                                                 <input type="date" id="expiresIn" class="form-control" placeholder="Digite aqui">
                                             </div>
                                           
-                                            <div class="form-group col-md-6 mt-4 input-group">
-                                                    <div class="input-group-prepend bg-primary" data-toggle="modal" data-target="#addCategory">
-                                                        <div class="input-group-text bg-btn bt">+</div>
-                                                    </div>
-                                                    <select id="categories" name="categories" class="form-control">
-                                                        <option value="" selected disabled>Selecione a categoria</option>
+
+                                            <div class="form-group col-md-12 input-group">
+                                                <div class="form-group col-md-12">
+                                                    <label>Categoria <i style="color: red;">*</i></label>
+                                                    <select id="category" class="form-control">
+                                                        <option selected disabled>Selecione a categoria</option>
                                                     </select>
                                             </div>
-
-                                            <div class="form-group col-md-6 mt-4 input-group">
-                                                
-                                                <div class="input-group- bg-primary2" data-toggle="modal" data-target="#addSupplier">
-                                                    <div class="input-group-text bg-btn bt" >+</div>
-                                                </div>
-                                                <select id="suppliers" name="suppliers" class="form-control">
-                                                    <option value="" selected disabled>Selecione o fornecedor</option>
-                                                </select>
-                                            </div>
                                             
+                                            </div>
                                         </div>
-                                      
-                                        <div class="form-group d-flex justify-content-end">
-                                            <a href="#" style="color: #3B4E87; font-weight: 400;" data-toggle="modal" data-target="#addProduct"><i class="fas fa-plus-circle"></i> Adicionar produto</a>
-                                        </div>
-                                        
+                                        <div class="form-group d-flex justify-content-end mx-3">
+                                                <a href="#" style="color: #3B4E87; font-weight: 400;" data-toggle="modal" data-target="#newCategory"><i class="fas fa-plus-circle"></i> Nova categoria</a>
+                                            </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
 
 
-                        <!-- Supplier and category -->
+                        <!-- Submit section -->
                         <div class="card">
                             <div class="card-body">
                                 <div class="basic-form">
@@ -292,7 +269,7 @@
                                                 </div>
                                                 
                                                 <div>
-                                                    <button type="submit" id="registerBtn" class="btn bg-btn">Registar compra</button>
+                                                    <button type="submit" id="registerBtn" class="btn bg-btn">Registar</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -313,107 +290,11 @@
         </div>
       
         <!-- Modal section -->
-         <!-- Add product modal -->
- <div class="modal fade lg" id="addProduct">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content px-3">
-            <div class="modal-header">
-                <h5 class="modal-title">Adicionar produto à compra</h5>
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <label>Código</label>
-                            <input type="text" id="barcode1" class="form-control" placeholder="Digite aqui" autofocus>
-                        </div>
-                      
-                        <div class="form-group col-md-12">
-                            <label>Nome do produto <i style="color: red;">*</i> </label>
-                            <input type="text" id="name1" class="form-control" placeholder="Digite aqui" required>
-                        </div>
-                       
-                        <div class="form-group col-md-6">
-                            <label>Valor de compra <i style="color: red;">*</i></label>
-                            <input type="text" id="shop1" class="form-control" placeholder="Digite aqui">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Valor de venda <i style="color: red;">*</i></label>
-                            <input type="text" id="sell1" class="form-control" placeholder="Digite aqui">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Quantidade <i style="color: red;">*</i></label>
-                            <input type="number" min="1" id="quantity1" class="form-control" placeholder="Digite aqui">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Data de validade</label>
-                            <input type="date" id="expiresIn1" class="form-control" placeholder="Digite aqui">
-                        </div>
-                        <div class="form-group col-md-12 mt-2 input-group">
-                            <div class="input-group-prepend bg-primary" id="addCategoryModal">
-                                <div class="input-group-text bg-btn bt">+</div>
-                            </div>
-                            <select id="categoryName1" name="categoryName1" class="form-control">
-                                <option value="" selected disabled>Selecione a categoria</option>
-                            </select>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="addPurchase">Adicionar produto</button>
-            </div>
-        </div>
-    </div>
-</div> 
-<!-- Add product Modal end -->
-
-
-<!-- Add supplier modal start -->
-<div class="modal fade lg" id="addSupplier">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content px-3">
-            <div class="modal-header">
-                <h5 class="modal-title">Registar novo fornecedor <h5>
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <label>Nome <i style="color: red;">*</i></label>
-                            <input type="text" id="supplierName" class="form-control" placeholder="Digite o nome do fornecedor">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>E-mail </label>
-                            <input type="text" id="email" class="form-control" placeholder="Digite o e-mail" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Contacto </label>
-                            <input type="text" id="contact" class="form-control" placeholder="Digite o contacto" required>
-                        </div>
-                        
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-secondary" data-dismiss="modal">Registar</button>
-            </div>
-        </div>
-    </div>
-</div> 
-
-<!-- Add supplier modal end -->
-
+         
 
 <!-- Start category modal -->
 <div class="row">
-<div class="modal fade lg " id="addCategory">
+<div class="modal fade lg " id="newCategory">
     <div class="modal-dialog modal-dialog-centered" >
         <div class="modal-content px-3">
             <div class="modal-header">
@@ -441,11 +322,11 @@
 
 <!-- End category modal -->
 
-<div class="footer">
+    <div class="footer">
             <div class="copyright " id="footer-info">
                 
             </div>
-        </div>
+    </div>
      
     
     <!--**********************************
@@ -457,12 +338,12 @@
     ***********************************-->
     <!-- Required vendors -->
     <script src="../../vendor/global/global.min.js"></script>
-    <script src="../../js/shop/create.js"></script>
+    <script src="../../js/product/index.js"></script>
     <script src="../../js/components.js"></script>
     <script src="../../js/quixnav-init.js"></script>
     <script src="../../js/custom.min.js"></script>
 
-       <!-- Sweet alert -->
+      <!-- Sweet alert -->
       <script src="../../js/sweetalert.min.js"></script>
     
 </body>

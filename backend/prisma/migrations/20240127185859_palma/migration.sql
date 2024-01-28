@@ -39,7 +39,7 @@ CREATE TABLE `categories` (
 -- CreateTable
 CREATE TABLE `products` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(35) NOT NULL,
+    `name` VARCHAR(100) NOT NULL,
     `barcode` BIGINT NOT NULL,
     `sell` DECIMAL(12, 2) NOT NULL,
     `shop` DECIMAL(12, 2) NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE `products` (
 
 -- CreateTable
 CREATE TABLE `purchaseProducts` (
-    `name` VARCHAR(50) NOT NULL,
+    `name` VARCHAR(100) NOT NULL,
     `sell` DECIMAL(12, 2) NOT NULL,
     `shop` DECIMAL(12, 2) NOT NULL,
     `quantity` INTEGER NOT NULL,
@@ -72,6 +72,7 @@ CREATE TABLE `purchases` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `supplierId` INTEGER NOT NULL,
     `invoice` INTEGER NOT NULL,
+    `totalShop` DECIMAL(12, 2) NOT NULL DEFAULT 0,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
@@ -86,8 +87,6 @@ CREATE TABLE `suppliers` (
     `contact` VARCHAR(10) NULL,
 
     UNIQUE INDEX `suppliers_name_key`(`name`),
-    UNIQUE INDEX `suppliers_email_key`(`email`),
-    UNIQUE INDEX `suppliers_contact_key`(`contact`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

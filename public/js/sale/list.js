@@ -5,9 +5,8 @@ $(document).ready(function() {
   var rowId = 0;
   var counter = 0;
   var dataTable;
-  var categories = [];
-  var suppliers = [];
-  var isNull = false;
+
+  
   //Catch the id
   $('#sell').on('click', '[data-rowid]', function(event) {
       event.preventDefault();
@@ -43,6 +42,7 @@ $(document).ready(function() {
 
 // Setting values to modal
 function setSaleValues() {
+    
     fetch(`${baseUrl}/sales/${rowId}`)
         .then(response => response.json())
         .then(data => {
@@ -51,43 +51,44 @@ function setSaleValues() {
             var productHtml = `
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6 mb-5">
                             <label>Referência da venda</label>
-                            <input type="number" value="${data.id}" class="form-control" readonly>
+                            <input type="number" value="${data.invoice}" class="form-control" readonly>
                         </div>
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6 mb-5">
                             <label>Total pago</label>
                             <input type="number" value="${data.totalAmount}" class="form-control" readonly>
                         </div>
-                        <input type="hidden" value="${data.id}" class="form-control">
+                        <input type="hidden" id="saleId" value="${data.id}" class="form-control">
+                        <input type="hidden" id="customerId" value="${data.customerId}" class="form-control">
+                        <input type="hidden" id="employerId" value="${data.employerId}" class="form-control">
                     `;
                 productsContainer.append(productHtml);
+               counter = data.items.length;
                
-            for(let i = 0; i< data.items.length; i++){
+            for(let i = 0; i< counter; i++){
                 productHtml = `<div class="row mx-2 mb-3" style="box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;">
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6">
                             <label>Nome do produto</label>
-                            <input type="text" id="name`+ (counter + 1) +`" value="${data.items[i].product.name}" class="form-control" readonly>
+                            <input type="text" id="name`+ (i + 1) +`" value="${data.items[i].product.name}" class="form-control" readonly>
                         </div>
                         
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6">
-                            <label>Valor de venda</label>
-                            <input type="number" min="1" id="sell`+(counter + 1)+`" value="${data.items[i].product.sell}" class="form-control"readonly >
+                            <label>Preço</label>
+                            <input type="number" min="1" id="sell`+(i + 1)+`" value="${data.items[i].product.sell}" class="form-control"readonly >
                         </div>
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6">
                             <label>Quantidade   </label>
-                            <input type="number" min="1" id="quantity`+(counter + 1)+`" value="${data.items[i].product.quantity}" class="form-control" >
+                            <input type="number" min="1" id="quantity`+(i + 1)+`" value="${data.items[i].quantity}" class="form-control" >
                         </div>
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6">
                             <label>Subtotal</label>
-                            <input type="number" id="subtotal`+(counter + 1)+`" value = "${data.items[i].subTotal}" class="form-control" readonly>
+                            <input type="number" id="subtotal`+(i + 1)+`" value = "${data.items[i].subTotal}" class="form-control" readonly>
                         </div>
-                        <input type="hidden" id="productId`+(counter + 1)+`" value="${data.items[i].product.id}">
+                        <input type="hidden" id="productId`+(i + 1)+`" value="${data.items[i].product.id}">
                 </div>
                 `;
                 productsContainer.append(productHtml);
-                counter++;
+                
             };
-
-            // Add more code to set values for other elements if needed
 
         })
         .catch(error => console.error('Error fetching data:', error));
@@ -106,7 +107,7 @@ function viewSaleProducts() {
             
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6 mb-5">
                             <label>Número de recibo</label>
-                            <input type="number" value="${data.id}" class="form-control" readonly>
+                            <input type="number" value="${data.invoice}" class="form-control" readonly>
                         </div>
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6 mb-5">
                             <label>Total pago</label>
@@ -144,7 +145,7 @@ function viewSaleProducts() {
                 </div>
                 `;
                 productsContainer.append(productHtml);
-                counter++;
+                
             };
 
             // Add more code to set values for other elements if needed
@@ -172,95 +173,59 @@ function formatDateTime(dateString) {
     return formattedDate;
   }
 
-
-  // Fill the modal to edit
-  fetch(baseUrl+'/categories')
-  .then(response => response.json()) 
-  .then(data => {
-    categories = data;
-      
-  })
-  .catch(error => {
-      console.error('Error fetching data:', error);
-  });
-
-
-  fetch(baseUrl+'/suppliers')
-  .then(response => response.json()) 
-  .then(data => {
-      suppliers = data;
-      
-  })
-  .catch(error => {
-      console.error('Error fetching data:', error);
-  });
-
-
-
-
 //   Edit purchase
 $("#edit-sale-btn").click(function() {
-    var purchase = {
-      totalAmount: parseFloat($("#totalAmount").val()).toFixed(2),
-      customerId: 1,
-      employerId: 1,
+    var sale = {
+      totalAmount: 0,
+      customerId: parseInt($("#customerId").val(), 10),
+      employerId: parseInt($("#employerId").val(), 10),
       items: []
     };
 
-    for (var i = 0; i < counter; i++) {
-        purchase.totalShop += ($("#quantity" + (i+1)).val() * $("#shop" + (i+1)).val());
-  
-      const quantity = parseInt($("#quantity" + (i+1)).val(), 10);
-      const name = $("#name" + (i+1)).val();
-      const sell = $("#sell" + (i+1)).val();
-      const shop = $("#shop" + (i+1)).val();
-      const expiresIn = $("#expiresIn" + (i+1)).val(); 
-      const categoryId = parseInt($("#categoryId" + (i+1)).val(), 10);
+    for (let i = 0; i < counter; i++) {
+      
+      const quantity = parseInt($("#quantity" + (i+1)).val(), 10);      
       const productId = parseInt($("#productId"+(i+1)).val(), 10);
-
-      if($("#name" + (i+1)).val() == ''){isNull = true;}
-      if($("#sell" + (i+1)).val() == ''){isNull = true;}
-      if($("#quantity" + (i+1)).val() == ''){isNull = true;}
-    
-      purchase.products.push({
-        name,
-        sell,
-        shop,
+      const subTotal = parseFloat(quantity * $("#sell"+(i+1)).val()).toFixed(2);
+      sale.items.push({
+        subTotal,
         quantity,
-        expiresIn,
-        categoryId,
         productId,
       });
+
+        sale.totalAmount += parseFloat(subTotal);
     }
-    
-    if(isNull == false){
-        const id = $("#idPurchase").val();
-        updatePurchase(purchase, id);
+        sale.totalAmount = parseFloat(sale.totalAmount).toFixed(2);
+        const id = parseInt($("#saleId").val(), 10);
+        updateSale(sale, id);
         counter = 0;
         $("#editModal").modal("hide");
-    }
-    swal("Mensagem", "Preencha todos os campos!", "error");
-    isNull = false;
-    
+
   });
-  
+
 
 // Update the purchase
-function updatePurchase(purchaseData, id) {
+function updateSale(saleData, id) {
     var requestOptions = {
         method: 'PUT', // Use PUT for updating data
         headers: {
             'Content-Type': 'application/json', // Set the content type to JSON
             // Add any other headers if needed
         },
-        body: JSON.stringify(purchaseData) // Convert data to JSON string
+        body: JSON.stringify(saleData) // Convert data to JSON string
     };
 
     // Perform the fetch request
-    fetch(`${baseUrl}/purchases/${id}`, requestOptions)
+    fetch(`${baseUrl}/sales/${id}`, requestOptions)
         .then(response => response.json())
         .then(data => {
-                swal("Mensagem", "Produto registado com sucesso!", "success");
+            swal({
+                title: "Mensagem",
+                text: "Alterações feitas com sucesso!",
+                icon: "success",
+                timer: 2500,  // Set the time delay in milliseconds
+                buttons: false  // Disable the "OK" button
+              });
                 loadAll();
         })
         .catch(error => {
@@ -289,7 +254,7 @@ function updatePurchase(purchaseData, id) {
             },
               data: data,
               columns: [
-                { data: 'id' },
+                { data: 'invoice' },
                 { data: 'totalAmount' },
                 { data: 'employer.fullname' },
                 {
@@ -348,7 +313,7 @@ function updatePurchase(purchaseData, id) {
             },
               data: data,
               columns: [
-                { data: 'id' },
+                { data: 'invoice' },
                 { data: 'totalAmount' },
                 { data: 'employer.fullname' },
                 {

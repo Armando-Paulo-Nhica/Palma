@@ -75,10 +75,7 @@ if(name.val().trim() === ''){
     validate(name, "O nome do produto é obrigatório");
     isOk = false;
 }
-if(invoice.val().trim() === ''){
-    validate(invoice, "O número da factura é obrigatória");
-    isOk = false;
-}
+
 if(sell.val().trim() === ''){
     validate(sell, "O valor da venda é obrigatório");
     isOk = false;

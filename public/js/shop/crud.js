@@ -37,6 +37,7 @@ $(document).ready(function() {
 
 // Setting values to modal
 function setPurchaseValues() {
+    counter = 0;
     fetch(`${baseUrl}/purchases/${rowId}`)
         .then(response => response.json())
         .then(data => {
@@ -251,7 +252,6 @@ $("#edit-purchase-btn").click(function() {
     
   });
   
-
 // Update the purchase
 function updatePurchase(purchaseData, id) {
     var requestOptions = {

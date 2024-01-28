@@ -13,6 +13,31 @@ type Product= {
     
 }
 
+
+// create product
+export async function createProduct(formData: Product){
+	const product = await db.product.create({
+        data: {
+            name: formData.name,
+            barcode: formData.barcode,
+            sell: formData.sell,
+            shop: formData.shop,
+            quantity: formData.quantity,
+            expiresIn: formData.expiresIn,
+            category: {
+                        connectOrCreate:{
+                            where: {name: formData.categoryName},
+                            create: {name: formData.categoryName}
+                        }
+                      }
+                     
+            }
+	})
+	return product;
+}
+
+
+
 //   Get all products
 export async function findAll(){
 	const products = await db.product.findMany({
@@ -90,6 +115,7 @@ export async function updateProduct(id: number, formData: Product){
             barcode: formData.barcode,
             sell: formData.shop,
             shop: formData.shop,
+            quantity: formData.quantity,
             expiresIn: formData.expiresIn,
             category: {
                         connectOrCreate:{

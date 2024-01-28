@@ -5,11 +5,20 @@ import json from "../helper/json";
 export const productRouter = express.Router();
 
 
+// Create product
+productRouter.post("/" ,async (request: Request,response: Response) =>{
+	try {
+		const product = await ProductService.createProduct(request.body);
+		return response.status(200).type("json").send(json(product));
+	} catch (error: any) {
+		return response.status(500).json(error.message)
+	}
+})
+
 // List product
 productRouter.get("/" ,async (request: Request,response: Response) =>{
 	try {
 		const product = await ProductService.findAll();
-		// return response.status(200).json(supplier);
 		return response.status(200).type("json").send(json(product));
 	} catch (error: any) {
 		return response.status(500).json(error.message)
@@ -23,7 +32,6 @@ productRouter.get("/:id", async (request: Request,response: Response) =>{
 		const product = await ProductService.findById(id);
 		if(product){
 			return response.status(200).type("json").send(json(product));
-			// return response.status(200).json(product);
 		}
 		return response.status(404).json({error:true,msg: "Produto não foi encontrado!"});
 	} catch (error: any) {

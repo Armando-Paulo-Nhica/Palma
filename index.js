@@ -14,8 +14,11 @@ app.use(cors({
 const saleRoutes = require('./routes/sale/index');
 const homeRoutes = require('./routes/home/index');
 const shopRoutes = require('./routes/shop/index');
+const productRoutes = require('./routes/product/index');
 
 const port = 8080
+
+
 
 // Configure Nunjucks with the correct views path
 nunjucks.configure('public/views', {
@@ -29,6 +32,7 @@ app.use(express.static('public'));
 app.use('/', homeRoutes);
 app.use('/sale', saleRoutes);
 app.use('/product', shopRoutes);
+app.use('/stock', productRoutes);
 
 
 app.listen(port, () => {
