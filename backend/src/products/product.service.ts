@@ -10,6 +10,7 @@ type Product= {
     quantity: number,
     expiresIn: string,
     categoryName: string,
+    categoryId: number
     
 }
 
@@ -41,17 +42,17 @@ export async function createProduct(formData: Product){
 //   Get all products
 export async function findAll(){
 	const products = await db.product.findMany({
+        orderBy: {id: 'desc'},
         select: {
                     id: true, 
                     name: true, 
                     barcode: true, 
                     sell: true, 
                     shop: true,
-                    category: {
-                                select:{
-                                            name:true
-                                        }
-                            }
+                    quantity: true,
+                    expiresIn: true,
+                    createdAt: true,
+                    category: true
                }
             });
 	return products;
@@ -113,16 +114,11 @@ export async function updateProduct(id: number, formData: Product){
         data: {
             name: formData.name,
             barcode: formData.barcode,
-            sell: formData.shop,
+            sell: formData.sell,
             shop: formData.shop,
             quantity: formData.quantity,
             expiresIn: formData.expiresIn,
-            category: {
-                        connectOrCreate:{
-                            where: {name: formData.categoryName},
-                            create: {name: formData.categoryName}
-                        }
-                      }
+            categoryId: formData.categoryId
                      
             }
 	})

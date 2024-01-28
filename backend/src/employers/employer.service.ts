@@ -1,5 +1,8 @@
 import {db} from '../utiles/db.server'
-
+import * as bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+const { hash, compare } = bcrypt;
+const SECRET: number = parseInt(process.env.JWT_SECRET as string, 10);
 
 type Employer= {
 	id: number,
@@ -10,6 +13,30 @@ type Employer= {
     isAdmin: boolean,
     status: string
 }
+
+
+// Authentication
+
+export const authenticateUser = async (username: string, password: string) => {
+	// Check if the user exists in the database
+	const user = await db.employer.findUnique({ where: { email:username } });
+  
+	if (!user) {
+	  throw new Error('Credenciais inválidas');
+	}
+  
+	// Verify the password
+	const passwordMatch = await bcrypt.compare(password, user.password);
+  
+	if (!passwordMatch) {
+	  throw new Error('Credenciais inválidas');
+	}
+  
+	// Create a JWT
+	const token = jwt.sign({ userId: user.id, fullName: user.fullname, isAdmin: user.isAdmin }, SECRET.toString(),{expiresIn: "1h"});
+  
+	return token;
+  };
 
 //   Get all employer
 export async function findAll(){
@@ -51,12 +78,12 @@ export async function create(formData: Employer){
         // Supplier with the same name already exists
         throw new Error('A conta já existe');
       }
-
+      const hashedPassword = await bcrypt.hash(formData.password, 4);
 	const employer = await db.employer.create({
         data: {
             fullname: formData.fullname, 
             email: formData.email,
-            password: formData.password,
+            password: hashedPassword,
             username: formData.username,
             isAdmin: formData.isAdmin,
             status: formData.status
