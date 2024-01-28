@@ -129,6 +129,41 @@ export async function updateProduct(id: number, formData: Product){
 	return product;
 }
 
+
+// Reduce product quantity
+export async function updateProductQty(items: { productId: number; quantity: number }[]): Promise<boolean> {
+    try {
+      for (const item of items) {
+        const existingProduct = await db.product.findUnique({
+          where: { id: item.productId },
+          select: { quantity: true },
+        });
+  
+  
+        // Check if newQuantity is less than the existing quantity
+        if(existingProduct != null){
+            if (item.quantity <= existingProduct.quantity) {
+                await db.product.update({
+                  where: { id: item.productId },
+                  data: {
+                    quantity: {
+                      decrement: item.quantity,
+                    },
+                  },
+                });
+              } else {
+                  return false;
+              }
+        }
+        else {return false;}
+      }
+  
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
   
   
   

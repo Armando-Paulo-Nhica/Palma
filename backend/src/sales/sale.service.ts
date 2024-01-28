@@ -1,5 +1,5 @@
 import {db} from '../utiles/db.server'
-
+import { updateProductQty } from '../products/product.service';
 type Sale = {
     totalAmount: number,
     customerId: number, 
@@ -16,7 +16,7 @@ function generateInvoice() {
   const currentTime = new Date().getTime();
   const reference = currentTime.toString().slice(-10);
   return parseInt(reference, 10);
-}
+} 
 
 //   Get all sale
 export async function findAll(){
@@ -37,7 +37,10 @@ export async function findById(id: number){
 
 // Create sale
 export async function create(newSaleData: Sale){
-	const Sale = await db.sale.create({
+const isUpdated = await updateProductQty(newSaleData.items);
+
+	if(isUpdated){
+      const Sale = await db.sale.create({
         data: {
             totalAmount: newSaleData.totalAmount,
             customerId: newSaleData.customerId,
@@ -45,7 +48,9 @@ export async function create(newSaleData: Sale){
             invoice: generateInvoice(),
             items:{create: newSaleData.items}
             }})
-	return Sale;	
+      return Sale;
+  }
+
 }
 // Delete Sale
 export async function destroy(id: number){
