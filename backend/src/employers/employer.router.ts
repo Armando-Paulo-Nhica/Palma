@@ -1,9 +1,23 @@
 import express from "express";
 import type { Request, Response } from "express"
 import * as EmployerService from "./employer.service"
+import {db} from '../utiles/db.server'
+import jwt from 'jsonwebtoken';
+var CryptoJS = require("crypto-js");
 
-// export const employerRouter = express.Router()
 export const employerRouter = express.Router();
+
+
+// Auth
+employerRouter.post("/auth" ,async (req: Request,res: Response) =>{
+	try {
+		const users = await EmployerService.authenticateUser(req.body.username, req.body.password);
+		return res.status(200).json(users);
+	} catch (error: any) {
+		return res.status(500).json(error.message)
+	}
+})
+
 
 // List employer
 employerRouter.get("/" ,async (request: Request,response: Response) =>{

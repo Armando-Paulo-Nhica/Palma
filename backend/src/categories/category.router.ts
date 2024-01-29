@@ -1,19 +1,21 @@
 import express from "express";
-import type { Request, Response } from "express"
+import { Request, Response, NextFunction } from 'express';
 import * as CategoryService from "./category.service"
+// import * as vt from '../verifyToken'
 
-// export const categoryRouter = express.Router()
 export const categoryRouter = express.Router();
 
+
 // List users
-categoryRouter.get("/" ,async (request: Request,response: Response) =>{
+categoryRouter.get("/", async (request: Request, response: Response) => {
 	try {
-		const category = await CategoryService.findAll();
-		return response.status(200).json(category);
+	  const categories = await CategoryService.findAll();
+	  return response.status(200).json(categories);
 	} catch (error: any) {
-		return response.status(500).json(error.message)
+	  return response.status(500).json({ error: true, message: error.message });
 	}
-})
+  });
+
 
 // Get single Category
 categoryRouter.get("/:id", async (request: Request,response: Response) =>{

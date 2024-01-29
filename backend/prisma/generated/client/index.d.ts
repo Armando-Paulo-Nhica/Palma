@@ -1940,28 +1940,28 @@ export namespace Prisma {
   }
 
   export type EmployerSumAggregateOutputType = {
-    id: bigint | null
+    id: number | null
   }
 
   export type EmployerMinAggregateOutputType = {
-    id: bigint | null
+    id: number | null
     email: string | null
     fullname: string | null
     username: string | null
     password: string | null
     isAdmin: boolean | null
-    status: string | null
+    isActive: boolean | null
     createdAt: Date | null
   }
 
   export type EmployerMaxAggregateOutputType = {
-    id: bigint | null
+    id: number | null
     email: string | null
     fullname: string | null
     username: string | null
     password: string | null
     isAdmin: boolean | null
-    status: string | null
+    isActive: boolean | null
     createdAt: Date | null
   }
 
@@ -1972,7 +1972,7 @@ export namespace Prisma {
     username: number
     password: number
     isAdmin: number
-    status: number
+    isActive: number
     createdAt: number
     _all: number
   }
@@ -1993,7 +1993,7 @@ export namespace Prisma {
     username?: true
     password?: true
     isAdmin?: true
-    status?: true
+    isActive?: true
     createdAt?: true
   }
 
@@ -2004,7 +2004,7 @@ export namespace Prisma {
     username?: true
     password?: true
     isAdmin?: true
-    status?: true
+    isActive?: true
     createdAt?: true
   }
 
@@ -2015,7 +2015,7 @@ export namespace Prisma {
     username?: true
     password?: true
     isAdmin?: true
-    status?: true
+    isActive?: true
     createdAt?: true
     _all?: true
   }
@@ -2107,13 +2107,13 @@ export namespace Prisma {
   }
 
   export type EmployerGroupByOutputType = {
-    id: bigint
+    id: number
     email: string
     fullname: string
     username: string
     password: string
     isAdmin: boolean
-    status: string
+    isActive: boolean
     createdAt: Date
     _count: EmployerCountAggregateOutputType | null
     _avg: EmployerAvgAggregateOutputType | null
@@ -2143,7 +2143,7 @@ export namespace Prisma {
     username?: boolean
     password?: boolean
     isAdmin?: boolean
-    status?: boolean
+    isActive?: boolean
     createdAt?: boolean
     sales?: boolean | Employer$salesArgs<ExtArgs>
     _count?: boolean | EmployerCountOutputTypeDefaultArgs<ExtArgs>
@@ -2156,7 +2156,7 @@ export namespace Prisma {
     username?: boolean
     password?: boolean
     isAdmin?: boolean
-    status?: boolean
+    isActive?: boolean
     createdAt?: boolean
   }
 
@@ -2172,13 +2172,13 @@ export namespace Prisma {
       sales: Prisma.$SalePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: bigint
+      id: number
       email: string
       fullname: string
       username: string
       password: string
       isAdmin: boolean
-      status: string
+      isActive: boolean
       createdAt: Date
     }, ExtArgs["result"]["employer"]>
     composites: {}
@@ -2575,13 +2575,13 @@ export namespace Prisma {
    * Fields of the Employer model
    */ 
   interface EmployerFieldRefs {
-    readonly id: FieldRef<"Employer", 'BigInt'>
+    readonly id: FieldRef<"Employer", 'Int'>
     readonly email: FieldRef<"Employer", 'String'>
     readonly fullname: FieldRef<"Employer", 'String'>
     readonly username: FieldRef<"Employer", 'String'>
     readonly password: FieldRef<"Employer", 'String'>
     readonly isAdmin: FieldRef<"Employer", 'Boolean'>
-    readonly status: FieldRef<"Employer", 'String'>
+    readonly isActive: FieldRef<"Employer", 'Boolean'>
     readonly createdAt: FieldRef<"Employer", 'DateTime'>
   }
     
@@ -8904,7 +8904,7 @@ export namespace Prisma {
     id: bigint | null
     totalAmount: Decimal | null
     customerId: number | null
-    employerId: bigint | null
+    employerId: number | null
     invoice: number | null
   }
 
@@ -8913,7 +8913,7 @@ export namespace Prisma {
     totalAmount: Decimal | null
     createdAt: Date | null
     customerId: number | null
-    employerId: bigint | null
+    employerId: number | null
     invoice: number | null
   }
 
@@ -8922,7 +8922,7 @@ export namespace Prisma {
     totalAmount: Decimal | null
     createdAt: Date | null
     customerId: number | null
-    employerId: bigint | null
+    employerId: number | null
     invoice: number | null
   }
 
@@ -9072,7 +9072,7 @@ export namespace Prisma {
     totalAmount: Decimal
     createdAt: Date
     customerId: number | null
-    employerId: bigint
+    employerId: number
     invoice: number
     _count: SaleCountAggregateOutputType | null
     _avg: SaleAvgAggregateOutputType | null
@@ -9137,7 +9137,7 @@ export namespace Prisma {
       totalAmount: Prisma.Decimal
       createdAt: Date
       customerId: number | null
-      employerId: bigint
+      employerId: number
       invoice: number
     }, ExtArgs["result"]["sale"]>
     composites: {}
@@ -9542,7 +9542,7 @@ export namespace Prisma {
     readonly totalAmount: FieldRef<"Sale", 'Decimal'>
     readonly createdAt: FieldRef<"Sale", 'DateTime'>
     readonly customerId: FieldRef<"Sale", 'Int'>
-    readonly employerId: FieldRef<"Sale", 'BigInt'>
+    readonly employerId: FieldRef<"Sale", 'Int'>
     readonly invoice: FieldRef<"Sale", 'Int'>
   }
     
@@ -12699,7 +12699,7 @@ export namespace Prisma {
     username: 'username',
     password: 'password',
     isAdmin: 'isAdmin',
-    status: 'status',
+    isActive: 'isActive',
     createdAt: 'createdAt'
   };
 
@@ -12841,9 +12841,9 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'BigInt'
+   * Reference to a field of type 'Int'
    */
-  export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
@@ -12869,9 +12869,9 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'BigInt'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
     
 
 
@@ -12896,13 +12896,13 @@ export namespace Prisma {
     AND?: EmployerWhereInput | EmployerWhereInput[]
     OR?: EmployerWhereInput[]
     NOT?: EmployerWhereInput | EmployerWhereInput[]
-    id?: BigIntFilter<"Employer"> | bigint | number
+    id?: IntFilter<"Employer"> | number
     email?: StringFilter<"Employer"> | string
     fullname?: StringFilter<"Employer"> | string
     username?: StringFilter<"Employer"> | string
     password?: StringFilter<"Employer"> | string
     isAdmin?: BoolFilter<"Employer"> | boolean
-    status?: StringFilter<"Employer"> | string
+    isActive?: BoolFilter<"Employer"> | boolean
     createdAt?: DateTimeFilter<"Employer"> | Date | string
     sales?: SaleListRelationFilter
   }
@@ -12914,13 +12914,13 @@ export namespace Prisma {
     username?: SortOrder
     password?: SortOrder
     isAdmin?: SortOrder
-    status?: SortOrder
+    isActive?: SortOrder
     createdAt?: SortOrder
     sales?: SaleOrderByRelationAggregateInput
   }
 
   export type EmployerWhereUniqueInput = Prisma.AtLeast<{
-    id?: bigint | number
+    id?: number
     email?: string
     fullname?: string
     username?: string
@@ -12929,7 +12929,7 @@ export namespace Prisma {
     NOT?: EmployerWhereInput | EmployerWhereInput[]
     password?: StringFilter<"Employer"> | string
     isAdmin?: BoolFilter<"Employer"> | boolean
-    status?: StringFilter<"Employer"> | string
+    isActive?: BoolFilter<"Employer"> | boolean
     createdAt?: DateTimeFilter<"Employer"> | Date | string
     sales?: SaleListRelationFilter
   }, "id" | "email" | "fullname" | "username">
@@ -12941,7 +12941,7 @@ export namespace Prisma {
     username?: SortOrder
     password?: SortOrder
     isAdmin?: SortOrder
-    status?: SortOrder
+    isActive?: SortOrder
     createdAt?: SortOrder
     _count?: EmployerCountOrderByAggregateInput
     _avg?: EmployerAvgOrderByAggregateInput
@@ -12954,13 +12954,13 @@ export namespace Prisma {
     AND?: EmployerScalarWhereWithAggregatesInput | EmployerScalarWhereWithAggregatesInput[]
     OR?: EmployerScalarWhereWithAggregatesInput[]
     NOT?: EmployerScalarWhereWithAggregatesInput | EmployerScalarWhereWithAggregatesInput[]
-    id?: BigIntWithAggregatesFilter<"Employer"> | bigint | number
+    id?: IntWithAggregatesFilter<"Employer"> | number
     email?: StringWithAggregatesFilter<"Employer"> | string
     fullname?: StringWithAggregatesFilter<"Employer"> | string
     username?: StringWithAggregatesFilter<"Employer"> | string
     password?: StringWithAggregatesFilter<"Employer"> | string
     isAdmin?: BoolWithAggregatesFilter<"Employer"> | boolean
-    status?: StringWithAggregatesFilter<"Employer"> | string
+    isActive?: BoolWithAggregatesFilter<"Employer"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Employer"> | Date | string
   }
 
@@ -13342,7 +13342,7 @@ export namespace Prisma {
     totalAmount?: DecimalFilter<"Sale"> | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFilter<"Sale"> | Date | string
     customerId?: IntNullableFilter<"Sale"> | number | null
-    employerId?: BigIntFilter<"Sale"> | bigint | number
+    employerId?: IntFilter<"Sale"> | number
     invoice?: IntFilter<"Sale"> | number
     items?: SaleOrderListRelationFilter
     customer?: XOR<CustomerNullableRelationFilter, CustomerWhereInput> | null
@@ -13369,7 +13369,7 @@ export namespace Prisma {
     totalAmount?: DecimalFilter<"Sale"> | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFilter<"Sale"> | Date | string
     customerId?: IntNullableFilter<"Sale"> | number | null
-    employerId?: BigIntFilter<"Sale"> | bigint | number
+    employerId?: IntFilter<"Sale"> | number
     invoice?: IntFilter<"Sale"> | number
     items?: SaleOrderListRelationFilter
     customer?: XOR<CustomerNullableRelationFilter, CustomerWhereInput> | null
@@ -13398,7 +13398,7 @@ export namespace Prisma {
     totalAmount?: DecimalWithAggregatesFilter<"Sale"> | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeWithAggregatesFilter<"Sale"> | Date | string
     customerId?: IntNullableWithAggregatesFilter<"Sale"> | number | null
-    employerId?: BigIntWithAggregatesFilter<"Sale"> | bigint | number
+    employerId?: IntWithAggregatesFilter<"Sale"> | number
     invoice?: IntWithAggregatesFilter<"Sale"> | number
   }
 
@@ -13567,83 +13567,80 @@ export namespace Prisma {
   }
 
   export type EmployerCreateInput = {
-    id?: bigint | number
     email: string
     fullname: string
     username: string
     password: string
     isAdmin?: boolean
-    status: string
+    isActive?: boolean
     createdAt?: Date | string
     sales?: SaleCreateNestedManyWithoutEmployerInput
   }
 
   export type EmployerUncheckedCreateInput = {
-    id?: bigint | number
+    id?: number
     email: string
     fullname: string
     username: string
     password: string
     isAdmin?: boolean
-    status: string
+    isActive?: boolean
     createdAt?: Date | string
     sales?: SaleUncheckedCreateNestedManyWithoutEmployerInput
   }
 
   export type EmployerUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    status?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sales?: SaleUpdateManyWithoutEmployerNestedInput
   }
 
   export type EmployerUncheckedUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    status?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sales?: SaleUncheckedUpdateManyWithoutEmployerNestedInput
   }
 
   export type EmployerCreateManyInput = {
-    id?: bigint | number
+    id?: number
     email: string
     fullname: string
     username: string
     password: string
     isAdmin?: boolean
-    status: string
+    isActive?: boolean
     createdAt?: Date | string
   }
 
   export type EmployerUpdateManyMutationInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    status?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmployerUncheckedUpdateManyInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    status?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -14030,7 +14027,7 @@ export namespace Prisma {
     totalAmount: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     customerId?: number | null
-    employerId: bigint | number
+    employerId: number
     invoice?: number
     items?: SaleOrderUncheckedCreateNestedManyWithoutSaleInput
   }
@@ -14050,7 +14047,7 @@ export namespace Prisma {
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerId?: NullableIntFieldUpdateOperationsInput | number | null
-    employerId?: BigIntFieldUpdateOperationsInput | bigint | number
+    employerId?: IntFieldUpdateOperationsInput | number
     invoice?: IntFieldUpdateOperationsInput | number
     items?: SaleOrderUncheckedUpdateManyWithoutSaleNestedInput
   }
@@ -14060,7 +14057,7 @@ export namespace Prisma {
     totalAmount: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     customerId?: number | null
-    employerId: bigint | number
+    employerId: number
     invoice?: number
   }
 
@@ -14076,7 +14073,7 @@ export namespace Prisma {
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerId?: NullableIntFieldUpdateOperationsInput | number | null
-    employerId?: BigIntFieldUpdateOperationsInput | bigint | number
+    employerId?: IntFieldUpdateOperationsInput | number
     invoice?: IntFieldUpdateOperationsInput | number
   }
 
@@ -14233,15 +14230,15 @@ export namespace Prisma {
     zone?: StringFieldUpdateOperationsInput | string
   }
 
-  export type BigIntFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -14291,7 +14288,7 @@ export namespace Prisma {
     username?: SortOrder
     password?: SortOrder
     isAdmin?: SortOrder
-    status?: SortOrder
+    isActive?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -14306,7 +14303,7 @@ export namespace Prisma {
     username?: SortOrder
     password?: SortOrder
     isAdmin?: SortOrder
-    status?: SortOrder
+    isActive?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -14317,7 +14314,7 @@ export namespace Prisma {
     username?: SortOrder
     password?: SortOrder
     isAdmin?: SortOrder
-    status?: SortOrder
+    isActive?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -14325,20 +14322,20 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
     _count?: NestedIntFilter<$PrismaModel>
     _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedBigIntFilter<$PrismaModel>
-    _min?: NestedBigIntFilter<$PrismaModel>
-    _max?: NestedBigIntFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -14380,17 +14377,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type CustomerCountOrderByAggregateInput = {
     id?: SortOrder
     fullname?: SortOrder
@@ -14418,22 +14404,6 @@ export namespace Prisma {
 
   export type CustomerSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type ProductListRelationFilter = {
@@ -14467,6 +14437,17 @@ export namespace Prisma {
 
   export type CategorySumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type BigIntFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
   }
 
   export type DecimalFilter<$PrismaModel = never> = {
@@ -14560,6 +14541,22 @@ export namespace Prisma {
     shop?: SortOrder
     quantity?: SortOrder
     categoryId?: SortOrder
+  }
+
+  export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedBigIntFilter<$PrismaModel>
+    _min?: NestedBigIntFilter<$PrismaModel>
+    _max?: NestedBigIntFilter<$PrismaModel>
   }
 
   export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
@@ -14965,14 +14962,6 @@ export namespace Prisma {
     connect?: SaleWhereUniqueInput | SaleWhereUniqueInput[]
   }
 
-  export type BigIntFieldUpdateOperationsInput = {
-    set?: bigint | number
-    increment?: bigint | number
-    decrement?: bigint | number
-    multiply?: bigint | number
-    divide?: bigint | number
-  }
-
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -14997,6 +14986,14 @@ export namespace Prisma {
     update?: SaleUpdateWithWhereUniqueWithoutEmployerInput | SaleUpdateWithWhereUniqueWithoutEmployerInput[]
     updateMany?: SaleUpdateManyWithWhereWithoutEmployerInput | SaleUpdateManyWithWhereWithoutEmployerInput[]
     deleteMany?: SaleScalarWhereInput | SaleScalarWhereInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type SaleUncheckedUpdateManyWithoutEmployerNestedInput = {
@@ -15039,14 +15036,6 @@ export namespace Prisma {
     update?: SaleUpdateWithWhereUniqueWithoutCustomerInput | SaleUpdateWithWhereUniqueWithoutCustomerInput[]
     updateMany?: SaleUpdateManyWithWhereWithoutCustomerInput | SaleUpdateManyWithWhereWithoutCustomerInput[]
     deleteMany?: SaleScalarWhereInput | SaleScalarWhereInput[]
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type SaleUncheckedUpdateManyWithoutCustomerNestedInput = {
@@ -15137,6 +15126,14 @@ export namespace Prisma {
     connectOrCreate?: PurchaseProductCreateOrConnectWithoutProductInput | PurchaseProductCreateOrConnectWithoutProductInput[]
     createMany?: PurchaseProductCreateManyProductInputEnvelope
     connect?: PurchaseProductWhereUniqueInput | PurchaseProductWhereUniqueInput[]
+  }
+
+  export type BigIntFieldUpdateOperationsInput = {
+    set?: bigint | number
+    increment?: bigint | number
+    decrement?: bigint | number
+    multiply?: bigint | number
+    divide?: bigint | number
   }
 
   export type DecimalFieldUpdateOperationsInput = {
@@ -15449,15 +15446,15 @@ export namespace Prisma {
     update?: XOR<XOR<SaleUpdateToOneWithWhereWithoutItemsInput, SaleUpdateWithoutItemsInput>, SaleUncheckedUpdateWithoutItemsInput>
   }
 
-  export type NestedBigIntFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -15490,23 +15487,7 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedBigIntFilter<$PrismaModel>
-    _min?: NestedBigIntFilter<$PrismaModel>
-    _max?: NestedBigIntFilter<$PrismaModel>
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
     notIn?: number[]
@@ -15514,7 +15495,12 @@ export namespace Prisma {
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type NestedFloatFilter<$PrismaModel = never> = {
@@ -15567,20 +15553,15 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
+  export type NestedBigIntFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
   }
 
   export type NestedDecimalFilter<$PrismaModel = never> = {
@@ -15592,6 +15573,22 @@ export namespace Prisma {
     gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedBigIntFilter<$PrismaModel>
+    _min?: NestedBigIntFilter<$PrismaModel>
+    _max?: NestedBigIntFilter<$PrismaModel>
   }
 
   export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
@@ -15731,7 +15728,7 @@ export namespace Prisma {
     totalAmount?: DecimalFilter<"Sale"> | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFilter<"Sale"> | Date | string
     customerId?: IntNullableFilter<"Sale"> | number | null
-    employerId?: BigIntFilter<"Sale"> | bigint | number
+    employerId?: IntFilter<"Sale"> | number
     invoice?: IntFilter<"Sale"> | number
   }
 
@@ -15748,7 +15745,7 @@ export namespace Prisma {
     id?: bigint | number
     totalAmount: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
-    employerId: bigint | number
+    employerId: number
     invoice?: number
     items?: SaleOrderUncheckedCreateNestedManyWithoutSaleInput
   }
@@ -16295,24 +16292,23 @@ export namespace Prisma {
   }
 
   export type EmployerCreateWithoutSalesInput = {
-    id?: bigint | number
     email: string
     fullname: string
     username: string
     password: string
     isAdmin?: boolean
-    status: string
+    isActive?: boolean
     createdAt?: Date | string
   }
 
   export type EmployerUncheckedCreateWithoutSalesInput = {
-    id?: bigint | number
+    id?: number
     email: string
     fullname: string
     username: string
     password: string
     isAdmin?: boolean
-    status: string
+    isActive?: boolean
     createdAt?: Date | string
   }
 
@@ -16373,24 +16369,23 @@ export namespace Prisma {
   }
 
   export type EmployerUpdateWithoutSalesInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
     email?: StringFieldUpdateOperationsInput | string
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    status?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmployerUncheckedUpdateWithoutSalesInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    status?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -16441,7 +16436,7 @@ export namespace Prisma {
     totalAmount: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     customerId?: number | null
-    employerId: bigint | number
+    employerId: number
     invoice?: number
   }
 
@@ -16514,7 +16509,7 @@ export namespace Prisma {
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerId?: NullableIntFieldUpdateOperationsInput | number | null
-    employerId?: BigIntFieldUpdateOperationsInput | bigint | number
+    employerId?: IntFieldUpdateOperationsInput | number
     invoice?: IntFieldUpdateOperationsInput | number
   }
 
@@ -16556,7 +16551,7 @@ export namespace Prisma {
     id?: bigint | number
     totalAmount: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
-    employerId: bigint | number
+    employerId: number
     invoice?: number
   }
 
@@ -16573,7 +16568,7 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    employerId?: BigIntFieldUpdateOperationsInput | bigint | number
+    employerId?: IntFieldUpdateOperationsInput | number
     invoice?: IntFieldUpdateOperationsInput | number
     items?: SaleOrderUncheckedUpdateManyWithoutSaleNestedInput
   }
@@ -16582,7 +16577,7 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    employerId?: BigIntFieldUpdateOperationsInput | bigint | number
+    employerId?: IntFieldUpdateOperationsInput | number
     invoice?: IntFieldUpdateOperationsInput | number
   }
 

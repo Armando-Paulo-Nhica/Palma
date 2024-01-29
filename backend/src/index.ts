@@ -1,6 +1,9 @@
 
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config();
+
+
 // import { createBarcode } from './barcode/barcodeService';
 // import { productRouter } from './products/product.router';
 import { categoryRouter } from './categories/category.router';

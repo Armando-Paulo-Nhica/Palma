@@ -1,8 +1,7 @@
 import {db} from '../utiles/db.server'
-import * as bcrypt from 'bcrypt';
+import bcrypt, { hash } from 'bcrypt';
 import jwt from 'jsonwebtoken';
-const { hash, compare } = bcrypt;
-const SECRET: number = parseInt(process.env.JWT_SECRET as string, 10);
+const SECRET: number = parseInt('hsI89nDq32nsk' as string, 10);
 
 type Employer= {
 	id: number,
@@ -11,31 +10,33 @@ type Employer= {
     username: string,
     password: string,
     isAdmin: boolean,
-    status: string
+    isActive: boolean
 }
 
 
-// Authentication
-
-export const authenticateUser = async (username: string, password: string) => {
-	// Check if the user exists in the database
-	const user = await db.employer.findUnique({ where: { email:username } });
-  
-	if (!user) {
-	  throw new Error('Credenciais inválidas');
-	}
-  
-	// Verify the password
-	const passwordMatch = await bcrypt.compare(password, user.password);
-  
-	if (!passwordMatch) {
-	  throw new Error('Credenciais inválidas');
-	}
-  
-	// Create a JWT
-	const token = jwt.sign({ userId: user.id, fullName: user.fullname, isAdmin: user.isAdmin }, SECRET.toString(),{expiresIn: "1h"});
-  
-	return token;
+export const authenticateUser = async (username: string, password: string) =>{
+    // Check if the user exists in the database
+    const user = await db.employer.findUnique({
+      where: { username: username },
+      select: { id: true, isAdmin: true, password: true }
+    });
+    
+    
+    if (!user) {
+      throw new Error('Invalid username or password');
+    }
+    
+    // Verify the password
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    
+    if (!passwordMatch) {
+      throw new Error('Invalid username or password');
+    }
+    
+    // Create a JWT
+    const token = jwt.sign({ userId: user.id }, SECRET.toString(),{expiresIn: "1h"});
+    
+    return token;
   };
 
 //   Get all employer
@@ -47,7 +48,7 @@ export async function findAll(){
             email: true,
             username: true,
             isAdmin: true,
-            status: true
+            isActive: true
         }})
 	return employer;
 }
@@ -60,7 +61,7 @@ export async function findById(id: number){
         email: true,
         username: true,
         isAdmin: true,
-        status: true
+        isActive: true
     }})
 	return employer;
 }
@@ -68,17 +69,16 @@ export async function findById(id: number){
 // Create employer
 export async function create(formData: Employer){
 	  // Check if the supplierName already exists
-      const existingemployer = await db.employer.findUnique({
+      const user = await db.employer.findUnique({
         where: {
           fullname: formData.fullname,
         },
       });
     
-      if (existingemployer) {
-        // Supplier with the same name already exists
+      if (user) {
         throw new Error('A conta já existe');
       }
-      const hashedPassword = await bcrypt.hash(formData.password, 4);
+      const hashedPassword = await hash(formData.password, 4);
 	const employer = await db.employer.create({
         data: {
             fullname: formData.fullname, 
@@ -86,7 +86,7 @@ export async function create(formData: Employer){
             password: hashedPassword,
             username: formData.username,
             isAdmin: formData.isAdmin,
-            status: formData.status
+            isActive: formData.isActive
             }})
 	return employer;	
 }
@@ -109,7 +109,7 @@ export async function updateEmployer(id: number, formData: Employer){
             email: formData.email,
             username: formData.username,
             isAdmin: formData.isAdmin,
-            status: formData.status
+            isActive: formData.isActive
         }
 	})
 	return employer;

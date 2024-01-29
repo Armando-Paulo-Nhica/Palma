@@ -114,7 +114,7 @@ exports.Prisma.EmployerScalarFieldEnum = {
   username: 'username',
   password: 'password',
   isAdmin: 'isAdmin',
-  status: 'status',
+  isActive: 'isActive',
   createdAt: 'createdAt'
 };
 
