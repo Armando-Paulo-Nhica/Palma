@@ -1,7 +1,20 @@
+// Retrieve the token from localStorage
+const token = localStorage.getItem('token');
 const baseUrl = 'http://localhost:3000/api';
 
+
   async function findProduct(barcode) {
-    return fetch(baseUrl+`/products/barcode/${barcode}`)
+    var requestOptions = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        // Include the Authorization header with the token
+        'Authorization': `Bearer ${token}`,
+        // Add any other headers if needed
+      },
+    };
+
+    return fetch(baseUrl+`/products/barcode/${barcode}`, requestOptions)
       .then(response => {
         if (response.status === 200) {
           // HTTP status code is 200 (OK)
@@ -30,7 +43,16 @@ const baseUrl = 'http://localhost:3000/api';
 
 // Find product by name
 async function findProductByName(name){
-    return fetch(baseUrl+`/products/name/${name}`)
+  var requestOptions = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      // Include the Authorization header with the token
+      'Authorization': `Bearer ${token}`,
+      // Add any other headers if needed
+    },
+  };
+    return fetch(baseUrl+`/products/name/${name}`, requestOptions)
     .then(response => {
       if (response.status === 200) {
         // HTTP status code is 200 (OK)
@@ -331,7 +353,7 @@ $("#saleBtn").click(function(){
       method: 'POST',
       headers: {
           'Content-Type': 'application/json', // Set the content type to JSON
-          // Add any other headers if needed
+          'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(transformJson()) // Convert data to JSON string
   };

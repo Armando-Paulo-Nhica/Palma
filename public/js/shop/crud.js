@@ -1,3 +1,4 @@
+const token = localStorage.getItem('token');
 const baseUrl = 'http://localhost:3000/api';
 
 $(document).ready(function() {
@@ -18,10 +19,12 @@ $(document).ready(function() {
 
   //Delete the purchase
   $("#deleteBtn").click(function(){
+   
         fetch(baseUrl+'/purchases/' + rowId, {
           method: 'DELETE',
           headers: {
               'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
           },
       })
           .then(response => response.json())
@@ -38,7 +41,16 @@ $(document).ready(function() {
 // Setting values to modal
 function setPurchaseValues() {
     counter = 0;
-    fetch(`${baseUrl}/purchases/${rowId}`)
+    var requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+    };
+
+
+    fetch(`${baseUrl}/purchases/${rowId}`, requestOptions)
         .then(response => response.json())
         .then(data => {
             const productsContainer = $("#editPurch");
@@ -110,7 +122,16 @@ function setPurchaseValues() {
 // View purchase products
 // Setting values to modal
 function viewPaurchaseProducts() {
-    fetch(`${baseUrl}/purchases/${rowId}`)
+    var requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+    };
+
+
+    fetch(`${baseUrl}/purchases/${rowId}`, requestOptions)
         .then(response => response.json())
         .then(data => {
             const productsContainer = $("#viewProducts");
@@ -276,8 +297,17 @@ function updatePurchase(purchaseData, id) {
         });
 }
 
+
+var requestPurchase = {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+    },
+};
+
   //Set data to datatable
-  fetch(baseUrl+'/purchases')
+  fetch(baseUrl+'/purchases', requestPurchase)
       .then(response => response.json())
       .then(data => {
          if (dataTable) {
@@ -336,7 +366,13 @@ function updatePurchase(purchaseData, id) {
 
   //Load all purchases
   function loadAll(){ 
-    fetch(baseUrl+'/purchases')
+    fetch(baseUrl+'/purchases',{
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+    })
       .then(response => response.json())
       .then(data => {
          // Destroy the existing DataTable instance before reinitializing

@@ -2,6 +2,7 @@ import express from "express";
 import type { Request, Response } from "express"
 import * as PurchaseService from "./purchase.service"
 import json from "../helper/json";
+import { verifyToken, verifyTokenAndAdmin } from "../verifyToken";
 
 export const purchaseRouter = express.Router();
 
@@ -23,7 +24,7 @@ purchaseRouter.post("/", async (request: Request,response: Response)=>{
 })
 
 // List purchase
-purchaseRouter.get("/" ,async (request: Request,response: Response) =>{
+purchaseRouter.get("/" , verifyToken,async (request: Request,response: Response) =>{
 	try {
 		const purchase = await PurchaseService.findAll();
 		// return response.status(200).json(purchase);
@@ -31,10 +32,10 @@ purchaseRouter.get("/" ,async (request: Request,response: Response) =>{
 	} catch (error: any) {
 		return response.status(500).json(error.message)
 	}
-})
+}) 
 
 // Get single purchase
-purchaseRouter.get("/:id", async (request: Request,response: Response) =>{
+purchaseRouter.get("/:id", verifyToken, async (request: Request,response: Response) =>{
 	const id: number = parseInt(request.params.id, 10);
 	try {
 		const purchase = await PurchaseService.findById(id);
@@ -52,7 +53,7 @@ purchaseRouter.get("/:id", async (request: Request,response: Response) =>{
 
 
 // Delete purchase
-purchaseRouter.delete("/:id", async(request: Request, response: Response) =>{
+purchaseRouter.delete("/:id", verifyTokenAndAdmin, async(request: Request, response: Response) =>{
 	const id: number = parseInt(request.params.id, 10);
 	try {
 		const purchase = await PurchaseService.destroy(id);
@@ -63,7 +64,7 @@ purchaseRouter.delete("/:id", async(request: Request, response: Response) =>{
 })
 
 // Updade purchase
-purchaseRouter.put("/:id", async(request: Request, response: Response) =>{
+purchaseRouter.put("/:id", verifyToken, async(request: Request, response: Response) =>{
 	
 	const id: number = parseInt(request.params.id);
 	

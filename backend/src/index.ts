@@ -1,7 +1,10 @@
-
+import dotenv from 'dotenv';
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
+
+
+// Load environment variables from .env file
+dotenv.config();
 
 
 // import { createBarcode } from './barcode/barcodeService';
@@ -11,7 +14,7 @@ import { supplierRouter } from './suppliers/supplier.router';
 import { purchaseRouter } from './purchases/purchase.router';
 import { serviceRouter } from './services/service.router';
 import { companyRouter } from './companies/company.router';
-import { employerRouter } from './employers/employer.router';
+import { userRouter } from './users/user.router';
 import { productRouter } from './products/product.router';
 import { SaleRouter } from './sales/sale.router';
 const port = 3000;
@@ -30,7 +33,7 @@ app.use("/api/suppliers", supplierRouter);
 app.use("/api/purchases", purchaseRouter);
 app.use("/api/services", serviceRouter);
 app.use("/api/companies", companyRouter);
-app.use("/api/users", employerRouter);
+app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/sales", SaleRouter);
 

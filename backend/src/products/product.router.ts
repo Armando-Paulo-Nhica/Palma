@@ -2,11 +2,12 @@ import express from "express";
 import type { Request, Response } from "express"
 import * as ProductService from "./product.service"
 import json from "../helper/json";
+import {verifyToken, verifyTokenAndAdmin, verifyTokenAndAuthorization} from '../verifyToken'
 export const productRouter = express.Router();
 
 
 // Create product
-productRouter.post("/" ,async (request: Request,response: Response) =>{
+productRouter.post("/" , verifyTokenAndAdmin,async (request: Request,response: Response) =>{
 	try {
 		const product = await ProductService.createProduct(request.body);
 		return response.status(200).type("json").send(json(product));
@@ -16,7 +17,7 @@ productRouter.post("/" ,async (request: Request,response: Response) =>{
 })
 
 // List product
-productRouter.get("/" ,async (request: Request,response: Response) =>{
+productRouter.get("/",verifyTokenAndAdmin ,async (request: Request,response: Response) =>{
 	try {
 		const product = await ProductService.findAll();
 		return response.status(200).type("json").send(json(product));
@@ -26,7 +27,7 @@ productRouter.get("/" ,async (request: Request,response: Response) =>{
 })
 
 // Get single product
-productRouter.get("/:id", async (request: Request,response: Response) =>{
+productRouter.get("/:id", verifyTokenAndAdmin, async (request: Request,response: Response) =>{
 	const id: number = parseInt(request.params.id, 10);
 	try {
 		const product = await ProductService.findById(id);
@@ -40,7 +41,7 @@ productRouter.get("/:id", async (request: Request,response: Response) =>{
 })
 
 // Get single product by barcode
-productRouter.get("/barcode/:barcode", async (request: Request,response: Response) =>{
+productRouter.get("/barcode/:barcode", verifyToken, async (request: Request,response: Response) =>{
 	const barcode: number = parseInt(request.params.barcode, 10);
 	try {
 		const product = await ProductService.findByBarcode(barcode);
@@ -55,7 +56,7 @@ productRouter.get("/barcode/:barcode", async (request: Request,response: Respons
 })
 
 // Get single product by name
-productRouter.get("/name/:name", async (request: Request,response: Response) =>{
+productRouter.get("/name/:name", verifyToken, async (request: Request,response: Response) =>{
 	const name: string = request.params.name;
 	try {
 		const product = await ProductService.findByName(name);
@@ -69,7 +70,7 @@ productRouter.get("/name/:name", async (request: Request,response: Response) =>{
 })
 
 // Delete product
-productRouter.delete("/:id", async(request: Request, response: Response) =>{
+productRouter.delete("/:id", verifyTokenAndAdmin, async(request: Request, response: Response) =>{
 	const id: number = parseInt(request.params.id, 10);
 	try {
 		const supplier = await ProductService.destroy(id);
@@ -80,7 +81,7 @@ productRouter.delete("/:id", async(request: Request, response: Response) =>{
 })
 
 // Updade product
-productRouter.put("/:id", async(request: Request, response: Response) =>{
+productRouter.put("/:id", verifyTokenAndAdmin, async(request: Request, response: Response) =>{
 	const id: number = parseInt(request.params.id);
 	try {
 		const user = await ProductService.updateProduct(id, request.body);

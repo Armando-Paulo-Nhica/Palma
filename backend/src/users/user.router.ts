@@ -1,17 +1,16 @@
 import express from "express";
 import type { Request, Response } from "express"
-import * as EmployerService from "./employer.service"
-import {db} from '../utiles/db.server'
-import jwt from 'jsonwebtoken';
+import * as userService from "./user.service"
+import {verifyToken, verifyTokenAndAdmin, verifyTokenAndAuthorization} from '../verifyToken'
 var CryptoJS = require("crypto-js");
 
-export const employerRouter = express.Router();
+export const userRouter = express.Router();
 
 
 // Auth
-employerRouter.post("/auth" ,async (req: Request,res: Response) =>{
+userRouter.post("/auth" ,async (req: Request,res: Response) =>{
 	try {
-		const users = await EmployerService.authenticateUser(req.body.username, req.body.password);
+		const users = await userService.authenticateUser(req.body.username, req.body.password);
 		return res.status(200).json(users);
 	} catch (error: any) {
 		return res.status(500).json(error.message)
@@ -19,10 +18,10 @@ employerRouter.post("/auth" ,async (req: Request,res: Response) =>{
 })
 
 
-// List employer
-employerRouter.get("/" ,async (request: Request,response: Response) =>{
+// List users
+userRouter.get("/", verifyTokenAndAdmin ,async (request: Request,response: Response) =>{
 	try {
-		const employer = await EmployerService.findAll();
+		const employer = await userService.findAll();
 		return response.status(200).json(employer);
 	} catch (error: any) {
 		return response.status(500).json(error.message)
@@ -30,10 +29,10 @@ employerRouter.get("/" ,async (request: Request,response: Response) =>{
 })
 
 // Get single employer
-employerRouter.get("/:id", async (request: Request,response: Response) =>{
+userRouter.get("/:id", verifyToken, async (request: Request,response: Response) =>{
 	const id: number = parseInt(request.params.id, 10);
 	try {
-		const employer = await EmployerService.findById(id);
+		const employer = await userService.findById(id);
 		if(employer){
 			return response.status(200).json(employer);
 		}
@@ -44,9 +43,9 @@ employerRouter.get("/:id", async (request: Request,response: Response) =>{
 })
 
 // Create employer
-employerRouter.post("/", async (request: Request,response: Response)=>{
+userRouter.post("/", verifyTokenAndAdmin, async (request: Request,response: Response)=>{
 	try {
-		const employer = await EmployerService.create(request.body);
+		const employer = await userService.create(request.body);
 		if(employer)
 			return response.status(200).json({error:false, msg:"Sua conta foi criada com sucesso"});
 		
@@ -57,11 +56,11 @@ employerRouter.post("/", async (request: Request,response: Response)=>{
 	}
 })
 
-// Delete employer
-employerRouter.delete("/:id", async(request: Request, response: Response) =>{
+// Delete user
+userRouter.delete("/:id", verifyTokenAndAdmin,async(request: Request, response: Response) =>{
 	const id: number = parseInt(request.params.id, 10);
 	try {
-		const employer = await EmployerService.destroy(id);
+		const employer = await userService.destroy(id);
 		return response.status(200).json({error: "false", msg: "Conta eliminada com sucesso"})
 	} catch (error: any) {
 		return response.status(500).json(error.message)
@@ -69,10 +68,10 @@ employerRouter.delete("/:id", async(request: Request, response: Response) =>{
 })
 
 // Updade employer
-employerRouter.put("/:id", async(request: Request, response: Response) =>{
+userRouter.put("/:id", verifyToken, async(request: Request, response: Response) =>{
 	const id: number = parseInt(request.params.id);
 	try {
-		const employer = await EmployerService.updateEmployer(id, request.body);
+		const employer = await userService.updateUser(id, request.body);
 		
 		return response.json({error: false, msg: "Alterações feitas com sucesso"});
 	} catch (error: any) {
