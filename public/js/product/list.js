@@ -1,3 +1,4 @@
+const token = localStorage.getItem('token');
 const baseUrl = 'http://localhost:3000/api';
 
 $(document).ready(function() {
@@ -149,7 +150,13 @@ function updateStock(saleData, id) {
 }
 
   //Set data to datatable
-  fetch(baseUrl+'/products')
+  fetch(baseUrl+'/products', {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json', // Set the content type to JSON
+        'Authorization': `Bearer ${token}`,
+    }
+  })
       .then(response => response.json())
       .then(data => {
          if (dataTable) {
