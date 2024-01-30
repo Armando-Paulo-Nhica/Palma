@@ -10,7 +10,7 @@ type Employer= {
     username: string,
     password: string,
     isAdmin: boolean,
-    isActive: boolean
+    isActive: boolean 
 }
 
 
