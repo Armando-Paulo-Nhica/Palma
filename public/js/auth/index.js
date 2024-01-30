@@ -5,7 +5,7 @@ $("#login-btn").click(function(e){
 
    var user = {
     username: "admin",
-    password: "admin1"
+    password: "admin"
    }
    auth(user);
 })
