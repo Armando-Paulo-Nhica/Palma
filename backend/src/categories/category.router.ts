@@ -1,7 +1,6 @@
 import express from "express";
 import { Request, Response, NextFunction } from 'express';
 import * as CategoryService from "./category.service"
-// import * as vt from '../verifyToken'
 
 export const categoryRouter = express.Router();
 

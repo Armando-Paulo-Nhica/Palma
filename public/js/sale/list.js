@@ -42,8 +42,16 @@ $(document).ready(function() {
 
 // Setting values to modal
 function setSaleValues() {
-    
-    fetch(`${baseUrl}/sales/${rowId}`)
+    var requestOptions = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          // Include the Authorization header with the token
+          'Authorization': `Bearer ${token}`,
+          // Add any other headers if needed
+        },
+      };
+    fetch(`${baseUrl}/sales/${rowId}`, requestOptions)
         .then(response => response.json())
         .then(data => {
             const productsContainer = $("#editSale");
@@ -210,7 +218,7 @@ function updateSale(saleData, id) {
         method: 'PUT', // Use PUT for updating data
         headers: {
             'Content-Type': 'application/json', // Set the content type to JSON
-            // Add any other headers if needed
+            'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(saleData) // Convert data to JSON string
     };
@@ -234,8 +242,18 @@ function updateSale(saleData, id) {
         });
 }
 
+var reqToken = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      // Include the Authorization header with the token
+      'Authorization': `Bearer ${token}`,
+      // Add any other headers if needed
+    },
+  };
+
   //Set data to datatable
-  fetch(baseUrl+'/sales')
+  fetch(baseUrl+'/sales', reqToken)
       .then(response => response.json())
       .then(data => {
          if (dataTable) {

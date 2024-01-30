@@ -1,4 +1,5 @@
 // Global product var
+const token = localStorage.getItem('token');
 const baseUrl = 'http://localhost:3000/api';
 var products = [];
 var counter = 1;
@@ -135,7 +136,7 @@ if(isOk){
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json', // Set the content type to JSON
-                    // Add any other headers if needed
+                    'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify(products) // Convert data to JSON string
             };
@@ -157,8 +158,7 @@ if(isOk){
                     
                 })
                 .catch(error => {
-                    console.error('Error:', error);
-                    // Handle errors here
+                    
                 });
 
  }

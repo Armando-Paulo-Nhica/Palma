@@ -2,12 +2,12 @@ import express from "express";
 import type { Request, Response } from "express"
 import * as Sale from './sale.service'
 import json from "../helper/json";
-
+import {verifyToken, verifyTokenAndAdmin, verifyTokenAndAuthorization} from '../verifyToken'
 // export const SaleRouter = express.Router()
 export const SaleRouter = express.Router();
 
-// List users
-SaleRouter.get("/" ,async (request: Request,response: Response) =>{
+// List sales
+SaleRouter.get("/" ,verifyTokenAndAdmin ,async (request: Request,response: Response) =>{
 	try {
 		const sale = await Sale.findAll();
         return response.status(200).type("json").send(json(sale));
@@ -17,7 +17,7 @@ SaleRouter.get("/" ,async (request: Request,response: Response) =>{
 })
 
 // Get single Sale
-SaleRouter.get("/:id", async (request: Request,response: Response) =>{
+SaleRouter.get("/:id", verifyTokenAndAdmin, async (request: Request,response: Response) =>{
 	const id: number = parseInt(request.params.id, 10);
 	try {
 		const sale = await Sale.findById(id);
@@ -31,7 +31,7 @@ SaleRouter.get("/:id", async (request: Request,response: Response) =>{
 })
 
 // Create Sale
-SaleRouter.post("/", async (request: Request,response: Response)=>{
+SaleRouter.post("/", verifyToken, async (request: Request,response: Response)=>{
 	try {
 		const sale = await Sale.create(request.body);
 		if(Sale){return response.status(200).json({error:false, msg:"Nova venda registada com sucesso"});}
@@ -44,7 +44,7 @@ SaleRouter.post("/", async (request: Request,response: Response)=>{
 })
 
 // Delete Sale
-SaleRouter.delete("/:id", async(request: Request, response: Response) =>{
+SaleRouter.delete("/:id", verifyTokenAndAdmin, async(request: Request, response: Response) =>{
 	const id: number = parseInt(request.params.id, 10);
 	try {
 		const sale = await Sale.destroy(id);
@@ -55,7 +55,7 @@ SaleRouter.delete("/:id", async(request: Request, response: Response) =>{
 })
 
 // Updade Sale
-SaleRouter.put("/:id", async(request: Request, response: Response) =>{
+SaleRouter.put("/:id", verifyTokenAndAdmin, async(request: Request, response: Response) =>{
 	const id: number = parseInt(request.params.id);
 	try {
 		const sale = await Sale.updateSale(id, request.body);

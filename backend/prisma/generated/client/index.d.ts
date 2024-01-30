@@ -14,10 +14,10 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
- * Model Employer
+ * Model User
  * 
  */
-export type Employer = $Result.DefaultSelection<Prisma.$EmployerPayload>
+export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
  * Model Customer
  * 
@@ -76,8 +76,8 @@ export type Company = $Result.DefaultSelection<Prisma.$CompanyPayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Employers
- * const employers = await prisma.employer.findMany()
+ * // Fetch zero or more Users
+ * const users = await prisma.user.findMany()
  * ```
  *
  * 
@@ -97,8 +97,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Employers
-   * const employers = await prisma.employer.findMany()
+   * // Fetch zero or more Users
+   * const users = await prisma.user.findMany()
    * ```
    *
    * 
@@ -192,14 +192,14 @@ export class PrismaClient<
   $extends: $Extensions.ExtendsHook<'extends', Prisma.TypeMapCb, ExtArgs>
 
       /**
-   * `prisma.employer`: Exposes CRUD operations for the **Employer** model.
+   * `prisma.user`: Exposes CRUD operations for the **User** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Employers
-    * const employers = await prisma.employer.findMany()
+    * // Fetch zero or more Users
+    * const users = await prisma.user.findMany()
     * ```
     */
-  get employer(): Prisma.EmployerDelegate<ExtArgs>;
+  get user(): Prisma.UserDelegate<ExtArgs>;
 
   /**
    * `prisma.customer`: Exposes CRUD operations for the **Customer** model.
@@ -770,7 +770,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Employer: 'Employer',
+    User: 'User',
     Customer: 'Customer',
     Category: 'Category',
     Product: 'Product',
@@ -797,73 +797,73 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'employer' | 'customer' | 'category' | 'product' | 'purchaseProduct' | 'purchase' | 'supplier' | 'sale' | 'saleOrder' | 'service' | 'company'
+      modelProps: 'user' | 'customer' | 'category' | 'product' | 'purchaseProduct' | 'purchase' | 'supplier' | 'sale' | 'saleOrder' | 'service' | 'company'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
-      Employer: {
-        payload: Prisma.$EmployerPayload<ExtArgs>
-        fields: Prisma.EmployerFieldRefs
+      User: {
+        payload: Prisma.$UserPayload<ExtArgs>
+        fields: Prisma.UserFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.EmployerFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$EmployerPayload> | null
+            args: Prisma.UserFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.EmployerFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$EmployerPayload>
+            args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           findFirst: {
-            args: Prisma.EmployerFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$EmployerPayload> | null
+            args: Prisma.UserFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.EmployerFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$EmployerPayload>
+            args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           findMany: {
-            args: Prisma.EmployerFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$EmployerPayload>[]
+            args: Prisma.UserFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
           }
           create: {
-            args: Prisma.EmployerCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$EmployerPayload>
+            args: Prisma.UserCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           createMany: {
-            args: Prisma.EmployerCreateManyArgs<ExtArgs>,
+            args: Prisma.UserCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           delete: {
-            args: Prisma.EmployerDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$EmployerPayload>
+            args: Prisma.UserDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           update: {
-            args: Prisma.EmployerUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$EmployerPayload>
+            args: Prisma.UserUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           deleteMany: {
-            args: Prisma.EmployerDeleteManyArgs<ExtArgs>,
+            args: Prisma.UserDeleteManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           updateMany: {
-            args: Prisma.EmployerUpdateManyArgs<ExtArgs>,
+            args: Prisma.UserUpdateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           upsert: {
-            args: Prisma.EmployerUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$EmployerPayload>
+            args: Prisma.UserUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>
           }
           aggregate: {
-            args: Prisma.EmployerAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateEmployer>
+            args: Prisma.UserAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateUser>
           }
           groupBy: {
-            args: Prisma.EmployerGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<EmployerGroupByOutputType>[]
+            args: Prisma.UserGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<UserGroupByOutputType>[]
           }
           count: {
-            args: Prisma.EmployerCountArgs<ExtArgs>,
-            result: $Utils.Optional<EmployerCountAggregateOutputType> | number
+            args: Prisma.UserCountArgs<ExtArgs>,
+            result: $Utils.Optional<UserCountAggregateOutputType> | number
           }
         }
       }
@@ -1672,34 +1672,34 @@ export namespace Prisma {
 
 
   /**
-   * Count Type EmployerCountOutputType
+   * Count Type UserCountOutputType
    */
 
-  export type EmployerCountOutputType = {
+  export type UserCountOutputType = {
     sales: number
   }
 
-  export type EmployerCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    sales?: boolean | EmployerCountOutputTypeCountSalesArgs
+  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sales?: boolean | UserCountOutputTypeCountSalesArgs
   }
 
   // Custom InputTypes
 
   /**
-   * EmployerCountOutputType without action
+   * UserCountOutputType without action
    */
-  export type EmployerCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the EmployerCountOutputType
+     * Select specific fields to fetch from the UserCountOutputType
      */
-    select?: EmployerCountOutputTypeSelect<ExtArgs> | null
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
   }
 
 
   /**
-   * EmployerCountOutputType without action
+   * UserCountOutputType without action
    */
-  export type EmployerCountOutputTypeCountSalesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCountOutputTypeCountSalesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SaleWhereInput
   }
 
@@ -1924,37 +1924,26 @@ export namespace Prisma {
    */
 
   /**
-   * Model Employer
+   * Model User
    */
 
-  export type AggregateEmployer = {
-    _count: EmployerCountAggregateOutputType | null
-    _avg: EmployerAvgAggregateOutputType | null
-    _sum: EmployerSumAggregateOutputType | null
-    _min: EmployerMinAggregateOutputType | null
-    _max: EmployerMaxAggregateOutputType | null
+  export type AggregateUser = {
+    _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
   }
 
-  export type EmployerAvgAggregateOutputType = {
+  export type UserAvgAggregateOutputType = {
     id: number | null
   }
 
-  export type EmployerSumAggregateOutputType = {
+  export type UserSumAggregateOutputType = {
     id: number | null
   }
 
-  export type EmployerMinAggregateOutputType = {
-    id: number | null
-    email: string | null
-    fullname: string | null
-    username: string | null
-    password: string | null
-    isAdmin: boolean | null
-    isActive: boolean | null
-    createdAt: Date | null
-  }
-
-  export type EmployerMaxAggregateOutputType = {
+  export type UserMinAggregateOutputType = {
     id: number | null
     email: string | null
     fullname: string | null
@@ -1965,7 +1954,18 @@ export namespace Prisma {
     createdAt: Date | null
   }
 
-  export type EmployerCountAggregateOutputType = {
+  export type UserMaxAggregateOutputType = {
+    id: number | null
+    email: string | null
+    fullname: string | null
+    username: string | null
+    password: string | null
+    isAdmin: boolean | null
+    isActive: boolean | null
+    createdAt: Date | null
+  }
+
+  export type UserCountAggregateOutputType = {
     id: number
     email: number
     fullname: number
@@ -1978,26 +1978,15 @@ export namespace Prisma {
   }
 
 
-  export type EmployerAvgAggregateInputType = {
+  export type UserAvgAggregateInputType = {
     id?: true
   }
 
-  export type EmployerSumAggregateInputType = {
+  export type UserSumAggregateInputType = {
     id?: true
   }
 
-  export type EmployerMinAggregateInputType = {
-    id?: true
-    email?: true
-    fullname?: true
-    username?: true
-    password?: true
-    isAdmin?: true
-    isActive?: true
-    createdAt?: true
-  }
-
-  export type EmployerMaxAggregateInputType = {
+  export type UserMinAggregateInputType = {
     id?: true
     email?: true
     fullname?: true
@@ -2008,7 +1997,18 @@ export namespace Prisma {
     createdAt?: true
   }
 
-  export type EmployerCountAggregateInputType = {
+  export type UserMaxAggregateInputType = {
+    id?: true
+    email?: true
+    fullname?: true
+    username?: true
+    password?: true
+    isAdmin?: true
+    isActive?: true
+    createdAt?: true
+  }
+
+  export type UserCountAggregateInputType = {
     id?: true
     email?: true
     fullname?: true
@@ -2020,93 +2020,93 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type EmployerAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Employer to aggregate.
+     * Filter which User to aggregate.
      */
-    where?: EmployerWhereInput
+    where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Employers to fetch.
+     * Determine the order of Users to fetch.
      */
-    orderBy?: EmployerOrderByWithRelationInput | EmployerOrderByWithRelationInput[]
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: EmployerWhereUniqueInput
+    cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Employers from the position of the cursor.
+     * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Employers.
+     * Skip the first `n` Users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Employers
+     * Count returned Users
     **/
-    _count?: true | EmployerCountAggregateInputType
+    _count?: true | UserCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: EmployerAvgAggregateInputType
+    _avg?: UserAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: EmployerSumAggregateInputType
+    _sum?: UserSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: EmployerMinAggregateInputType
+    _min?: UserMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: EmployerMaxAggregateInputType
+    _max?: UserMaxAggregateInputType
   }
 
-  export type GetEmployerAggregateType<T extends EmployerAggregateArgs> = {
-        [P in keyof T & keyof AggregateEmployer]: P extends '_count' | 'count'
+  export type GetUserAggregateType<T extends UserAggregateArgs> = {
+        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateEmployer[P]>
-      : GetScalarType<T[P], AggregateEmployer[P]>
+        : GetScalarType<T[P], AggregateUser[P]>
+      : GetScalarType<T[P], AggregateUser[P]>
   }
 
 
 
 
-  export type EmployerGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EmployerWhereInput
-    orderBy?: EmployerOrderByWithAggregationInput | EmployerOrderByWithAggregationInput[]
-    by: EmployerScalarFieldEnum[] | EmployerScalarFieldEnum
-    having?: EmployerScalarWhereWithAggregatesInput
+  export type UserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithAggregationInput | UserOrderByWithAggregationInput[]
+    by: UserScalarFieldEnum[] | UserScalarFieldEnum
+    having?: UserScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: EmployerCountAggregateInputType | true
-    _avg?: EmployerAvgAggregateInputType
-    _sum?: EmployerSumAggregateInputType
-    _min?: EmployerMinAggregateInputType
-    _max?: EmployerMaxAggregateInputType
+    _count?: UserCountAggregateInputType | true
+    _avg?: UserAvgAggregateInputType
+    _sum?: UserSumAggregateInputType
+    _min?: UserMinAggregateInputType
+    _max?: UserMaxAggregateInputType
   }
 
-  export type EmployerGroupByOutputType = {
+  export type UserGroupByOutputType = {
     id: number
     email: string
     fullname: string
@@ -2115,28 +2115,28 @@ export namespace Prisma {
     isAdmin: boolean
     isActive: boolean
     createdAt: Date
-    _count: EmployerCountAggregateOutputType | null
-    _avg: EmployerAvgAggregateOutputType | null
-    _sum: EmployerSumAggregateOutputType | null
-    _min: EmployerMinAggregateOutputType | null
-    _max: EmployerMaxAggregateOutputType | null
+    _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
+    _min: UserMinAggregateOutputType | null
+    _max: UserMaxAggregateOutputType | null
   }
 
-  type GetEmployerGroupByPayload<T extends EmployerGroupByArgs> = Prisma.PrismaPromise<
+  type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<EmployerGroupByOutputType, T['by']> &
+      PickEnumerable<UserGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof EmployerGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], EmployerGroupByOutputType[P]>
-            : GetScalarType<T[P], EmployerGroupByOutputType[P]>
+              : GetScalarType<T[P], UserGroupByOutputType[P]>
+            : GetScalarType<T[P], UserGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type EmployerSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
     fullname?: boolean
@@ -2145,11 +2145,11 @@ export namespace Prisma {
     isAdmin?: boolean
     isActive?: boolean
     createdAt?: boolean
-    sales?: boolean | Employer$salesArgs<ExtArgs>
-    _count?: boolean | EmployerCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["employer"]>
+    sales?: boolean | User$salesArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["user"]>
 
-  export type EmployerSelectScalar = {
+  export type UserSelectScalar = {
     id?: boolean
     email?: boolean
     fullname?: boolean
@@ -2160,14 +2160,14 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type EmployerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    sales?: boolean | Employer$salesArgs<ExtArgs>
-    _count?: boolean | EmployerCountOutputTypeDefaultArgs<ExtArgs>
+  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sales?: boolean | User$salesArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
 
-  export type $EmployerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Employer"
+  export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "User"
     objects: {
       sales: Prisma.$SalePayload<ExtArgs>[]
     }
@@ -2180,160 +2180,160 @@ export namespace Prisma {
       isAdmin: boolean
       isActive: boolean
       createdAt: Date
-    }, ExtArgs["result"]["employer"]>
+    }, ExtArgs["result"]["user"]>
     composites: {}
   }
 
 
-  type EmployerGetPayload<S extends boolean | null | undefined | EmployerDefaultArgs> = $Result.GetResult<Prisma.$EmployerPayload, S>
+  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
 
-  type EmployerCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<EmployerFindManyArgs, 'select' | 'include' | 'distinct' > & {
-      select?: EmployerCountAggregateInputType | true
+  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct' > & {
+      select?: UserCountAggregateInputType | true
     }
 
-  export interface EmployerDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Employer'], meta: { name: 'Employer' } }
+  export interface UserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
     /**
-     * Find zero or one Employer that matches the filter.
-     * @param {EmployerFindUniqueArgs} args - Arguments to find a Employer
+     * Find zero or one User that matches the filter.
+     * @param {UserFindUniqueArgs} args - Arguments to find a User
      * @example
-     * // Get one Employer
-     * const employer = await prisma.employer.findUnique({
+     * // Get one User
+     * const user = await prisma.user.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUnique<T extends EmployerFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, EmployerFindUniqueArgs<ExtArgs>>
-    ): Prisma__EmployerClient<$Result.GetResult<Prisma.$EmployerPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    findUnique<T extends UserFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one Employer that matches the filter or throw an error  with `error.code='P2025'` 
+     * Find one User that matches the filter or throw an error  with `error.code='P2025'` 
      *     if no matches were found.
-     * @param {EmployerFindUniqueOrThrowArgs} args - Arguments to find a Employer
+     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
      * @example
-     * // Get one Employer
-     * const employer = await prisma.employer.findUniqueOrThrow({
+     * // Get one User
+     * const user = await prisma.user.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUniqueOrThrow<T extends EmployerFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, EmployerFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__EmployerClient<$Result.GetResult<Prisma.$EmployerPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
 
     /**
-     * Find the first Employer that matches the filter.
+     * Find the first User that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmployerFindFirstArgs} args - Arguments to find a Employer
+     * @param {UserFindFirstArgs} args - Arguments to find a User
      * @example
-     * // Get one Employer
-     * const employer = await prisma.employer.findFirst({
+     * // Get one User
+     * const user = await prisma.user.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirst<T extends EmployerFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, EmployerFindFirstArgs<ExtArgs>>
-    ): Prisma__EmployerClient<$Result.GetResult<Prisma.$EmployerPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    findFirst<T extends UserFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
 
     /**
-     * Find the first Employer that matches the filter or
+     * Find the first User that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmployerFindFirstOrThrowArgs} args - Arguments to find a Employer
+     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
      * @example
-     * // Get one Employer
-     * const employer = await prisma.employer.findFirstOrThrow({
+     * // Get one User
+     * const user = await prisma.user.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirstOrThrow<T extends EmployerFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, EmployerFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__EmployerClient<$Result.GetResult<Prisma.$EmployerPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    findFirstOrThrow<T extends UserFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
 
     /**
-     * Find zero or more Employers that matches the filter.
+     * Find zero or more Users that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmployerFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {UserFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Employers
-     * const employers = await prisma.employer.findMany()
+     * // Get all Users
+     * const users = await prisma.user.findMany()
      * 
-     * // Get first 10 Employers
-     * const employers = await prisma.employer.findMany({ take: 10 })
+     * // Get first 10 Users
+     * const users = await prisma.user.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const employerWithIdOnly = await prisma.employer.findMany({ select: { id: true } })
+     * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
      * 
     **/
-    findMany<T extends EmployerFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, EmployerFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployerPayload<ExtArgs>, T, 'findMany'>>
+    findMany<T extends UserFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findMany'>>
 
     /**
-     * Create a Employer.
-     * @param {EmployerCreateArgs} args - Arguments to create a Employer.
+     * Create a User.
+     * @param {UserCreateArgs} args - Arguments to create a User.
      * @example
-     * // Create one Employer
-     * const Employer = await prisma.employer.create({
+     * // Create one User
+     * const User = await prisma.user.create({
      *   data: {
-     *     // ... data to create a Employer
+     *     // ... data to create a User
      *   }
      * })
      * 
     **/
-    create<T extends EmployerCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, EmployerCreateArgs<ExtArgs>>
-    ): Prisma__EmployerClient<$Result.GetResult<Prisma.$EmployerPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    create<T extends UserCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, UserCreateArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
 
     /**
-     * Create many Employers.
-     *     @param {EmployerCreateManyArgs} args - Arguments to create many Employers.
+     * Create many Users.
+     *     @param {UserCreateManyArgs} args - Arguments to create many Users.
      *     @example
-     *     // Create many Employers
-     *     const employer = await prisma.employer.createMany({
+     *     // Create many Users
+     *     const user = await prisma.user.createMany({
      *       data: {
      *         // ... provide data here
      *       }
      *     })
      *     
     **/
-    createMany<T extends EmployerCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, EmployerCreateManyArgs<ExtArgs>>
+    createMany<T extends UserCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Employer.
-     * @param {EmployerDeleteArgs} args - Arguments to delete one Employer.
+     * Delete a User.
+     * @param {UserDeleteArgs} args - Arguments to delete one User.
      * @example
-     * // Delete one Employer
-     * const Employer = await prisma.employer.delete({
+     * // Delete one User
+     * const User = await prisma.user.delete({
      *   where: {
-     *     // ... filter to delete one Employer
+     *     // ... filter to delete one User
      *   }
      * })
      * 
     **/
-    delete<T extends EmployerDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, EmployerDeleteArgs<ExtArgs>>
-    ): Prisma__EmployerClient<$Result.GetResult<Prisma.$EmployerPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    delete<T extends UserDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, UserDeleteArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
 
     /**
-     * Update one Employer.
-     * @param {EmployerUpdateArgs} args - Arguments to update one Employer.
+     * Update one User.
+     * @param {UserUpdateArgs} args - Arguments to update one User.
      * @example
-     * // Update one Employer
-     * const employer = await prisma.employer.update({
+     * // Update one User
+     * const user = await prisma.user.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2343,34 +2343,34 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends EmployerUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, EmployerUpdateArgs<ExtArgs>>
-    ): Prisma__EmployerClient<$Result.GetResult<Prisma.$EmployerPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    update<T extends UserUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, UserUpdateArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
 
     /**
-     * Delete zero or more Employers.
-     * @param {EmployerDeleteManyArgs} args - Arguments to filter Employers to delete.
+     * Delete zero or more Users.
+     * @param {UserDeleteManyArgs} args - Arguments to filter Users to delete.
      * @example
-     * // Delete a few Employers
-     * const { count } = await prisma.employer.deleteMany({
+     * // Delete a few Users
+     * const { count } = await prisma.user.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
     **/
-    deleteMany<T extends EmployerDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, EmployerDeleteManyArgs<ExtArgs>>
+    deleteMany<T extends UserDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Employers.
+     * Update zero or more Users.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmployerUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Employers
-     * const employer = await prisma.employer.updateMany({
+     * // Update many Users
+     * const user = await prisma.user.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2380,59 +2380,59 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends EmployerUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, EmployerUpdateManyArgs<ExtArgs>>
+    updateMany<T extends UserUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Employer.
-     * @param {EmployerUpsertArgs} args - Arguments to update or create a Employer.
+     * Create or update one User.
+     * @param {UserUpsertArgs} args - Arguments to update or create a User.
      * @example
-     * // Update or create a Employer
-     * const employer = await prisma.employer.upsert({
+     * // Update or create a User
+     * const user = await prisma.user.upsert({
      *   create: {
-     *     // ... data to create a Employer
+     *     // ... data to create a User
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Employer we want to update
+     *     // ... the filter for the User we want to update
      *   }
      * })
     **/
-    upsert<T extends EmployerUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, EmployerUpsertArgs<ExtArgs>>
-    ): Prisma__EmployerClient<$Result.GetResult<Prisma.$EmployerPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    upsert<T extends UserUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, UserUpsertArgs<ExtArgs>>
+    ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
 
     /**
-     * Count the number of Employers.
+     * Count the number of Users.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmployerCountArgs} args - Arguments to filter Employers to count.
+     * @param {UserCountArgs} args - Arguments to filter Users to count.
      * @example
-     * // Count the number of Employers
-     * const count = await prisma.employer.count({
+     * // Count the number of Users
+     * const count = await prisma.user.count({
      *   where: {
-     *     // ... the filter for the Employers we want to count
+     *     // ... the filter for the Users we want to count
      *   }
      * })
     **/
-    count<T extends EmployerCountArgs>(
-      args?: Subset<T, EmployerCountArgs>,
+    count<T extends UserCountArgs>(
+      args?: Subset<T, UserCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], EmployerCountAggregateOutputType>
+          : GetScalarType<T['select'], UserCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Employer.
+     * Allows you to perform aggregations operations on a User.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmployerAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -2452,13 +2452,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends EmployerAggregateArgs>(args: Subset<T, EmployerAggregateArgs>): Prisma.PrismaPromise<GetEmployerAggregateType<T>>
+    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Prisma.PrismaPromise<GetUserAggregateType<T>>
 
     /**
-     * Group by Employer.
+     * Group by User.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmployerGroupByArgs} args - Group by arguments.
+     * @param {UserGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -2473,14 +2473,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends EmployerGroupByArgs,
+      T extends UserGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: EmployerGroupByArgs['orderBy'] }
-        : { orderBy?: EmployerGroupByArgs['orderBy'] },
+        ? { orderBy: UserGroupByArgs['orderBy'] }
+        : { orderBy?: UserGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -2529,23 +2529,23 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, EmployerGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmployerGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Employer model
+   * Fields of the User model
    */
-  readonly fields: EmployerFieldRefs;
+  readonly fields: UserFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Employer.
+   * The delegate class that acts as a "Promise-like" for User.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__EmployerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    sales<T extends Employer$salesArgs<ExtArgs> = {}>(args?: Subset<T, Employer$salesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SalePayload<ExtArgs>, T, 'findMany'> | Null>;
+    sales<T extends User$salesArgs<ExtArgs> = {}>(args?: Subset<T, User$salesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SalePayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2572,332 +2572,332 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Employer model
+   * Fields of the User model
    */ 
-  interface EmployerFieldRefs {
-    readonly id: FieldRef<"Employer", 'Int'>
-    readonly email: FieldRef<"Employer", 'String'>
-    readonly fullname: FieldRef<"Employer", 'String'>
-    readonly username: FieldRef<"Employer", 'String'>
-    readonly password: FieldRef<"Employer", 'String'>
-    readonly isAdmin: FieldRef<"Employer", 'Boolean'>
-    readonly isActive: FieldRef<"Employer", 'Boolean'>
-    readonly createdAt: FieldRef<"Employer", 'DateTime'>
+  interface UserFieldRefs {
+    readonly id: FieldRef<"User", 'Int'>
+    readonly email: FieldRef<"User", 'String'>
+    readonly fullname: FieldRef<"User", 'String'>
+    readonly username: FieldRef<"User", 'String'>
+    readonly password: FieldRef<"User", 'String'>
+    readonly isAdmin: FieldRef<"User", 'Boolean'>
+    readonly isActive: FieldRef<"User", 'Boolean'>
+    readonly createdAt: FieldRef<"User", 'DateTime'>
   }
     
 
   // Custom InputTypes
 
   /**
-   * Employer findUnique
+   * User findUnique
    */
-  export type EmployerFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Employer
+     * Select specific fields to fetch from the User
      */
-    select?: EmployerSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: EmployerInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null
     /**
-     * Filter, which Employer to fetch.
+     * Filter, which User to fetch.
      */
-    where: EmployerWhereUniqueInput
+    where: UserWhereUniqueInput
   }
 
 
   /**
-   * Employer findUniqueOrThrow
+   * User findUniqueOrThrow
    */
-  export type EmployerFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Employer
+     * Select specific fields to fetch from the User
      */
-    select?: EmployerSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: EmployerInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null
     /**
-     * Filter, which Employer to fetch.
+     * Filter, which User to fetch.
      */
-    where: EmployerWhereUniqueInput
+    where: UserWhereUniqueInput
   }
 
 
   /**
-   * Employer findFirst
+   * User findFirst
    */
-  export type EmployerFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Employer
+     * Select specific fields to fetch from the User
      */
-    select?: EmployerSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: EmployerInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null
     /**
-     * Filter, which Employer to fetch.
+     * Filter, which User to fetch.
      */
-    where?: EmployerWhereInput
+    where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Employers to fetch.
+     * Determine the order of Users to fetch.
      */
-    orderBy?: EmployerOrderByWithRelationInput | EmployerOrderByWithRelationInput[]
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Employers.
+     * Sets the position for searching for Users.
      */
-    cursor?: EmployerWhereUniqueInput
+    cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Employers from the position of the cursor.
+     * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Employers.
+     * Skip the first `n` Users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Employers.
+     * Filter by unique combinations of Users.
      */
-    distinct?: EmployerScalarFieldEnum | EmployerScalarFieldEnum[]
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
 
   /**
-   * Employer findFirstOrThrow
+   * User findFirstOrThrow
    */
-  export type EmployerFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Employer
+     * Select specific fields to fetch from the User
      */
-    select?: EmployerSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: EmployerInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null
     /**
-     * Filter, which Employer to fetch.
+     * Filter, which User to fetch.
      */
-    where?: EmployerWhereInput
+    where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Employers to fetch.
+     * Determine the order of Users to fetch.
      */
-    orderBy?: EmployerOrderByWithRelationInput | EmployerOrderByWithRelationInput[]
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Employers.
+     * Sets the position for searching for Users.
      */
-    cursor?: EmployerWhereUniqueInput
+    cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Employers from the position of the cursor.
+     * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Employers.
+     * Skip the first `n` Users.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Employers.
+     * Filter by unique combinations of Users.
      */
-    distinct?: EmployerScalarFieldEnum | EmployerScalarFieldEnum[]
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
 
   /**
-   * Employer findMany
+   * User findMany
    */
-  export type EmployerFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Employer
+     * Select specific fields to fetch from the User
      */
-    select?: EmployerSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: EmployerInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null
     /**
-     * Filter, which Employers to fetch.
+     * Filter, which Users to fetch.
      */
-    where?: EmployerWhereInput
+    where?: UserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Employers to fetch.
+     * Determine the order of Users to fetch.
      */
-    orderBy?: EmployerOrderByWithRelationInput | EmployerOrderByWithRelationInput[]
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Employers.
+     * Sets the position for listing Users.
      */
-    cursor?: EmployerWhereUniqueInput
+    cursor?: UserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Employers from the position of the cursor.
+     * Take `±n` Users from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Employers.
+     * Skip the first `n` Users.
      */
     skip?: number
-    distinct?: EmployerScalarFieldEnum | EmployerScalarFieldEnum[]
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
 
   /**
-   * Employer create
+   * User create
    */
-  export type EmployerCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Employer
+     * Select specific fields to fetch from the User
      */
-    select?: EmployerSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: EmployerInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null
     /**
-     * The data needed to create a Employer.
+     * The data needed to create a User.
      */
-    data: XOR<EmployerCreateInput, EmployerUncheckedCreateInput>
+    data: XOR<UserCreateInput, UserUncheckedCreateInput>
   }
 
 
   /**
-   * Employer createMany
+   * User createMany
    */
-  export type EmployerCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Employers.
+     * The data used to create many Users.
      */
-    data: EmployerCreateManyInput | EmployerCreateManyInput[]
+    data: UserCreateManyInput | UserCreateManyInput[]
     skipDuplicates?: boolean
   }
 
 
   /**
-   * Employer update
+   * User update
    */
-  export type EmployerUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Employer
+     * Select specific fields to fetch from the User
      */
-    select?: EmployerSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: EmployerInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null
     /**
-     * The data needed to update a Employer.
+     * The data needed to update a User.
      */
-    data: XOR<EmployerUpdateInput, EmployerUncheckedUpdateInput>
+    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
     /**
-     * Choose, which Employer to update.
+     * Choose, which User to update.
      */
-    where: EmployerWhereUniqueInput
+    where: UserWhereUniqueInput
   }
 
 
   /**
-   * Employer updateMany
+   * User updateMany
    */
-  export type EmployerUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Employers.
+     * The data used to update Users.
      */
-    data: XOR<EmployerUpdateManyMutationInput, EmployerUncheckedUpdateManyInput>
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
     /**
-     * Filter which Employers to update
+     * Filter which Users to update
      */
-    where?: EmployerWhereInput
+    where?: UserWhereInput
   }
 
 
   /**
-   * Employer upsert
+   * User upsert
    */
-  export type EmployerUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Employer
+     * Select specific fields to fetch from the User
      */
-    select?: EmployerSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: EmployerInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null
     /**
-     * The filter to search for the Employer to update in case it exists.
+     * The filter to search for the User to update in case it exists.
      */
-    where: EmployerWhereUniqueInput
+    where: UserWhereUniqueInput
     /**
-     * In case the Employer found by the `where` argument doesn't exist, create a new Employer with this data.
+     * In case the User found by the `where` argument doesn't exist, create a new User with this data.
      */
-    create: XOR<EmployerCreateInput, EmployerUncheckedCreateInput>
+    create: XOR<UserCreateInput, UserUncheckedCreateInput>
     /**
-     * In case the Employer was found with the provided `where` argument, update it with this data.
+     * In case the User was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<EmployerUpdateInput, EmployerUncheckedUpdateInput>
+    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
   }
 
 
   /**
-   * Employer delete
+   * User delete
    */
-  export type EmployerDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Employer
+     * Select specific fields to fetch from the User
      */
-    select?: EmployerSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: EmployerInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null
     /**
-     * Filter which Employer to delete.
+     * Filter which User to delete.
      */
-    where: EmployerWhereUniqueInput
+    where: UserWhereUniqueInput
   }
 
 
   /**
-   * Employer deleteMany
+   * User deleteMany
    */
-  export type EmployerDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Employers to delete
+     * Filter which Users to delete
      */
-    where?: EmployerWhereInput
+    where?: UserWhereInput
   }
 
 
   /**
-   * Employer.sales
+   * User.sales
    */
-  export type Employer$salesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$salesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Sale
      */
@@ -2916,17 +2916,17 @@ export namespace Prisma {
 
 
   /**
-   * Employer without action
+   * User without action
    */
-  export type EmployerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Employer
+     * Select specific fields to fetch from the User
      */
-    select?: EmployerSelect<ExtArgs> | null
+    select?: UserSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: EmployerInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null
   }
 
 
@@ -9104,7 +9104,7 @@ export namespace Prisma {
     invoice?: boolean
     items?: boolean | Sale$itemsArgs<ExtArgs>
     customer?: boolean | Sale$customerArgs<ExtArgs>
-    employer?: boolean | EmployerDefaultArgs<ExtArgs>
+    employer?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | SaleCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sale"]>
 
@@ -9120,7 +9120,7 @@ export namespace Prisma {
   export type SaleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     items?: boolean | Sale$itemsArgs<ExtArgs>
     customer?: boolean | Sale$customerArgs<ExtArgs>
-    employer?: boolean | EmployerDefaultArgs<ExtArgs>
+    employer?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | SaleCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -9130,7 +9130,7 @@ export namespace Prisma {
     objects: {
       items: Prisma.$SaleOrderPayload<ExtArgs>[]
       customer: Prisma.$CustomerPayload<ExtArgs> | null
-      employer: Prisma.$EmployerPayload<ExtArgs>
+      employer: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
@@ -9508,7 +9508,7 @@ export namespace Prisma {
 
     customer<T extends Sale$customerArgs<ExtArgs> = {}>(args?: Subset<T, Sale$customerArgs<ExtArgs>>): Prisma__CustomerClient<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
-    employer<T extends EmployerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmployerDefaultArgs<ExtArgs>>): Prisma__EmployerClient<$Result.GetResult<Prisma.$EmployerPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    employer<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -12692,7 +12692,7 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-  export const EmployerScalarFieldEnum: {
+  export const UserScalarFieldEnum: {
     id: 'id',
     email: 'email',
     fullname: 'fullname',
@@ -12703,7 +12703,7 @@ export namespace Prisma {
     createdAt: 'createdAt'
   };
 
-  export type EmployerScalarFieldEnum = (typeof EmployerScalarFieldEnum)[keyof typeof EmployerScalarFieldEnum]
+  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
   export const CustomerScalarFieldEnum: {
@@ -12892,22 +12892,22 @@ export namespace Prisma {
    */
 
 
-  export type EmployerWhereInput = {
-    AND?: EmployerWhereInput | EmployerWhereInput[]
-    OR?: EmployerWhereInput[]
-    NOT?: EmployerWhereInput | EmployerWhereInput[]
-    id?: IntFilter<"Employer"> | number
-    email?: StringFilter<"Employer"> | string
-    fullname?: StringFilter<"Employer"> | string
-    username?: StringFilter<"Employer"> | string
-    password?: StringFilter<"Employer"> | string
-    isAdmin?: BoolFilter<"Employer"> | boolean
-    isActive?: BoolFilter<"Employer"> | boolean
-    createdAt?: DateTimeFilter<"Employer"> | Date | string
+  export type UserWhereInput = {
+    AND?: UserWhereInput | UserWhereInput[]
+    OR?: UserWhereInput[]
+    NOT?: UserWhereInput | UserWhereInput[]
+    id?: IntFilter<"User"> | number
+    email?: StringFilter<"User"> | string
+    fullname?: StringFilter<"User"> | string
+    username?: StringFilter<"User"> | string
+    password?: StringFilter<"User"> | string
+    isAdmin?: BoolFilter<"User"> | boolean
+    isActive?: BoolFilter<"User"> | boolean
+    createdAt?: DateTimeFilter<"User"> | Date | string
     sales?: SaleListRelationFilter
   }
 
-  export type EmployerOrderByWithRelationInput = {
+  export type UserOrderByWithRelationInput = {
     id?: SortOrder
     email?: SortOrder
     fullname?: SortOrder
@@ -12919,22 +12919,22 @@ export namespace Prisma {
     sales?: SaleOrderByRelationAggregateInput
   }
 
-  export type EmployerWhereUniqueInput = Prisma.AtLeast<{
+  export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     email?: string
     fullname?: string
     username?: string
-    AND?: EmployerWhereInput | EmployerWhereInput[]
-    OR?: EmployerWhereInput[]
-    NOT?: EmployerWhereInput | EmployerWhereInput[]
-    password?: StringFilter<"Employer"> | string
-    isAdmin?: BoolFilter<"Employer"> | boolean
-    isActive?: BoolFilter<"Employer"> | boolean
-    createdAt?: DateTimeFilter<"Employer"> | Date | string
+    AND?: UserWhereInput | UserWhereInput[]
+    OR?: UserWhereInput[]
+    NOT?: UserWhereInput | UserWhereInput[]
+    password?: StringFilter<"User"> | string
+    isAdmin?: BoolFilter<"User"> | boolean
+    isActive?: BoolFilter<"User"> | boolean
+    createdAt?: DateTimeFilter<"User"> | Date | string
     sales?: SaleListRelationFilter
   }, "id" | "email" | "fullname" | "username">
 
-  export type EmployerOrderByWithAggregationInput = {
+  export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrder
     fullname?: SortOrder
@@ -12943,25 +12943,25 @@ export namespace Prisma {
     isAdmin?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
-    _count?: EmployerCountOrderByAggregateInput
-    _avg?: EmployerAvgOrderByAggregateInput
-    _max?: EmployerMaxOrderByAggregateInput
-    _min?: EmployerMinOrderByAggregateInput
-    _sum?: EmployerSumOrderByAggregateInput
+    _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
+    _max?: UserMaxOrderByAggregateInput
+    _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
   }
 
-  export type EmployerScalarWhereWithAggregatesInput = {
-    AND?: EmployerScalarWhereWithAggregatesInput | EmployerScalarWhereWithAggregatesInput[]
-    OR?: EmployerScalarWhereWithAggregatesInput[]
-    NOT?: EmployerScalarWhereWithAggregatesInput | EmployerScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Employer"> | number
-    email?: StringWithAggregatesFilter<"Employer"> | string
-    fullname?: StringWithAggregatesFilter<"Employer"> | string
-    username?: StringWithAggregatesFilter<"Employer"> | string
-    password?: StringWithAggregatesFilter<"Employer"> | string
-    isAdmin?: BoolWithAggregatesFilter<"Employer"> | boolean
-    isActive?: BoolWithAggregatesFilter<"Employer"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"Employer"> | Date | string
+  export type UserScalarWhereWithAggregatesInput = {
+    AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    OR?: UserScalarWhereWithAggregatesInput[]
+    NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"User"> | number
+    email?: StringWithAggregatesFilter<"User"> | string
+    fullname?: StringWithAggregatesFilter<"User"> | string
+    username?: StringWithAggregatesFilter<"User"> | string
+    password?: StringWithAggregatesFilter<"User"> | string
+    isAdmin?: BoolWithAggregatesFilter<"User"> | boolean
+    isActive?: BoolWithAggregatesFilter<"User"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
   export type CustomerWhereInput = {
@@ -13346,7 +13346,7 @@ export namespace Prisma {
     invoice?: IntFilter<"Sale"> | number
     items?: SaleOrderListRelationFilter
     customer?: XOR<CustomerNullableRelationFilter, CustomerWhereInput> | null
-    employer?: XOR<EmployerRelationFilter, EmployerWhereInput>
+    employer?: XOR<UserRelationFilter, UserWhereInput>
   }
 
   export type SaleOrderByWithRelationInput = {
@@ -13358,7 +13358,7 @@ export namespace Prisma {
     invoice?: SortOrder
     items?: SaleOrderOrderByRelationAggregateInput
     customer?: CustomerOrderByWithRelationInput
-    employer?: EmployerOrderByWithRelationInput
+    employer?: UserOrderByWithRelationInput
   }
 
   export type SaleWhereUniqueInput = Prisma.AtLeast<{
@@ -13373,7 +13373,7 @@ export namespace Prisma {
     invoice?: IntFilter<"Sale"> | number
     items?: SaleOrderListRelationFilter
     customer?: XOR<CustomerNullableRelationFilter, CustomerWhereInput> | null
-    employer?: XOR<EmployerRelationFilter, EmployerWhereInput>
+    employer?: XOR<UserRelationFilter, UserWhereInput>
   }, "id">
 
   export type SaleOrderByWithAggregationInput = {
@@ -13566,7 +13566,7 @@ export namespace Prisma {
     zone?: StringWithAggregatesFilter<"Company"> | string
   }
 
-  export type EmployerCreateInput = {
+  export type UserCreateInput = {
     email: string
     fullname: string
     username: string
@@ -13577,7 +13577,7 @@ export namespace Prisma {
     sales?: SaleCreateNestedManyWithoutEmployerInput
   }
 
-  export type EmployerUncheckedCreateInput = {
+  export type UserUncheckedCreateInput = {
     id?: number
     email: string
     fullname: string
@@ -13589,7 +13589,7 @@ export namespace Prisma {
     sales?: SaleUncheckedCreateNestedManyWithoutEmployerInput
   }
 
-  export type EmployerUpdateInput = {
+  export type UserUpdateInput = {
     email?: StringFieldUpdateOperationsInput | string
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
@@ -13600,7 +13600,7 @@ export namespace Prisma {
     sales?: SaleUpdateManyWithoutEmployerNestedInput
   }
 
-  export type EmployerUncheckedUpdateInput = {
+  export type UserUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     fullname?: StringFieldUpdateOperationsInput | string
@@ -13612,7 +13612,7 @@ export namespace Prisma {
     sales?: SaleUncheckedUpdateManyWithoutEmployerNestedInput
   }
 
-  export type EmployerCreateManyInput = {
+  export type UserCreateManyInput = {
     id?: number
     email: string
     fullname: string
@@ -13623,7 +13623,7 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
-  export type EmployerUpdateManyMutationInput = {
+  export type UserUpdateManyMutationInput = {
     email?: StringFieldUpdateOperationsInput | string
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
@@ -13633,7 +13633,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EmployerUncheckedUpdateManyInput = {
+  export type UserUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     fullname?: StringFieldUpdateOperationsInput | string
@@ -14019,7 +14019,7 @@ export namespace Prisma {
     invoice?: number
     items?: SaleOrderCreateNestedManyWithoutSaleInput
     customer?: CustomerCreateNestedOneWithoutSaleInput
-    employer: EmployerCreateNestedOneWithoutSalesInput
+    employer: UserCreateNestedOneWithoutSalesInput
   }
 
   export type SaleUncheckedCreateInput = {
@@ -14039,7 +14039,7 @@ export namespace Prisma {
     invoice?: IntFieldUpdateOperationsInput | number
     items?: SaleOrderUpdateManyWithoutSaleNestedInput
     customer?: CustomerUpdateOneWithoutSaleNestedInput
-    employer?: EmployerUpdateOneRequiredWithoutSalesNestedInput
+    employer?: UserUpdateOneRequiredWithoutSalesNestedInput
   }
 
   export type SaleUncheckedUpdateInput = {
@@ -14281,7 +14281,7 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type EmployerCountOrderByAggregateInput = {
+  export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
     fullname?: SortOrder
@@ -14292,22 +14292,11 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
-  export type EmployerAvgOrderByAggregateInput = {
+  export type UserAvgOrderByAggregateInput = {
     id?: SortOrder
   }
 
-  export type EmployerMaxOrderByAggregateInput = {
-    id?: SortOrder
-    email?: SortOrder
-    fullname?: SortOrder
-    username?: SortOrder
-    password?: SortOrder
-    isAdmin?: SortOrder
-    isActive?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type EmployerMinOrderByAggregateInput = {
+  export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
     fullname?: SortOrder
@@ -14318,7 +14307,18 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
-  export type EmployerSumOrderByAggregateInput = {
+  export type UserMinOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    fullname?: SortOrder
+    username?: SortOrder
+    password?: SortOrder
+    isAdmin?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type UserSumOrderByAggregateInput = {
     id?: SortOrder
   }
 
@@ -14773,9 +14773,9 @@ export namespace Prisma {
     isNot?: CustomerWhereInput | null
   }
 
-  export type EmployerRelationFilter = {
-    is?: EmployerWhereInput
-    isNot?: EmployerWhereInput
+  export type UserRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
   }
 
   export type SaleCountOrderByAggregateInput = {
@@ -15351,10 +15351,10 @@ export namespace Prisma {
     connect?: CustomerWhereUniqueInput
   }
 
-  export type EmployerCreateNestedOneWithoutSalesInput = {
-    create?: XOR<EmployerCreateWithoutSalesInput, EmployerUncheckedCreateWithoutSalesInput>
-    connectOrCreate?: EmployerCreateOrConnectWithoutSalesInput
-    connect?: EmployerWhereUniqueInput
+  export type UserCreateNestedOneWithoutSalesInput = {
+    create?: XOR<UserCreateWithoutSalesInput, UserUncheckedCreateWithoutSalesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSalesInput
+    connect?: UserWhereUniqueInput
   }
 
   export type SaleOrderUncheckedCreateNestedManyWithoutSaleInput = {
@@ -15388,12 +15388,12 @@ export namespace Prisma {
     update?: XOR<XOR<CustomerUpdateToOneWithWhereWithoutSaleInput, CustomerUpdateWithoutSaleInput>, CustomerUncheckedUpdateWithoutSaleInput>
   }
 
-  export type EmployerUpdateOneRequiredWithoutSalesNestedInput = {
-    create?: XOR<EmployerCreateWithoutSalesInput, EmployerUncheckedCreateWithoutSalesInput>
-    connectOrCreate?: EmployerCreateOrConnectWithoutSalesInput
-    upsert?: EmployerUpsertWithoutSalesInput
-    connect?: EmployerWhereUniqueInput
-    update?: XOR<XOR<EmployerUpdateToOneWithWhereWithoutSalesInput, EmployerUpdateWithoutSalesInput>, EmployerUncheckedUpdateWithoutSalesInput>
+  export type UserUpdateOneRequiredWithoutSalesNestedInput = {
+    create?: XOR<UserCreateWithoutSalesInput, UserUncheckedCreateWithoutSalesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSalesInput
+    upsert?: UserUpsertWithoutSalesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSalesInput, UserUpdateWithoutSalesInput>, UserUncheckedUpdateWithoutSalesInput>
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -15738,7 +15738,7 @@ export namespace Prisma {
     createdAt?: Date | string
     invoice?: number
     items?: SaleOrderCreateNestedManyWithoutSaleInput
-    employer: EmployerCreateNestedOneWithoutSalesInput
+    employer: UserCreateNestedOneWithoutSalesInput
   }
 
   export type SaleUncheckedCreateWithoutCustomerInput = {
@@ -16291,7 +16291,7 @@ export namespace Prisma {
     create: XOR<CustomerCreateWithoutSaleInput, CustomerUncheckedCreateWithoutSaleInput>
   }
 
-  export type EmployerCreateWithoutSalesInput = {
+  export type UserCreateWithoutSalesInput = {
     email: string
     fullname: string
     username: string
@@ -16301,7 +16301,7 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
-  export type EmployerUncheckedCreateWithoutSalesInput = {
+  export type UserUncheckedCreateWithoutSalesInput = {
     id?: number
     email: string
     fullname: string
@@ -16312,9 +16312,9 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
-  export type EmployerCreateOrConnectWithoutSalesInput = {
-    where: EmployerWhereUniqueInput
-    create: XOR<EmployerCreateWithoutSalesInput, EmployerUncheckedCreateWithoutSalesInput>
+  export type UserCreateOrConnectWithoutSalesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSalesInput, UserUncheckedCreateWithoutSalesInput>
   }
 
   export type SaleOrderUpsertWithWhereUniqueWithoutSaleInput = {
@@ -16357,18 +16357,18 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EmployerUpsertWithoutSalesInput = {
-    update: XOR<EmployerUpdateWithoutSalesInput, EmployerUncheckedUpdateWithoutSalesInput>
-    create: XOR<EmployerCreateWithoutSalesInput, EmployerUncheckedCreateWithoutSalesInput>
-    where?: EmployerWhereInput
+  export type UserUpsertWithoutSalesInput = {
+    update: XOR<UserUpdateWithoutSalesInput, UserUncheckedUpdateWithoutSalesInput>
+    create: XOR<UserCreateWithoutSalesInput, UserUncheckedCreateWithoutSalesInput>
+    where?: UserWhereInput
   }
 
-  export type EmployerUpdateToOneWithWhereWithoutSalesInput = {
-    where?: EmployerWhereInput
-    data: XOR<EmployerUpdateWithoutSalesInput, EmployerUncheckedUpdateWithoutSalesInput>
+  export type UserUpdateToOneWithWhereWithoutSalesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutSalesInput, UserUncheckedUpdateWithoutSalesInput>
   }
 
-  export type EmployerUpdateWithoutSalesInput = {
+  export type UserUpdateWithoutSalesInput = {
     email?: StringFieldUpdateOperationsInput | string
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
@@ -16378,7 +16378,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EmployerUncheckedUpdateWithoutSalesInput = {
+  export type UserUncheckedUpdateWithoutSalesInput = {
     id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     fullname?: StringFieldUpdateOperationsInput | string
@@ -16428,7 +16428,7 @@ export namespace Prisma {
     createdAt?: Date | string
     invoice?: number
     customer?: CustomerCreateNestedOneWithoutSaleInput
-    employer: EmployerCreateNestedOneWithoutSalesInput
+    employer: UserCreateNestedOneWithoutSalesInput
   }
 
   export type SaleUncheckedCreateWithoutItemsInput = {
@@ -16501,7 +16501,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     invoice?: IntFieldUpdateOperationsInput | number
     customer?: CustomerUpdateOneWithoutSaleNestedInput
-    employer?: EmployerUpdateOneRequiredWithoutSalesNestedInput
+    employer?: UserUpdateOneRequiredWithoutSalesNestedInput
   }
 
   export type SaleUncheckedUpdateWithoutItemsInput = {
@@ -16561,7 +16561,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     invoice?: IntFieldUpdateOperationsInput | number
     items?: SaleOrderUpdateManyWithoutSaleNestedInput
-    employer?: EmployerUpdateOneRequiredWithoutSalesNestedInput
+    employer?: UserUpdateOneRequiredWithoutSalesNestedInput
   }
 
   export type SaleUncheckedUpdateWithoutCustomerInput = {
@@ -16793,9 +16793,9 @@ export namespace Prisma {
    * Aliases for legacy arg types
    */
     /**
-     * @deprecated Use EmployerCountOutputTypeDefaultArgs instead
+     * @deprecated Use UserCountOutputTypeDefaultArgs instead
      */
-    export type EmployerCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EmployerCountOutputTypeDefaultArgs<ExtArgs>
+    export type UserCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use CustomerCountOutputTypeDefaultArgs instead
      */
@@ -16821,9 +16821,9 @@ export namespace Prisma {
      */
     export type SaleCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SaleCountOutputTypeDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use EmployerDefaultArgs instead
+     * @deprecated Use UserDefaultArgs instead
      */
-    export type EmployerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EmployerDefaultArgs<ExtArgs>
+    export type UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
     /**
      * @deprecated Use CustomerDefaultArgs instead
      */

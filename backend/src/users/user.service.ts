@@ -3,7 +3,7 @@ import bcrypt, { hash } from 'bcrypt';
 import jwt from 'jsonwebtoken';
 const SECRET: number = parseInt('hsI89nDq32nsk' as string, 10);
 
-type Employer= {
+type user= {
 	id: number,
     email: string,
     fullname: string,
@@ -16,7 +16,7 @@ type Employer= {
 
 export const authenticateUser = async (username: string, password: string) =>{
     // Check if the user exists in the database
-    const user = await db.employer.findUnique({
+    const user = await db.user.findUnique({
       where: { username: username },
       select: { id: true, isAdmin: true, password: true }
     });
@@ -34,14 +34,14 @@ export const authenticateUser = async (username: string, password: string) =>{
     }
     
     // Create a JWT
-    const token = jwt.sign({ userId: user.id }, SECRET.toString(),{expiresIn: "1h"});
+    const token = jwt.sign({ user: user }, SECRET.toString(),{expiresIn: "1d"});
     
     return token;
   };
 
-//   Get all employer
+//   Get all user
 export async function findAll(){
-	const employer = await db.employer.findMany({
+	const user = await db.user.findMany({
         select: {
             id: true, 
             fullname: true, 
@@ -50,12 +50,12 @@ export async function findAll(){
             isAdmin: true,
             isActive: true
         }})
-	return employer;
+	return user;
 }
 
-// Get single employer
+// Get single user
 export async function findById(id: number){
-	const employer = await db.employer.findUnique({where: {id: id}, select: {
+	const user = await db.user.findUnique({where: {id: id}, select: {
         id: true, 
         fullname: true, 
         email: true,
@@ -63,23 +63,23 @@ export async function findById(id: number){
         isAdmin: true,
         isActive: true
     }})
-	return employer;
+	return user;
 }
 
-// Create employer
-export async function create(formData: Employer){
+// Create user
+export async function create(formData: user){
 	  // Check if the supplierName already exists
-      const user = await db.employer.findUnique({
+      const userData = await db.user.findUnique({
         where: {
           fullname: formData.fullname,
         },
       });
     
-      if (user) {
+      if (userData) {
         throw new Error('A conta já existe');
       }
       const hashedPassword = await hash(formData.password, 4);
-	const employer = await db.employer.create({
+	const user = await db.user.create({
         data: {
             fullname: formData.fullname, 
             email: formData.email,
@@ -88,21 +88,21 @@ export async function create(formData: Employer){
             isAdmin: formData.isAdmin,
             isActive: formData.isActive
             }})
-	return employer;	
+	return user;	
 }
 
 
 
-// Delete employer
+// Delete user
 export async function destroy(id: number){
-	const employer = await db.employer.delete({where: {id: id}})
-	return employer;
+	const user = await db.user.delete({where: {id: id}})
+	return user;
 }
 
 
 // update user
-export async function updateEmployer(id: number, formData: Employer){
-	const employer = await db.employer.update({
+export async function updateUser(id: number, formData: user){
+	const user = await db.user.update({
 		where: {id: id}, 
 		data: {
             fullname: formData.fullname, 
@@ -112,7 +112,7 @@ export async function updateEmployer(id: number, formData: Employer){
             isActive: formData.isActive
         }
 	})
-	return employer;
+	return user;
 }
 
   

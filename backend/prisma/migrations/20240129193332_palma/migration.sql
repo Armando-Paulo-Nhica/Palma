@@ -1,17 +1,17 @@
 -- CreateTable
-CREATE TABLE `employers` (
-    `id` BIGINT NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
     `email` VARCHAR(50) NOT NULL,
     `fullname` VARCHAR(35) NOT NULL,
     `username` VARCHAR(20) NOT NULL,
     `password` VARCHAR(128) NOT NULL,
     `isAdmin` BOOLEAN NOT NULL DEFAULT false,
-    `status` VARCHAR(10) NOT NULL,
+    `isActive` BOOLEAN NOT NULL DEFAULT false,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
-    UNIQUE INDEX `employers_email_key`(`email`),
-    UNIQUE INDEX `employers_fullname_key`(`fullname`),
-    UNIQUE INDEX `employers_username_key`(`username`),
+    UNIQUE INDEX `users_email_key`(`email`),
+    UNIQUE INDEX `users_fullname_key`(`fullname`),
+    UNIQUE INDEX `users_username_key`(`username`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -96,7 +96,8 @@ CREATE TABLE `sales` (
     `totalAmount` DECIMAL(12, 2) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `customerId` INTEGER NULL,
-    `employerId` BIGINT NOT NULL,
+    `employerId` INTEGER NOT NULL,
+    `invoice` INTEGER NOT NULL DEFAULT 123456789,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -151,7 +152,7 @@ ALTER TABLE `purchases` ADD CONSTRAINT `purchases_supplierId_fkey` FOREIGN KEY (
 ALTER TABLE `sales` ADD CONSTRAINT `sales_customerId_fkey` FOREIGN KEY (`customerId`) REFERENCES `customers`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `sales` ADD CONSTRAINT `sales_employerId_fkey` FOREIGN KEY (`employerId`) REFERENCES `employers`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `sales` ADD CONSTRAINT `sales_employerId_fkey` FOREIGN KEY (`employerId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `saleorders` ADD CONSTRAINT `saleorders_productId_fkey` FOREIGN KEY (`productId`) REFERENCES `products`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

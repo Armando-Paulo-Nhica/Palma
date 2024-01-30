@@ -14,6 +14,7 @@ app.use(cors({
 const saleRoutes = require('./routes/sale/index');
 const homeRoutes = require('./routes/home/index');
 const shopRoutes = require('./routes/shop/index');
+const userRoutes = require('./routes/user/index');
 const productRoutes = require('./routes/product/index');
 
 const port = 8080
@@ -33,6 +34,7 @@ app.use('/', homeRoutes);
 app.use('/sale', saleRoutes);
 app.use('/product', shopRoutes);
 app.use('/stock', productRoutes);
+app.use('/user', userRoutes);
 
 
 app.listen(port, () => {
