@@ -179,7 +179,7 @@ function displaySales(product) {
     row += "<td><input type='text' class='qty' value='" + product[i].quantity + "'/></td>";
     row += "<td><input type='text' class='discount' value='0'/></td>";
     row += "<td><input type='text' value="+(product[i].sell * product[i].quantity).toFixed(2)+" readonly class='subtotal'></td>";
-    row += "<td class='actions'> <i class='fas fa-plus' onClick='addQty(this)'></i> <i class='fas fa-minus' onClick='reduceQty(this)'></i> <i class='fas fa-trash' onClick='deleteRow(this)'></i></td>";
+    row += "<td class='actions'> <i class='fas fa-plus gute' onClick='addQty(this)'></i> <i class='fas fa-minus gute' onClick='reduceQty(this)'></i> <i class='fas fa-trash gute' onClick='deleteRow(this)'></i></td>";
     row += "</tr>";
 
     $("#dta").append(row);

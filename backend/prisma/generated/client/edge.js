@@ -216,7 +216,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "E:\\PROGRAMMING\\WSG\\Palma\\backend\\prisma\\generated\\client",
+      "value": "E:\\Projects\\Palma\\backend\\prisma\\generated\\client",
       "fromEnvVar": null
     },
     "config": {

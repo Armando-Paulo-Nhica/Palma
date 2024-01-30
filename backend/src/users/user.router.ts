@@ -8,12 +8,12 @@ export const userRouter = express.Router();
 
 
 // Auth
-userRouter.post("/auth" ,async (req: Request,res: Response) =>{
+userRouter.post("/auth", async (req: Request,res: Response) =>{
 	try {
 		const users = await userService.authenticateUser(req.body.username, req.body.password);
-		return res.status(200).json(users);
+		return res.status(200).json({ status: 200, token: users });
 	} catch (error: any) {
-		return res.status(500).json(error.message)
+		return res.status(500).json({ status: 500, message: error.message });
 	}
 })
 
@@ -42,7 +42,7 @@ userRouter.get("/:id", verifyToken, async (request: Request,response: Response) 
 	}
 })
 
-// Create employer
+// Create user
 userRouter.post("/", verifyTokenAndAdmin, async (request: Request,response: Response)=>{
 	try {
 		const employer = await userService.create(request.body);
@@ -67,11 +67,23 @@ userRouter.delete("/:id", verifyTokenAndAdmin,async(request: Request, response: 
 	}
 })
 
-// Updade employer
+// Updade user
 userRouter.put("/:id", verifyToken, async(request: Request, response: Response) =>{
 	const id: number = parseInt(request.params.id);
 	try {
 		const employer = await userService.updateUser(id, request.body);
+		
+		return response.json({error: false, msg: "Alterações feitas com sucesso"});
+	} catch (error: any) {
+		return response.status(500).json(error.message)
+	}
+})
+
+// Updade user
+userRouter.put("/new/password/:id", verifyToken, async(request: Request, response: Response) =>{
+	const id: number = parseInt(request.params.id);
+	try {
+		const employer = await userService.updateUserPassword(id, request.body.password);
 		
 		return response.json({error: false, msg: "Alterações feitas com sucesso"});
 	} catch (error: any) {

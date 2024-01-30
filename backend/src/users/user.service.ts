@@ -10,7 +10,7 @@ type user= {
     username: string,
     password: string,
     isAdmin: boolean,
-    isActive: boolean
+    isActive: boolean 
 }
 
 
@@ -102,14 +102,27 @@ export async function destroy(id: number){
 
 // update user
 export async function updateUser(id: number, formData: user){
+  const hashedPassword = await hash(formData.password, 4);
 	const user = await db.user.update({
 		where: {id: id}, 
 		data: {
             fullname: formData.fullname, 
             email: formData.email,
             username: formData.username,
+            password: hashedPassword,
             isAdmin: formData.isAdmin,
             isActive: formData.isActive
+        }
+	})
+	return user;
+}
+
+export async function updateUserPassword(id: number, newPassword: string){
+  const hashedPassword = await hash(newPassword, 4);
+	const user = await db.user.update({
+		where: {id: id}, 
+		data: {
+            password: hashedPassword
         }
 	})
 	return user;
