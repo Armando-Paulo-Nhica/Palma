@@ -1,3 +1,4 @@
+const token = localStorage.getItem('token');
 const baseUrl = 'http://localhost:3000/api';
 
 $(document).ready(function() {
@@ -270,7 +271,7 @@ var reqToken = {
                     previous: '<i class="fas fa-arrow-left"></i>'},
                     info: 'Ver _START_ à _END_ de _TOTAL_ entradas'
             },
-              data: data,
+              data: data.sale,
               columns: [
                 { data: 'invoice' },
                 { data: 'totalAmount' },
@@ -329,7 +330,7 @@ var reqToken = {
                     previous: '<i class="fas fa-arrow-left"></i>'},
                     info: 'Ver _START_ à _END_ de _TOTAL_ entradas'
             },
-              data: data,
+              data: data.sale,
               columns: [
                 { data: 'invoice' },
                 { data: 'totalAmount' },

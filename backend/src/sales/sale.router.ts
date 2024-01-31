@@ -10,9 +10,9 @@ export const SaleRouter = express.Router();
 SaleRouter.get("/" ,verifyTokenAndAdmin ,async (request: Request,response: Response) =>{
 	try {
 		const sale = await Sale.findAll();
-        return response.status(200).type("json").send(json(sale));
+        return response.status(200).type("json").send(json({status: 200, sale: sale}));
 	} catch (error: any) {
-		return response.status(500).json(error.message)
+		return response.status(500).json({status: 500, error: error.message})
 	}
 })
 

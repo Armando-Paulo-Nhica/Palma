@@ -38,7 +38,7 @@ $("#login-btn").click(function(e){
             
             if (data.status === 200) { 
               localStorage.setItem('token', data.token);
-              window.location.href = '/stock/view'; 
+              window.location.href = '/'; 
             } else {
               swal("Mensagem", "Credenciais inválidas", "error");
               setTimeout(function () {
