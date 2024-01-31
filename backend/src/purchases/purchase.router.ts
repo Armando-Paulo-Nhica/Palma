@@ -10,8 +10,11 @@ export const purchaseRouter = express.Router();
 purchaseRouter.post("/", async (request: Request,response: Response)=>{
 	try {
 		const purchase = await PurchaseService.create(request.body);
-		if(purchase){
-			return response.status(200).json({error:false, msg:"Novo produto foi adicionado com sucesso"});
+		
+		if(purchase.ok){
+			const jsonResponse = purchase.paths.map((filePath) => ({ barcode: filePath }));
+			console.log(jsonResponse)
+			return response.status(200).json({error:false, msg:"Novo produto foi adicionado com sucesso", paths: jsonResponse});
 		}
 		else
 		{

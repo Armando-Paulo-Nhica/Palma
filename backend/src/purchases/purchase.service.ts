@@ -1,7 +1,8 @@
 import { Product } from 'electron'
 import {db} from '../utiles/db.server'
 import { generateBarcodeImage } from '../utiles/barcode';
-import { switchToPage } from 'pdfkit';
+import * as fs from 'fs';
+import * as zlib from 'zlib';
 
 type Purchase = {
   id: number;
@@ -38,6 +39,10 @@ type Shop = {
     }
   ]
 };
+
+const barcodepaths: string[] = [];
+
+
 
 // Create
 export async function create(formData: Purchase | Purchase[]) {
@@ -77,7 +82,17 @@ for (const purchase of purchasesArray) {
     });
 
     // Create barcode
-    generateBarcodeImage(existingProduct.barcode.toString(), './public/barcodes');
+    // generateBarcodeImage(existingProduct.barcode.toString(), './public/barcodes');
+
+    generateBarcodeImage(existingProduct.barcode.toString())
+    .then((filePath) => {
+      const pathValues = {barcode: filePath};
+        // barcodepaths.push(pathValues);   
+        
+    })
+    .catch((error) => {
+        console.error(`Error generating barcode image: ${error.message}`);
+    });
 
     // Create a new entry in the purchaseproduct table
     try {
@@ -134,7 +149,16 @@ for (const purchase of purchasesArray) {
           },
         },
       });
-      generateBarcodeImage(purchase.barcode.toString(), './public/barcodes');
+      // generateBarcodeImage(purchase.barcode.toString(), './public/barcodes');
+      
+      generateBarcodeImage(purchase.barcode.toString())
+    .then((filePath) => {
+      var pathValues = {barcode: filePath};
+      // barcodepaths.push(pathValues);
+    })
+    .catch((error) => {
+        console.error(`Error generating barcode image: ${error.message}`);
+    });
       createdPurchases.push(true);
     } catch (error) {
       // Handle the error
@@ -146,7 +170,7 @@ for (const purchase of purchasesArray) {
 
 // ======== end new code
   // return Array.isArray(formData) ? createdPurchases : createdPurchases[0];
-  return true;
+  return {ok: true, paths: barcodepaths};
 }
 
 
@@ -250,6 +274,19 @@ export async function updatePurchase(data: Shop, id: number) {
   }
 }
 
+
+// Compress image
+function compressAndEncodeImage(filePath: string) {
+  const imageData = fs.readFileSync(filePath);
+
+  // Compress the image data using gzip
+  const compressedData = zlib.gzipSync(imageData);
+
+  // Encode the compressed data as base64
+  const base64Encoded = compressedData.toString('base64');
+
+  return base64Encoded;
+}
 
 
 

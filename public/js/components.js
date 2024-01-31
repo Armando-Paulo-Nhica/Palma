@@ -1,12 +1,12 @@
-const token = localStorage.getItem('token');
+// const token = localStorage.getItem('token');
 // Sidebar
-function isAdmin(){
-    const [header, payload, signature] = token.split('.');
-    const decodedPayload = atob(payload);
-    const payloadData = JSON.parse(decodedPayload);
-console.log(payloadData.user.isAdmin)
-    return payloadData.user.isAdmin;
-}
+// function isAdmin(){
+//     const [header, payload, signature] = token.split('.');
+//     const decodedPayload = atob(payload);
+//     const payloadData = JSON.parse(decodedPayload);
+// console.log(payloadData.user.isAdmin)
+//     return payloadData.user.isAdmin;
+// }
 
 
 document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
@@ -30,14 +30,14 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
             <li><a href="#"><i class="mdi mdi-circle-outline"></i> Relatório</a></li>
         </ul>
     </li>
-  ${isAdmin() ? `<li class="nav-label first">Controle de Stock</li>
+<li class="nav-label first">Controle de Stock</li>
   <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
       class="icon icon-cart-simple"></i><span class="nav-text">Stock</span></a>
       <ul aria-expanded="false">
           <li><a href="/stock/create"><i class="mdi mdi-circle-outline"></i> Registar novo</a></li>
           <li><a href="/stock/view"><i class="mdi mdi-circle-outline"></i> Visualizar</a></li>
       </ul>
-  </li>` : `lhjgjjhh`}
+  </li>
     
     <li class="nav-label first">Gestão de serviços</li>
     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i

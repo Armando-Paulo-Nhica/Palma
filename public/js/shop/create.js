@@ -145,9 +145,11 @@ if(isOk){
                 .then(response => response.json())
                 .then(data => {
                     if(!data.error){
+                        console.log(data)
                         swal("Mensagem", "Produto registado com sucesso!", "success");
                         setTimeout(function () {
-                            window.location.href = '/product/view';
+                            // window.location.href = '/product/view';
+                            
                         }, 500);
                         
                     }
