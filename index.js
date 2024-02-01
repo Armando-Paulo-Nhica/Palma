@@ -1,5 +1,6 @@
 const express = require('express');
 const nunjucks = require('nunjucks'); 
+
 const app = express();
 const cors = require('cors');
 
@@ -36,7 +37,7 @@ app.use('/product', shopRoutes);
 app.use('/stock', productRoutes);
 app.use('/user', userRoutes);
 
-
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
+

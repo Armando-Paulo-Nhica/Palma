@@ -8905,7 +8905,7 @@ export namespace Prisma {
     totalAmount: Decimal | null
     customerId: number | null
     employerId: number | null
-    invoice: number | null
+    invoice: bigint | null
   }
 
   export type SaleMinAggregateOutputType = {
@@ -8914,7 +8914,7 @@ export namespace Prisma {
     createdAt: Date | null
     customerId: number | null
     employerId: number | null
-    invoice: number | null
+    invoice: bigint | null
   }
 
   export type SaleMaxAggregateOutputType = {
@@ -8923,7 +8923,7 @@ export namespace Prisma {
     createdAt: Date | null
     customerId: number | null
     employerId: number | null
-    invoice: number | null
+    invoice: bigint | null
   }
 
   export type SaleCountAggregateOutputType = {
@@ -9073,7 +9073,7 @@ export namespace Prisma {
     createdAt: Date
     customerId: number | null
     employerId: number
-    invoice: number
+    invoice: bigint
     _count: SaleCountAggregateOutputType | null
     _avg: SaleAvgAggregateOutputType | null
     _sum: SaleSumAggregateOutputType | null
@@ -9138,7 +9138,7 @@ export namespace Prisma {
       createdAt: Date
       customerId: number | null
       employerId: number
-      invoice: number
+      invoice: bigint
     }, ExtArgs["result"]["sale"]>
     composites: {}
   }
@@ -9543,7 +9543,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Sale", 'DateTime'>
     readonly customerId: FieldRef<"Sale", 'Int'>
     readonly employerId: FieldRef<"Sale", 'Int'>
-    readonly invoice: FieldRef<"Sale", 'Int'>
+    readonly invoice: FieldRef<"Sale", 'BigInt'>
   }
     
 
@@ -13343,7 +13343,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Sale"> | Date | string
     customerId?: IntNullableFilter<"Sale"> | number | null
     employerId?: IntFilter<"Sale"> | number
-    invoice?: IntFilter<"Sale"> | number
+    invoice?: BigIntFilter<"Sale"> | bigint | number
     items?: SaleOrderListRelationFilter
     customer?: XOR<CustomerNullableRelationFilter, CustomerWhereInput> | null
     employer?: XOR<UserRelationFilter, UserWhereInput>
@@ -13363,6 +13363,7 @@ export namespace Prisma {
 
   export type SaleWhereUniqueInput = Prisma.AtLeast<{
     id?: bigint | number
+    invoice?: bigint | number
     AND?: SaleWhereInput | SaleWhereInput[]
     OR?: SaleWhereInput[]
     NOT?: SaleWhereInput | SaleWhereInput[]
@@ -13370,11 +13371,10 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Sale"> | Date | string
     customerId?: IntNullableFilter<"Sale"> | number | null
     employerId?: IntFilter<"Sale"> | number
-    invoice?: IntFilter<"Sale"> | number
     items?: SaleOrderListRelationFilter
     customer?: XOR<CustomerNullableRelationFilter, CustomerWhereInput> | null
     employer?: XOR<UserRelationFilter, UserWhereInput>
-  }, "id">
+  }, "id" | "invoice">
 
   export type SaleOrderByWithAggregationInput = {
     id?: SortOrder
@@ -13399,7 +13399,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Sale"> | Date | string
     customerId?: IntNullableWithAggregatesFilter<"Sale"> | number | null
     employerId?: IntWithAggregatesFilter<"Sale"> | number
-    invoice?: IntWithAggregatesFilter<"Sale"> | number
+    invoice?: BigIntWithAggregatesFilter<"Sale"> | bigint | number
   }
 
   export type SaleOrderWhereInput = {
@@ -14016,7 +14016,7 @@ export namespace Prisma {
     id?: bigint | number
     totalAmount: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
-    invoice?: number
+    invoice?: bigint | number
     items?: SaleOrderCreateNestedManyWithoutSaleInput
     customer?: CustomerCreateNestedOneWithoutSaleInput
     employer: UserCreateNestedOneWithoutSalesInput
@@ -14028,7 +14028,7 @@ export namespace Prisma {
     createdAt?: Date | string
     customerId?: number | null
     employerId: number
-    invoice?: number
+    invoice?: bigint | number
     items?: SaleOrderUncheckedCreateNestedManyWithoutSaleInput
   }
 
@@ -14036,7 +14036,7 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    invoice?: IntFieldUpdateOperationsInput | number
+    invoice?: BigIntFieldUpdateOperationsInput | bigint | number
     items?: SaleOrderUpdateManyWithoutSaleNestedInput
     customer?: CustomerUpdateOneWithoutSaleNestedInput
     employer?: UserUpdateOneRequiredWithoutSalesNestedInput
@@ -14048,7 +14048,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerId?: NullableIntFieldUpdateOperationsInput | number | null
     employerId?: IntFieldUpdateOperationsInput | number
-    invoice?: IntFieldUpdateOperationsInput | number
+    invoice?: BigIntFieldUpdateOperationsInput | bigint | number
     items?: SaleOrderUncheckedUpdateManyWithoutSaleNestedInput
   }
 
@@ -14058,14 +14058,14 @@ export namespace Prisma {
     createdAt?: Date | string
     customerId?: number | null
     employerId: number
-    invoice?: number
+    invoice?: bigint | number
   }
 
   export type SaleUpdateManyMutationInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    invoice?: IntFieldUpdateOperationsInput | number
+    invoice?: BigIntFieldUpdateOperationsInput | bigint | number
   }
 
   export type SaleUncheckedUpdateManyInput = {
@@ -14074,7 +14074,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerId?: NullableIntFieldUpdateOperationsInput | number | null
     employerId?: IntFieldUpdateOperationsInput | number
-    invoice?: IntFieldUpdateOperationsInput | number
+    invoice?: BigIntFieldUpdateOperationsInput | bigint | number
   }
 
   export type SaleOrderCreateInput = {
@@ -15680,7 +15680,7 @@ export namespace Prisma {
     id?: bigint | number
     totalAmount: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
-    invoice?: number
+    invoice?: bigint | number
     items?: SaleOrderCreateNestedManyWithoutSaleInput
     customer?: CustomerCreateNestedOneWithoutSaleInput
   }
@@ -15690,7 +15690,7 @@ export namespace Prisma {
     totalAmount: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     customerId?: number | null
-    invoice?: number
+    invoice?: bigint | number
     items?: SaleOrderUncheckedCreateNestedManyWithoutSaleInput
   }
 
@@ -15729,14 +15729,14 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Sale"> | Date | string
     customerId?: IntNullableFilter<"Sale"> | number | null
     employerId?: IntFilter<"Sale"> | number
-    invoice?: IntFilter<"Sale"> | number
+    invoice?: BigIntFilter<"Sale"> | bigint | number
   }
 
   export type SaleCreateWithoutCustomerInput = {
     id?: bigint | number
     totalAmount: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
-    invoice?: number
+    invoice?: bigint | number
     items?: SaleOrderCreateNestedManyWithoutSaleInput
     employer: UserCreateNestedOneWithoutSalesInput
   }
@@ -15746,7 +15746,7 @@ export namespace Prisma {
     totalAmount: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     employerId: number
-    invoice?: number
+    invoice?: bigint | number
     items?: SaleOrderUncheckedCreateNestedManyWithoutSaleInput
   }
 
@@ -16426,7 +16426,7 @@ export namespace Prisma {
     id?: bigint | number
     totalAmount: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
-    invoice?: number
+    invoice?: bigint | number
     customer?: CustomerCreateNestedOneWithoutSaleInput
     employer: UserCreateNestedOneWithoutSalesInput
   }
@@ -16437,7 +16437,7 @@ export namespace Prisma {
     createdAt?: Date | string
     customerId?: number | null
     employerId: number
-    invoice?: number
+    invoice?: bigint | number
   }
 
   export type SaleCreateOrConnectWithoutItemsInput = {
@@ -16499,7 +16499,7 @@ export namespace Prisma {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    invoice?: IntFieldUpdateOperationsInput | number
+    invoice?: BigIntFieldUpdateOperationsInput | bigint | number
     customer?: CustomerUpdateOneWithoutSaleNestedInput
     employer?: UserUpdateOneRequiredWithoutSalesNestedInput
   }
@@ -16510,7 +16510,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerId?: NullableIntFieldUpdateOperationsInput | number | null
     employerId?: IntFieldUpdateOperationsInput | number
-    invoice?: IntFieldUpdateOperationsInput | number
+    invoice?: BigIntFieldUpdateOperationsInput | bigint | number
   }
 
   export type SaleCreateManyEmployerInput = {
@@ -16518,14 +16518,14 @@ export namespace Prisma {
     totalAmount: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     customerId?: number | null
-    invoice?: number
+    invoice?: bigint | number
   }
 
   export type SaleUpdateWithoutEmployerInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    invoice?: IntFieldUpdateOperationsInput | number
+    invoice?: BigIntFieldUpdateOperationsInput | bigint | number
     items?: SaleOrderUpdateManyWithoutSaleNestedInput
     customer?: CustomerUpdateOneWithoutSaleNestedInput
   }
@@ -16535,7 +16535,7 @@ export namespace Prisma {
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerId?: NullableIntFieldUpdateOperationsInput | number | null
-    invoice?: IntFieldUpdateOperationsInput | number
+    invoice?: BigIntFieldUpdateOperationsInput | bigint | number
     items?: SaleOrderUncheckedUpdateManyWithoutSaleNestedInput
   }
 
@@ -16544,7 +16544,7 @@ export namespace Prisma {
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerId?: NullableIntFieldUpdateOperationsInput | number | null
-    invoice?: IntFieldUpdateOperationsInput | number
+    invoice?: BigIntFieldUpdateOperationsInput | bigint | number
   }
 
   export type SaleCreateManyCustomerInput = {
@@ -16552,14 +16552,14 @@ export namespace Prisma {
     totalAmount: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     employerId: number
-    invoice?: number
+    invoice?: bigint | number
   }
 
   export type SaleUpdateWithoutCustomerInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    invoice?: IntFieldUpdateOperationsInput | number
+    invoice?: BigIntFieldUpdateOperationsInput | bigint | number
     items?: SaleOrderUpdateManyWithoutSaleNestedInput
     employer?: UserUpdateOneRequiredWithoutSalesNestedInput
   }
@@ -16569,7 +16569,7 @@ export namespace Prisma {
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     employerId?: IntFieldUpdateOperationsInput | number
-    invoice?: IntFieldUpdateOperationsInput | number
+    invoice?: BigIntFieldUpdateOperationsInput | bigint | number
     items?: SaleOrderUncheckedUpdateManyWithoutSaleNestedInput
   }
 
@@ -16578,7 +16578,7 @@ export namespace Prisma {
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     employerId?: IntFieldUpdateOperationsInput | number
-    invoice?: IntFieldUpdateOperationsInput | number
+    invoice?: BigIntFieldUpdateOperationsInput | bigint | number
   }
 
   export type ProductCreateManyCategoryInput = {

@@ -1,5 +1,6 @@
 import {db} from '../utiles/db.server'
 import { updateProductQty } from '../products/product.service';
+import { Console } from 'escpos';
 type Sale = {
     totalAmount: number,
     customerId: number, 
@@ -37,6 +38,7 @@ export async function findById(id: number){
 
 // Create sale
 export async function create(newSaleData: Sale){
+  
 const isUpdated = await updateProductQty(newSaleData.items);
 
 	if(isUpdated){
@@ -67,7 +69,7 @@ export async function updateSale(id: number, newSaleData: Sale) {
         totalAmount: newSaleData.totalAmount,
         customerId: newSaleData.customerId,
         employerId: newSaleData.employerId,
-        items: {
+        items: { 
           // Assuming SaleOrder data is directly provided in newSaleData.items
           upsert: newSaleData.items.map(item => ({
             where: { saleId_productId: { saleId: id, productId: item.productId } },

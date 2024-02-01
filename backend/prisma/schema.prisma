@@ -106,7 +106,7 @@ model Sale {
   createdAt   DateTime    @default(now())
   customerId  Int?        
   employerId  Int
-  invoice Int @default(123456789)
+  invoice BigInt @unique @default(0)
   items       SaleOrder[]
   customer    Customer?  @relation(fields: [customerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   employer    User    @relation(fields: [employerId], references: [id], onDelete: Cascade, onUpdate: Cascade)

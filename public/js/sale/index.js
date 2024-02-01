@@ -364,7 +364,7 @@ $("#saleBtn").click(function(){
           if(!data.error){
               swal("Mensagem", "Venda registada com sucesso!", "success");
                         setTimeout(function () {
-                            window.location.href = '/sale/view';
+                            // window.location.href = '/sale/view';
                         }, 500);
               $("#counter-id").text("");
               counter = 0;
@@ -388,10 +388,11 @@ $("#saleBtn").click(function(){
 
 // Generate the output
 function transformJson() {
+  
   const outputJson = {
     totalAmount: 0,
-    customerId: 1,
-    employerId: 1,
+    customerId: parseInt($("#customerId").val(), 10),
+    employerId: getEmployerId(),
     items: []
   };
 
@@ -411,5 +412,38 @@ function transformJson() {
     });
   });
 
+  
   return outputJson;
+}
+
+
+//Fetch data
+fetch(baseUrl+'/customers')
+.then(response => response.json()) 
+.then(data => {
+    getCustomers(data);
+})
+.catch(error => {
+    console.error('Error fetching data:', error);
+});
+
+//load suppliers
+function getCustomers(data) {
+    const selectElement = $('#customerId');
+    
+    data.forEach(item => {
+        selectElement.append($('<option>', {
+            value: item.id,
+            text: item.fullname
+        }));
+        
+    });
+}
+
+function getEmployerId(){
+    const [header, payload, signature] = token.split('.');
+    const decodedPayload = atob(payload);
+    const payloadData = JSON.parse(decodedPayload);
+
+    return parseInt(payloadData.user.id, 10);
 }

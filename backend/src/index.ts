@@ -17,6 +17,8 @@ import { companyRouter } from './companies/company.router';
 import { userRouter } from './users/user.router';
 import { productRouter } from './products/product.router';
 import { SaleRouter } from './sales/sale.router';
+import { customerRouter } from './customers/customer.router';
+
 const port = 3000;
 const app = express();
 app.use(express.json());
@@ -36,6 +38,8 @@ app.use("/api/companies", companyRouter);
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/sales", SaleRouter);
+app.use("/api/customers", customerRouter);
+
 
 app.listen(port, () => {
   console.log(`Servidor Express rodando na porta ${port}`);
