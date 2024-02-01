@@ -144,8 +144,9 @@ if(isOk){
             fetch(baseUrl+'/purchases', requestOptions)
                 .then(response => response.json())
                 .then(data => {
+                    
                     if(!data.error){
-                        console.log(data)
+                        console.log(data.paths[0])
                         swal("Mensagem", "Produto registado com sucesso!", "success");
                         setTimeout(function () {
                             // window.location.href = '/product/view';
@@ -167,6 +168,26 @@ if(isOk){
 
 })
 
+
+
+
+// Print barcode image
+function printBarcode() {
+    // Create a new window or iframe
+    const printWindow = window.open('', '_blank');
+    
+    // Set the content of the new window or iframe
+    printWindow.document.write('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Print Barcode</title><style>@media print {body {margin: 0; padding: 0;}img {max-width: 100%; height: auto;}}</style></head><body>');
+
+    // Insert the barcode image
+    printWindow.document.write('<img src="path/to/your/barcode.png" alt="Barcode">');
+
+    // Close the HTML document
+    printWindow.document.write('</body></html>');
+
+    // Trigger the print dialog
+    printWindow.print();
+  }
 
 
 // Calculate the total of purchase

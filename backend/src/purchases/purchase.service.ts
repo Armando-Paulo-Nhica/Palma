@@ -40,12 +40,18 @@ type Shop = {
   ]
 };
 
-const barcodepaths: string[] = [];
+interface BarcodePath {
+  barcode: string;
+}
+
+var barcodepaths: BarcodePath[] = [];
 
 
+var filePath;
 
 // Create
 export async function create(formData: Purchase | Purchase[]) {
+  barcodepaths = [];
   const purchasesArray = Array.isArray(formData) ? formData : [formData];
   //Insert purchase just once
   const purchaseData = await db.purchase.create({
@@ -84,15 +90,9 @@ for (const purchase of purchasesArray) {
     // Create barcode
     // generateBarcodeImage(existingProduct.barcode.toString(), './public/barcodes');
 
-    generateBarcodeImage(existingProduct.barcode.toString())
-    .then((filePath) => {
-      const pathValues = {barcode: filePath};
-        // barcodepaths.push(pathValues);   
-        
-    })
-    .catch((error) => {
-        console.error(`Error generating barcode image: ${error.message}`);
-    });
+     filePath = {barcode: await generateBarcodeImage(purchase.barcode.toString())}
+    barcodepaths.push(filePath);
+   filePath = null;
 
     // Create a new entry in the purchaseproduct table
     try {
@@ -151,15 +151,13 @@ for (const purchase of purchasesArray) {
       });
       // generateBarcodeImage(purchase.barcode.toString(), './public/barcodes');
       
-      generateBarcodeImage(purchase.barcode.toString())
-    .then((filePath) => {
-      var pathValues = {barcode: filePath};
-      // barcodepaths.push(pathValues);
-    })
-    .catch((error) => {
-        console.error(`Error generating barcode image: ${error.message}`);
-    });
+      filePath = {barcode: await generateBarcodeImage(purchase.barcode.toString())}
+        barcodepaths.push(filePath);
+      filePath = null;
+
+
       createdPurchases.push(true);
+
     } catch (error) {
       // Handle the error
       createdPurchases.push(false);
@@ -170,7 +168,10 @@ for (const purchase of purchasesArray) {
 
 // ======== end new code
   // return Array.isArray(formData) ? createdPurchases : createdPurchases[0];
-  return {ok: true, paths: barcodepaths};
+
+
+  return {status: 200, paths: barcodepaths};
+
 }
 
 
