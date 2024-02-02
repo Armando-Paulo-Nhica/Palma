@@ -174,7 +174,7 @@ if(isOk){
 
 
 function printBarcode(imagePaths){
-    $("#printButton").click(function () {
+    
         // Create image containers dynamically for each image path
         $.each(imagePaths, function (index, imagePath) {
             var imageContainer = $("<div class='imageContainer' style='display: none;'>");
@@ -183,15 +183,10 @@ function printBarcode(imagePaths){
             $("body").append(imageContainer);
         });
 
-        // Show all image containers before printing
         $(".imageContainer").css("display", "block");
-
-        // Call the print function to trigger the browser's print dialog
         window.print();
 
-        // Remove the dynamically created image containers after printing
         $(".imageContainer").remove();
-    });
 
 }
 
