@@ -226,6 +226,8 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   --gray-dark: #343a40;
   /* --primary: #593bdb; */
   --primary: #5b3c88;
+  --primary-1: #3253A8;
+  --primary-2: #3A3A3A;
   --secondary: #673BB7;
   --success: #7ED321;
   --info: #50E3C2;
@@ -10317,8 +10319,15 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   top: 5rem;
   padding-top: 0;
   z-index: 2;
-  /* background-color: #343957; */
-  background-color: var(--primary);
+  
+  /* background-color: var(--primary); */
+  background: #413B87;
+  background: -webkit-linear-gradient(left, #3B4E87, #6E3B87);
+  background: -o-linear-gradient(left, #3B4E87, #6E3B87);
+  background: -moz-linear-gradient(left, #3B4E87, #6E3B87);
+  background: linear-gradient(left, #3B4E87, #6E3B87); 
+
+
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
   transition: all .2s ease; }
   .quixnav .quixnav-scroll {

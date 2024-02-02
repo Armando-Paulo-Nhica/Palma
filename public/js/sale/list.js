@@ -107,7 +107,13 @@ function setSaleValues() {
 
 // View purchase products
 function viewSaleProducts() {
-    fetch(`${baseUrl}/sales/${rowId}`)
+    fetch(`${baseUrl}/sales/${rowId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      })
         .then(response => response.json())
         .then(data => {
             const productsContainer = $("#saleItems");

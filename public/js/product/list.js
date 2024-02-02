@@ -22,6 +22,7 @@ $(document).ready(function() {
           method: 'DELETE',
           headers: {
               'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
           },
       })
           .then(response => response.json())
@@ -44,7 +45,14 @@ $(document).ready(function() {
 // Setting values to modal
 function setStockValues() {
     
-    fetch(`${baseUrl}/products/${rowId}`)
+    fetch(`${baseUrl}/products/${rowId}`, 
+    {
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+      }}
+    )
         .then(response => response.json())
         .then(data => {
             const productsContainer = $("#editStock");
@@ -117,15 +125,15 @@ $("#edit-stock-btn").click(function() {
     $("#editModal").modal("hide");
 
   });
-
+ 
 
 // Update the purchase
 function updateStock(saleData, id) {
     var requestOptions = {
         method: 'PUT', // Use PUT for updating data
         headers: {
-            'Content-Type': 'application/json', // Set the content type to JSON
-            // Add any other headers if needed
+            'Content-Type': 'application/json', 
+            'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(saleData) // Convert data to JSON string
     };
@@ -206,10 +214,8 @@ function updateStock(saleData, id) {
                       const formattedDate = new Date(data).toLocaleDateString('en-GB', {
                         day: '2-digit',
                         month: '2-digit',
-                        year: '2-digit',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        second: '2-digit'
+                        year: '2-digit'
+                       
                       });
                   
                       return formattedDate;
@@ -232,7 +238,12 @@ function updateStock(saleData, id) {
 
   //Load all purchases
   function loadAll(){ 
-    fetch(baseUrl+'/products')
+    fetch(baseUrl+'/products', {
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+      }})
       .then(response => response.json())
       .then(data => {
          if (dataTable) {
@@ -282,10 +293,8 @@ function updateStock(saleData, id) {
                       const formattedDate = new Date(data).toLocaleDateString('en-GB', {
                         day: '2-digit',
                         month: '2-digit',
-                        year: '2-digit',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        second: '2-digit'
+                        year: '2-digit'
+                       
                       });
                   
                       return formattedDate;

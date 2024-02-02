@@ -1,14 +1,14 @@
-// const token = localStorage.getItem('token');
-// Sidebar
-// function isAdmin(){
-//     const [header, payload, signature] = token.split('.');
-//     const decodedPayload = atob(payload);
-//     const payloadData = JSON.parse(decodedPayload);
+
+function isAdmin(){
+    const token = localStorage.getItem('token');
+    const [header, payload, signature] = token.split('.');
+    const decodedPayload = atob(payload);
+    const payloadData = JSON.parse(decodedPayload);
 // console.log(payloadData.user.isAdmin)
-//     return payloadData.user.isAdmin;
-// }
+    return payloadData.user.isAdmin;
+}
 
-
+// Sidebar
 document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
 <ul class="metismenu" id="menu">
     <li class="nav-label first">Gestão de vendas</li>
@@ -30,14 +30,14 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
             <li><a href="#"><i class="mdi mdi-circle-outline"></i> Relatório</a></li>
         </ul>
     </li>
-<li class="nav-label first">Controle de Stock</li>
-  <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-      class="icon icon-cart-simple"></i><span class="nav-text">Stock</span></a>
-      <ul aria-expanded="false">
-          <li><a href="/stock/create"><i class="mdi mdi-circle-outline"></i> Registar novo</a></li>
-          <li><a href="/stock/view"><i class="mdi mdi-circle-outline"></i> Visualizar</a></li>
-      </ul>
-  </li>
+    ${isAdmin() ? `<li class="nav-label first">Controle de Stock</li>
+    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
+        class="icon icon-cart-simple"></i><span class="nav-text">Stock</span></a>
+        <ul aria-expanded="false">
+            <li><a href="/stock/create"><i class="mdi mdi-circle-outline"></i> Registar novo</a></li>
+            <li><a href="/stock/view"><i class="mdi mdi-circle-outline"></i> Visualizar</a></li>
+        </ul>
+    </li>` : ``}
     
     <li class="nav-label first">Gestão de serviços</li>
     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
@@ -57,7 +57,7 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
         </ul>
     </li>
 
-    <li class="nav-label first">Gestão financeira</li>
+    ${isAdmin() ? ` <li class="nav-label first">Gestão financeira</li>
     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
         class="icon icon-payment"></i><span class="nav-text">Finanças</span></a>
         <ul aria-expanded="false">
@@ -65,19 +65,18 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
             <li><a href="#"><i class="mdi mdi-circle-outline"></i> Fluxo de caixa</a></li>
             <li><a href="#"><i class="mdi mdi-circle-outline"></i> Balanço Patrimonial</a></li>
         </ul>
-    </li>
+    </li>` : ``}
 
-    <li class="nav-label first">Análise de relatórios</li>
+    ${isAdmin() ? `<li class="nav-label first">Análise de relatórios</li>
     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
         class="icon icon-analytics"></i><span class="nav-text">Relatório</span></a>
         <ul aria-expanded="false">
             <li><a href="#"><i class="mdi mdi-circle-outline"></i> Relatórios Personalizados</a></li>
             <li><a href="#"><i class="mdi mdi-circle-outline"></i> Análises de Desempenho</a></li>
         </ul>
-    </li>
+    </li>` : ``}
 
-
-    <li class="nav-label first">Administração do Staff</li>
+    ${isAdmin() ? `<li class="nav-label first">Administração do Staff</li>
     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
         class="icon icon-users-mm"></i><span class="nav-text">Recursos humanos</span></a>
         <ul aria-expanded="false">
@@ -86,7 +85,9 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
             <li><a href="#"><i class="mdi mdi-circle-outline"></i> Gestão de Ponto</a></li>
 
         </ul>
-    </li>
+    </li>` : ``}
+
+    
 
     </li>
 </ul>

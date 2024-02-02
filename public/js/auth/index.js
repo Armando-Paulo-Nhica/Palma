@@ -11,7 +11,7 @@ $("#login-btn").click(function(e){
 })
 
 // Auth function
-
+ 
 
     function auth(data) {
         var requestOptions = {
@@ -51,8 +51,6 @@ $("#login-btn").click(function(e){
             setTimeout(function () {
               swal.close();
             }, 3000);
-          });
-
-          
+          }); 
     }
 

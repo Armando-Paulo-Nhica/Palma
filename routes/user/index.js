@@ -8,8 +8,13 @@ const router = express.Router();
 
 router.get('/login', (req, res) => {
 
-res.render('login.njk');
+res.render('auth/login.njk');
 });
+
+router.get('/reset/pw', (req, res) => {
+
+  res.render('auth/resetPass.njk');
+  });
 
 
   module.exports = router;

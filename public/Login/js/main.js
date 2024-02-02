@@ -1,7 +1,7 @@
 
 (function ($) {
     "use strict";
-
+    const baseUrl = 'http://localhost:3000/api';
 
     /*==================================================================
     [ Focus input ]*/
@@ -16,14 +16,12 @@
         })    
     })
   
-  
     /*==================================================================
     [ Validate ]*/
     var input = $('.validate-input .input100');
 
-    $('.validate-form').on('submit',function(){
+    $('.validate-form').on('submit',function(e){
         var check = true;
-
         for(var i=0; i<input.length; i++) {
             if(validate(input[i]) == false){
                 showValidate(input[i]);
@@ -31,8 +29,56 @@
             }
         }
 
-        return check;
+    if(check){
+        var user = {
+            username: $("#username").val(),
+            password: $("#password").val()
+           }
+        auth(user);
+    }
+        e.preventDefault();
     });
+
+    function auth(data) {
+        var requestOptions = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              // Add any other headers if needed
+            },
+            body: JSON.stringify(data),
+          };
+          
+          // Perform the fetch request
+          fetch(baseUrl + '/users/auth', requestOptions)
+          .then((response) => {
+            if (!response.ok) {
+              swal("Mensagem", data.message, "error");
+              setTimeout(function () {
+                swal.close();
+              }, 3000);
+            }
+            return response.json();
+          })
+          .then((data) => {
+            
+            if (data.status === 200) { 
+              localStorage.setItem('token', data.token);
+              window.location.href = '/'; 
+            } else {
+              swal("Mensagem", "Credenciais inválidas", "error");
+              setTimeout(function () {
+                swal.close();
+              }, 3000);
+            }
+          })
+          .catch((error) => {
+            swal("Mensagem", data.message, "error");
+            setTimeout(function () {
+              swal.close();
+            }, 3000);
+          }); 
+    }
 
 
     $('.validate-form .input100').each(function(){
@@ -41,17 +87,16 @@
         });
     });
 
+    
     function validate (input) {
-        if($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
-            if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
+        if($(input).attr('name') == 'username') {
+            if($(input).val().trim() != '') {
                 return false;
             }
         }
-        else {
-            if($(input).val().trim() == ''){
-                return false;
-            }
-        }
+       
+
+       return true; 
     }
 
     function showValidate(input) {

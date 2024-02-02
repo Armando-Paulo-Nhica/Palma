@@ -24,6 +24,7 @@
 
 .bg-primary{
     background: var(--primary);
+    
 }
 
 
@@ -109,7 +110,8 @@ table .actions i:hover{cursor: pointer;color: var(--primary);}
 
 #cart-header{display: none;}
 
-.bg-logo{background: #413B87;}
+.bg-logo{background: #3B4E86;}
+.bg-logo img{width: 170px;}
 
 .side-left-header{
     padding-bottom: 10px;
@@ -141,4 +143,32 @@ table .actions i:hover{cursor: pointer;color: var(--primary);}
     padding: 7px 25px;
     border: none;
     border-radius:4px;
+}
+
+
+@media print {
+    /* Set paper size for thermal printer */
+    @page {
+        size: 50mm 30mm;
+        margin: 0;
+    }
+
+    /* Hide unnecessary elements during printing */
+    body * {
+        visibility: hidden;
+    }
+    #imageContainer, #imageContainer * {
+        visibility: visible;
+        background: yellow;
+    }
+    #imageContainer {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    /* Use a monospaced font suitable for thermal printing */
+    body {
+        font-family: 'Courier New', monospace;
+    }
 }
