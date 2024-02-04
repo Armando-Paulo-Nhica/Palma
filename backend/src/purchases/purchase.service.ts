@@ -3,6 +3,7 @@ import {db} from '../utiles/db.server'
 import { generateBarcodeImage } from '../utiles/barcode';
 import * as fs from 'fs';
 import * as zlib from 'zlib';
+import { Decimal } from '@prisma/client/runtime/library';
 
 type Purchase = {
   id: number;
@@ -20,6 +21,7 @@ type Purchase = {
   invoice :number;
   categoryId: number;
   supplierId: number;
+  printBarcode: boolean
 };
 
 type Shop = {
@@ -42,10 +44,12 @@ type Shop = {
 
 interface BarcodePath {
   barcode: string;
+  name: string,
+  price: string
 }
 
 var barcodepaths: BarcodePath[] = [];
-
+var print: boolean = false;
 
 var filePath;
 
@@ -53,6 +57,7 @@ var filePath;
 export async function create(formData: Purchase | Purchase[]) {
   barcodepaths = [];
   const purchasesArray = Array.isArray(formData) ? formData : [formData];
+  print = purchasesArray[0].printBarcode;
   //Insert purchase just once
   const purchaseData = await db.purchase.create({
     data: {
@@ -88,9 +93,7 @@ for (const purchase of purchasesArray) {
     });
 
     // Create barcode
-    // generateBarcodeImage(existingProduct.barcode.toString(), './public/barcodes');
-
-     filePath = {barcode: await generateBarcodeImage(purchase.barcode.toString())}
+     filePath = {barcode: await generateBarcodeImage(existingProduct.barcode.toString()), name: existingProduct.name, price: existingProduct.sell.toString()}
     barcodepaths.push(filePath);
    filePath = null;
 
@@ -149,9 +152,8 @@ for (const purchase of purchasesArray) {
           },
         },
       });
-      // generateBarcodeImage(purchase.barcode.toString(), './public/barcodes');
       
-      filePath = {barcode: await generateBarcodeImage(purchase.barcode.toString())}
+      filePath = {barcode: await generateBarcodeImage(purchase.barcode.toString()), name: purchase.name, price: purchase.sell.toString()}
         barcodepaths.push(filePath);
       filePath = null;
 
@@ -169,9 +171,9 @@ for (const purchase of purchasesArray) {
 // ======== end new code
   // return Array.isArray(formData) ? createdPurchases : createdPurchases[0];
 
-
-  return {status: 200, paths: barcodepaths};
-
+  if(print){return {status: 200, paths: barcodepaths, print: true};}
+  
+  return {status: 200, paths: barcodepaths, print: false};
 }
 
 

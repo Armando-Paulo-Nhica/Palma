@@ -147,28 +147,13 @@ table .actions i:hover{cursor: pointer;color: var(--primary);}
 
 
 @media print {
-    /* Set paper size for thermal printer */
-    @page {
-        size: 50mm 30mm;
-        margin: 0;
-    }
-
-    /* Hide unnecessary elements during printing */
-    body * {
-        visibility: hidden;
-    }
-    #imageContainer, #imageContainer * {
-        visibility: visible;
-        background: yellow;
-    }
-    #imageContainer {
-        position: absolute;
-        left: 0;
-        top: 0;
-    }
-
-    /* Use a monospaced font suitable for thermal printing */
     body {
-        font-family: 'Courier New', monospace;
-    }
+       width: 80mm; /* Adjust as needed */
+       height: 30mm; /* Adjust as needed */
+       margin: 0; /* Remove default margins */
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       page-break-before: always; /* Ensure each content fits on a separate printed page */
+   }
 }

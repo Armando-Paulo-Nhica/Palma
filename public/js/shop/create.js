@@ -60,7 +60,6 @@ $("#addPurchase").click(function(){
 $("#registerBtn").click(function(e){
 e.preventDefault();
 var isOk = true;
-var barcode = $("#barcode").val().trim() === '' ? generateBarcode(): $("#barcode").val().trim();
 var name = $("#name");
 var sell = $("#sell");
 var shop = $("#shop");
@@ -108,7 +107,7 @@ if(isOk){
             const generatecode = $("#flexSwitchCheckChecked").prop("checked");
 
             products.forEach(product => {
-                product["invoice"] = parseInt(invoice.val(), 10);
+                product["invoice"] = invoice.val() == '' ? generateInvoice() : parseInt(invoice.val(), 10);
               });
               
               const total = (getTotalPurchase() + (parseInt(quantity.val(), 10) * shop.val()));
@@ -120,17 +119,18 @@ if(isOk){
                 "shop": shop.val(),
                 "quantity": parseInt(quantity.val(), 10),
                 "expiresIn": expiresIn.val(),
-                "invoice": parseInt(invoice.val(), 10),
+                "invoice": invoice.val() == '' ? generateInvoice() : parseInt(invoice.val(), 10),
                 "totalShop": total, 
                 "categoryName":categoryName.val() == null ? categoryName1.val().trim() : categoryName.val(),
                 "supplierName": supplierName.val() == null ? supplierName1.val().trim() : supplierName.val(),
                 "contact": $("#contact").val().trim(),
-                "email":$("#email").val().trim()
+                "email":$("#email").val().trim(),
+                "printBarcode": generatecode
             };
             
             // Add the new object to the products array
             products.push(newPurchase);
-            
+            console.log(products)
             //======= CREATE NEW PURCHASE ========
             var requestOptions = {
                 method: 'POST',
@@ -146,16 +146,25 @@ if(isOk){
                 .then(data => {
                     
                     if(!data.error){
-
-                        // console.log(data.paths[0])
-                        // swal("Mensagem", "Produto registado com sucesso!", "success");
-                        // setTimeout(function () {
-                        //     // window.location.href = '/product/view';
-                            
-                        // }, 500);
-
-                        printBarcode(data.paths.paths);
+                        $("#name").val("");
+                        $("#sell").val("");
+                        $("#shop").val("");
+                        $("#invoice").val("");
+                        $("#quantity").val("");
+                        products = [];
+                        sale = [];
                         
+                        if(data.paths.print){
+                            printBarcode(data.paths);
+                        }
+                        else{
+                            
+                            swal("Mensagem", "Produto registado com sucesso!", "success");
+                            setTimeout(function () {
+                                swal.close();
+                                window.location.href = '/product/view';
+                            }, 500);
+                        }
                         
                     }
                     else
@@ -173,22 +182,36 @@ if(isOk){
 })
 
 
-function printBarcode(imagePaths){
+
+function printBarcode(printData) {
+    window.jsPDF = window.jspdf.jsPDF;
+
+      const pdf = new jsPDF();
+
+      printData.paths.forEach((base64img, index) => {
+        // Add an image to the PDF
+        pdf.addImage(base64img.barcode, 'png', 10, 10 + index * 40, 50, 30);
+        pdf.text(printData.name+"  "+printData.price+" MT", 10, 8+ index*40)
+      });
+
+      // Get the data URI of the PDF
+      const pdfDataUri = pdf.output('datauristring');
+
+      // Open a new popup window
+      const popupWindow = window.open('', '_blank', 'width=800,height=600');
+
+      // Set the content of the popup window
+      popupWindow.document.write('<html><head><title>PDF Viewer</title></head><body>');
+      popupWindow.document.write('<object data="' + pdfDataUri + '" type="application/pdf" width="100%" height="100%">');
+      popupWindow.document.write('<p>It appears you don\'t have a PDF plugin for this browser. You can <a href="' + pdfDataUri + '">download the PDF file.</a></p>');
+      popupWindow.document.write('</object>');
+      
+      popupWindow.document.write('</body></html>');
+
+      // Prevent the popup window from navigating to a blank page
+      popupWindow.document.close();
     
-        // Create image containers dynamically for each image path
-        $.each(imagePaths, function (index, imagePath) {
-            var imageContainer = $("<div class='imageContainer' style='display: none;'>");
-            var barcodeImage = $("<img src='" + imagePath.barcode + "' alt='Barcode Image'>");
-            imageContainer.append(barcodeImage);
-            $("body").append(imageContainer);
-        });
-
-        $(".imageContainer").css("display", "block");
-        window.print();
-
-        $(".imageContainer").remove();
-
-}
+  }
 
 
 // Calculate the total of purchase
@@ -198,7 +221,6 @@ function getTotalPurchase() {
     for (let i = 0; i < products.length; i++) {
         total += (products[i].quantity * products[i].shop);
     }
-
     return parseFloat(total);
 }
 
@@ -228,6 +250,22 @@ function generateBarcode() {
 
     return parseInt(barcode, 10);
 }
+
+
+//Generate barcode
+function generateInvoice() {
+    // Get the current time as a string with 4 digits
+    var timestampV = new Date().getTime().toString().slice(-6);
+
+    // Generate 2 random digits
+    var randomDigitsV = Math.floor(Math.random() * 9000) + 1000;
+
+    // Combine the time and random digits to create the 10-digit barcode
+    var invoice = timestampV + randomDigitsV;
+
+    return parseInt(invoice, 10);
+}   
+
 
 // Add new input for category name
 
