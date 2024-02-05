@@ -22,6 +22,7 @@ $(document).ready(function() {
           method: 'DELETE',
           headers: {
               'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
           },
       })
           .then(response => response.json())

@@ -80,7 +80,7 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
         class="icon icon-users-mm"></i><span class="nav-text">Recursos humanos</span></a>
         <ul aria-expanded="false">
-            <li><a href="#"><i class="mdi mdi-circle-outline"></i> Cadastro de Funcionários</a></li>
+            <li><a href="/user"><i class="mdi mdi-circle-outline"></i> Funcionários</a></li>
             <li><a href="#"><i class="mdi mdi-circle-outline"></i> Folha de Pagamento</a></li>
             <li><a href="#"><i class="mdi mdi-circle-outline"></i> Gestão de Ponto</a></li>
 

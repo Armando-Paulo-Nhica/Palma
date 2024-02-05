@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 
-// router.get('/create', (req, res) => {
-//     res.render('lo.njk');
-//   });
+router.get('/', (req, res) => {
+    res.render('user/index.njk');
+  });
 
 router.get('/login', (req, res) => {
 

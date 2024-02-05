@@ -166,7 +166,7 @@ if(isOk){
                             swal("Mensagem", "Produto registado com sucesso!", "success");
                             setTimeout(function () {
                                 swal.close();
-                                // window.location.href = '/product/view';
+                                window.location.href = '/product/view';
                             }, 500);
                         }
                         

@@ -193,7 +193,7 @@ function displaySales(product) {
     // counter++;
     var row = "<tr>";
     row += "<th>" + counter + "</th>";
-    row += "<td>" + product.name + "</td>";
+    row += "<td class='name'>" + product.name + "</td>";
     row += "<td><input type='text' class='price' value=" + product.sell + " readonly></td>";
     row += "<td><input type='text' class='qty' value='1'/></td>";
     row += "<td><input type='text' class='discount' value='0'/></td>";
@@ -215,6 +215,7 @@ function displaySales(product) {
       "price": product.price,
       "discount": 0,
       "subtotal": product.sell,
+      "maxQty": product.quantity
     };
   sale.push(newPurchase);
   setAmount();
@@ -236,27 +237,44 @@ function addQty(elem) {
   // Find the parent row
   var row = $(elem).closest("tr");
   // Find the input element within the row
+
   var quantityInput = row.find("td input.qty");
+  var name = row.find("td.name").text();
+  
   var subtotal = row.find("td input.subtotal");
   var price = row.find("td input.price");
   var discount = parseFloat(row.find("td input.discount").val(), 10);
   var currentQuantity = parseInt(quantityInput.val(), 10);
 
   var newQuantity = (currentQuantity + 1) > 0 ? currentQuantity + 1 : 1;
-  quantityInput.val(newQuantity);
   
-  var sbtotal = parseFloat(price.val(), 10).toFixed(2) * parseInt(newQuantity, 10);
-  subtotal.val(parseFloat((sbtotal - sbtotal*(discount/100)).toFixed(2)))
+      // Update sale array
+      var index = row.find("th").text();
+      if(sale[index-1].name == name){
 
-  // Update sale array
-  var index = row.find("th").text();
-  sale[index -1].quantity = newQuantity;
-  sale[index -1].subtotal = subtotal.val();
-  setAmount();
+            if(sale[index -1].maxQty < newQuantity){
+              swal("Mensagem", "Quantidade insuficiente no Stock!", "error");
+              setTimeout(function () {
+                  swal.close();
+              }, 2000);
+            }
+            else{
+                  quantityInput.val(newQuantity);
+                  var sbtotal = parseFloat(price.val(), 10).toFixed(2) * parseInt(newQuantity, 10);
+                  subtotal.val(parseFloat((sbtotal - sbtotal*(discount/100)).toFixed(2)))
+                  sale[index -1].quantity = newQuantity;
+                  sale[index -1].subtotal = subtotal.val();
+                  setAmount();
+            }
+      }
+    
 
 }
-// update sales price
 
+
+
+
+// update sales price
 function setAmount() {
   var totalWithDiscount = 0;
   var discount = 0;
@@ -305,12 +323,28 @@ $('#table').on('input', '.qty', function() {
   var discount = parseFloat(row.find("td input.discount").val(), 10);
   var qty = row.find("td input.qty").val() > 0 ? row.find("td input.qty").val() : 1;
   qty = isNaN(qty) ? 1 : qty;
-  var sbtotal = parseFloat(price.val(), 10).toFixed(2) * parseInt(qty, 10);
-  subtotal.val(parseFloat((sbtotal - sbtotal*(discount/100).toFixed(2)).toFixed(2)))
   var index = row.find("th").text();
-  sale[index-1].subtotal = subtotal.val();
-  sale[index-1].quantity = qty;
-  setAmount();
+  var name = row.find("td.name").text();
+
+  if(sale[index -1].maxQty < qty){
+
+    if(sale[index-1].name == name){
+      swal("Mensagem", "Quantidade insuficiente no Stock!", "error");
+      setTimeout(function () {
+          swal.close();
+      }, 2000);
+    }
+
+  }
+  else
+  {
+    var sbtotal = parseFloat(price.val(), 10).toFixed(2) * parseInt(qty, 10);
+    subtotal.val(parseFloat((sbtotal - sbtotal*(discount/100).toFixed(2)).toFixed(2)))
+    
+    sale[index-1].subtotal = subtotal.val();
+    sale[index-1].quantity = qty;
+    setAmount();
+  }
   
 });
 
@@ -364,8 +398,8 @@ $("#saleBtn").click(function(){
           if(!data.error){
               swal("Mensagem", "Venda registada com sucesso!", "success");
                         setTimeout(function () {
-                            // window.location.href = '/sale/view';
-                        }, 500);
+                            swal.close();
+                        }, 2000);
               $("#counter-id").text("");
               counter = 0;
               sale = [];
@@ -375,6 +409,9 @@ $("#saleBtn").click(function(){
           else
           {
               swal("Mensagem", "Operação falhou, contacte a equipe técnica!", "error");
+              setTimeout(function () {
+                swal.close();
+            }, 2000);
           }
           
       })

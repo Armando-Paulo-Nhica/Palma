@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PALMA - Vendas</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon.png">
+    <!-- Datatable -->
+    <link href="../../vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!-- Custom Stylesheet -->
+    <link href="../../fonts/fontawesome-free-6.2.1-web/css/all.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/custom/style.css">
+    
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header bg-logo">
+            <a href="/" class="brand-logo">
+                <!-- <img class="logo-abbr" src="../../images/logo.png" style="width: 100px;" alt="logo"> -->
+                <img src="../../images/logo.png" alt="">
+               
+            </a>
+
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header" id="header">
+
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="quixnav" id="quixnav">
+        
+        </div>
+
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0">
+                        <div class="welcome-text">
+                            <h4>FUNCIONÁRIOS DO SISTEMA</h4>
+                            
+                        </div>
+                    </div>
+                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Vendas</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Visualizar</a></li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- row -->
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header col-xxl-12 col-xl-12">
+                                <div><h4 class="card-title">Todos Funcionários</h4></div>
+                                <div> <button class="btn-primary btn" data-toggle="modal" data-target="#addStaff"> <i class="fas fa-user-plus"></i> Adicionar</button> </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="user" class="display" style="min-width: 845px">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Usuário</th>
+                                                <th>E-mail</th>
+                                                <th>Função</th>
+                                                <th>Estado</th>
+                                                <th>Actions</th>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                         <tfoot>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Usuário</th>
+                                                <th>E-mail</th>
+                                                <th>Função</th>
+                                                <th>Estado</th>
+                                                <th>Actions</th>
+                                                
+                                            </tr>
+                                        </tfoot> 
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                 
+            </div>
+        </div>
+
+          <!-- Modal delete start -->
+          <div class="modal fade" id="deleteModal">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Mensagem de confirmação</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Tem certeza de eliminar a compra?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        
+                        <button type="button" id="deleteBtn" data-dismiss="modal" class="btn btn-danger"><i class="mdi mdi-delete"></i> Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- Modal delete end -->
+
+ <!-- Modal edit start -->
+ <div class="modal fade" id="addStaff">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Novo funcionário</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+              <div class="modal-body">
+                <div class="row px-3">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Nome <i style="color: red;">*</i></label>
+                            <input type="text" id="fullname" class="form-control" placeholder="Nome completo">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>E-mail <i style="color: red;">*</i></label>
+                            <input type="text" id="email" class="form-control" placeholder="Digite o e-mail" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Usuário <i style="color: red;">*</i></label>
+                            <input type="text" id="username" class="form-control" placeholder="Nome do utilizador" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Palavra-passe <i style="color: red;">*</i></label>
+                            <input type="password" id="password" class="form-control" value="12345678" placeholder="Gerar automaticamente" required>
+                        </div>
+                         <div class="form-group col-md-6">
+                            <label>Função</label>
+                            <select class="form-control" id="isActive">
+                                <option selected disabled>Selecione a função</option>
+                                <option value="false">Funcionário</option>
+                                <option value="true">Administrador</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-12 d-flex justify-content-end status"><i class="fas fa-toggle-on"> Ativo</i></div>
+
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="createUser">Criar conta</button>
+            </div>
+        </div>
+    </div>
+ </div> 
+<!-- Modal edit end -->
+
+ <!-- Modal details start -->
+ <div class="modal fade" id="detailModal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Produtos Vendidos</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+             <div class="modal-body">
+                 <!-- View products -->
+                    <div class="form-row row" id="saleItems">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                
+            </div>
+        </div>
+    </div>
+</div> 
+<!-- Modal edit end -->
+        <!--**********************************
+            Content body end
+        ***********************************-->
+    
+       <div class="footer">
+            <div class="copyright " id="footer-info">
+                
+            </div>
+        </div>
+ 
+
+        
+    </div>
+   
+
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+<script src="../../vendor/global/global.min.js"></script>
+<script src="../../js/user/list.js"></script>
+<!-- <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script> -->
+<script src="../../js/datatable/datatable.js"></script> 
+<!-- <script src="../../vendor/global/global.min.js"></script> -->
+<script src="../../js/components.js"></script>
+<script src="../../js/quixnav-init.js"></script>
+<script src="../../js/custom.min.js"></script>
+
+<!-- Datatable -->
+<script src="../../vendor/datatables/js/jquery.dataTables.min.js"></script> 
+<!-- <script src="../../js/plugins-init/datatables.init.js"></script>  -->
+<script src="../../js/sweetalert.min.js"></script>
+</body>
+
+</html>
