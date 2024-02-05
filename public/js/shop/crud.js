@@ -5,6 +5,7 @@ $(document).ready(function() {
 
   var rowId = 0;
   var counter = 0;
+  var counterEdit = 0;
   var dataTable;
   var categories = [];
   var suppliers = [];
@@ -40,7 +41,7 @@ $(document).ready(function() {
 
 // Setting values to modal
 function setPurchaseValues() {
-    counter = 0;
+    
     var requestOptions = {
         method: 'GET',
         headers: {
@@ -68,28 +69,28 @@ function setPurchaseValues() {
                         <input type="hidden" id="idPurchase" value="${data.id}">
                     `;
                 productsContainer.append(productHtml);
-               
+                counterEdit = data.purchases.length;
             for(let i = 0; i< data.purchases.length; i++){
                 productHtml = `<div class="row mx-2 mb-3" style="box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;">
                         <div class="form-group col-md-12 col-xxl-12 col-xl-12">
                             <label>Nome do produto</label>
-                            <input type="text" id="name`+ (counter + 1) +`" value="${data.purchases[i].name}" class="form-control" >
+                            <input type="text" id="name`+ (i + 1) +`" value="${data.purchases[i].name}" class="form-control" >
                         </div>
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6">
                             <label>Valor de compra</label>
-                            <input type="number" min="1" id="shop`+(counter + 1)+`" value="${data.purchases[i].shop}" class="form-control" >
+                            <input type="number" min="1" id="shop`+(i + 1)+`" value="${data.purchases[i].shop}" class="form-control" >
                         </div>
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6">
                             <label>Valor de venda</label>
-                            <input type="number" min="1" id="sell`+(counter + 1)+`" value="${data.purchases[i].sell}" class="form-control" >
+                            <input type="number" min="1" id="sell`+(i + 1)+`" value="${data.purchases[i].sell}" class="form-control" >
                         </div>
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6">
                             <label>Quantidade   </label>
-                            <input type="number" min="1" id="quantity`+(counter + 1)+`" value="${data.purchases[i].quantity}" class="form-control" >
+                            <input type="number" min="1" id="quantity`+(i + 1)+`" value="${data.purchases[i].quantity}" class="form-control" >
                         </div>
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6">
                             <label>Data validade   </label>
-                            <input type="date" id="expiresIn`+(counter + 1)+`" class="form-control" >
+                            <input type="date" id="expiresIn`+(i + 1)+`" value="${data.purchases[i].product.expiresIn}" class="form-control" >
                         </div>
                     
                     <div class="form-group col-md-6 mt-4 input-group col-md-12 col-xxl-12 col-xl-12">
@@ -97,16 +98,16 @@ function setPurchaseValues() {
                                 <div class="input-group-text bg-btn bt">+</div>
                             </div>
                             
-                            <select name="categories" id="categoryId${counter + 1}" class="form-control categories">
+                            <select name="categories" id="categoryId${i + 1}" class="form-control categories">
                                 ${categories.map(item => `<option value="${item.id}" ${item.id === data.purchases[i].product.categoryId ? 'selected' : ''}>${item.name}</option>`).join('')}
                             </select>
 
                     </div>
-                    <input type="hidden" id="productId`+(counter + 1)+`" value="${data.purchases[i].productId}">
+                    <input type="hidden" id="productId`+(i + 1)+`" value="${data.purchases[i].productId}">
                 </div>
                 `;
                 productsContainer.append(productHtml);
-                counter++;
+                
             };
 
             // Add more code to set values for other elements if needed
@@ -149,7 +150,7 @@ function viewPaurchaseProducts() {
                         
                     `;
                 productsContainer.append(productHtml);
-               
+                counter = data.purchases.length;
             for(let i = 0; i< data.purchases.length; i++){
                 productHtml = `<div class="row mx-2 mb-3" style="box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;">
                         <div class="form-group col-md-12 col-xxl-12 col-xl-12">
@@ -170,7 +171,7 @@ function viewPaurchaseProducts() {
                         </div>
                         <div class="form-group col-md-6 col-xxl-6 col-xl-6">
                             <label>Data validade   </label>
-                            <input type="date"  class="form-control" readonly>
+                            <input type="text"  class="form-control" value="${data.purchases[i].product.expiresIn}" readonly>
                         </div>
                     
                     <div class="form-group col-md-6 mt-4 input-group col-md-12 col-xxl-12 col-xl-12">
@@ -187,7 +188,7 @@ function viewPaurchaseProducts() {
                 </div>
                 `;
                 productsContainer.append(productHtml);
-                counter++;
+                
             };
 
             // Add more code to set values for other elements if needed
@@ -235,42 +236,51 @@ $("#edit-purchase-btn").click(function() {
       products: []
     };
 
+    var qty = 0;
+    var price = 0;
+    
+    for (var i = 0; i < counterEdit; i++) {
+        qty = parseInt($("#quantity" + (i+1)).val(), 10);
+        price = parseFloat($("#shop" + (i+1)).val()).toFixed(2)
 
-    for (var i = 0; i < counter; i++) {
-        purchase.totalShop += ($("#quantity" + (i+1)).val() * $("#shop" + (i+1)).val());
-  
-      const quantity = parseInt($("#quantity" + (i+1)).val(), 10);
-      const name = $("#name" + (i+1)).val();
-      const sell = $("#sell" + (i+1)).val();
-      const shop = $("#shop" + (i+1)).val();
-      const expiresIn = $("#expiresIn" + (i+1)).val(); 
-      const categoryId = parseInt($("#categoryId" + (i+1)).val(), 10);
-      const productId = parseInt($("#productId"+(i+1)).val(), 10);
+        purchase.totalShop += qty*price;
 
       if($("#name" + (i+1)).val() == ''){isNull = true;}
       if($("#sell" + (i+1)).val() == ''){isNull = true;}
       if($("#quantity" + (i+1)).val() == ''){isNull = true;}
     
       purchase.products.push({
-        name,
-        sell,
-        shop,
-        quantity,
-        expiresIn,
-        categoryId,
-        productId,
+        name : $("#name" + (i+1)).val(),
+        sell : $("#sell" + (i+1)).val(),
+        shop : $("#shop" + (i+1)).val(),
+        quantity : parseInt($("#quantity" + (i+1)).val(), 10),
+        expiresIn : $("#expiresIn" + (i+1)).val(),
+        categoryId : parseInt($("#categoryId" + (i+1)).val(), 10),
+        productId : parseInt($("#productId"+(i+1)).val(), 10),
       });
+
     }
+
+    counterEdit = 0;
+    counter = 0;
     
+
     if(isNull == false){
         const id = $("#idPurchase").val();
         updatePurchase(purchase, id);
-        counter = 0;
+        purchase = {
+            invoice: 0,
+            totalShop: 0,
+            supplierId: 0,
+            products: []
+        };
         $("#editModal").modal("hide");
     }
-    swal("Mensagem", "Preencha todos os campos!", "error");
-    isNull = false;
-    
+    else{
+        swal("Mensagem", "Preencha todos os campos!", "error");
+        isNull = false;
+    }
+   
   });
   
 // Update the purchase
@@ -279,7 +289,7 @@ function updatePurchase(purchaseData, id) {
         method: 'PUT', // Use PUT for updating data
         headers: {
             'Content-Type': 'application/json', // Set the content type to JSON
-            // Add any other headers if needed
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(purchaseData) // Convert data to JSON string
     };
@@ -288,7 +298,10 @@ function updatePurchase(purchaseData, id) {
     fetch(`${baseUrl}/purchases/${id}`, requestOptions)
         .then(response => response.json())
         .then(data => {
-                swal("Mensagem", "Produto registado com sucesso!", "success");
+            swal("Mensagem", "Alterações feitas com sucesso!", "success");
+                setTimeout(function() {
+                    swal.close();
+                }, 2000);
                 loadAll();
         })
         .catch(error => {
@@ -380,6 +393,15 @@ var requestPurchase = {
             dataTable.destroy();
           }
           dataTable = $('#shop').DataTable({
+            lengthMenu: [5,10, 25, 50, 75, 100],
+            ordering: false,
+            language: {
+                lengthMenu: 'Mostrar _MENU_ entradas',
+                paginate: {
+                    next: '<i class="fas fa-arrow-right"></i>', 
+                    previous: '<i class="fas fa-arrow-left"></i>'},
+                    info: 'Ver _START_ à _END_ de _TOTAL_ entradas'
+            },
               data: data,
               columns: [
                   { data: 'invoice' },

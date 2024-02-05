@@ -3,6 +3,7 @@ const token = localStorage.getItem('token');
 const baseUrl = 'http://localhost:3000/api';
 var products = [];
 var counter = 1;
+var generatecode = false;
 // add new product
 $("#addPurchase").click(function(){
     // Create a new object for each purchase
@@ -54,6 +55,8 @@ $("#addPurchase").click(function(){
     
     // Add the new object to the products array
     products.push(newPurchase);
+
+    $("#addProduct").modal("hide");
 })
 
 // Add new purchase
@@ -104,10 +107,11 @@ if(isOk){
             $("#totalIn").text("")
             $(".counter span").remove();
 
-            const generatecode = $("#flexSwitchCheckChecked").prop("checked");
-
+            generatecode = $("#flexSwitchCheckChecked").prop("checked");
+            // Add field to all objects
             products.forEach(product => {
-                product["invoice"] = invoice.val() == '' ? generateInvoice() : parseInt(invoice.val(), 10);
+                product["invoice"] = invoice.val() == '' ? 0 : parseInt(invoice.val(), 10);
+                product["totalShop"] = (getTotalPurchase() + (parseInt(quantity.val(), 10) * shop.val()));
               });
               
               const total = (getTotalPurchase() + (parseInt(quantity.val(), 10) * shop.val()));
@@ -119,18 +123,18 @@ if(isOk){
                 "shop": shop.val(),
                 "quantity": parseInt(quantity.val(), 10),
                 "expiresIn": expiresIn.val(),
-                "invoice": invoice.val() == '' ? generateInvoice() : parseInt(invoice.val(), 10),
+                "invoice": invoice.val() == '' ? 0 : parseInt(invoice.val(), 10),
                 "totalShop": total, 
                 "categoryName":categoryName.val() == null ? categoryName1.val().trim() : categoryName.val(),
                 "supplierName": supplierName.val() == null ? supplierName1.val().trim() : supplierName.val(),
                 "contact": $("#contact").val().trim(),
-                "email":$("#email").val().trim(),
-                "printBarcode": generatecode
+                "email":$("#email").val().trim()
+                
             };
             
             // Add the new object to the products array
             products.push(newPurchase);
-            console.log(products)
+            
             //======= CREATE NEW PURCHASE ========
             var requestOptions = {
                 method: 'POST',
@@ -154,7 +158,7 @@ if(isOk){
                         products = [];
                         sale = [];
                         
-                        if(data.paths.print){
+                        if(generatecode){
                             printBarcode(data.paths);
                         }
                         else{
@@ -162,7 +166,7 @@ if(isOk){
                             swal("Mensagem", "Produto registado com sucesso!", "success");
                             setTimeout(function () {
                                 swal.close();
-                                window.location.href = '/product/view';
+                                // window.location.href = '/product/view';
                             }, 500);
                         }
                         
@@ -185,13 +189,13 @@ if(isOk){
 
 function printBarcode(printData) {
     window.jsPDF = window.jspdf.jsPDF;
-
+console.log(printData)
       const pdf = new jsPDF();
 
       printData.paths.forEach((base64img, index) => {
         // Add an image to the PDF
         pdf.addImage(base64img.barcode, 'png', 10, 10 + index * 40, 50, 30);
-        pdf.text(printData.name+"  "+printData.price+" MT", 10, 8+ index*40)
+        pdf.text(base64img.name+""+base64img.price+"MT", 12, 8+ index*40)
       });
 
       // Get the data URI of the PDF
@@ -249,22 +253,7 @@ function generateBarcode() {
     var barcode = timestamp + randomDigits;
 
     return parseInt(barcode, 10);
-}
-
-
-//Generate barcode
-function generateInvoice() {
-    // Get the current time as a string with 4 digits
-    var timestampV = new Date().getTime().toString().slice(-6);
-
-    // Generate 2 random digits
-    var randomDigitsV = Math.floor(Math.random() * 9000) + 1000;
-
-    // Combine the time and random digits to create the 10-digit barcode
-    var invoice = timestampV + randomDigitsV;
-
-    return parseInt(invoice, 10);
-}   
+}  
 
 
 // Add new input for category name

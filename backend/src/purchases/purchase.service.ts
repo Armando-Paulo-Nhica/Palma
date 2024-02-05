@@ -171,9 +171,8 @@ for (const purchase of purchasesArray) {
 // ======== end new code
   // return Array.isArray(formData) ? createdPurchases : createdPurchases[0];
 
-  if(print){return {status: 200, paths: barcodepaths, print: true};}
+  return {status: 200, paths: barcodepaths};
   
-  return {status: 200, paths: barcodepaths, print: false};
 }
 
 
