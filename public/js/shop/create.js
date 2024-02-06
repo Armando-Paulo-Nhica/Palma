@@ -148,7 +148,6 @@ if(isOk){
             fetch(baseUrl+'/purchases', requestOptions)
                 .then(response => response.json())
                 .then(data => {
-                    
                     if(!data.error){
                         $("#name").val("");
                         $("#sell").val("");
@@ -157,7 +156,6 @@ if(isOk){
                         $("#quantity").val("");
                         products = [];
                         sale = [];
-                        
                         if(generatecode){
                             printBarcode(data.paths);
                         }
@@ -167,7 +165,7 @@ if(isOk){
                             setTimeout(function () {
                                 swal.close();
                                 window.location.href = '/product/view';
-                            }, 500);
+                            }, 2000);
                         }
                         
                     }

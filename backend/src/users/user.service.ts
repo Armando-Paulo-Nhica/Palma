@@ -5,12 +5,12 @@ const SECRET: number = parseInt('hsI89nDq32nsk' as string, 10);
 
 type user= {
 	id: number,
-    email: string,
-    fullname: string,
-    username: string,
-    password: string,
-    isAdmin: boolean,
-    isActive: boolean 
+  email: string,
+  fullname: string,
+  username: string,
+  password: string,
+  isAdmin: boolean,
+  isActive: boolean 
 }
 
 
@@ -112,6 +112,18 @@ export async function updateUser(id: number, formData: user){
             password: hashedPassword,
             isAdmin: formData.isAdmin,
             isActive: formData.isActive
+        }
+	})
+	return user;
+}
+
+export async function updateUserRole(id: number, isAdmin: boolean, isActive: boolean ){
+  
+	const user = await db.user.update({
+		where: {id: id}, 
+		data: {
+            isAdmin: isAdmin,
+            isActive: isActive
         }
 	})
 	return user;

@@ -47,7 +47,20 @@ userRouter.post("/", verifyTokenAndAdmin, async (request: Request,response: Resp
 	try {
 		const employer = await userService.create(request.body);
 		if(employer)
-			return response.status(200).json({error:false, msg:"Sua conta foi criada com sucesso"});
+			return response.status(200).json({error:false, msg:"A conta foi criada com sucesso"});
+		
+			return response.status(500).json({error:true, msg:"Operação falhou"})
+		
+	} catch (error: any) {
+		return response.status(500).json({error:true, msg:error.message})
+	}
+})
+
+userRouter.post("/", verifyTokenAndAdmin, async (request: Request,response: Response)=>{
+	try {
+		const employer = await userService.create(request.body);
+		if(employer)
+			return response.status(200).json({error:false, msg:"A conta foi criada com sucesso"});
 		
 			return response.status(500).json({error:true, msg:"Operação falhou"})
 		
@@ -61,21 +74,23 @@ userRouter.delete("/:id", verifyTokenAndAdmin,async(request: Request, response: 
 	const id: number = parseInt(request.params.id, 10);
 	try {
 		const employer = await userService.destroy(id);
-		return response.status(200).json({error: "false", msg: "Conta eliminada com sucesso"})
+		return response.status(200).json({error: false, msg: "Conta eliminada com sucesso"})
 	} catch (error: any) {
-		return response.status(500).json(error.message)
+		return response.status(500).json({error: true, msg: error.message})
 	}
 })
 
 // Updade user
-userRouter.put("/:id", verifyToken, async(request: Request, response: Response) =>{
+userRouter.put("/:id/:role/:status", verifyTokenAndAdmin, async(request: Request, response: Response) =>{
 	const id: number = parseInt(request.params.id);
+	const role: boolean = (request.params.role === 'true');
+	const status: boolean = (request.params.status === 'true');
 	try {
-		const employer = await userService.updateUser(id, request.body);
+		const user = await userService.updateUserRole(id, role, status);
 		
 		return response.json({error: false, msg: "Alterações feitas com sucesso"});
 	} catch (error: any) {
-		return response.status(500).json(error.message)
+		return response.status(500).json({error: true, msg: error.message})
 	}
 })
 

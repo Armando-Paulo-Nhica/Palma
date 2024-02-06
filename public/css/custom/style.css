@@ -152,12 +152,9 @@ table .actions i:hover{cursor: pointer;color: var(--primary);}
   background: #593bdb;
 }
 
-.status i{
-    color: red;
-    font-size: 15px; 
-    text-transform: lowercase !important;
+.dropdown-menu form input{
+    background: #593bdb1a !important; 
 }
-
 
 @media print {
     body {

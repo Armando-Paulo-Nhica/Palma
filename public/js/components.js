@@ -179,11 +179,11 @@ document.getElementById("header").innerHTML =` <div class="header-content">
                     <i class="mdi mdi-account"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a href="./app-profile.html" class="dropdown-item">
+                    <a href="/user/profile" class="dropdown-item">
                         <i class="icon-user"></i>
                         <span class="ml-2">Perfil</span>
                     </a>
-                    <a href="./page-login.html" class="dropdown-item">
+                    <a href="#" class="dropdown-item">
                         <i class="icon-key"></i>
                         <span class="ml-2">Alterar senha</span>
                     </a>
