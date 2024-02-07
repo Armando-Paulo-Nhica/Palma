@@ -11,9 +11,9 @@ export const userRouter = express.Router();
 userRouter.post("/auth", async (req: Request,res: Response) =>{
 	try {
 		const users = await userService.authenticateUser(req.body.username, req.body.password);
-		return res.status(200).json({ status: 200, token: users });
+		return res.status(200).json({ error: false, token: users });
 	} catch (error: any) {
-		return res.status(500).json({ status: 500, message: error.message });
+		return res.status(500).json({ error: true, msg: error.message });
 	}
 })
 
@@ -80,7 +80,7 @@ userRouter.delete("/:id", verifyTokenAndAdmin,async(request: Request, response: 
 	}
 })
 
-// Updade user
+// Updade user role
 userRouter.put("/:id/:role/:status", verifyTokenAndAdmin, async(request: Request, response: Response) =>{
 	const id: number = parseInt(request.params.id);
 	const role: boolean = (request.params.role === 'true');
@@ -103,5 +103,16 @@ userRouter.put("/new/password/:id", verifyToken, async(request: Request, respons
 		return response.json({error: false, msg: "Alterações feitas com sucesso"});
 	} catch (error: any) {
 		return response.status(500).json(error.message)
+	}
+})
+
+userRouter.put("/:id", verifyToken, async(request: Request, response: Response) =>{
+	const id: number = parseInt(request.params.id);
+	try {
+		const user = await userService.updateUser(id, request.body);
+		
+		return response.json({error: false, msg: "Alterações feitas com sucesso"});
+	} catch (error: any) {
+		return response.status(500).json({error: true, msg: error.message})
 	}
 })

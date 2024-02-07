@@ -320,7 +320,13 @@ var reqToken = {
 
   //Load all purchases
   function loadAll(){ 
-    fetch(baseUrl+'/sales')
+    fetch(baseUrl+'/sales',{
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      })
       .then(response => response.json())
       .then(data => {
          if (dataTable) {

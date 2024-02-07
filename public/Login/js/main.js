@@ -39,19 +39,20 @@
         e.preventDefault();
     });
 
-    function auth(data) {
+    function auth(user) {
         var requestOptions = {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
               // Add any other headers if needed
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(user),
           };
           
           // Perform the fetch request
           fetch(baseUrl + '/users/auth', requestOptions)
           .then((response) => {
+            
             if (!response.ok) {
               swal("Mensagem", data.message, "error");
               setTimeout(function () {
@@ -62,7 +63,7 @@
           })
           .then((data) => {
             
-            if (data.status === 200) { 
+            if (!data.error) { 
               localStorage.setItem('token', data.token);
               window.location.href = '/'; 
             } else {
@@ -73,7 +74,7 @@
             }
           })
           .catch((error) => {
-            swal("Mensagem", data.message, "error");
+            swal("Mensagem", "Credenciais inválidas", "error");
             setTimeout(function () {
               swal.close();
             }, 3000);

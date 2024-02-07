@@ -1,4 +1,18 @@
 
+// Check if a token exists
+function checkToken() {
+    // Get the token from localStorage
+    const token = localStorage.getItem('token');
+    // Check if token exists
+    if (!token) {
+        window.location.href = '/user/login';
+    }
+}
+
+// Call the checkToken function when the page loads
+document.addEventListener('DOMContentLoaded', checkToken);
+
+
 function isAdmin(){
     const token = localStorage.getItem('token');
     const [header, payload, signature] = token.split('.');
@@ -203,3 +217,4 @@ $("#logout").click(function(e){
     window.location.href = '/user/login';
 
 })
+

@@ -102,16 +102,13 @@ export async function destroy(id: number){
 
 // update user
 export async function updateUser(id: number, formData: user){
-  const hashedPassword = await hash(formData.password, 4);
+  
 	const user = await db.user.update({
 		where: {id: id}, 
 		data: {
             fullname: formData.fullname, 
             email: formData.email,
-            username: formData.username,
-            password: hashedPassword,
-            isAdmin: formData.isAdmin,
-            isActive: formData.isActive
+            username: formData.username
         }
 	})
 	return user;
