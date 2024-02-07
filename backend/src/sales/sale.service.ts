@@ -29,6 +29,12 @@ export async function findAll(){
         )
 	return sale;
 }
+
+//   Get employer sales
+export async function findMine(employerId: number){
+	const sale = await db.sale.count({where:{employerId: employerId}})
+	return sale;
+}
  
 // Get single sale
 export async function findById(id: number){

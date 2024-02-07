@@ -32,10 +32,34 @@ function loadSingleUser(){
             $("#uname").text(data.username)
           })
           .catch(error => console.error('Error fetching data:', error));
+
+          countMySales();
 }
 
 document.addEventListener('DOMContentLoaded', loadSingleUser);
 
+
+
+
+function countMySales(){
+  var reqToken = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        // Include the Authorization header with the token
+        'Authorization': `Bearer ${token}`,
+        // Add any other headers if needed
+      },
+    };
+  
+    //Set data to datatable
+    fetch(baseUrl+'/sales/count/'+getuserId(), reqToken)
+        .then(response => response.json())
+        .then(data => {
+        if(!data.error){$("#countSales").text(data.count)}
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
 
 
 // Edit profile
