@@ -383,42 +383,42 @@ function deleteRow(elem) {
 // Create new sale
 $("#saleBtn").click(function(){
     // Create new sale
-    var requestOptions = {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json', // Set the content type to JSON
-          'Authorization': `Bearer ${token}`,
-      },
-      body: JSON.stringify(transformJson()) // Convert data to JSON string
-  };
-  // Perform the fetch request
-  fetch(baseUrl+'/sales', requestOptions)
-      .then(response => response.json())
-      .then(data => {
-          if(!data.error){
-              swal("Mensagem", "Venda registada com sucesso!", "success");
-                        setTimeout(function () {
-                            swal.close();
-                        }, 2000);
-              $("#counter-id").text("");
-              counter = 0;
-              sale = [];
-              $('#dta').empty();
-              setAmount();
-          }
-          else
-          {
-              swal("Mensagem", "Operação falhou, contacte a equipe técnica!", "error");
-              setTimeout(function () {
-                swal.close();
-            }, 2000);
-          }
+//     var requestOptions = {
+//       method: 'POST',
+//       headers: {
+//           'Content-Type': 'application/json', // Set the content type to JSON
+//           'Authorization': `Bearer ${token}`,
+//       },
+//       body: JSON.stringify(transformJson()) // Convert data to JSON string
+//   };
+//   // Perform the fetch request
+//   fetch(baseUrl+'/sales', requestOptions)
+//       .then(response => response.json())
+//       .then(data => {
+//           if(!data.error){
+//               swal("Mensagem", "Venda registada com sucesso!", "success");
+//                         setTimeout(function () {
+//                             swal.close();
+//                         }, 2000);
+//               $("#counter-id").text("");
+//               counter = 0;
+//               sale = [];
+//               $('#dta').empty();
+//               setAmount();
+//           }
+//           else
+//           {
+//               swal("Mensagem", "Operação falhou, contacte a equipe técnica!", "error");
+//               setTimeout(function () {
+//                 swal.close();
+//             }, 2000);
+//           }
           
-      })
-      .catch(error => {
-          console.error('Error:', error);
-          // Handle errors here
-      });
+//       })
+//       .catch(error => {
+//           console.error('Error:', error);
+//           // Handle errors here
+//       });
 })
 
 

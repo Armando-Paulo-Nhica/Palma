@@ -156,15 +156,5 @@ table .actions i:hover{cursor: pointer;color: var(--primary);}
     background: #593bdb1a !important; 
 }
 
-@media print {
-    body {
-       width: 80mm; /* Adjust as needed */
-       height: 30mm; /* Adjust as needed */
-       margin: 0; /* Remove default margins */
-       display: flex;
-       justify-content: center;
-       align-items: center;
-       page-break-before: always; /* Ensure each content fits on a separate printed page */
-   }
-}
+
 
