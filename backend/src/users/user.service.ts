@@ -3,7 +3,7 @@ import bcrypt, { hash } from 'bcrypt';
 import jwt from 'jsonwebtoken';
 const SECRET: number = parseInt('hsI89nDq32nsk' as string, 10);
 
-type user= {
+type User= {
 	id: number,
   email: string,
   fullname: string,
@@ -11,6 +11,12 @@ type user= {
   password: string,
   isAdmin: boolean,
   isActive: boolean 
+}
+
+type Profile ={
+  id: number,
+  username: string,
+  password: string
 }
 
 
@@ -34,7 +40,7 @@ export const authenticateUser = async (username: string, password: string) =>{
     }
     
     // Create a JWT
-    const token = jwt.sign({ user: user }, SECRET.toString(),{expiresIn: "1d"});
+    const token = jwt.sign({ user: user }, SECRET.toString(),{expiresIn: "8h"});
     
     return token;
   };
@@ -67,7 +73,7 @@ export async function findById(id: number){
 }
 
 // Create user
-export async function create(formData: user){
+export async function create(formData: User){
 	  // Check if the supplierName already exists
       const userData = await db.user.findUnique({
         where: {
@@ -101,7 +107,7 @@ export async function destroy(id: number){
 
 
 // update user
-export async function updateUser(id: number, formData: user){
+export async function updateUser(id: number, formData: User){
   
 	const user = await db.user.update({
 		where: {id: id}, 
@@ -126,16 +132,25 @@ export async function updateUserRole(id: number, isAdmin: boolean, isActive: boo
 	return user;
 }
 
-export async function updateUserPassword(id: number, newPassword: string){
-  const hashedPassword = await hash(newPassword, 4);
-	const user = await db.user.update({
-		where: {id: id}, 
-		data: {
-            password: hashedPassword
-        }
-	})
-	return user;
+export async function updateUserPassword(data: Profile) {
+  try {
+    // Hash the new password with 10 salt rounds
+    const hashedPassword = await hash(data.password, 10);
+
+    // Update the user's password in the database
+    const updatedUser = await db.user.update({
+      where: { id: data.id, username: data.username },
+      data: {
+        password: hashedPassword
+      }
+    });
+
+    return true;
+  } catch (error) {
+    return false;
+  }
 }
+
 
   
   

@@ -34,12 +34,10 @@ function loadSingleUser(){
           .catch(error => console.error('Error fetching data:', error));
 
           countMySales();
+          countTodaySales();
 }
 
 document.addEventListener('DOMContentLoaded', loadSingleUser);
-
-
-
 
 function countMySales(){
   var reqToken = {
@@ -57,6 +55,26 @@ function countMySales(){
         .then(response => response.json())
         .then(data => {
         if(!data.error){$("#countSales").text(data.count)}
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
+
+function countTodaySales(){
+  var reqToken = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        // Include the Authorization header with the token
+        'Authorization': `Bearer ${token}`,
+        // Add any other headers if needed
+      },
+    };
+  
+    //Set data to datatable
+    fetch(baseUrl+'/sales/today/'+getuserId(), reqToken)
+        .then(response => response.json())
+        .then(data => {
+        if(!data.error){$("#countTodaySales").text(data.count)}
         })
         .catch(error => console.error('Error fetching data:', error));
 }
@@ -134,7 +152,6 @@ function updateProfile(id, data){
             // Handle errors here
         });
 }
-
 
 
 

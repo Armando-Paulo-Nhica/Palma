@@ -35,6 +35,26 @@ export async function findMine(employerId: number){
 	const sale = await db.sale.count({where:{employerId: employerId}})
 	return sale;
 }
+
+// Retrive today sales
+export async function findTodaySales(employerId: number) {
+  // Get today's date
+  const today = new Date();
+  const startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1); // Start of tomorrow
+
+  const sales = await db.sale.count({
+      where: {
+          employerId: employerId, // Filter sales by employerId
+          createdAt: {
+              gte: startDate,
+              lt: endDate
+          }
+      }
+  });
+
+  return sales;
+}
  
 // Get single sale
 export async function findById(id: number){

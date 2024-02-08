@@ -95,14 +95,16 @@ userRouter.put("/:id/:role/:status", verifyTokenAndAdmin, async(request: Request
 })
 
 // Updade user
-userRouter.put("/new/password/:id", verifyToken, async(request: Request, response: Response) =>{
-	const id: number = parseInt(request.params.id);
+userRouter.post("/password/new", verifyToken, async(request: Request, response: Response) =>{
 	try {
-		const employer = await userService.updateUserPassword(id, request.body.password);
-		
-		return response.json({error: false, msg: "Alterações feitas com sucesso"});
+		const user = await userService.updateUserPassword(request.body);
+		if(user){
+			return response.json({error: false, msg: "Alterações feitas com sucesso"});
+		}
+		return response.status(500).json({error: true, msg: "Credenciais inválidas"})
+
 	} catch (error: any) {
-		return response.status(500).json(error.message)
+		return response.status(500).json({error: true, msg: error.message})
 	}
 })
 

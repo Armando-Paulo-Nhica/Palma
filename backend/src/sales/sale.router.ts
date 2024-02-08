@@ -43,11 +43,23 @@ SaleRouter.post("/", verifyToken, async (request: Request,response: Response)=>{
 	}
 })
 
-// Create Sale
-SaleRouter.get("/sales/count/:id", verifyToken, async (request: Request,response: Response)=>{
+// Get my Sales
+SaleRouter.get("/count/:id", verifyToken, async (request: Request,response: Response)=>{
 	const id: number = parseInt(request.params.id, 10);
 	try {
 		const sale = await Sale.findMine(id);
+		return response.status(200).type("json").send(json({error: false, count: sale}));
+		
+	} catch (error: any) {
+		return response.status(500).json({error:true, msg:error.message})
+	}
+})
+
+// Retrieve al my sales
+SaleRouter.get("/today/:id", verifyToken, async (request: Request,response: Response)=>{
+	const id: number = parseInt(request.params.id, 10);
+	try {
+		const sale = await Sale.findTodaySales(id);
 		return response.status(200).type("json").send(json({error: false, count: sale}));
 		
 	} catch (error: any) {
