@@ -136,6 +136,7 @@ $("#searchProductBtn").on("click", function(){
   .then(data => {
     if (data != null) {
       $("#search-box").val("");
+      $("#with-icon_collapseTwo").collapse("show");
             // Check if the product already exists
             for (var i = 0; i < sale.length; i++) {
               if (name == sale[i].name) {
@@ -371,54 +372,15 @@ function deleteRow(elem) {
   var row = $(elem).closest("tr");
   var index = row.find("th").text();
   sale.splice(index, 1);
-  
     $(elem).closest("tr").remove();
     counter--;
     $("#counter-id").text(counter);
-  
-  
 }
 
 
 // Create new sale
 $("#saleBtn").click(function(){
-    // Create new sale
-//     var requestOptions = {
-//       method: 'POST',
-//       headers: {
-//           'Content-Type': 'application/json', // Set the content type to JSON
-//           'Authorization': `Bearer ${token}`,
-//       },
-//       body: JSON.stringify(transformJson()) // Convert data to JSON string
-//   };
-//   // Perform the fetch request
-//   fetch(baseUrl+'/sales', requestOptions)
-//       .then(response => response.json())
-//       .then(data => {
-//           if(!data.error){
-//               swal("Mensagem", "Venda registada com sucesso!", "success");
-//                         setTimeout(function () {
-//                             swal.close();
-//                         }, 2000);
-//               $("#counter-id").text("");
-//               counter = 0;
-//               sale = [];
-//               $('#dta').empty();
-//               setAmount();
-//           }
-//           else
-//           {
-//               swal("Mensagem", "Operação falhou, contacte a equipe técnica!", "error");
-//               setTimeout(function () {
-//                 swal.close();
-//             }, 2000);
-//           }
-          
-//       })
-//       .catch(error => {
-//           console.error('Error:', error);
-//           // Handle errors here
-//       });
+ generatePDF(transformJson())
 })
 
 
@@ -428,22 +390,22 @@ function transformJson() {
   
   const outputJson = {
     totalAmount: 0,
-    customerId: parseInt($("#customerId").val(), 10),
-    employerId: getEmployerId(),
     items: []
   };
 
   sale.forEach(item => {
-    const productId = parseInt(item.productId, 10);
+    const name = item.name;
     const quantity = item.quantity;
     const subTotal = parseFloat(item.subtotal);
+    const price = parseFloat(item.sell);
 
     // Update totalAmount
     outputJson.totalAmount += subTotal;
 
     // Add item to the items array
     outputJson.items.push({
-      productId,
+      price,
+      name,
       quantity,
       subTotal
     });
@@ -483,4 +445,185 @@ function getEmployerId(){
     const payloadData = JSON.parse(decodedPayload);
 
     return parseInt(payloadData.user.id, 10);
+}
+
+// Print invoice
+
+function generatePDF(data) {
+  console.log(data)
+  const htmlContent = `
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Factura</title>
+  <link rel="stylesheet" href="../../css/custom/invoice.css">
+
+
+  </head>
+  
+  <body >
+  
+  <div id="sectionToPrint">
+      <div class="py-4">
+        <div class="px-14 py-6">
+          <table class="w-full border-collapse border-spacing-0" >
+            <tbody>
+              <tr>
+                <td class="w-full align-top">
+                  <div>
+                    <img src="../../images/logo.png" width="100px" height="70px" />
+                  </div>
+                </td>
+      
+                <td class="align-top">
+                  <div class="text-sm">
+                    <table class="border-collapse border-spacing-0">
+                      <tbody>
+                        <tr>
+                          <td class="border-r pr-4">
+                            <div>
+                              <p class="whitespace-nowrap text-slate-400 text-right">Data</p>
+                              <p class="whitespace-nowrap font-bold text-main text-right">April 26, 2023</p>
+                            </div>
+                          </td>
+                          <td class="pl-4">
+                            <div>
+                              <p class="whitespace-nowrap text-slate-400 text-right">Factura 6438798</p>
+                              <p class="whitespace-nowrap font-bold text-main text-right">Mozambique</p>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      
+        <div class="bg-slate-100 px-14 py-6 text-sm">
+          <table class="w-full border-collapse border-spacing-0">
+            <tbody>
+              <tr>
+                <td class="w-1/2 align-top">
+                  <div class="text-sm text-neutral-600">
+                    <p class="font-bold">Web Soluções Gráfica</p>
+                    <p>NUIT: 23456789</p>
+                    <p>Endereço: Beira</p>
+                    <p>Rua : Samora Machel</p>
+                    <p>Bairro : Munhava</p>
+                    <p>Sofala</p>
+                  </div>
+                </td>
+                <td class="w-1/2 align-top text-right">
+                  <div class="text-sm text-neutral-600">
+                    <p class="font-bold">Cliente</p>
+                    <p>Nome: Armando Nhica</p>
+                    <p>Mozambique</p>
+                    <p>Sofala</p>
+                    
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      
+        <div class="px-14 py-10 text-sm text-neutral-700">
+          <table class="w-full border-collapse border-spacing-0" id="invoiceTable">
+            <thead>
+              <tr>
+                <td class="border-b-2 border-main pb-3 pl-3 font-bold text-main">#</td>
+                <td class="border-b-2 border-main pb-3 pl-2 font-bold text-main">Produto</td>
+                <td class="border-b-2 border-main pb-3 pl-2 text-right font-bold text-main">Preço</td>
+                <td class="border-b-2 border-main pb-3 pl-2 text-center font-bold text-main">Qty.</td>
+                <td class="border-b-2 border-main pb-3 pl-2 text-right font-bold text-main">Subtotal</td>
+              </tr>
+            </thead>
+            <tbody>
+            ` +
+            data.items.map((item, index) => `
+              <tr> 
+                <td class="border-b py-3 pl-3">${index + 1}.</td>
+                <td class="border-b py-3 pl-2">${item.name}</td>
+                <td class="border-b py-3 pl-2 text-right">${item.price.toFixed(2)}</td>
+                <td class="border-b py-3 pl-2 text-center">${item.quantity}</td>
+                <td class="border-b py-3 pl-2 text-right">${(item.price * item.quantity).toFixed(2)}</td>
+              </tr>
+            `).join('\n') +
+            `
+              <tr>
+                <td colspan="7">
+                  <table class="w-full border-collapse border-spacing-0">
+                    <tbody>
+                      <tr>
+                        <td class="w-full"></td>
+                        <td>
+                          <table class="w-full border-collapse border-spacing-0">
+                            <tbody>
+                             
+                              <tr>
+                                <td class="bg-main p-3 text-right my-10">
+                                  <div class="whitespace-nowrap font-bold text-white">Total &nbsp;&nbsp;&nbsp; MZN ${(data.totalAmount).toFixed(2)}</div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      
+       
+      <div class="bg-slate-100 px-14 py-6 text-sm footer-sec">
+        <table class="w-full border-collapse border-spacing-0">
+          <tbody>
+            <tr>
+              <td class="w-1/2 align-top">
+                <div class="text-sm text-neutral-600">
+                  <p class="font-bold">Web Soluções Gráfica</p>
+                </div>
+              </td>
+              <td class="w-1/2 align-top text-right">
+                <div class="text-sm text-neutral-600">
+                  <p>info@websolucoesgrafica.co.mz</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+
+      </div>
+</div>
+  
+  </body>
+  
+  </html>
+  `;
+
+// Options for PDF generation
+const options = {
+filename: 'document.pdf', // Name of the PDF file
+html2canvas: {}, // Options for html2canvas library
+jsPDF: {} // Options for jsPDF library
+};
+
+// Generate PDF from HTML content
+html2pdf().from(htmlContent).set(options).toPdf().get('pdf').then(function(pdf) {
+// Create a blob URL for the PDF
+const blobUrl = URL.createObjectURL(pdf.output('blob'));
+
+// Open PDF in a new window
+window.open(blobUrl, '_blank');
+});
 }

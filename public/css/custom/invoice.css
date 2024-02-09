@@ -585,7 +585,7 @@ video {
 }
 
 .bg-main{
-  background-color: #5c6ac4;
+  background-color: #593bdb;
 }
 
 .bg-slate-100{
@@ -704,6 +704,14 @@ video {
   color: #fff;
 }
 
+.foot-sec{
+  width: 100% !important;
+  position: absolute !important;
+  bottom: 0 !important;
+}
+
+.my-10{margin-top: 10px;}
+
 @page {
   margin: 0;
 }
@@ -713,3 +721,4 @@ video {
     -webkit-print-color-adjust: exact;
   }
 }
+

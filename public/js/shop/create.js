@@ -187,7 +187,6 @@ if(isOk){
 
 function printBarcode(printData) {
     window.jsPDF = window.jspdf.jsPDF;
-console.log(printData)
       const pdf = new jsPDF();
 
       printData.paths.forEach((base64img, index) => {
