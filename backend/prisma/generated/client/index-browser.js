@@ -197,8 +197,9 @@ exports.Prisma.CompanyScalarFieldEnum = {
   name: 'name',
   city: 'city',
   contact: 'contact',
-  email: 'email',
-  zone: 'zone'
+  street: 'street',
+  zone: 'zone',
+  nuit: 'nuit'
 };
 
 exports.Prisma.SortOrder = {

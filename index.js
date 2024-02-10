@@ -18,6 +18,7 @@ const shopRoutes = require('./routes/shop/index');
 const userRoutes = require('./routes/user/index');
 const invoiceRoutes = require('./routes/invoice/index');
 const productRoutes = require('./routes/product/index');
+const companyRoutes = require('./routes/company/index');
 
 const port = 8080
 
@@ -38,6 +39,7 @@ app.use('/product', shopRoutes);
 app.use('/stock', productRoutes);
 app.use('/user', userRoutes);
 app.use('/invoice', invoiceRoutes);
+app.use('/office', companyRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);

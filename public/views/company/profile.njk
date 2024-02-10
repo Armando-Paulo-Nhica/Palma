@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PALMA - Perfil</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon.png">
+    <!-- Datatable -->
+    <link href="../../vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!-- Custom Stylesheet -->
+    <link href="../../fonts/fontawesome-free-6.2.1-web/css/all.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/custom/style.css">
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+          <div class="nav-header bg-logo">
+            <a href="/" class="brand-logo">
+                <img src="../../images/logo.png" alt="">
+            </a>
+
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header" id="header">
+           
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="quixnav" id="quixnav">
+        
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0">
+                        <div class="welcome-text">
+                            <h4>PERFIL EMPRESARIAL </h4>
+                            <p class="mb-0">Dados da empresa e configurações</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Empresa</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Perfil</a></li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="profile">
+                            <div class="profile-head">
+                                <div class="photo-content">
+                                    <div class="cover-photo" style="background-image: url(../images/cover2.png); background-repeat: no-repeat; background-size: 100%; background-position: center; "></div>
+                                    <div class="profile-photo">
+                                    </div>
+                                     
+                                </div>
+                                <div class="profile-info">
+                                    <div class="row justify-content-center">
+                                        <div class="col-xl-8">
+                                            <div class="row">
+                                                <div class="col-xl-4 col-sm-4 border-right-1 prf-col">
+                                                    <div class="profile-name">
+                                                        <h4 class="text-primary nameC"></h4>
+                                                        <p>Nome</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 col-sm-4 border-right-1 prf-col">
+                                                    <div class="profile-email">
+                                                        <h4 class="text-muted cityC"></h4>
+                                                        <p>Cidade</p>
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="profile-statistics">
+                                    <div class="text-center mt-4 border-bottom-1 pb-3">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h3 class="m-b-0" id="countSales"></h3><span>Funcionários</span>
+                                            </div>
+                                            <div class="col">
+                                                <h3 class="m-b-0" id="countTodaySales"></h3><span>Administradores</span>
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="mt-4">
+                                            <a href="javascript:void()" class="btn btn-primary pl-5 pr-5 mr-3 mb-4">Minhas actividades</a> 
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="profile-tab">
+                                    <div class="custom-tab-1">
+                                        <ul class="nav nav-tabs">
+                                            <li class="nav-item"><a href="#my-posts" data-toggle="tab" class="nav-link active show">Dados da empresa</a>
+                                            </li>
+                                            
+                                            <li class="nav-item"><a href="#profile-settings" data-toggle="tab" class="nav-link">Editar</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div id="my-posts" class="tab-pane fade active show">
+                                                 
+                                                 <div class="profile-personal-info pt-4">
+                                                    
+                                                    <div class="row mb-4">
+                                                        <div class="col-3">
+                                                            <h5 class="f-w-500">NUIT <span class="pull-right">:</span>
+                                                            </h5>
+                                                        </div>
+                                                        <div class="col-9"><span class="nuitC"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-4">
+                                                        <div class="col-3">
+                                                            <h5 class="f-w-500">Contacto <span class="pull-right">:</span></h5>
+                                                        </div>
+                                                        <div class="col-9"><span class="nameC"></span>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                    <div class="row mb-4">
+                                                        <div class="col-3">
+                                                            <h5 class="f-w-500">Bairro <span class="pull-right">:</span></h5>
+                                                        </div>
+                                                        <div class="col-9"><span class="zoneC"></span>
+                                                        </div>
+                                                    </div>
+
+                                                     <div class="row mb-4">
+                                                        <div class="col-3">
+                                                            <h5 class="f-w-500">Rua <span class="pull-right">:</span></h5>
+                                                        </div>
+                                                        <div class="col-9"><span class="streetC"></span>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                </div>
+
+
+                                            </div>
+                                          
+                                                 <div class="modal fade" id="createCompanyModal">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Registar empresa</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row px-3">
+                                                                    <div class="form-row">
+                                                                        <div class="form-group col-md-6">
+                                                                            <label>Nome da empresa <i style="color: red;">*</i></label>
+                                                                            <input type="text" id="name" class="form-control" placeholder="Nome da empresa" autofocus>
+                                                                        </div>
+                                                                        <div class="form-group col-md-6">
+                                                                            <label>NUIT <i style="color: red;">*</i></label>
+                                                                            <input type="text" id="nuit" class="form-control"  placeholder="Rua">
+                                                                        </div>
+                                                                        
+                                                                        <div class="form-group col-md-6">
+                                                                            <label>Bairro <i style="color: red;">*</i></label>
+                                                                            <input type="text" id="zoneC" class="form-control" placeholder="Bairro" required>
+                                                                        </div>
+                                                                        <div class="form-group col-md-6">
+                                                                            <label>Rua <i style="color: red;">*</i></label>
+                                                                            <input type="text" id="streetC" class="form-control"  placeholder="Rua">
+                                                                        </div>
+                                                                        <div class="form-group col-md-6">
+                                                                            <label>Contacto <i style="color: red;">*</i></label>
+                                                                            <input type="text" id="contact" class="form-control"  placeholder="Contacto">
+                                                                        </div>
+                                                                        <div class="form-group col-md-6">
+                                                                            <label>Cidade <i style="color: red;">*</i></label>
+                                                                            <select class="form-control" id="city">
+                                                                                <option selected disabled value="">Selecione a cidade</option>
+                                                                                 <option value="Maputo">Maputo</option>
+                                                                                <option value="Nampula">Nampula</option>
+                                                                                <option value="Beira">Beira</option>
+                                                                                <option value="Chimoio">Chimoio</option>
+                                                                                <option value="Nacala">Nacala</option>
+                                                                                <option value="Quelimane">Quelimane</option>
+                                                                                <option value="Pemba">Pemba</option>
+                                                                                <option value="Maxixe">Maxixe</option>
+                                                                                <option value="Inhambane">Inhambane</option>
+                                                                                <option value="Xai-Xai">Xai-Xai</option>
+                                                                                <option value="Tete">Tete</option>
+                                                                                <option value="Lichinga">Lichinga</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-primary" id="createCompany">Criar empresa</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+
+        <div id="_passwordModal"></div>
+
+       <div class="footer">
+            <div class="copyright " id="footer-info">
+                
+            </div>
+        </div>
+     
+    </div>
+ 
+    <!-- Required vendors -->
+<script src="../../vendor/global/global.min.js"></script>
+<script src="../../js/company/index.js"></script>
+
+<script src="../../js/datatable/datatable.js"></script> 
+<script src="../../js/components.js"></script>
+<script src="../../js/quixnav-init.js"></script>
+<script src="../../js/custom.min.js"></script>
+<!-- Datatable -->
+<script src="../../vendor/datatables/js/jquery.dataTables.min.js"></script> 
+<script src="../../js/sweetalert.min.js"></script>
+    
+
+</body>
+
+</html>

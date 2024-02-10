@@ -11777,10 +11777,12 @@ export namespace Prisma {
 
   export type CompanyAvgAggregateOutputType = {
     id: number | null
+    nuit: number | null
   }
 
   export type CompanySumAggregateOutputType = {
     id: number | null
+    nuit: number | null
   }
 
   export type CompanyMinAggregateOutputType = {
@@ -11788,8 +11790,9 @@ export namespace Prisma {
     name: string | null
     city: string | null
     contact: string | null
-    email: string | null
+    street: string | null
     zone: string | null
+    nuit: number | null
   }
 
   export type CompanyMaxAggregateOutputType = {
@@ -11797,8 +11800,9 @@ export namespace Prisma {
     name: string | null
     city: string | null
     contact: string | null
-    email: string | null
+    street: string | null
     zone: string | null
+    nuit: number | null
   }
 
   export type CompanyCountAggregateOutputType = {
@@ -11806,18 +11810,21 @@ export namespace Prisma {
     name: number
     city: number
     contact: number
-    email: number
+    street: number
     zone: number
+    nuit: number
     _all: number
   }
 
 
   export type CompanyAvgAggregateInputType = {
     id?: true
+    nuit?: true
   }
 
   export type CompanySumAggregateInputType = {
     id?: true
+    nuit?: true
   }
 
   export type CompanyMinAggregateInputType = {
@@ -11825,8 +11832,9 @@ export namespace Prisma {
     name?: true
     city?: true
     contact?: true
-    email?: true
+    street?: true
     zone?: true
+    nuit?: true
   }
 
   export type CompanyMaxAggregateInputType = {
@@ -11834,8 +11842,9 @@ export namespace Prisma {
     name?: true
     city?: true
     contact?: true
-    email?: true
+    street?: true
     zone?: true
+    nuit?: true
   }
 
   export type CompanyCountAggregateInputType = {
@@ -11843,8 +11852,9 @@ export namespace Prisma {
     name?: true
     city?: true
     contact?: true
-    email?: true
+    street?: true
     zone?: true
+    nuit?: true
     _all?: true
   }
 
@@ -11939,8 +11949,9 @@ export namespace Prisma {
     name: string
     city: string
     contact: string
-    email: string | null
+    street: string | null
     zone: string
+    nuit: number
     _count: CompanyCountAggregateOutputType | null
     _avg: CompanyAvgAggregateOutputType | null
     _sum: CompanySumAggregateOutputType | null
@@ -11967,8 +11978,9 @@ export namespace Prisma {
     name?: boolean
     city?: boolean
     contact?: boolean
-    email?: boolean
+    street?: boolean
     zone?: boolean
+    nuit?: boolean
   }, ExtArgs["result"]["company"]>
 
   export type CompanySelectScalar = {
@@ -11976,8 +11988,9 @@ export namespace Prisma {
     name?: boolean
     city?: boolean
     contact?: boolean
-    email?: boolean
+    street?: boolean
     zone?: boolean
+    nuit?: boolean
   }
 
 
@@ -11989,8 +12002,9 @@ export namespace Prisma {
       name: string
       city: string
       contact: string
-      email: string | null
+      street: string | null
       zone: string
+      nuit: number
     }, ExtArgs["result"]["company"]>
     composites: {}
   }
@@ -12389,8 +12403,9 @@ export namespace Prisma {
     readonly name: FieldRef<"Company", 'String'>
     readonly city: FieldRef<"Company", 'String'>
     readonly contact: FieldRef<"Company", 'String'>
-    readonly email: FieldRef<"Company", 'String'>
+    readonly street: FieldRef<"Company", 'String'>
     readonly zone: FieldRef<"Company", 'String'>
+    readonly nuit: FieldRef<"Company", 'Int'>
   }
     
 
@@ -12812,8 +12827,9 @@ export namespace Prisma {
     name: 'name',
     city: 'city',
     contact: 'contact',
-    email: 'email',
-    zone: 'zone'
+    street: 'street',
+    zone: 'zone',
+    nuit: 'nuit'
   };
 
   export type CompanyScalarFieldEnum = (typeof CompanyScalarFieldEnum)[keyof typeof CompanyScalarFieldEnum]
@@ -13515,8 +13531,9 @@ export namespace Prisma {
     name?: StringFilter<"Company"> | string
     city?: StringFilter<"Company"> | string
     contact?: StringFilter<"Company"> | string
-    email?: StringNullableFilter<"Company"> | string | null
+    street?: StringNullableFilter<"Company"> | string | null
     zone?: StringFilter<"Company"> | string
+    nuit?: IntFilter<"Company"> | number
   }
 
   export type CompanyOrderByWithRelationInput = {
@@ -13524,8 +13541,9 @@ export namespace Prisma {
     name?: SortOrder
     city?: SortOrder
     contact?: SortOrder
-    email?: SortOrderInput | SortOrder
+    street?: SortOrderInput | SortOrder
     zone?: SortOrder
+    nuit?: SortOrder
   }
 
   export type CompanyWhereUniqueInput = Prisma.AtLeast<{
@@ -13536,8 +13554,9 @@ export namespace Prisma {
     NOT?: CompanyWhereInput | CompanyWhereInput[]
     city?: StringFilter<"Company"> | string
     contact?: StringFilter<"Company"> | string
-    email?: StringNullableFilter<"Company"> | string | null
+    street?: StringNullableFilter<"Company"> | string | null
     zone?: StringFilter<"Company"> | string
+    nuit?: IntFilter<"Company"> | number
   }, "id" | "name">
 
   export type CompanyOrderByWithAggregationInput = {
@@ -13545,8 +13564,9 @@ export namespace Prisma {
     name?: SortOrder
     city?: SortOrder
     contact?: SortOrder
-    email?: SortOrderInput | SortOrder
+    street?: SortOrderInput | SortOrder
     zone?: SortOrder
+    nuit?: SortOrder
     _count?: CompanyCountOrderByAggregateInput
     _avg?: CompanyAvgOrderByAggregateInput
     _max?: CompanyMaxOrderByAggregateInput
@@ -13562,8 +13582,9 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Company"> | string
     city?: StringWithAggregatesFilter<"Company"> | string
     contact?: StringWithAggregatesFilter<"Company"> | string
-    email?: StringNullableWithAggregatesFilter<"Company"> | string | null
+    street?: StringNullableWithAggregatesFilter<"Company"> | string | null
     zone?: StringWithAggregatesFilter<"Company"> | string
+    nuit?: IntWithAggregatesFilter<"Company"> | number
   }
 
   export type UserCreateInput = {
@@ -14174,8 +14195,9 @@ export namespace Prisma {
     name: string
     city: string
     contact: string
-    email?: string | null
+    street?: string | null
     zone: string
+    nuit: number
   }
 
   export type CompanyUncheckedCreateInput = {
@@ -14183,16 +14205,18 @@ export namespace Prisma {
     name: string
     city: string
     contact: string
-    email?: string | null
+    street?: string | null
     zone: string
+    nuit: number
   }
 
   export type CompanyUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     contact?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
+    street?: NullableStringFieldUpdateOperationsInput | string | null
     zone?: StringFieldUpdateOperationsInput | string
+    nuit?: IntFieldUpdateOperationsInput | number
   }
 
   export type CompanyUncheckedUpdateInput = {
@@ -14200,8 +14224,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     contact?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
+    street?: NullableStringFieldUpdateOperationsInput | string | null
     zone?: StringFieldUpdateOperationsInput | string
+    nuit?: IntFieldUpdateOperationsInput | number
   }
 
   export type CompanyCreateManyInput = {
@@ -14209,16 +14234,18 @@ export namespace Prisma {
     name: string
     city: string
     contact: string
-    email?: string | null
+    street?: string | null
     zone: string
+    nuit: number
   }
 
   export type CompanyUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     contact?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
+    street?: NullableStringFieldUpdateOperationsInput | string | null
     zone?: StringFieldUpdateOperationsInput | string
+    nuit?: IntFieldUpdateOperationsInput | number
   }
 
   export type CompanyUncheckedUpdateManyInput = {
@@ -14226,8 +14253,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     contact?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
+    street?: NullableStringFieldUpdateOperationsInput | string | null
     zone?: StringFieldUpdateOperationsInput | string
+    nuit?: IntFieldUpdateOperationsInput | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -14918,12 +14946,14 @@ export namespace Prisma {
     name?: SortOrder
     city?: SortOrder
     contact?: SortOrder
-    email?: SortOrder
+    street?: SortOrder
     zone?: SortOrder
+    nuit?: SortOrder
   }
 
   export type CompanyAvgOrderByAggregateInput = {
     id?: SortOrder
+    nuit?: SortOrder
   }
 
   export type CompanyMaxOrderByAggregateInput = {
@@ -14931,8 +14961,9 @@ export namespace Prisma {
     name?: SortOrder
     city?: SortOrder
     contact?: SortOrder
-    email?: SortOrder
+    street?: SortOrder
     zone?: SortOrder
+    nuit?: SortOrder
   }
 
   export type CompanyMinOrderByAggregateInput = {
@@ -14940,12 +14971,14 @@ export namespace Prisma {
     name?: SortOrder
     city?: SortOrder
     contact?: SortOrder
-    email?: SortOrder
+    street?: SortOrder
     zone?: SortOrder
+    nuit?: SortOrder
   }
 
   export type CompanySumOrderByAggregateInput = {
     id?: SortOrder
+    nuit?: SortOrder
   }
 
   export type SaleCreateNestedManyWithoutEmployerInput = {

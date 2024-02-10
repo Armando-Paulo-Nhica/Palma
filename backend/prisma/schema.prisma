@@ -139,8 +139,9 @@ model Company {
   id             Int     @id @default(autoincrement())
   name           String  @unique @db.VarChar(50)
   city           String  @db.VarChar(30)
-  contact String  @db.VarChar(10)
-  email          String? @db.VarChar(30)
+  contact String  @db.VarChar(15)
+  street          String? @db.VarChar(30)
   zone String
+  nuit Int
   @@map("company")
 }

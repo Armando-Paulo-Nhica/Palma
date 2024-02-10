@@ -105,7 +105,7 @@ name.next('.error-message').remove();
 name.after('<span class="error-message">' + message + '</span>');
 }
 
-// Update the user
+// create the user
 function createUser(user){
         var requestOptions = {
             method: 'POST',

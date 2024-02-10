@@ -1,17 +1,35 @@
 
-// Check if a token exists
 function checkToken() {
     // Get the token from localStorage
     const token = localStorage.getItem('token');
+
     // Check if token exists
     if (!token) {
+        window.location.href = '/user/login';
+        return; // Exit function early
+    }
+
+    try {
+        // Decode the token to extract payload
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        const expirationTime = payload.exp * 1000; 
+
+        // Get current time
+        const currentTime = Date.now();
+
+        // Check if token has expired
+        if (currentTime > expirationTime) {
+            // Redirect to login page if token has expired
+            window.location.href = '/user/login';
+            return; // Exit function early
+        }
+    } catch (error) {
         window.location.href = '/user/login';
     }
 }
 
 // Call the checkToken function when the page loads
 document.addEventListener('DOMContentLoaded', checkToken);
-
 
 function isAdmin(){
     const token = localStorage.getItem('token');
@@ -37,7 +55,7 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
 
     <li class="nav-label first">Abastecimento do Stock</li>
     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                class="icon icon-payment"></i><span class="nav-text">Aquisição de produtos</span></a>
+                class="fas fa-cart-plus"></i><span class="nav-text">Aquisição de produtos</span></a>
         <ul aria-expanded="false">
             <li><a href="/product/create"><i class="mdi mdi-circle-outline"></i> Registar entrada</a></li>
             <li><a href="/product/view"><i class="mdi mdi-circle-outline"></i> Visualizar</a></li>
@@ -46,7 +64,7 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
     </li>
     ${isAdmin() ? `<li class="nav-label first">Controle de Stock</li>
     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-        class="icon icon-cart-simple"></i><span class="nav-text">Stock</span></a>
+        class="fas fa-boxes"></i><span class="nav-text">Stock</span></a>
         <ul aria-expanded="false">
             <li><a href="/stock/create"><i class="mdi mdi-circle-outline"></i> Registar novo</a></li>
             <li><a href="/stock/view"><i class="mdi mdi-circle-outline"></i> Visualizar</a></li>
@@ -55,7 +73,7 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
     
     <li class="nav-label first">Gestão de serviços</li>
     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-        class="icon icon-layers-3"></i><span class="nav-text">Serviços</span></a>
+        class="fas fa-tools"></i><span class="nav-text">Serviços</span></a>
         <ul aria-expanded="false">
             <li><a href="#"><i class="mdi mdi-circle-outline"></i> Criar Serviço</a></li>
             <li><a href="#"><i class="mdi mdi-circle-outline"></i> Ver Serviços</a></li>
@@ -73,7 +91,7 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
 
     ${isAdmin() ? ` <li class="nav-label first">Gestão financeira</li>
     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-        class="icon icon-payment"></i><span class="nav-text">Finanças</span></a>
+        class="fas fa-chart-line"></i><span class="nav-text">Finanças</span></a>
         <ul aria-expanded="false">
             <li><a href="#"><i class="mdi mdi-circle-outline"></i> Contas a pagar</a></li>
             <li><a href="#"><i class="mdi mdi-circle-outline"></i> Fluxo de caixa</a></li>
@@ -92,7 +110,7 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
 
     ${isAdmin() ? `<li class="nav-label first">Administração do Staff</li>
     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-        class="icon icon-users-mm"></i><span class="nav-text">Recursos humanos</span></a>
+        class="fas fa-users"></i><span class="nav-text">Recursos humanos</span></a>
         <ul aria-expanded="false">
             <li><a href="/user"><i class="mdi mdi-circle-outline"></i> Funcionários</a></li>
             <li><a href="#"><i class="mdi mdi-circle-outline"></i> Folha de Pagamento</a></li>
@@ -135,7 +153,6 @@ document.getElementById("footer-info").innerHTML = `
 <p>By <a href="#" target="_blank"> <i style="font-weight: bold">Web Soluções Gráfica</i> | </a> info@websolucoesgrafica.co.mz | 2024</p>
 `;
 
-
 document.getElementById("_passwordModal").innerHTML =`<div class="modal fade" id="editPassModal">
 <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -167,76 +184,6 @@ document.getElementById("_passwordModal").innerHTML =`<div class="modal fade" id
     </div>
 </div>
 </div> `;
-
-// Sending data
-function updateUserPassword(userData) {
-    const token = localStorage.getItem('token');
-const baseUrl = 'http://localhost:3000/api';
-
-    var requestOptions = {
-        method: 'POST', // Use PUT for updating data
-        headers: {
-            'Content-Type': 'application/json', // Set the content type to JSON
-            'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(userData)
-        
-    };
-
-    // Perform the fetch request
-    fetch(`${baseUrl}/users/password/new`, requestOptions)
-        .then(response => response.json())
-        .then(data => {
-                if(!data.error){
-                    swal("Mensagem", data.msg, "success");
-                    setTimeout(function() {
-                        swal.close();
-                    }, 2000);
-                    
-                }
-                else
-                {
-                    swal("Mensagem", "Credenciais inválidas", "error");
-                    setTimeout(function() {
-                        swal.close();
-                    }, 2000);
-                    
-                }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Handle errors here
-        });
-}
-
-
-$("#setNewPassword").click(function(){
-    var username = $("#_uname");
-    var password = $("#newPassword");
-    var isOk = true;
-    if(username.val().trim() === ''){
-        validate(username, 'O nome do utilizador é obrigatório')
-        isOk = false;
-    }
-
-    if(password.val().trim() === ''){
-        validate(password, 'A senha não pode ser vazia')
-        isOk = false;
-    }
-
-    if(isOk){
-        $("#editPassModal").modal("hide")
-        var data = {
-            id: getuserId(),
-            username: username.val(),
-            password: password.val()
-        }
-
-        updateUserPassword(data);
-    }
-
-    
-})
 
 
 document.getElementById("header").innerHTML =` <div class="header-content">
@@ -318,10 +265,28 @@ document.getElementById("header").innerHTML =` <div class="header-content">
             </li>
 
             
+            <li class="nav-item dropdown header-profile">
+                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                    <i class="fas fa-gear"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a href="/office/profile" class="dropdown-item">
+                        <i class="icon-user"></i>
+                        <span class="ml-2">Perfil empresarial</span>
+                    </a>
+                    <a href="#" data-toggle="modal" data-target="#createCompanyModal" class="dropdown-item">
+                        <i class="icon-key"></i>
+                        <span class="ml-2">Registar empresa</span>
+                    </a>
+                    
+                </div>
+            </li>
+
+
 
             <li class="nav-item dropdown header-profile">
                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                    <i class="mdi mdi-account"></i>
+                    <i class="fas fa-user-gear"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a href="/user/profile" class="dropdown-item">
@@ -343,6 +308,78 @@ document.getElementById("header").innerHTML =` <div class="header-content">
 </div>
 
 `;
+
+// Sending data
+function updateUserPassword(userData) {
+    const token = localStorage.getItem('token');
+const baseUrl = 'http://localhost:3000/api';
+
+    var requestOptions = {
+        method: 'POST', // Use PUT for updating data
+        headers: {
+            'Content-Type': 'application/json', // Set the content type to JSON
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(userData)
+        
+    };
+
+    // Perform the fetch request
+    fetch(`${baseUrl}/users/password/new`, requestOptions)
+        .then(response => response.json())
+        .then(data => {
+                if(!data.error){
+                    swal("Mensagem", data.msg, "success");
+                    setTimeout(function() {
+                        swal.close();
+                    }, 2000);
+                    
+                }
+                else
+                {
+                    swal("Mensagem", "Credenciais inválidas", "error");
+                    setTimeout(function() {
+                        swal.close();
+                    }, 2000);
+                    
+                }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Handle errors here
+        });
+}
+
+
+$("#setNewPassword").click(function(){
+    var username = $("#_uname");
+    var password = $("#newPassword");
+    var isOk = true;
+    if(username.val().trim() === ''){
+        validate(username, 'O nome do utilizador é obrigatório')
+        isOk = false;
+    }
+
+    if(password.val().trim() === ''){
+        validate(password, 'A senha não pode ser vazia')
+        isOk = false;
+    }
+
+    if(isOk){
+        $("#editPassModal").modal("hide")
+        var data = {
+            id: getuserId(),
+            username: username.val(),
+            password: password.val()
+        }
+
+        updateUserPassword(data);
+    }
+
+    
+})
+
+
 
 $("#logout").click(function(e){
     e.preventDefault();
