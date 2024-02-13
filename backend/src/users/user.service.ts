@@ -133,24 +133,36 @@ export async function updateUserRole(id: number, isAdmin: boolean, isActive: boo
 }
 
 export async function updateUserPassword(data: Profile) {
-  try {
-    // Hash the new password with 10 salt rounds
-    const hashedPassword = await hash(data.password, 10);
+      try {
+        // Hash the new password with 10 salt rounds
+        const hashedPassword = await hash(data.password, 10);
 
-    // Update the user's password in the database
-    const updatedUser = await db.user.update({
-      where: { id: data.id, username: data.username },
-      data: {
-        password: hashedPassword
+        // Update the user's password in the database
+        const updatedUser = await db.user.update({
+          where: { id: data.id, username: data.username },
+          data: {
+            password: hashedPassword
+          }
+        });
+
+        return true;
+      } catch (error) {
+        return false;
       }
-    });
-
-    return true;
-  } catch (error) {
-    return false;
-  }
 }
 
+
+// Count all users
+export async function countAllUsers(){
+	const users = await db.user.count()
+	return users;
+}
+
+// Count only admin
+export async function countAdmins(){
+	const admins = await db.user.count({where: {isAdmin: true}})
+	return admins;
+}
 
   
   

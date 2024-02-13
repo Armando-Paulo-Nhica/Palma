@@ -113,7 +113,7 @@
                                             <div class="row">
                                                 <div class="col-xl-4 col-sm-4 border-right-1 prf-col">
                                                     <div class="profile-name">
-                                                        <h4 class="text-primary nameC"></h4>
+                                                        <h4 class="text-primary nameC" style="width: 200px;"></h4>
                                                         <p>Nome</p>
                                                     </div>
                                                 </div>
@@ -140,10 +140,10 @@
                                     <div class="text-center mt-4 border-bottom-1 pb-3">
                                         <div class="row">
                                             <div class="col">
-                                                <h3 class="m-b-0" id="countSales"></h3><span>Funcionários</span>
+                                                <h3 class="m-b-0" id="countUsers"></h3><span>Funcionários</span>
                                             </div>
                                             <div class="col">
-                                                <h3 class="m-b-0" id="countTodaySales"></h3><span>Administradores</span>
+                                                <h3 class="m-b-0" id="countAdmins"></h3><span>Administradores</span>
                                             </div>
                                            
                                         </div>
@@ -166,112 +166,107 @@
                                             <li class="nav-item"><a href="#my-posts" data-toggle="tab" class="nav-link active show">Dados da empresa</a>
                                             </li>
                                             
-                                            <li class="nav-item"><a href="#profile-settings" data-toggle="tab" class="nav-link">Editar</a>
+                                            <li class="nav-item"><a href="#editCompany" data-toggle="tab" class="nav-link">Editar</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content">
-                                            <div id="my-posts" class="tab-pane fade active show">
-                                                 
-                                                 <div class="profile-personal-info pt-4">
-                                                    
-                                                    <div class="row mb-4">
-                                                        <div class="col-3">
-                                                            <h5 class="f-w-500">NUIT <span class="pull-right">:</span>
-                                                            </h5>
-                                                        </div>
-                                                        <div class="col-9"><span class="nuitC"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-4">
-                                                        <div class="col-3">
-                                                            <h5 class="f-w-500">Contacto <span class="pull-right">:</span></h5>
-                                                        </div>
-                                                        <div class="col-9"><span class="nameC"></span>
-                                                        </div>
-                                                    </div>
-                                                   
-                                                    <div class="row mb-4">
-                                                        <div class="col-3">
-                                                            <h5 class="f-w-500">Bairro <span class="pull-right">:</span></h5>
-                                                        </div>
-                                                        <div class="col-9"><span class="zoneC"></span>
-                                                        </div>
-                                                    </div>
-
-                                                     <div class="row mb-4">
-                                                        <div class="col-3">
-                                                            <h5 class="f-w-500">Rua <span class="pull-right">:</span></h5>
-                                                        </div>
-                                                        <div class="col-9"><span class="streetC"></span>
-                                                        </div>
-                                                    </div>
-                                                   
-                                                </div>
-
-
-                                            </div>
-                                          
-                                                 <div class="modal fade" id="createCompanyModal">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">Registar empresa</h5>
-                                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="row px-3">
-                                                                    <div class="form-row">
-                                                                        <div class="form-group col-md-6">
-                                                                            <label>Nome da empresa <i style="color: red;">*</i></label>
-                                                                            <input type="text" id="name" class="form-control" placeholder="Nome da empresa" autofocus>
-                                                                        </div>
-                                                                        <div class="form-group col-md-6">
-                                                                            <label>NUIT <i style="color: red;">*</i></label>
-                                                                            <input type="text" id="nuit" class="form-control"  placeholder="Rua">
-                                                                        </div>
-                                                                        
-                                                                        <div class="form-group col-md-6">
-                                                                            <label>Bairro <i style="color: red;">*</i></label>
-                                                                            <input type="text" id="zoneC" class="form-control" placeholder="Bairro" required>
-                                                                        </div>
-                                                                        <div class="form-group col-md-6">
-                                                                            <label>Rua <i style="color: red;">*</i></label>
-                                                                            <input type="text" id="streetC" class="form-control"  placeholder="Rua">
-                                                                        </div>
-                                                                        <div class="form-group col-md-6">
-                                                                            <label>Contacto <i style="color: red;">*</i></label>
-                                                                            <input type="text" id="contact" class="form-control"  placeholder="Contacto">
-                                                                        </div>
-                                                                        <div class="form-group col-md-6">
-                                                                            <label>Cidade <i style="color: red;">*</i></label>
-                                                                            <select class="form-control" id="city">
-                                                                                <option selected disabled value="">Selecione a cidade</option>
-                                                                                 <option value="Maputo">Maputo</option>
-                                                                                <option value="Nampula">Nampula</option>
-                                                                                <option value="Beira">Beira</option>
-                                                                                <option value="Chimoio">Chimoio</option>
-                                                                                <option value="Nacala">Nacala</option>
-                                                                                <option value="Quelimane">Quelimane</option>
-                                                                                <option value="Pemba">Pemba</option>
-                                                                                <option value="Maxixe">Maxixe</option>
-                                                                                <option value="Inhambane">Inhambane</option>
-                                                                                <option value="Xai-Xai">Xai-Xai</option>
-                                                                                <option value="Tete">Tete</option>
-                                                                                <option value="Lichinga">Lichinga</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        
-                                                                    </div>
+                                                    <div id="my-posts" class="tab-pane fade active show">
+                                                        
+                                                        <div class="profile-personal-info pt-4">
+                                                            
+                                                            <div class="row mb-4">
+                                                                <div class="col-3">
+                                                                    <h5 class="f-w-500">NUIT <span class="pull-right">:</span>
+                                                                    </h5>
+                                                                </div>
+                                                                <div class="col-9"><span class="nuitC"></span>
                                                                 </div>
                                                             </div>
-                                                            
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-primary" id="createCompany">Criar empresa</button>
+                                                            <div class="row mb-4">
+                                                                <div class="col-3">
+                                                                    <h5 class="f-w-500">Contacto <span class="pull-right">:</span></h5>
+                                                                </div>
+                                                                <div class="col-9"><span class="contactC"></span>
+                                                                </div>
+                                                            </div>
+                                                        
+                                                            <div class="row mb-4">
+                                                                <div class="col-3">
+                                                                    <h5 class="f-w-500">Bairro <span class="pull-right">:</span></h5>
+                                                                </div>
+                                                                <div class="col-9"><span class="zoneC"></span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row mb-4">
+                                                                <div class="col-3">
+                                                                    <h5 class="f-w-500">Rua <span class="pull-right">:</span></h5>
+                                                                </div>
+                                                                <div class="col-9"><span class="streetC"></span>
+                                                                </div>
+                                                            </div>
+                                                        
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div id="editCompany" class="tab-pane fade">
+                                                        <div class="pt-3">
+                                                            <div class="settings-form">
+                                                                
+                                                                <form>
+                                                                    <div class="form-row">
+                                                                        <div class="form-group col-md-6">
+                                                                            <label>Nome</label>
+                                                                            <input type="text" class="form-control" id="nameE">
+                                                                        </div>
+                                                                        <div class="form-group col-md-6">
+                                                                            <label>Bairro</label>
+                                                                            <input type="text" class="form-control" id="zoneE">
+                                                                        </div>
+                                                                        <div class="form-group col-md-6">
+                                                                            <label>Nuit</label>
+                                                                            <input type="number" class="form-control" min="1" id="nuitE">
+                                                                        </div>
+                                                                        <div class="form-group col-md-6">
+                                                                            <label>Contacto</label>
+                                                                            <input type="text" class="form-control" min="1" id="contactE">
+                                                                        </div>
+                                                                        <div class="form-group col-md-6">
+                                                                            <label>Rua</label>
+                                                                            <input type="text" class="form-control" id="streetE">
+                                                                        </div>
+                                                                        <div class="form-group col-md-6">
+                                                                        <label>Cidade <i style="color: red;">*</i></label>
+                                                                        <select class="form-control" id="cityE">
+                                                                            <option selected disabled value="">Selecione a cidade</option>
+                                                                            <option value="Maputo">Maputo</option>
+                                                                            <option value="Nampula">Nampula</option>
+                                                                            <option value="Beira">Beira</option>
+                                                                            <option value="Chimoio">Chimoio</option>
+                                                                            <option value="Nacala">Nacala</option>
+                                                                            <option value="Quelimane">Quelimane</option>
+                                                                            <option value="Pemba">Pemba</option>
+                                                                            <option value="Maxixe">Maxixe</option>
+                                                                            <option value="Inhambane">Inhambane</option>
+                                                                            <option value="Xai-Xai">Xai-Xai</option>
+                                                                            <option value="Tete">Tete</option>
+                                                                            <option value="Lichinga">Lichinga</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    
+                                                                    </div>
+                                                                    
+                                                                
+                                                                
+                                                                    <button class="btn btn-primary" id="saveCompany" type="submit">Salvar alterações</button>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div> 
+
+                                          
+                                          
                                             </div> 
                                         </div>
                                     </div>
@@ -304,7 +299,6 @@
     <!-- Required vendors -->
 <script src="../../vendor/global/global.min.js"></script>
 <script src="../../js/company/index.js"></script>
-
 <script src="../../js/datatable/datatable.js"></script> 
 <script src="../../js/components.js"></script>
 <script src="../../js/quixnav-init.js"></script>

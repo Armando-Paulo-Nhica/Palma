@@ -380,10 +380,10 @@ function deleteRow(elem) {
 
 // Create new sale
 $("#saleBtn").click(function(){
- generatePDF(transformJson())
+  const customer = $("#customerId").val() == null ? ($("#customerName").val() == '' ? '--------' : $("#customerName").val()) : $("#customerId").val()
+ generatePDF(transformJson(), customer)
+
 })
-
-
 
 // Generate the output
 function transformJson() {
@@ -411,6 +411,11 @@ function transformJson() {
     });
   });
 
+  sale = [];
+  $("#counter-id").text("");
+  counter = 0;
+  $('#dta').empty();
+  setAmount();
   
   return outputJson;
 }
@@ -432,7 +437,7 @@ function getCustomers(data) {
     
     data.forEach(item => {
         selectElement.append($('<option>', {
-            value: item.id,
+            value: item.fullname,
             text: item.fullname
         }));
         
@@ -447,168 +452,242 @@ function getEmployerId(){
     return parseInt(payloadData.user.id, 10);
 }
 
-// Print invoice
+// var company = {key: "test"}
 
-function generatePDF(data) {
-  console.log(data)
+// Get company
+async function getCompany() {
+  try {
+      const reqToken = {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              // Include the Authorization header with the token
+              'Authorization': `Bearer ${token}`,
+              // Add any other headers if needed
+          },
+      };
+
+      // Fetch company data
+      const response = await fetch(baseUrl + '/companies/1', reqToken);
+      if (!response.ok) {
+          throw new Error('Failed to fetch company data');
+      }
+
+      // Parse response body as JSON and return
+      return await response.json();
+  } catch (error) {
+      console.error('Error fetching company data:', error);
+      throw error; // Rethrow the error to the caller
+  }
+}
+
+function getFormattedDate() {
+  // Create a new Date object for today's date
+  const currentDate = new Date();
+
+  // Define options for formatting the date
+  const options = { 
+      month: 'long', // Full month name (e.g., January)
+      day: 'numeric', // Day of the month (e.g., 26)
+      year: 'numeric' // Full year (e.g., 2023)
+  };
+
+  // Format the date according to the options
+  const formattedDate = currentDate.toLocaleDateString('pt-PT', options);
+
+  // Return the formatted date
+  return formattedDate;
+}
+
+
+// Print invoice
+async function generatePDF(data, customer) {
+        
+        var company = await getCompany().then(companyData => {
+          return companyData;
+      })
+
+      
+      const todayDate = getFormattedDate();
+
   const htmlContent = `
   <!DOCTYPE html>
-  <html lang="en">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Factura</title>
-  <link rel="stylesheet" href="../../css/custom/invoice.css">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/custom/invoice.css">
+</head>
+<body class="container-factura">
 
-
-  </head>
-  
-  <body >
-  
-  <div id="sectionToPrint">
-      <div class="py-4">
-        <div class="px-14 py-6">
-          <table class="w-full border-collapse border-spacing-0" >
-            <tbody>
-              <tr>
-                <td class="w-full align-top">
-                  <div>
-                    <img src="../../images/logo.png" width="100px" height="70px" />
-                  </div>
-                </td>
-      
-                <td class="align-top">
-                  <div class="text-sm">
-                    <table class="border-collapse border-spacing-0">
-                      <tbody>
-                        <tr>
-                          <td class="border-r pr-4">
-                            <div>
-                              <p class="whitespace-nowrap text-slate-400 text-right">Data</p>
-                              <p class="whitespace-nowrap font-bold text-main text-right">April 26, 2023</p>
-                            </div>
-                          </td>
-                          <td class="pl-4">
-                            <div>
-                              <p class="whitespace-nowrap text-slate-400 text-right">Factura 6438798</p>
-                              <p class="whitespace-nowrap font-bold text-main text-right">Mozambique</p>
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      
-        <div class="bg-slate-100 px-14 py-6 text-sm">
-          <table class="w-full border-collapse border-spacing-0">
-            <tbody>
-              <tr>
-                <td class="w-1/2 align-top">
-                  <div class="text-sm text-neutral-600">
-                    <p class="font-bold">Web Soluções Gráfica</p>
-                    <p>NUIT: 23456789</p>
-                    <p>Endereço: Beira</p>
-                    <p>Rua : Samora Machel</p>
-                    <p>Bairro : Munhava</p>
-                    <p>Sofala</p>
-                  </div>
-                </td>
-                <td class="w-1/2 align-top text-right">
-                  <div class="text-sm text-neutral-600">
-                    <p class="font-bold">Cliente</p>
-                    <p>Nome: Armando Nhica</p>
-                    <p>Mozambique</p>
-                    <p>Sofala</p>
-                    
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      
-        <div class="px-14 py-10 text-sm text-neutral-700">
-          <table class="w-full border-collapse border-spacing-0" id="invoiceTable">
-            <thead>
-              <tr>
-                <td class="border-b-2 border-main pb-3 pl-3 font-bold text-main">#</td>
-                <td class="border-b-2 border-main pb-3 pl-2 font-bold text-main">Produto</td>
-                <td class="border-b-2 border-main pb-3 pl-2 text-right font-bold text-main">Preço</td>
-                <td class="border-b-2 border-main pb-3 pl-2 text-center font-bold text-main">Qty.</td>
-                <td class="border-b-2 border-main pb-3 pl-2 text-right font-bold text-main">Subtotal</td>
-              </tr>
-            </thead>
-            <tbody>
-            ` +
-            data.items.map((item, index) => `
-              <tr> 
-                <td class="border-b py-3 pl-3">${index + 1}.</td>
-                <td class="border-b py-3 pl-2">${item.name}</td>
-                <td class="border-b py-3 pl-2 text-right">${item.price.toFixed(2)}</td>
-                <td class="border-b py-3 pl-2 text-center">${item.quantity}</td>
-                <td class="border-b py-3 pl-2 text-right">${(item.price * item.quantity).toFixed(2)}</td>
-              </tr>
-            `).join('\n') +
-            `
-              <tr>
-                <td colspan="7">
-                  <table class="w-full border-collapse border-spacing-0">
-                    <tbody>
-                      <tr>
-                        <td class="w-full"></td>
-                        <td>
-                          <table class="w-full border-collapse border-spacing-0">
-                            <tbody>
-                             
-                              <tr>
-                                <td class="bg-main p-3 text-right my-10">
-                                  <div class="whitespace-nowrap font-bold text-white">Total &nbsp;&nbsp;&nbsp; MZN ${(data.totalAmount).toFixed(2)}</div>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      
-       
-      <div class="bg-slate-100 px-14 py-6 text-sm footer-sec">
-        <table class="w-full border-collapse border-spacing-0">
-          <tbody>
-            <tr>
-              <td class="w-1/2 align-top">
-                <div class="text-sm text-neutral-600">
-                  <p class="font-bold">Web Soluções Gráfica</p>
+    <div class="fatura">
+        <div class="corpoFacture">
+            <header class="cabecalho">
+                <div class="logo">
+                    <img src="../../images/logo.png" alt="logo">
                 </div>
-              </td>
-              <td class="w-1/2 align-top text-right">
-                <div class="text-sm text-neutral-600">
-                  <p>info@websolucoesgrafica.co.mz</p>
+                <ul>
+                    <li>
+                        <div class="dataEmissao">
+                            <span>
+                                Data
+                            </span>
+                            <div class="diaMesAno">
+                               ${todayDate}   
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="numFatura">
+                            <div class="fat">
+                                <span>
+                                    Factura
+                                </span>
+                                <span>
+                                    6438798
+                                </span>
+                            </div>
+                            <div class="paiz">
+                                Mozambique
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </header>
+            
+            <div class="assignFactura">
+                <div class="companyT">
+                    <h2>
+                        ${company.name}
+                    </h2>
+                    <ul>
+                    <li>
+                            <span>
+                                Cidade: 
+                            </span>
+                            <span>
+                            ${company.city}
+                            </span>
+                    </li>    
+                    <li>
+                            <span>
+                                Nuit: 
+                            </span>
+                            <span>
+                            ${company.nuit}
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                Endereço:
+                            </span>
+                            <span>
+                            ${company.city}
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                Rua:
+                            </span>
+                            <span>
+                            ${company.street}
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                Bairro:
+                            </span>
+                            <span>
+                            ${company.zone}
+                            </span>
+                        </li>
+                        <li>
+                        <span>
+                            Contacto:
+                        </span>
+                        <span>
+                        ${company.contact}
+                        </span>
+                    </li>
+                       
+                    </ul>
                 </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      
 
-      </div>
-</div>
-  
-  </body>
-  
-  </html>
+                <div class="companyT">
+                    <h2>
+                        Cliente
+                    </h2>
+                    <ul>
+                        <li>
+                            <span>
+                                Nome:
+                            </span>
+                            <span>
+                                ${customer}
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                Mozambique
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                Sofala
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Produto
+                    </th>
+                    <th>
+                        Preço
+                    </th>
+                    <th>
+                        Qty.
+                    </th>
+                    <th>
+                        Subtotal
+                    </th>
+                </thead>
+           
+                ` +
+                data.items.map((item, index) => `
+                  <tr> 
+                    <td>${index + 1}.</td>
+                    <td>${item.name}</td>
+                    <td>${item.price.toFixed(2)}</td>
+                    <td>${item.quantity}</td>
+                    <td>${(item.price * item.quantity).toFixed(2)}</td>
+                  </tr>
+                `).join('\n') +
+                `
+            </table>
+            <div class="tot">
+                <div class="total">
+                    <span>
+                        Total
+                    </span>
+                    <span>
+                    MZN ${(data.totalAmount).toFixed(2)}
+                    </span>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+</body>
+</html>
   `;
 
 // Options for PDF generation

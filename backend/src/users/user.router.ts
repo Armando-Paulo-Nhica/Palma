@@ -1,6 +1,7 @@
 import express from "express";
 import type { Request, Response } from "express"
 import * as userService from "./user.service"
+import json from "../helper/json";
 import {verifyToken, verifyTokenAndAdmin, verifyTokenAndAuthorization} from '../verifyToken'
 var CryptoJS = require("crypto-js");
 
@@ -116,5 +117,28 @@ userRouter.put("/:id", verifyToken, async(request: Request, response: Response) 
 		return response.json({error: false, msg: "Alterações feitas com sucesso"});
 	} catch (error: any) {
 		return response.status(500).json({error: true, msg: error.message})
+	}
+})
+
+
+// Count all users
+userRouter.get("/count/all", verifyTokenAndAdmin, async (request: Request,response: Response) =>{
+	try {
+		const allUsers = await userService.countAllUsers();
+		return response.status(200).type("json").send(json({error: false, count: allUsers}));
+		
+	} catch (error: any) {
+		return response.status(500).json({error:true, msg:error.message})
+	}
+})
+
+// Count all admins
+userRouter.get("/count/admins", verifyTokenAndAdmin, async (request: Request,response: Response) =>{
+	try {
+		const allUsers = await userService.countAdmins();
+		return response.status(200).type("json").send(json({error: false, count: allUsers}));
+		
+	} catch (error: any) {
+		return response.status(500).json({error:true, msg:error.message})
 	}
 })

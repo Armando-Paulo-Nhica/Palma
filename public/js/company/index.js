@@ -1,16 +1,14 @@
 // Retrieve the token from localStorage
-const token = localStorage.getItem('token');
-const baseUrl = 'http://localhost:3000/api';
 
 // Create new sale
-$("#createCompany").click(function(e){
+$("#saveCompany").click(function(e){
   e.preventDefault()
- var name = $("#name");
- var street = $("#streetC");
- var zone = $("#zoneC");
- var nuit = $("#nuit");
- var contact = $("#contact");
- var city = $("#city");
+ var name = $("#nameE");
+ var street = $("#streetE");
+ var zone = $("#zoneE");
+ var nuit = $("#nuitE");
+ var contact = $("#contactE");
+ var city = $("#cityE");
  var isOk = true;
 
     if(name.val().trim() == ''){
@@ -53,18 +51,19 @@ $("#createCompany").click(function(e){
           contact : contact.val()
         }
         
-        createCompany(company);
+        updateCompany(company);
         company = {}
     }
 
- 
 })
 
 
 // Update the user
-function createCompany(company){
+function updateCompany(company){
+  const token = localStorage.getItem('token');
+  const baseUrl = 'http://localhost:3000/api';
   var requestOptions = {
-      method: 'POST',
+      method: 'PUT',  
       headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
@@ -72,15 +71,15 @@ function createCompany(company){
       body: JSON.stringify(company)
   };
   // Perform the fetch request
-  fetch(baseUrl+'/companies', requestOptions)
+  fetch(baseUrl+'/companies/1', requestOptions)
       .then(response => response.json())
       .then(data => {
           if(!data.error){
               $("#createCompanyModal").modal("hide")
               swal("Mensagem", data.msg, "success");
+              getCompany()
               setTimeout(function () {
                   swal.close();
-                  loadAllUsers();
               }, 2000);
             
           }
@@ -99,10 +98,10 @@ function createCompany(company){
 }
 
 
-
-
-// Fetch data
 function getCompany(){
+  const token = localStorage.getItem('token');
+  const baseUrl = 'http://localhost:3000/api';
+
   var reqToken = {
       method: 'GET',
       headers: {
@@ -123,16 +122,19 @@ function getCompany(){
           $(".zoneC").text(data.zone)
           $(".streetC").text(data.street)
           $(".contactC").text(data.contact)
+
+          $("#nameE").val(data.name)
+          $("#cityE").val(data.city)
+          $("#nuitE").val(data.nuit)
+          $("#zoneE").val(data.zone)
+          $("#streetE").val(data.street)
+          $("#contactE").val(data.contact)
         })
         .catch(error => console.error('Error fetching data:', error));
 
-        countMySales();
-        countTodaySales();
+        // countMySales();
+        // countTodaySales();
 }
-
-document.addEventListener('DOMContentLoaded', getCompany);
-
-
 
 
 
@@ -142,7 +144,3 @@ function validate(name, message){
   name.after('<span class="error-message">' + message + '</span>');
 
 }
-
-
-
-

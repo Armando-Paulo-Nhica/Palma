@@ -62,6 +62,6 @@ companyRouter.put("/:id", async(request: Request, response: Response) =>{
 		
 		return response.json({error: false, msg: "Alterações feitas com sucesso"});
 	} catch (error: any) {
-		return response.status(500).json(error.message)
+		return response.status(500).json({error:true, msg:error.message})
 	}
 })

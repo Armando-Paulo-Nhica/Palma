@@ -10324,12 +10324,12 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   
   /* background-color: var(--primary); */
   /* background-color: #17233b; */
-  background: var(--primary-4);
-  /* background: #413B87;
+  /* background: var(--primary-4); */
+  background: #413B87;
   background: -webkit-linear-gradient(left, #3B4E87, #6E3B87);
   background: -o-linear-gradient(left, #3B4E87, #6E3B87);
   background: -moz-linear-gradient(left, #3B4E87, #6E3B87);
-  background: linear-gradient(left, #3B4E87, #6E3B87);  */
+  background: linear-gradient(left, #3B4E87, #6E3B87); 
 
 
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);

@@ -183,7 +183,74 @@ document.getElementById("_passwordModal").innerHTML =`<div class="modal fade" id
         </div>
     </div>
 </div>
-</div> `;
+</div> 
+
+
+
+<div class="modal fade" id="createCompanyModal">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Registar empresa</h5>
+            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row px-3">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Nome da empresa <i style="color: red;">*</i></label>
+                        <input type="text" id="name" class="form-control" placeholder="Nome da empresa" autofocus>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>NUIT <i style="color: red;">*</i></label>
+                        <input type="text" id="nuit" class="form-control"  placeholder="Rua">
+                    </div>
+                    
+                    <div class="form-group col-md-6">
+                        <label>Bairro <i style="color: red;">*</i></label>
+                        <input type="text" id="zoneC" class="form-control" placeholder="Bairro" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Rua <i style="color: red;">*</i></label>
+                        <input type="text" id="streetC" class="form-control"  placeholder="Rua">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Contacto <i style="color: red;">*</i></label>
+                        <input type="text" id="contact" class="form-control"  placeholder="Contacto">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Cidade <i style="color: red;">*</i></label>
+                        <select class="form-control" id="city">
+                            <option selected disabled value="">Selecione a cidade</option>
+                             <option value="Maputo">Maputo</option>
+                            <option value="Nampula">Nampula</option>
+                            <option value="Beira">Beira</option>
+                            <option value="Chimoio">Chimoio</option>
+                            <option value="Nacala">Nacala</option>
+                            <option value="Quelimane">Quelimane</option>
+                            <option value="Pemba">Pemba</option>
+                            <option value="Maxixe">Maxixe</option>
+                            <option value="Inhambane">Inhambane</option>
+                            <option value="Xai-Xai">Xai-Xai</option>
+                            <option value="Tete">Tete</option>
+                            <option value="Lichinga">Lichinga</option>
+                        </select>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="createCompany">Criar empresa</button>
+        </div>
+    </div>
+</div>
+</div> 
+
+
+`;
 
 
 document.getElementById("header").innerHTML =` <div class="header-content">
@@ -264,7 +331,7 @@ document.getElementById("header").innerHTML =` <div class="header-content">
                 </div>
             </li>
 
-            
+            ${isAdmin() ? `
             <li class="nav-item dropdown header-profile">
                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
                     <i class="fas fa-gear"></i>
@@ -280,28 +347,27 @@ document.getElementById("header").innerHTML =` <div class="header-content">
                     </a>
                     
                 </div>
-            </li>
-
-
+            </li>` : ``}
 
             <li class="nav-item dropdown header-profile">
-                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                    <i class="fas fa-user-gear"></i>
+            <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                <i class="fas fa-user-gear"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a href="/user/profile" class="dropdown-item">
+                    <i class="icon-user"></i>
+                    <span class="ml-2">Perfil</span>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a href="/user/profile" class="dropdown-item">
-                        <i class="icon-user"></i>
-                        <span class="ml-2">Perfil</span>
-                    </a>
-                    <a href="#" data-toggle="modal" data-target="#editPassModal" class="dropdown-item">
-                        <i class="icon-key"></i>
-                        <span class="ml-2">Alterar senha</span>
-                    </a>
-                    <a href="#" id="logout" class="dropdown-item">
-                        <span class="ml-2"><i class="fa-solid fa-right-from-bracket"></i> Sair </span>
-                    </a>
-                </div>
-            </li>
+                <a href="#" data-toggle="modal" data-target="#editPassModal" class="dropdown-item">
+                    <i class="icon-key"></i>
+                    <span class="ml-2">Alterar senha</span>
+                </a>
+                <a href="#" id="logout" class="dropdown-item">
+                    <span class="ml-2"><i class="fa-solid fa-right-from-bracket"></i> Sair </span>
+                </a>
+            </div>
+        </li>
+
         </ul>
     </div>
 </nav>
@@ -403,3 +469,197 @@ function validate(name, message){
     name.after('<span class="error-message">' + message + '</span>');
   
   }
+
+
+
+// Create company
+
+
+// Create new sale
+$("#createCompany").click(function(e){
+    e.preventDefault()
+   var name = $("#name");
+   var street = $("#streetC");
+   var zone = $("#zoneC");
+   var nuit = $("#nuit");
+   var contact = $("#contact");
+   var city = $("#city");
+   var isOk = true;
+  
+      if(name.val().trim() == ''){
+        isOk = false;
+        validate(name, 'O campo nome é obrigatório')
+      }
+  
+      if(street.val().trim() == ''){
+        isOk = false;
+        validate(street, 'O campo rua é obrigatório')
+      }
+  
+      if(zone.val().trim() == ''){
+        isOk = false;
+        validate(zone, 'O campo bairro é obrigatório')
+      }
+  
+      if(nuit.val().trim() == ''){
+        isOk = false;
+        validate(nuit, 'O campo nuit é obrigatório')
+      }
+  
+      if(contact.val().trim() == ''){
+        isOk = false;
+        validate(contact, 'O campo contacto é obrigatório')
+      }
+  
+      if(city.val() == null){
+        isOk = false;
+        validate(city, 'O campo cidade é obrigatório')
+      }
+  
+      if(isOk){
+          var company = {
+            name: name.val(),
+            zone: zone.val(),
+            street: street.val(),
+            nuit : parseInt(nuit.val(), 10),
+            city: city.val(),
+            contact : contact.val()
+          }
+          
+          createCompany(company);
+          company = {}
+      }
+  
+   
+  })
+  
+  
+  // Create company
+  function createCompany(company){
+    const token = localStorage.getItem('token');
+    const baseUrl = 'http://localhost:3000/api';
+    var requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify(company)
+    };
+    // Perform the fetch request
+    fetch(baseUrl+'/companies', requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            if(!data.error){
+                $("#createCompanyModal").modal("hide")
+                swal("Mensagem", data.msg, "success");
+                setTimeout(function () {
+                    swal.close();
+                }, 2000);
+              
+            }
+            else
+            {
+                swal("Mensagem", "Operação falhou, contacte a equipe técnica!", "error");
+                setTimeout(function () {
+                    swal.close();
+                }, 2000);
+            }
+            
+        })
+        .catch(error => {
+            
+        });
+  }
+  
+  // Fetch data
+  function getCompany(){
+    const token = localStorage.getItem('token');
+    const baseUrl = 'http://localhost:3000/api';
+
+    var reqToken = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          // Include the Authorization header with the token
+          'Authorization': `Bearer ${token}`,
+          // Add any other headers if needed
+        },
+      };
+    
+      //Set data to datatable
+      fetch(baseUrl+'/companies/1', reqToken)
+          .then(response => response.json())
+          .then(data => {
+            $(".nameC").text(data.name)
+            $(".cityC").text(data.city)
+            $(".nuitC").text(data.nuit)
+            $(".zoneC").text(data.zone)
+            $(".streetC").text(data.street)
+            $(".contactC").text(data.contact)
+
+            $("#nameE").val(data.name)
+            $("#cityE").val(data.city)
+            $("#nuitE").val(data.nuit)
+            $("#zoneE").val(data.zone)
+            $("#streetE").val(data.street)
+            $("#contactE").val(data.contact)
+          })
+          .catch(error => console.error('Error fetching data:', error));
+  
+          countAdmins();
+          countUsers();
+  }
+
+  function countUsers(){
+    const token = localStorage.getItem('token');
+    const baseUrl = 'http://localhost:3000/api';
+    var reqToken = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          // Include the Authorization header with the token
+          'Authorization': `Bearer ${token}`,
+          // Add any other headers if needed
+        },
+      };
+    
+      //Set data to datatable
+      fetch(baseUrl+'/users/count/all', reqToken)
+          .then(response => response.json())
+          .then(data => {
+          if(!data.error){$("#countUsers").text(data.count)}
+          })
+          .catch(error => console.error('Error fetching data:', error));
+  }
+
+  function countAdmins(){
+    const token = localStorage.getItem('token');
+    const baseUrl = 'http://localhost:3000/api';
+    var reqToken = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          // Include the Authorization header with the token
+          'Authorization': `Bearer ${token}`,
+          // Add any other headers if needed
+        },
+      };
+    
+      //Set data to datatable
+      fetch(baseUrl+'/users/count/admins', reqToken)
+          .then(response => response.json())
+          .then(data => {
+          if(!data.error){$("#countAdmins").text(data.count)}
+          })
+          .catch(error => console.error('Error fetching data:', error));
+  }
+  
+
+  document.addEventListener('DOMContentLoaded', getCompany);
+  
+  
+  
+  
+  
+  
