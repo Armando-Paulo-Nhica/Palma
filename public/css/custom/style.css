@@ -157,4 +157,9 @@ table .actions i:hover{cursor: pointer;color: var(--primary);}
 }
 
 
+.stat-icon i{
+    border: none !important;
+    border-bottom: 2px solid !important;
+    
+} 
 

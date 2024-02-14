@@ -85,68 +85,72 @@
         <div class="content-body">
             <!-- row -->
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-4 col-sm-6">
+<div class="row">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="card">
-                            <div class="stat-widget-two card-body">
-                                <div class="stat-content">
-                                    <div class="stat-text">Total vendas - Hoje </div>
-                                    <div class="stat-digit"> MZN 8500.95</div>
+                            <div class="stat-widget-one card-body">
+                                <div class="stat-icon d-inline-block">
+                                    <i class="fa-solid fa-circle-dollar-to-slot text-success border-success"></i>
                                 </div>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-success w-85" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="stat-content d-inline-block">
+                                    <div class="stat-text">Vendas - Hoje</div>
+                                    <div class="stat-digit" id="todaySales"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="card">
-                            <div class="stat-widget-two card-body">
-                                <div class="stat-content">
-                                    <div class="stat-text">Total vendas - esta semana</div>
-                                    <div class="stat-digit"> MZN 7800.03 </div>
+                            <div class="stat-widget-one card-body">
+                                <div class="stat-icon d-inline-block">
+                                    <i class="fas fa-users text-primary border-primary"></i>
                                 </div>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-primary w-75" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="stat-content d-inline-block">
+                                    <div class="stat-text">Usuários</div>
+                                    <div class="stat-digit" id="countUsers"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="card">
-                            <div class="stat-widget-two card-body">
-                                <div class="stat-content">
-                                    <div class="stat-text">Tarefas concluídas</div>
-                                    <div class="stat-digit"> <i class="fa fa-list"></i> 107</div>
+                            <div class="stat-widget-one card-body">
+                                <div class="stat-icon d-inline-block">
+                                    <i class="fa-solid fa-circle-dollar-to-slot text-pink border-pink"></i>
                                 </div>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-warning w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="stat-content d-inline-block">
+                                    <div class="stat-text">Receita diária</div>
+                                    <div class="stat-digit">250</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                  
-                    <!-- /# column -->
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="stat-widget-one card-body">
+                                <div class="stat-icon d-inline-block">
+                                    <i class="fas fa-cubes text-danger border-danger"></i>
+                                </div>
+                                <div class="stat-content d-inline-block">
+                                    <div class="stat-text">Estado do stock</div>
+                                    <div class="stat-digit">68%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-xl-8 col-lg-8 col-md-8">
+                    <div class="col-sm-7 col-md-8 col-xxl-6 col-xl-8 col-lg-6">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Visão geral de vendas</h4>
                             </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Area Chart</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <div id="morris_area" class="morris_chart_height"></div>
-                                    </div>
-                                </div>
+                            <div class="col-sm-12 col-md-12 col-xxl-12 col-xl-12 col-lg-12">
+                                    <canvas id="area"></canvas>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-6 col-xxl-6 col-xl-4 col-lg-6">
+                    <div class="col-sm-5 col-md-4 col-xxl-4 col-xl-4 col-lg-6">
                         <div class="card ">
                             <div class="card-header">
                                 <h4 class="card-title">Produtos vendidos</h4>
@@ -165,7 +169,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="chart py-4">
-                                    <canvas id="sold-product"></canvas>
+                                    <canvas id="myChart"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -238,23 +242,12 @@
     <script src="../../js/custom.min.js"></script>
     
     <!-- Chart =========== -->
-    <script src="../../vendor/raphael/raphael.min.js"></script>
-    <script src="../../vendor/morris/morris.min.js"></script> 
 
-    <script src="../../vendor/circle-progress/circle-progress.min.js"></script>
-    <script src="../../vendor/chart.js/Chart.bundle.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../js/home/chart.js"></script>
 
-
-    <script src="../../vendor/owl-carousel/js/owl.carousel.min.js"></script>
-
-    <script src="../../vendor/jqvmap/js/jquery.vmap.min.js"></script>
-    <script src="../../vendor/jqvmap/js/jquery.vmap.usa.js"></script>
-    <script src="../../vendor/jquery.counterup/jquery.counterup.min.js"></script>
-
-    <script src="../../js/dashboard/dashboard-1.js"></script>
 
     <!-- Chart end =========== -->
-
       <!-- Sweet alert -->
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 

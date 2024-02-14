@@ -56,6 +56,31 @@ export async function findTodaySales(employerId: number) {
   return sales;
 }
  
+
+export async function sumTodaySales() {
+  // Get today's date
+  const today = new Date();
+  const startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1); // Start of tomorrow
+
+  // Consulta para somar totalAmount das vendas de hoje
+  const totalAmount = db.sale.aggregate({
+    where: {
+      createdAt: {
+        gte: startDate,
+        lt: endDate
+      }
+    },
+    _sum: {
+      totalAmount: true
+    }
+  });
+
+  // A variável 'totalAmount' agora contém o valor total das vendas de hoje
+  return (await totalAmount)._sum.totalAmount;
+}
+
+
 // Get single sale
 export async function findById(id: number){
 	const sale = await db.sale.findUnique({where: {id: id},  select: {id: true, invoice: true, customerId:true, employerId:true, totalAmount: true, createdAt: true, items: {select: {quantity: true, subTotal: true, product: true}}}})

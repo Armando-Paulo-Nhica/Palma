@@ -66,6 +66,17 @@ SaleRouter.get("/today/:id", verifyToken, async (request: Request,response: Resp
 		return response.status(500).json({error:true, msg:error.message})
 	}
 })
+// Today sales
+SaleRouter.get("/all/sales", verifyTokenAndAdmin, async (request: Request,response: Response)=>{
+	
+	try {
+		const totalAmount = await Sale.sumTodaySales();
+		return response.status(200).type("json").send(json({error: false, sum: totalAmount}));
+		
+	} catch (error: any) {
+		return response.status(500).json({error:true, msg:error.message})
+	}
+})
 
 // Delete Sale
 SaleRouter.delete("/:id", verifyTokenAndAdmin, async(request: Request, response: Response) =>{
