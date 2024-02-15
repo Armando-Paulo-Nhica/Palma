@@ -38,8 +38,9 @@
 
 .error-message, .supplier-msg{
     font-size: 11px;
-    color: red;
-    font-style: italic;
+    color: #dc3545;
+    font-weight: normal;
+    /* font-style: italic; */
 }
 
 .supplier-msg{

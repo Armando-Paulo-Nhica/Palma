@@ -104,6 +104,7 @@ model Sale {
   id          BigInt      @id @default(autoincrement())
   totalAmount Decimal     @db.Decimal(12, 2)
   createdAt   DateTime    @default(now())
+  
   customerId  Int?        
   employerId  Int
   invoice BigInt @unique @default(0)

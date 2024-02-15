@@ -78,6 +78,34 @@ SaleRouter.get("/all/sales", verifyTokenAndAdmin, async (request: Request,respon
 	}
 })
 
+// Get cost
+SaleRouter.get("/cost/get", verifyTokenAndAdmin, async (request: Request,response: Response)=>{
+	
+	try {
+		const cost = await Sale.getCost();
+		const sale = await Sale.sumTodaySales();
+
+		return response.status(200).type("json").send(json({error: false, cost: cost, sale: sale}));
+		
+	} catch (error: any) {
+		return response.status(500).json({error:true, msg:error.message})
+	}
+})
+
+// Get sales of last 5 months
+SaleRouter.get("/fivemonths/get", verifyTokenAndAdmin, async (request: Request,response: Response)=>{
+	
+	try {
+		const sales = await Sale.getSalesOf5months();
+
+		return response.status(200).type("json").send(json({error: false, sales: sales}));
+		
+	} catch (error: any) {
+		return response.status(500).json({error:true, msg:error.message})
+	}
+})
+
+
 // Delete Sale
 SaleRouter.delete("/:id", verifyTokenAndAdmin, async(request: Request, response: Response) =>{
 	const id: number = parseInt(request.params.id, 10);

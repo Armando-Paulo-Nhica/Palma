@@ -86,7 +86,7 @@
             <!-- row -->
             <div class="container-fluid">
 <div class="row">
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <div class="card">
                             <div class="stat-widget-one card-body">
                                 <div class="stat-icon d-inline-block">
@@ -99,7 +99,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <div class="card">
                             <div class="stat-widget-one card-body">
                                 <div class="stat-icon d-inline-block">
@@ -112,38 +112,34 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <div class="card">
                             <div class="stat-widget-one card-body">
                                 <div class="stat-icon d-inline-block">
                                     <i class="fa-solid fa-circle-dollar-to-slot text-pink border-pink"></i>
                                 </div>
                                 <div class="stat-content d-inline-block">
-                                    <div class="stat-text">Receita diária</div>
-                                    <div class="stat-digit">250</div>
+                                    <div class="stat-text">Receita - Hoje</div>
+                                    <div class="stat-digit" id="revenue"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="stat-widget-one card-body">
-                                <div class="stat-icon d-inline-block">
-                                    <i class="fas fa-cubes text-danger border-danger"></i>
-                                </div>
-                                <div class="stat-content d-inline-block">
-                                    <div class="stat-text">Estado do stock</div>
-                                    <div class="stat-digit">68%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  
                 </div>
                 <div class="row">
                     <div class="col-sm-7 col-md-8 col-xxl-6 col-xl-8 col-lg-6">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Visão geral de vendas</h4>
+                                <div><h4 class="card-title">Vendas e Receitas</h4></div>
+                                <div>
+                                    <select class="form-control" id="chartType">
+                                            <option value="line" >Linhas</option>
+                                            <option value="bar" selected>Barras</option>
+                                            
+                                </select>
+                                </div>
+
                             </div>
                             <div class="col-sm-12 col-md-12 col-xxl-12 col-xl-12 col-lg-12">
                                     <canvas id="area"></canvas>
@@ -153,7 +149,7 @@
                     <div class="col-sm-5 col-md-4 col-xxl-4 col-xl-4 col-lg-6">
                         <div class="card ">
                             <div class="card-header">
-                                <h4 class="card-title">Produtos vendidos</h4>
+                                <h4 class="card-title">Produtos mais vendidos</h4>
                                 <div class="card-action">
                                     <div class="dropdown custom-dropdown">
                                         <div data-toggle="dropdown">

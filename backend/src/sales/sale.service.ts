@@ -1,6 +1,7 @@
 import {db} from '../utiles/db.server'
+import { Prisma } from '@prisma/client';
 import { updateProductQty } from '../products/product.service';
-import { Console } from 'escpos';
+import { Decimal } from 'decimal.js';
 type Sale = {
     totalAmount: number,
     customerId: number, 
@@ -79,6 +80,67 @@ export async function sumTodaySales() {
   // A variável 'totalAmount' agora contém o valor total das vendas de hoje
   return (await totalAmount)._sum.totalAmount;
 }
+
+
+export async function getCost() {
+// Get today's date
+var cost = 0;
+const today = new Date();
+const startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+const endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1); // Start of tomorrow
+  // Consulta para obter todas as vendas
+  const sales = await db.sale.findMany({
+    where: {
+      createdAt: {
+        gte: startDate,
+        lt: endDate
+      }
+    },
+    select: {items: {select: {quantity: true, product: {select: {shop: true}}}}}
+  });
+
+  sales.forEach(item =>{
+    item.items.forEach(elem =>{
+      cost += elem.quantity * elem.product.shop.toNumber();
+    })
+  })
+
+  return cost;
+}
+
+
+// Get sales of last 5 months
+export async function getSalesOf5months() {
+  try {
+      // Get the current date
+      const currentDate = new Date();
+      // Calculate the start date 5 months ago
+      const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 2, 1);
+      
+      // Calculate the end date (today)
+      const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
+      // Query the database to sum totalAmount grouped by month
+      const salesByMonth = await db.sale.groupBy({
+        by: 'createdAt',
+        _sum: {
+          totalAmount: true
+        },
+        where: {
+          createdAt: {
+            gte: startDate,
+            lte: endDate
+          }
+        }
+      });
+      
+
+      return salesByMonth;
+  } catch (error) {
+      throw error;
+  }
+}
+
 
 
 // Get single sale

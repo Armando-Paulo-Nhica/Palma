@@ -1,5 +1,5 @@
 
-
+var chartType = $("#chartType").val();
 var dadosArea = {
     labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'],
     datasets: [{
@@ -10,8 +10,8 @@ var dadosArea = {
         fill: true,
         tension: 0.4 // Defina o tension para tornar as linhas curvas
     }, {
-        label: 'Receita',
-        data: [100, 230, 160, 120, 400],
+        label: 'Receitas',
+        data: [100, 230, 160, 120, 450],
         borderColor: '#1cbc88',
         backgroundColor: 'rgba(28, 188, 136, 0.2)',
         fill: true,
@@ -20,11 +20,18 @@ var dadosArea = {
 };
 
 var configArea = {
-    type: 'line',
+    type: chartType,
     data: dadosArea
 };
 
 var graficoArea = new Chart(document.getElementById('area'), configArea);
+
+$("#chartType").on("change", function(){
+  var newChartType = $(this).val();
+  configArea.type = newChartType;
+  graficoArea.destroy();
+  graficoArea = new Chart(document.getElementById('area'), configArea);
+});
 
 
 

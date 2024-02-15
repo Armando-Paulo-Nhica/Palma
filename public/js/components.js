@@ -263,7 +263,7 @@ document.getElementById("header").innerHTML =` <div class="header-content">
                 </span>
                 <div class="dropdown-menu p-0 m-0">
                     <form>
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control" type="search" placeholder="Pesquisar ..." aria-label="Search">
                     </form>
                 </div>
             </div>
