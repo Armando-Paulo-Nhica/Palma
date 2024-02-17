@@ -119,6 +119,20 @@ SaleRouter.get("/cost/of/fivemonths/get", verifyTokenAndAdmin, async (request: R
 	}
 })
 
+// Get the 3 most sold products
+SaleRouter.get("/get/top3", verifyTokenAndAdmin, async (request: Request,response: Response)=>{
+	
+	try {
+		const top3 = await Sale.topSoldProducts();
+		
+		return response.status(200).type("json").send(json({error: false, top3: top3}));
+		
+	} catch (error: any) {
+		return response.status(500).json({error:true, msg:error.message})
+	}
+})
+
+
 
 // Delete Sale
 SaleRouter.delete("/:id", verifyTokenAndAdmin, async(request: Request, response: Response) =>{

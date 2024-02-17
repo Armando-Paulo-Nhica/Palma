@@ -2,6 +2,8 @@
   var salesMonths = [];
   var costsMonths = [];
   var revenue = [];
+  var pieValues = [];
+  var pieLabels = [];
 
   // Last five manths
   async function lastFiveMonths(){
@@ -54,18 +56,60 @@
           
   }
 
+  
+  async function top3(){
+    const token = localStorage.getItem('token');
+    const baseUrl = 'http://localhost:3000/api';
+    var reqToken = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          // Include the Authorization header with the token
+          'Authorization': `Bearer ${token}`,
+          // Add any other headers if needed
+        },
+      };
+    
+      //Set data to datatable
+       return await fetch(baseUrl+'/sales/get/top3', reqToken)
+          .then(response => response.json())
+          .then(data => {
+              if(!data.error){
+                
+                return data
+              }
+          })
+          
+  }
+
   document.addEventListener('DOMContentLoaded',async function() {
     await costOfLast5Months().then(data =>{
       formatValues(data, lastFiveMonths());
     });
 
-    lastFiveMonths().then(data =>{
+ await top3().then(data =>{
+  setformat(data);
+
+  displaypieChart(pieLabels, pieValues)
+  
+ });
+
+
+
+lastFiveMonths().then(data =>{
       processSalesData(data.sales);
       displayChart(salesValues, salesMonths, revenue)
+    
       
     });
 });
 
+function setformat(top3Data){
+ top3Data.top3.forEach(item =>{
+  pieValues.push(item.total)
+  pieLabels.push(item.name)
+ })
+}
 
 async function formatValues(costs, saleValues) {
   // Clear existing data in global arrays
@@ -128,32 +172,34 @@ $("#chartType").on("change", function(){
 
 
 // Grafico circular
-const ctx = document.getElementById('myChart').getContext('2d');
-    const labels = ['Produto A', 'Produto B', 'Produto C'];
-    const data = [500, 300, 200];
-    const backgroundColors = [
-      'rgba(28, 188, 136, 0.5)', // Cor para vendas mais altas
-      'rgba(54, 162, 235, 0.6)', // Cor para vendas médias
-      'rgba(255, 206, 86, 0.6)'  // Cor para vendas mais baixas
-    ];
-    const borderColors = ['transparent', 'transparent', 'transparent'];
+function displaypieChart(pieLabels, pieValues){
+    const ctx = document.getElementById('myChart').getContext('2d');
+      const labels = pieLabels;
+      const data = pieValues;
+      const backgroundColors = [
+        'rgba(28, 188, 136, 0.5)', // Cor para vendas mais altas
+        'rgba(54, 162, 235, 0.6)', // Cor para vendas médias
+        'rgba(255, 206, 86, 0.6)'  // Cor para vendas mais baixas
+      ];
+      const borderColors = ['transparent', 'transparent', 'transparent'];
 
-    const myPieChart = new Chart(ctx, {
-      type: 'pie',
-      data: {
-        labels: labels,
-        datasets: [{
-          data: data,
-          backgroundColor: backgroundColors,
-          borderColor: borderColors,
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    });
+      const myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: data,
+            backgroundColor: backgroundColors,
+            borderColor: borderColors,
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+}
 
 
 

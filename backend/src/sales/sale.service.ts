@@ -2,6 +2,7 @@ import {db} from '../utiles/db.server'
 import { Prisma } from '@prisma/client';
 import { updateProductQty } from '../products/product.service';
 import { Decimal } from 'decimal.js';
+import { error } from 'pdf-lib';
 type Sale = {
     totalAmount: number,
     customerId: number, 
@@ -165,6 +166,56 @@ export async function getCostOfLast5months() {
   
     return sales;
 }
+
+// Get the 3 most sold
+export async function topSoldProducts (){
+  const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const topSoldProductsToday = await db.saleOrder.groupBy({
+  by: ['productId'],
+  _sum: {
+    quantity: true
+  },
+  where: {
+    sale: {
+      createdAt: {
+        gte: today, // Greater than or equal to the beginning of today
+        lt: new Date(today.getTime() + 24 * 60 * 60 * 1000) // Less than the beginning of tomorrow
+      }
+    }
+  },
+  orderBy: {
+    _sum: {
+      quantity: 'desc'
+    }
+  },
+  take: 3
+});
+
+const top3Products = await Promise.all(
+  topSoldProductsToday.map(async sale => {
+    try {
+      const products = await db.product.findUnique({
+        where: { id: sale.productId },
+        select: { name: true }
+      });
+
+      return {
+        productId: sale.productId,
+        name: products?.name,
+        total: sale._sum.quantity
+      };
+    } catch (error) {
+      throw error;
+    }
+  })
+);
+
+
+  return top3Products;
+}
+
 
 
 

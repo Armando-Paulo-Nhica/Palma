@@ -14,7 +14,7 @@ function sumTodaySales(){
       fetch(baseUrl+'/sales/all/sales', reqToken)
           .then(response => response.json())
           .then(data => {
-          if(!data.error){$("#todaySales").text(data.sum == null ? 0 : data.sum)}
+          if(!data.error){$("#todaySales").text(parseFloat(data.sum == null ? 0 : data.sum).toFixed(2))}
           })
           .catch(error => console.error('Error fetching data:', error));
   }
