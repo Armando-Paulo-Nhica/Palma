@@ -6,6 +6,7 @@ import {verifyToken, verifyTokenAndAdmin, verifyTokenAndAuthorization} from '../
 // export const SaleRouter = express.Router()
 export const SaleRouter = express.Router();
 
+
 // List sales
 SaleRouter.get("/" ,verifyTokenAndAdmin ,async (request: Request,response: Response) =>{
 	try {
@@ -93,12 +94,25 @@ SaleRouter.get("/cost/get", verifyTokenAndAdmin, async (request: Request,respons
 })
 
 // Get sales of last 5 months
-SaleRouter.get("/fivemonths/get", verifyTokenAndAdmin, async (request: Request,response: Response)=>{
+SaleRouter.get("/get/last/five", verifyTokenAndAdmin, async (request: Request,response: Response)=>{
 	
 	try {
 		const sales = await Sale.getSalesOf5months();
 
 		return response.status(200).type("json").send(json({error: false, sales: sales}));
+		
+	} catch (error: any) {
+		return response.status(500).json({error:true, msg:error.message})
+	}
+})
+
+// Get cost of last 5 months
+SaleRouter.get("/cost/of/fivemonths/get", verifyTokenAndAdmin, async (request: Request,response: Response)=>{
+	
+	try {
+		const sales = await Sale.getCostOfLast5months();
+		
+		return response.status(200).type("json").send(json({error: false, costs: sales}));
 		
 	} catch (error: any) {
 		return response.status(500).json({error:true, msg:error.message})

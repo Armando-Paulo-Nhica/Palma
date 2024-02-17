@@ -96,12 +96,13 @@
                                     <div class="stat-text">Vendas - Hoje</div>
                                     <div class="stat-digit" id="todaySales"></div>
                                 </div>
+                                <a href="#" class="rb">Ver todas <i class="fa-solid fa-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="card">
-                            <div class="stat-widget-one card-body">
+                            <div class="stat-widget-one card-body d-flex">
                                 <div class="stat-icon d-inline-block">
                                     <i class="fas fa-users text-primary border-primary"></i>
                                 </div>
@@ -109,6 +110,7 @@
                                     <div class="stat-text">Usuários</div>
                                     <div class="stat-digit" id="countUsers"></div>
                                 </div>
+                                <a href="#" class="rb">Ver todos <i class="fa-solid fa-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -130,8 +132,8 @@
                 <div class="row">
                     <div class="col-sm-7 col-md-8 col-xxl-6 col-xl-8 col-lg-6">
                         <div class="card">
-                            <div class="card-header">
-                                <div><h4 class="card-title">Vendas e Receitas</h4></div>
+                            <div class="card-header bg-title-chart">
+                                <div><h4 class="card-title"><i class="fas fa-chart-column"></i> Vendas e Receitas</h4></div>
                                 <div>
                                     <select class="form-control" id="chartType">
                                             <option value="line" >Linhas</option>
@@ -148,20 +150,16 @@
                     </div>
                     <div class="col-sm-5 col-md-4 col-xxl-4 col-xl-4 col-lg-6">
                         <div class="card ">
-                            <div class="card-header">
-                                <h4 class="card-title">Produtos mais vendidos</h4>
-                                <div class="card-action">
-                                    <div class="dropdown custom-dropdown">
-                                        <div data-toggle="dropdown">
-                                            <i class="ti-more-alt"></i>
-                                        </div>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#">Option 1</a>
-                                            <a class="dropdown-item" href="#">Option 2</a>
-                                            <a class="dropdown-item" href="#">Option 3</a>
-                                        </div>
-                                    </div>
+                            <div class="card-header bg-title-chart">
+                                <div><h4 class="card-title"><i class="mdi mdi-finance"></i> Top 3 mais vendidos</h4></div>
+                                <div>
+                                    <select class="form-control" id="chartType">
+                                            <option value="line" >Linhas</option>
+                                            <option value="bar" selected>Barras</option>
+                                            
+                                </select>
                                 </div>
+
                             </div>
                             <div class="card-body">
                                 <div class="chart py-4">

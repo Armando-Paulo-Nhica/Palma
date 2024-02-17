@@ -84,7 +84,7 @@ CREATE TABLE `suppliers` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(35) NOT NULL,
     `email` VARCHAR(35) NULL,
-    `contact` VARCHAR(10) NULL,
+    `contact` VARCHAR(15) NULL,
 
     UNIQUE INDEX `suppliers_name_key`(`name`),
     PRIMARY KEY (`id`)
@@ -95,10 +95,12 @@ CREATE TABLE `sales` (
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `totalAmount` DECIMAL(12, 2) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `customerId` INTEGER NULL,
     `employerId` INTEGER NOT NULL,
-    `invoice` INTEGER NOT NULL DEFAULT 123456789,
+    `invoice` BIGINT NOT NULL DEFAULT 0,
 
+    UNIQUE INDEX `sales_invoice_key`(`invoice`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -128,9 +130,10 @@ CREATE TABLE `company` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(50) NOT NULL,
     `city` VARCHAR(30) NOT NULL,
-    `contact` VARCHAR(10) NOT NULL,
-    `email` VARCHAR(30) NULL,
+    `contact` VARCHAR(15) NOT NULL,
+    `street` VARCHAR(30) NULL,
     `zone` VARCHAR(191) NOT NULL,
+    `nuit` INTEGER NOT NULL,
 
     UNIQUE INDEX `company_name_key`(`name`),
     PRIMARY KEY (`id`)

@@ -173,6 +173,7 @@ exports.Prisma.SaleScalarFieldEnum = {
   id: 'id',
   totalAmount: 'totalAmount',
   createdAt: 'createdAt',
+  dateIn: 'dateIn',
   customerId: 'customerId',
   employerId: 'employerId',
   invoice: 'invoice'

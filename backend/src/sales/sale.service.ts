@@ -115,17 +115,17 @@ export async function getSalesOf5months() {
       // Get the current date
       const currentDate = new Date();
       // Calculate the start date 5 months ago
-      const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 2, 1);
-      
+      const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 5, 1);
       // Calculate the end date (today)
-      const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+      const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth()  + 1, 1);
 
       // Query the database to sum totalAmount grouped by month
       const salesByMonth = await db.sale.groupBy({
-        by: 'createdAt',
+        by: 'dateIn',
         _sum: {
           totalAmount: true
         },
+        orderBy: {dateIn: 'asc'},
         where: {
           createdAt: {
             gte: startDate,
@@ -134,11 +134,36 @@ export async function getSalesOf5months() {
         }
       });
       
-
       return salesByMonth;
   } catch (error) {
       throw error;
   }
+}
+
+
+
+// Get cost of last 5 months
+export async function getCostOfLast5months() {
+  var cost = 0;
+  const currentDate = new Date();
+  // Calculate the start date 5 months ago
+  const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 5, 1);
+  // Calculate the end date (today)
+  const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
+    // Consulta para obter todas as vendas
+    const sales = await db.sale.findMany({
+      where: {
+        createdAt: {
+          gte: startDate,
+          lt: endDate
+        }
+      },
+      orderBy: {dateIn: 'asc'},
+      select: {dateIn: true, items: {select: {quantity: true, product: {select: {shop: true}}}}}
+    });
+  
+    return sales;
 }
 
 
@@ -153,6 +178,12 @@ export async function findById(id: number){
 export async function create(newSaleData: Sale){
   
 const isUpdated = await updateProductQty(newSaleData.items);
+const currentDate = new Date();
+// Get the year and month separately
+const year = currentDate.getFullYear();
+const month = currentDate.getMonth() + 1; // January is 0, so we add 1 to get the correct month number
+// Format the date as a string in the 'YYYY-MM' format
+const formattedDate = `${year}-${month.toString().padStart(2, '0')}`;
 
 	if(isUpdated){
       const Sale = await db.sale.create({
@@ -160,6 +191,7 @@ const isUpdated = await updateProductQty(newSaleData.items);
             totalAmount: newSaleData.totalAmount,
             customerId: newSaleData.customerId,
             employerId: newSaleData.employerId,
+            dateIn: formattedDate,
             invoice: generateInvoice(),
             items:{create: newSaleData.items}
             }})

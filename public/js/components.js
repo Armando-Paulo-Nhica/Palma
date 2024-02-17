@@ -204,7 +204,7 @@ document.getElementById("_passwordModal").innerHTML =`<div class="modal fade" id
                     </div>
                     <div class="form-group col-md-6">
                         <label>NUIT <i style="color: red;">*</i></label>
-                        <input type="text" id="nuit" class="form-control"  placeholder="Rua">
+                        <input type="text" id="nuit" class="form-control"  placeholder="Nuit">
                     </div>
                     
                     <div class="form-group col-md-6">

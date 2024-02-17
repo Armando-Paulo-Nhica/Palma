@@ -164,3 +164,16 @@ table .actions i:hover{cursor: pointer;color: var(--primary);}
     
 } 
 
+.bg-title-chart{
+    /* background: #593bdb1a; */
+    margin: 10px;
+}
+
+.rb {
+    position: absolute;
+    float: right;
+    right: 15px;
+    bottom: 10px;
+}
+
+.rb i{font-size: 20px;}
