@@ -5,21 +5,17 @@
 
 #example  a {
     padding: 3px 6px;
-    background: #593bdb1a;
+    background: var(--primary);
     margin-right: 2px;
 }
 
 #example  a i{
-    color: #593bdb;
+    color: var(--primary);
 }
 
 #example .actions{
     display: flex;
     flex-direction: row;
-}
-
-.bg-btn{
-    background: var(--btn);
 }
 
 .bg-primary{

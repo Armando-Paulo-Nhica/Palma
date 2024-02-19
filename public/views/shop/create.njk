@@ -43,12 +43,8 @@
     <!--*******************
         Preloader start
     ********************-->
-    <div id="preloader">
-        <div class="sk-three-bounce">
-            <div class="sk-child sk-bounce1"></div>
-            <div class="sk-child sk-bounce2"></div>
-            <div class="sk-child sk-bounce3"></div>
-        </div>
+     <div id="preloader" class="loader">
+       <div class="spinner"></div>
     </div>
     <!--*******************
         Preloader end
@@ -168,7 +164,7 @@
                                           
                                             <div class="form-group col-md-6 mt-4 input-group">
                                                     <div class="input-group-prepend bg-primary" data-toggle="modal" data-target="#addCategory">
-                                                        <div class="input-group-text bg-btn bt">+</div>
+                                                        <div class="input-group-text btn-primary bt" style="background: #593bdb !important;">+</div>
                                                     </div>
                                                     <select id="categories" name="categories" class="form-control">
                                                         <option value="" selected disabled>Selecione a categoria</option>
@@ -178,7 +174,7 @@
                                             <div class="form-group col-md-6 mt-4 input-group">
                                                 
                                                 <div class="input-group- bg-primary2" data-toggle="modal" data-target="#addSupplier">
-                                                    <div class="input-group-text bg-btn bt" >+</div>
+                                                    <div class="input-group-text btn-primary bt" >+</div>
                                                 </div>
                                                 <select id="suppliers" name="suppliers" class="form-control">
                                                     <option value="" selected disabled>Selecione o fornecedor</option>
@@ -271,7 +267,7 @@
                         </div>
                         <div class="form-group col-md-12 mt-2 input-group">
                             <div class="input-group-prepend bg-primary" id="addCategoryModal">
-                                <div class="input-group-text bg-btn bt">+</div>
+                                <div class="input-group-text btn-primary">+</div>
                             </div>
                             <select id="categoryName1" name="categoryName1" class="form-control">
                                 <option value="" selected disabled>Selecione a categoria</option>
@@ -282,7 +278,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="addPurchase">Adicionar produto</button>
+                <button type="button" class="btn btn-primary" id="addPurchase">Adicionar produto</button>
             </div>
         </div>
     </div>
@@ -320,7 +316,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-secondary" data-dismiss="modal">Registar</button>
+                <button type="submit" class="btn btn-primary" data-dismiss="modal">Registar</button>
             </div>
         </div>
     </div>
