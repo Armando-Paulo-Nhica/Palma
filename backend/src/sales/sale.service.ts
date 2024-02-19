@@ -167,54 +167,77 @@ export async function getCostOfLast5months() {
     return sales;
 }
 
-// Get the 3 most sold
-export async function topSoldProducts (){
+
+export async function topSoldProducts(interval: string) {
   const today = new Date();
-today.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
 
-const topSoldProductsToday = await db.saleOrder.groupBy({
-  by: ['productId'],
-  _sum: {
-    quantity: true
-  },
-  where: {
-    sale: {
-      createdAt: {
-        gte: today, // Greater than or equal to the beginning of today
-        lt: new Date(today.getTime() + 24 * 60 * 60 * 1000) // Less than the beginning of tomorrow
-      }
-    }
-  },
-  orderBy: {
+  let startDate;
+  let endDate;
+
+  switch (interval) {
+    case 'daily':
+      startDate = today;
+      endDate = new Date(today.getTime() + 24 * 60 * 60 * 1000); // Next day
+      break;
+    case 'weekly':
+      startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay()); // Start of current week (Sunday)
+      endDate = new Date(startDate.getTime() + 7 * 24 * 60 * 60 * 1000); // End of current week (next Sunday)
+      break;
+    case 'monthly':
+      startDate = new Date(today.getFullYear(), today.getMonth(), 1); // Start of current month
+      endDate = new Date(today.getFullYear(), today.getMonth() + 1, 0); // End of current month
+      break;
+    default:
+      throw new Error('Invalid interval provided');
+  }
+
+  const topSoldProducts = await db.saleOrder.groupBy({
+    by: ['productId'],
     _sum: {
-      quantity: 'desc'
-    }
-  },
-  take: 3
-});
+      quantity: true
+    },
+    where: {
+      sale: {
+        createdAt: {
+          gte: startDate,
+          lt: endDate
+        }
+      }
+    },
+    orderBy: {
+      _sum: {
+        quantity: 'desc'
+      }
+    },
+    take: 3
+  });
 
-const top3Products = await Promise.all(
-  topSoldProductsToday.map(async sale => {
-    try {
-      const products = await db.product.findUnique({
-        where: { id: sale.productId },
-        select: { name: true }
-      });
+  
+  const top3Products = await Promise.all(
+    topSoldProducts.map(async sale => {
+      try {
+        const products = await db.product.findUnique({
+          where: { id: sale.productId },
+          select: { name: true }
+        });
 
-      return {
-        productId: sale.productId,
-        name: products?.name,
-        total: sale._sum.quantity
-      };
-    } catch (error) {
-      throw error;
-    }
-  })
-);
+        return {
+          productId: sale.productId,
+          name: products?.name,
+          total: sale._sum.quantity
+        };
+      } catch (error) {
+        throw error;
+      }
+    })
+  );
 
 
-  return top3Products;
+return top3Products;
 }
+
+
 
 
 

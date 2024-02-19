@@ -120,10 +120,10 @@ SaleRouter.get("/cost/of/fivemonths/get", verifyTokenAndAdmin, async (request: R
 })
 
 // Get the 3 most sold products
-SaleRouter.get("/get/top3", verifyTokenAndAdmin, async (request: Request,response: Response)=>{
-	
+SaleRouter.get("/get/top3/:interval", verifyToken, async (request: Request,response: Response)=>{
+	const interval: string = request.params.interval;
 	try {
-		const top3 = await Sale.topSoldProducts();
+		const top3 = await Sale.topSoldProducts(interval);
 		
 		return response.status(200).type("json").send(json({error: false, top3: top3}));
 		

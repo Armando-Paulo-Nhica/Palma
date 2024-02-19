@@ -1,7 +1,7 @@
-:root {
+/* :root {
     --primary: #5B3C88;
     --btn: #413B87;
-  }
+  } */
 
 #example  a {
     padding: 3px 6px;
@@ -111,7 +111,7 @@ table .actions i:hover{cursor: pointer;color: var(--primary);}
 
 #cart-header{display: none;}
 
-.bg-logo{background: #593bdb;}
+.bg-logo{background: var(--primary);}
 .bg-logo img{width: 170px;}
 
 .side-left-header{
@@ -179,3 +179,34 @@ table .actions i:hover{cursor: pointer;color: var(--primary);}
 
 .rb:hover, .rb i:hover{color: #593bdb;}
 
+
+.loader {
+    display: flex;
+    height: 50vh;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .spinner {
+    height: 5vh;
+    width: 5vh;
+    border: 6px solid rgba(53, 35, 82, 0.2);
+    border-top-color: rgba(53, 35, 82, 0.8);
+    border-radius: 100%;
+    animation: rotation 0.9s infinite linear 0.25s;
+  
+    /* the opacity is used to lazyload the spinner, see animation delay */
+    /* this avoid the spinner to be displayed when visible for a very short period of time */
+    opacity: 0;
+  }
+  
+  @keyframes rotation {
+    from {
+      opacity: 1;
+      transform: rotate(0deg);
+    }
+    to {
+      opacity: 1;
+      transform: rotate(359deg);
+    }
+  }

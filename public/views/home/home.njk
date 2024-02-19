@@ -22,8 +22,12 @@
     <!--*******************
         Preloader start
     ********************-->
-    <div id="preloader" class="loader">
-       <div class="spinner"></div>
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
     </div>
     <!--*******************
         Preloader end
@@ -81,7 +85,7 @@
         <div class="content-body">
             <!-- row -->
             <div class="container-fluid">
-<div class="row">
+            <div class="row">
                     <div class="col-lg-4 col-sm-6">
                         <div class="card">
                             <div class="stat-widget-one card-body">
@@ -89,7 +93,7 @@
                                     <i class="fa-solid fa-circle-dollar-to-slot text-success border-success"></i>
                                 </div>
                                 <div class="stat-content d-inline-block">
-                                    <div class="stat-text">Venda - Hoje</div>
+                                    <div class="stat-text">Venda diária</div>
                                     <div class="stat-digit" id="todaySales"></div>
                                 </div>
                                 <a href="/sale/view" class="rb">Ver todas <i class="fa-solid fa-chevron-right"></i></a>
@@ -103,8 +107,8 @@
                                     <i class="fas fa-users text-primary border-primary"></i>
                                 </div>
                                 <div class="stat-content d-inline-block">
-                                    <div class="stat-text">Usuários</div>
-                                    <div class="stat-digit" id="countUsers"></div>
+                                    <div class="stat-text">Usuários level-1</div>
+                                    <div class="stat-digit" id="countUsers2"></div>
                                 </div>
                                 <a href="/user" class="rb">Ver todos <i class="fa-solid fa-chevron-right"></i></a>
                             </div>
@@ -117,7 +121,7 @@
                                     <i class="fa-solid fa-circle-dollar-to-slot text-pink border-pink"></i>
                                 </div>
                                 <div class="stat-content d-inline-block">
-                                    <div class="stat-text">Receita - Hoje</div>
+                                    <div class="stat-text">Receita diária</div>
                                     <div class="stat-digit" id="revenue"></div>
                                 </div>
                             </div>
@@ -201,14 +205,14 @@
     <!-- Chart =========== -->
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../../js/home/chart.js"></script>
+    <script src="../../js/home/chart2.js"></script>
 
 
     <!-- Chart end =========== -->
       <!-- Sweet alert -->
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-      <script src="../../js/home/index.js"></script>
+      <script src="../../js/home/index2.js"></script>
 
 </body>
 

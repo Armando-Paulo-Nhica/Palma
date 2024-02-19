@@ -39,6 +39,16 @@
         e.preventDefault();
     });
 
+
+    function isAdmin(){
+      const token = localStorage.getItem('token');
+      const [header, payload, signature] = token.split('.');
+      const decodedPayload = atob(payload);
+      const payloadData = JSON.parse(decodedPayload);
+  // console.log(payloadData.user.isAdmin)
+      return payloadData.user.isAdmin;
+  }
+
     function auth(user) {
         var requestOptions = {
             method: 'POST',
@@ -65,7 +75,14 @@
             
             if (!data.error) { 
               localStorage.setItem('token', data.token);
-              window.location.href = '/'; 
+              if(isAdmin()){
+                window.location.href = '/'; 
+              }
+              else
+              {
+                window.location.href = '/dashboard'; 
+              }
+              
             } else {
               swal("Mensagem", "Credenciais inválidas", "error");
               setTimeout(function () {
