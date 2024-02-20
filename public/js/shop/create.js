@@ -192,7 +192,7 @@ function printBarcode(printData) {
       printData.paths.forEach((base64img, index) => {
         // Add an image to the PDF
         pdf.addImage(base64img.barcode, 'png', 10, 10 + index * 40, 50, 30);
-        pdf.text(base64img.name+""+base64img.price+"MT", 12, 8+ index*40)
+        pdf.text("Preço:"+parseFloat(base64img.price).toFixed(2)+" mt", 12, 8+ index*40)
       });
 
       // Get the data URI of the PDF

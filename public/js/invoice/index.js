@@ -525,7 +525,7 @@ async function generatePDF(data, customer) {
         <div class="corpoFacture">
             <header class="cabecalho">
                 <div class="logo">
-                    <img src="../../images/logo.png" alt="logo">
+                    <h2>${company.name}</h2> 
                 </div>
                 <ul>
                     <li>
@@ -559,7 +559,7 @@ async function generatePDF(data, customer) {
             <div class="assignFactura">
                 <div class="companyT">
                     <h2>
-                        ${company.name}
+                        Endereço
                     </h2>
                     <ul>
                     <li>

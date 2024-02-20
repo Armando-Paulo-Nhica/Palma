@@ -92,6 +92,60 @@ export async function sumTodaySales() {
 }
 
 
+
+export async function sumMySales(id: number) {
+  // Get today's date
+  const today = new Date();
+  const startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1); // Start of tomorrow
+
+  // Consulta para somar totalAmount das vendas de hoje
+  const totalAmount = db.sale.aggregate({
+    where: {
+      employerId: id,
+      createdAt: {
+        gte: startDate,
+        lt: endDate
+      }
+    },
+    _sum: {
+      totalAmount: true
+    }
+  });
+
+  // A variável 'totalAmount' agora contém o valor total das vendas de hoje
+  return (await totalAmount)._sum.totalAmount;
+}
+
+
+export async function getCostOfmySales(id: number) {
+  // Get today's date
+  var cost = 0;
+  const today = new Date();
+  const startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1); // Start of tomorrow
+    // Consulta para obter todas as vendas
+    const sales = await db.sale.findMany({
+      where: {
+        employerId: id,
+        createdAt: {
+          gte: startDate,
+          lt: endDate
+        }
+      },
+      select: {items: {select: {quantity: true, product: {select: {shop: true}}}}}
+    });
+  
+    sales.forEach(item =>{
+      item.items.forEach(elem =>{
+        cost += elem.quantity * elem.product.shop.toNumber();
+      })
+    })
+  
+    return cost;
+  }
+
+
 export async function getCost() {
 // Get today's date
 var cost = 0;
@@ -151,6 +205,38 @@ export async function getSalesOf5months() {
 }
 
 
+// Get sales of last 5 months
+export async function getMySalesOf5months(id: number) {
+  try {
+      // Get the current date
+      const currentDate = new Date();
+      // Calculate the start date 5 months ago
+      const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 5, 1);
+      // Calculate the end date (today)
+      const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth()  + 1, 1);
+
+      // Query the database to sum totalAmount grouped by month
+      const salesByMonth = await db.sale.groupBy({
+        by: 'dateIn',
+        _sum: {
+          totalAmount: true
+        },
+        orderBy: {dateIn: 'asc'},
+        where: {
+          employerId: id,
+          createdAt: {
+            gte: startDate,
+            lte: endDate
+          }
+        }
+      });
+      
+      return salesByMonth;
+  } catch (error) {
+      throw error;
+  }
+}
+
 
 // Get cost of last 5 months
 export async function getCostOfLast5months() {
@@ -175,6 +261,32 @@ export async function getCostOfLast5months() {
   
     return sales;
 }
+
+
+export async function getMyCostOfLast5months(id: number) {
+  var cost = 0;
+  const currentDate = new Date();
+  // Calculate the start date 5 months ago
+  const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 5, 1);
+  // Calculate the end date (today)
+  const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
+    // Consulta para obter todas as vendas
+    const sales = await db.sale.findMany({
+      where: {
+        employerId: id,
+        createdAt: {
+          gte: startDate,
+          lt: endDate
+        }
+      },
+      orderBy: {dateIn: 'asc'},
+      select: {dateIn: true, items: {select: {quantity: true, product: {select: {shop: true}}}}}
+    });
+  
+    return sales;
+}
+
 
 
 export async function topSoldProducts(interval: string) {

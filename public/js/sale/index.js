@@ -91,7 +91,6 @@ async function findProductByName(name){
     .then(data => {
       if (data != null) {
               $(this).val("");
-              // $("#with-icon_collapseTwo").collapse("toggle");
               $("#with-icon_collapseTwo").collapse("show");
 
               $(this).attr("placeholder", barcode);
@@ -109,12 +108,24 @@ async function findProductByName(name){
               }
               else
               {
-                sale[index].quantity += 1;
-                sale[index].subtotal = (sale[index].sell * sale[index].quantity).toFixed(2);
-                  // Clear the rows
-                $("#dta").empty();
-                displaySales(sale);
-        
+                  if(sale[index].maxQty < sale[index].quantity + 1){
+                      swal("Mensagem", "Quantidade insuficiente no Stock!", "error");
+                      setTimeout(function () {
+                          swal.close();
+                      }, 2000);
+
+                      $(this).focus()
+                
+                  }
+                  else
+                  {
+                    sale[index].quantity += 1;
+                    sale[index].subtotal = (sale[index].sell * sale[index].quantity).toFixed(2);
+                      // Clear the rows
+                    $("#dta").empty();
+                    displaySales(sale);
+                  }
+
               }
       } else {
         swal("Mensagem!", "Nenhum produto foi encontrado!", "error");
@@ -136,6 +147,7 @@ $("#searchProductBtn").on("click", function(){
   .then(data => {
     if (data != null) {
       $("#search-box").val("");
+      $("#with-icon_collapseTwo").collapse("show");
             // Check if the product already exists
             for (var i = 0; i < sale.length; i++) {
               if (name == sale[i].name) {
@@ -382,6 +394,7 @@ function deleteRow(elem) {
 
 // Create new sale
 $("#saleBtn").click(function(){
+  console.log(transformJson())
     // Create new sale
     var requestOptions = {
       method: 'POST',

@@ -150,7 +150,7 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
 </div>`;
 
 document.getElementById("footer-info").innerHTML = `
-<p>By <a href="#" target="_blank"> <i style="font-weight: bold">Web Soluções Gráfica</i> | </a> info@websolucoesgrafica.co.mz | 2024</p>
+<p>By <a href="#" target="_blank"> Web Soluções Gráfica | </a> info@websolucoesgrafica.co.mz | 2024</p>
 `;
 
 document.getElementById("_passwordModal").innerHTML =`<div class="modal fade" id="editPassModal">
@@ -338,11 +338,11 @@ document.getElementById("header").innerHTML =` <div class="header-content">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a href="/office/profile" class="dropdown-item">
-                        <i class="icon-user"></i>
+                        <i class="fas fa-box"></i>
                         <span class="ml-2">Perfil empresarial</span>
                     </a>
                     <a href="#" data-toggle="modal" data-target="#createCompanyModal" class="dropdown-item">
-                        <i class="icon-key"></i>
+                        <i class="fas fa-plus"></i>
                         <span class="ml-2">Registar empresa</span>
                     </a>
                     
@@ -607,8 +607,12 @@ $("#createCompany").click(function(e){
           })
           .catch(error => console.error('Error fetching data:', error));
   
-          countAdmins();
-          countUsers();
+          
+          if(isAdmin()){
+            countAdmins();
+            countUsers();
+          }
+          
   }
 
   function countUsers(){

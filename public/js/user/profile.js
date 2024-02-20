@@ -26,7 +26,7 @@ function loadSingleUser(){
             $(".user-name").text(data.fullname)
             $(".user-email").text(data.email)
             $(".user-role").text(data.isAdmin == true ? 'Administrador' : 'Funcionário')
-            $("#nameE").val(data.fullname)
+            $("#nameUser").val(data.fullname)
             $("#emailE").val(data.email)
             $(".uname").val(data.username)
             $("#uname").text(data.username)
@@ -83,7 +83,7 @@ function countTodaySales(){
 // Edit profile
 $("#editProfile").click(function(e){
   e.preventDefault();
-  var name = $("#nameE")
+  var name = $("#nameUser")
   var email = $("#emailE")
   var username = $("#unameE")
   var isOk = true;

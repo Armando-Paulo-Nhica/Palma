@@ -183,7 +183,7 @@
                                         <option value="" selected disabled>Selecione o cliente</option>
                                     </select>
                                     <div class="input-group-prepend" id="addCategoryModal">
-                                        <div class="input-group-text bg-primary bt"><i class="fas fa-user" style="font-size: small;"></i> </div>
+                                        <div class="input-group-text btn-primary" data-toggle="modal" data-target="#addCustomerModal" style="cursor: pointer;"><i class="fas fa-user-plus" style="font-size: small;"></i> </div>
                                     </div>
                                 </div>
 
@@ -214,6 +214,38 @@
                 </div>
             </div>
         </div>
+
+    {# Start modal #}
+
+    <div class="row">
+            <div class="modal fade lg " id="addCustomerModal">
+                <div class="modal-dialog modal-dialog-centered" >
+                    <div class="modal-content px-3">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Registar cliente <h5>
+                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="form-row col-md-12 p-0">
+                                    <div class="form-group col-md-12 p-0">
+                                        <label>Nome <i style="color: red;">*</i></label>
+                                        <input type="text" id="customerName" class="form-control" placeholder="Digite o nome">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Registar</button>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+
+
+{# End modal #}
         <!--**********************************
             Content body end
         ***********************************-->

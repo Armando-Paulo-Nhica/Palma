@@ -79,6 +79,17 @@ SaleRouter.get("/all/sales", verifyTokenAndAdmin, async (request: Request,respon
 	}
 })
 
+SaleRouter.get("/all/sales/:id", verifyToken, async (request: Request,response: Response)=>{
+	const id: number = parseInt(request.params.id, 10);
+	try {
+		const totalAmount = await Sale.sumMySales(id);
+		return response.status(200).type("json").send(json({error: false, sum: totalAmount}));
+		
+	} catch (error: any) {
+		return response.status(500).json({error:true, msg:error.message})
+	}
+})
+
 // Get cost
 SaleRouter.get("/cost/get", verifyTokenAndAdmin, async (request: Request,response: Response)=>{
 	
@@ -93,6 +104,20 @@ SaleRouter.get("/cost/get", verifyTokenAndAdmin, async (request: Request,respons
 	}
 })
 
+SaleRouter.get("/my/cost/:id", verifyToken, async (request: Request,response: Response)=>{
+	const id: number = parseInt(request.params.id, 10);
+	try {
+		const cost = await Sale.getCostOfmySales(id);
+		const sale = await Sale.sumMySales(id);
+
+		return response.status(200).type("json").send(json({error: false, cost: cost, sale: sale}));
+		
+	} catch (error: any) {
+		return response.status(500).json({error:true, msg:error.message})
+	}
+})
+
+
 // Get sales of last 5 months
 SaleRouter.get("/get/last/five", verifyTokenAndAdmin, async (request: Request,response: Response)=>{
 	
@@ -100,6 +125,33 @@ SaleRouter.get("/get/last/five", verifyTokenAndAdmin, async (request: Request,re
 		const sales = await Sale.getSalesOf5months();
 
 		return response.status(200).type("json").send(json({error: false, sales: sales}));
+		
+	} catch (error: any) {
+		return response.status(500).json({error:true, msg:error.message})
+	}
+})
+
+
+// Get sales of last 5 months
+SaleRouter.get("/get/last/five/:id", verifyToken, async (request: Request,response: Response)=>{
+	const id: number = parseInt(request.params.id, 10);
+	try {
+		const sales = await Sale.getMySalesOf5months(id);
+
+		return response.status(200).type("json").send(json({error: false, sales: sales}));
+		
+	} catch (error: any) {
+		return response.status(500).json({error:true, msg:error.message})
+	}
+})
+
+
+SaleRouter.get("/cost/of/fivemonths/get/:id", verifyToken, async (request: Request,response: Response)=>{
+	const id: number = parseInt(request.params.id, 10);
+	try {
+		const sales = await Sale.getMyCostOfLast5months(id);
+		
+		return response.status(200).type("json").send(json({error: false, costs: sales}));
 		
 	} catch (error: any) {
 		return response.status(500).json({error:true, msg:error.message})

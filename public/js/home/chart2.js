@@ -34,7 +34,7 @@
       };
     
       //Set data to datatable
-      return await fetch(baseUrl+'/sales/get/last/five', reqToken)
+      return await fetch(baseUrl+'/sales/get/last/five/'+getuserId(), reqToken)
           .then(response => response.json())
           .then(data => {
           if(!data.error){
@@ -59,7 +59,7 @@
       };
     
       //Set data to datatable
-       return await fetch(baseUrl+'/sales/cost/of/fivemonths/get', reqToken)
+       return await fetch(baseUrl+'/sales/cost/of/fivemonths/get/'+getuserId(), reqToken)
           .then(response => response.json())
           .then(data => {
               if(!data.error){
@@ -269,4 +269,11 @@ function displaypieChart(pieLabels, pieValues){
       });
   }
   
-    
+
+  function getuserId(){
+    const token = localStorage.getItem('token');
+    const [header, payload, signature] = token.split('.');
+    const decodedPayload = atob(payload);
+    const payloadData = JSON.parse(decodedPayload);
+    return payloadData.user.id;
+}
