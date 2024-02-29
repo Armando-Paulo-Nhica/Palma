@@ -81,7 +81,7 @@
         <div class="content-body">
             <!-- row -->
             <div class="container-fluid">
-<div class="row">
+                <div class="row top-bann">
                     <div class="col-lg-4 col-sm-6">
                         <div class="card">
                             <div class="stat-widget-one card-body">
@@ -89,10 +89,10 @@
                                     <i class="fa-solid fa-circle-dollar-to-slot text-success border-success"></i>
                                 </div>
                                 <div class="stat-content d-inline-block">
-                                    <div class="stat-text">Venda - Hoje</div>
+                                    <div class="stat-text"><h3>Venda - Hoje</h3></div>
                                     <div class="stat-digit" id="todaySales"></div>
                                 </div>
-                                <a href="/sale/view" class="rb">Ver todas <i class="fa-solid fa-chevron-right"></i></a>
+                                <a href="/sale/view" class="rb">Detalhes <i class="fa-solid fa-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -103,10 +103,10 @@
                                     <i class="fas fa-users text-primary border-primary"></i>
                                 </div>
                                 <div class="stat-content d-inline-block">
-                                    <div class="stat-text">Usuários</div>
+                                    <div class="stat-text"><h3>Usuários</h3></div>
                                     <div class="stat-digit" id="countUsers"></div>
                                 </div>
-                                <a href="/user" class="rb">Ver todos <i class="fa-solid fa-chevron-right"></i></a>
+                                <a href="/user" class="rb">Detalhes <i class="fa-solid fa-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -117,7 +117,7 @@
                                     <i class="fa-solid fa-circle-dollar-to-slot text-pink border-pink"></i>
                                 </div>
                                 <div class="stat-content d-inline-block">
-                                    <div class="stat-text">Receita - Hoje</div>
+                                    <div class="stat-text"><h3>Receita - Hoje</h3></div>
                                     <div class="stat-digit" id="revenue"></div>
                                 </div>
                             </div>
@@ -125,8 +125,8 @@
                     </div>
                   
                 </div>
-                <div class="row">
-                    <div class="col-sm-7 col-md-8 col-xxl-6 col-xl-8 col-lg-6">
+                <div class="row mt-10">
+                    <div class="col-sm-6 col-md-6 col-xxl-6 col-xl-6 col-lg-6">
                         <div class="card">
                             <div class="card-header bg-title-chart">
                                 <div><h4 class="card-title"><i class="fas fa-chart-column"></i> Vendas e Receitas</h4></div>
@@ -144,7 +144,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-5 col-md-4 col-xxl-4 col-xl-4 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-xxl-6 col-xl-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-header bg-title-chart">
+                                <div><h4 class="card-title"><i class="fas fa-chart-column"></i> Vendas e Receitas</h4></div>
+                                <div>
+                                    <select class="form-control" id="chartType">
+                                            <option value="line" >Linhas</option>
+                                            <option value="bar" selected>Barras</option>
+                                            
+                                </select>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-xxl-4 col-xl-4 col-lg-4 py-4">
+                                    <canvas id="area2"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-md-4 col-xxl-4 col-xl-4 col-lg-6">
                         <div class="card ">
                             <div class="card-header bg-title-chart">
                                 <div><h4 class="card-title"><i class="mdi mdi-finance"></i> Top 3 mais vendidos</h4></div>
