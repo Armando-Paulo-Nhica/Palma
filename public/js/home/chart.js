@@ -146,7 +146,9 @@ var saleData = await saleValues.then(data => {return data})
 
 var chartType = $("#chartType").val();
 var graficoArea;
+var graficoArea2;
 var configArea = {}
+
 
 function displayChart(data, months, revenue){
       var dadosArea = {
@@ -174,6 +176,7 @@ function displayChart(data, months, revenue){
     };
 
     graficoArea = new Chart(document.getElementById('area'), configArea);
+    graficoArea2 = new Chart(document.getElementById('area2'), configArea);
 }
 
 $("#chartType").on("change", function(){
