@@ -157,14 +157,14 @@ function displayChart(data, months, revenue){
             label: 'Vendas',
             data: data,
             borderColor: '#dc2626',
-            backgroundColor: 'rgba(220, 38, 38, 0.2)',
+            backgroundColor: 'rgb(64, 84, 195, .9)',
             fill: true,
             tension: 0.4 // Defina o tension para tornar as linhas curvas
         }, {
             label: 'Receitas',
             data: revenue,
             borderColor: '#1cbc88',
-            backgroundColor: 'rgba(28, 188, 136, 0.2)',
+            backgroundColor: 'rgb(55, 141, 165)',
             fill: true,
             tension: 0.4 // Defina o tension para tornar as linhas curvas
         }]
@@ -217,9 +217,6 @@ function displaypieChart(pieLabels, pieValues){
         }
       });
 }
-
-
-
 
     function calculateTotalCost(costs) {
       const totalCostByMonth = {};

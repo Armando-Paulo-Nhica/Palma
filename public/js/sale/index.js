@@ -394,7 +394,8 @@ function deleteRow(elem) {
 
 // Create new sale
 $("#saleBtn").click(function(){
-  console.log(transformJson())
+  const status = $("#icon2").hasClass("fa-solid fa-circle-check") ? true : false;
+
     // Create new sale
     var requestOptions = {
       method: 'POST',
@@ -409,15 +410,20 @@ $("#saleBtn").click(function(){
       .then(response => response.json())
       .then(data => {
           if(!data.error){
-              swal("Mensagem", "Venda registada com sucesso!", "success");
-                        setTimeout(function () {
-                            swal.close();
-                        }, 2000);
-              $("#counter-id").text("");
-              counter = 0;
-              sale = [];
-              $('#dta').empty();
-              setAmount();
+              if(!status){
+                    swal("Mensagem", "Venda registada com sucesso!", "success");
+                            setTimeout(function () {
+                                swal.close();
+                            }, 1500);
+                  $("#counter-id").text("");
+                  counter = 0;
+                  sale = [];
+                  $('#dta').empty();
+                  setAmount();
+              }
+              else{
+                generatePDF([{name:"Nhica"}]);
+              }
           }
           else
           {
@@ -496,4 +502,223 @@ function getEmployerId(){
     const payloadData = JSON.parse(decodedPayload);
 
     return parseInt(payloadData.user.id, 10);
+}
+
+
+// Print receipt
+
+async function getCompany() {
+  try {
+      const reqToken = {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              // Include the Authorization header with the token
+              'Authorization': `Bearer ${token}`,
+              // Add any other headers if needed
+          },
+      };
+
+      // Fetch company data
+      const response = await fetch(baseUrl + '/companies/1', reqToken);
+      if (!response.ok) {
+          throw new Error('Failed to fetch company data');
+      }
+
+      // Parse response body as JSON and return
+      return await response.json();
+  } catch (error) {
+      console.error('Error fetching company data:', error);
+      throw error; // Rethrow the error to the caller
+  }
+}
+
+function getFormattedDate() {
+  // Create a new Date object for today's date
+  const currentDate = new Date();
+
+  // Define options for formatting the date
+  const options = { 
+      month: 'long', // Full month name (e.g., January)
+      day: 'numeric', // Day of the month (e.g., 26)
+      year: 'numeric' // Full year (e.g., 2023)
+  };
+
+  // Format the date according to the options
+  const formattedDate = currentDate.toLocaleDateString('pt-PT', options);
+
+  // Return the formatted date
+  return formattedDate;
+}
+
+
+// Print invoice
+async function generatePDF(data) {
+
+  const htmlContent = `
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receipt</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      
+    }
+
+    .receipt {
+      max-width: 280px;
+      margin: 10% auto;
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+      padding: 10px;
+    }
+
+
+    .divider {
+      border-top: 1px solid rgba(49, 47, 47, 0.1);
+      margin: 10px 0;
+    }
+    
+    .header {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .company-info {
+      margin-top: 10px;
+      margin-bottom: 25px;
+      font-size: 14px;
+    }
+
+    .company-info div, .info div{
+      margin-bottom: 10px;
+    }
+    .info {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .bd-line {
+      border-bottom: 1px dotted #c0c0c0;
+    }
+   
+    .item {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .item div{
+      margin-bottom: 13px;
+      font-size: 12px;
+   
+      
+    }
+
+    .total {
+      margin-top: 40px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .c-name{
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+  }
+  th, td {
+      border: none;
+      text-align: left;
+      padding: 8px 0;
+  }
+  </style>
+</head>
+<body>
+
+<div class="receipt" id="receipt">
+<div class="c-name">
+  <h3>WEB SOLUÇÕES</h3>
+</div>
+<div class="divider"></div>
+<div>Recibo nr 738784734</div>
+
+<div class="company-info">
+
+
+  <table>
+
+<tbody>
+<tr>
+  <td>Recibo n. 95487874</td>
+  </tr>
+    <tr>
+        <td>Data</td>
+        <td>12-03-2023</td>
+    </tr>
+ 
+   
+</tbody>
+</table>
+  
+</div>
+
+
+
+<div class="item">
+<table>
+
+<tbody>
+    <tr>
+        <td>Computador</td>
+        <td> 25000</td>
+    </tr>
+    <tr>
+        <td>Mouse Wireless</td>
+        <td> 750.00</td>
+    </tr>
+    <tr>
+        <td>Computador</td>
+        <td> 25000</td>
+    </tr>
+    <tr>
+        <td>Mouse Wireless</td>
+        <td> 750.00</td>
+    </tr>
+</tbody>
+</table>
+</div>
+
+
+  <h4 class="total">Total pago: MZN 250000.00</h4>
+
+</div>
+
+</body>
+</html>
+
+`;
+
+// Options for PDF generation
+const options = {
+filename: 'document.pdf', // Name of the PDF file
+html2canvas: {}, // Options for html2canvas library
+jsPDF: {} // Options for jsPDF library
+};
+
+// Generate PDF from HTML content
+html2pdf().from(htmlContent).set(options).toPdf().get('pdf').then(function(pdf) {
+// Create a blob URL for the PDF
+const blobUrl = URL.createObjectURL(pdf.output('blob'));
+
+// Open PDF in a new window
+window.open(blobUrl, '_blank');
+});
 }

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receipt</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .receipt {
+      max-width: 300px;
+      margin: 20px auto;
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+      padding: 10px;
+    }
+
+    .logo {
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .logo img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .divider {
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      /* box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px; */
+      margin: 10px 0;
+    }
+    
+    .header {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .company-info {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .company-info div, .info div{
+      margin-bottom: 10px;
+    }
+    .info {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .bd-line {
+      border-bottom: 1px dotted #c0c0c0;
+    }
+   
+    .item {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .item div{
+      margin-bottom: 13px;
+      font-size: 12px;
+      /* font: 14px Roboto, Sans-serif;
+      color: #c0c0c0; */
+      
+    }
+
+    .total {
+      margin-top: 25px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="receipt" id="receipt">
+    <div class="logo">
+      <!-- <img src="your-logo.png" alt="Company Logo"> -->
+      <h3>PALMA</h3>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="header">Recibo</div>
+
+    <div class="company-info">
+      <div>NUIT: 9843844389</div>
+      <div>Endereço: Munhava, Beira</div>
+      <div>Contacto: +2588643213</div>
+      <div>Data: 12-03-2023 12:34:56</div>
+      <div>Recibo No: 12345</div>
+      <div class="bd-line"></div>
+    </div>
+
+  
+
+    <div class="item">
+      <div>Computador: MZN 25000</div>
+      <div>Mouse Wireless: MZN 750.00</div>
+      <div>Computador: MZN 25000</div>
+      <div>Mouse Wireless: MZN 750.00</div>
+      <div>Computador: MZN 25000</div>
+      <div>Mouse Wireless: MZN 750.00</div>
+    </div>
+
+
+    <div class="total">Total: MZN 250000.00</div>
+
+    <div class="divider"></div>
+    
+    <div class="footer">
+      <p>Obrigado pela preferência, volte sempre!</p>
+    </div>
+  </div>
+
+  <button id="download-pdf">Convert 2 pdf </button>
+<script src="../js/html2pdf/html2pdf.bundle.js"></script>
+<script src="../js/html2pdf/convert2pdf.js"></script>
+</body>
+</html>

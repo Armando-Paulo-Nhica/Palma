@@ -8,10 +8,7 @@ var generatecode = false;
 $("#addPurchase").click(function(){
     // Create a new object for each purchase
     var isOk = true;
-    counter++;
-    if(counter == 2){
-        $(".counter").append(`<span><i class="fas fa-cart-plus"></i></span>`);
-    }
+   
 
     //Validation
     if($("#name1").val().trim() === ''){
@@ -37,26 +34,34 @@ $("#addPurchase").click(function(){
     }
     
     
-    $("#totalIn").text(counter)
-    $("#barcode1").focus()
-     var newPurchase = {
-        "name": $("#name1").val(),
-        "barcode": $("#barcode1").val().trim() === '' ? generateBarcode(): $("#barcode1").val().trim(),
-        "sell": $("#sell1").val(),
-        "shop": $("#shop1").val(),
-        "quantity": parseInt($("#quantity1").val(), 10),
-        "expiresIn": $("#expiresIn1").val(),
-        "invoice": parseInt($("#invoice1").val(), 10),
-        "categoryName":$("#categoryName1").val() == null ? $("#catName").val().trim() : $("#categoryName1").val(),
-        "supplierName": $("#suppliers").val() == null ? $("#supplierName").val().trim() : $("#suppliers").val(),
-        "contact": $("#contact").val().trim(),
-        "email":$("#email").val().trim()
-    };
-    
-    // Add the new object to the products array
-    products.push(newPurchase);
+    if(isOk){
 
-    $("#addProduct").modal("hide");
+        counter++;
+        if(counter == 2){
+            $(".counter").append(`<span><i class="fas fa-cart-plus"></i></span>`);
+        }
+        
+        $("#totalIn").text(counter)
+        $("#barcode1").focus()
+        var newPurchase = {
+            "name": $("#name1").val(),
+            "barcode": $("#barcode1").val().trim() === '' ? generateBarcode(): $("#barcode1").val().trim(),
+            "sell": $("#sell1").val(),
+            "shop": $("#shop1").val(),
+            "quantity": parseInt($("#quantity1").val(), 10),
+            "expiresIn": $("#expiresIn1").val(),
+            "invoice": parseInt($("#invoice1").val(), 10),
+            "categoryName":$("#categoryName1").val() == null ? $("#catName").val().trim() : $("#categoryName1").val(),
+            "supplierName": $("#suppliers").val() == null ? $("#supplierName").val().trim() : $("#suppliers").val(),
+            "contact": $("#contact").val().trim(),
+            "email":$("#email").val().trim()
+        };
+        
+        // Add the new object to the products array
+        products.push(newPurchase);
+
+        $("#addProduct").modal("hide");
+    }
 })
 
 // Add new purchase

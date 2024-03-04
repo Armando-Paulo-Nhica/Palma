@@ -663,7 +663,16 @@ $("#createCompany").click(function(e){
   document.addEventListener('DOMContentLoaded', getCompany);
   
   
-  
+//   Toggle
+$(".togg").click(function(){
+    if($(this).find('.icon').hasClass("fa-regular fa-circle")){
+        $(this).find('.icon').removeClass('fa-regular fa-circle').addClass('fa-solid fa-circle-check');
+    }
+    else
+    {
+        $(this).find('.icon').removeClass('fa-solid fa-circle-check').addClass('fa-regular fa-circle');
+    }
+})
   
   
   
