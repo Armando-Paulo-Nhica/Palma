@@ -94,9 +94,7 @@ function setPurchaseValues() {
                         </div>
                     
                     <div class="form-group col-md-6 mt-4 input-group col-md-12 col-xxl-12 col-xl-12">
-                            <div class="input-group-prepend bg-primary" data-toggle="modal" data-target="#addCategory">
-                                <div class="input-group-text bg-btn bt">+</div>
-                            </div>
+                            
                             
                             <select name="categories" id="categoryId${i + 1}" class="form-control categories">
                                 ${categories.map(item => `<option value="${item.id}" ${item.id === data.purchases[i].product.categoryId ? 'selected' : ''}>${item.name}</option>`).join('')}
@@ -175,9 +173,7 @@ function viewPaurchaseProducts() {
                         </div>
                     
                     <div class="form-group col-md-6 mt-4 input-group col-md-12 col-xxl-12 col-xl-12">
-                            <div class="input-group-prepend bg-primary" data-toggle="modal" data-target="#addCategory">
-                                <div class="input-group-text bg-btn bt">+</div>
-                            </div>
+                           
                             
                             <select name="categories" id="categoryId${counter + 1}" class="form-control categories" disabled>
                                 ${categories.map(item => `<option value="${item.id}" ${item.id === data.purchases[i].product.categoryId ? 'selected' : ''}>${item.name}</option>`).join('')}

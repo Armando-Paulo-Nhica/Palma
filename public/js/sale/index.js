@@ -408,7 +408,7 @@ $("#saleBtn").click(function(){
   // Perform the fetch request
   fetch(baseUrl+'/sales', requestOptions)
       .then(response => response.json())
-      .then(data => {
+      .then( async data => {
           if(!data.error){
               if(!status){
                     swal("Mensagem", "Venda registada com sucesso!", "success");
@@ -422,7 +422,16 @@ $("#saleBtn").click(function(){
                   setAmount();
               }
               else{
-                generatePDF([{name:"Nhica"}]);
+                var company = await getCompany().then(companyData => {
+                  return companyData;
+              })
+                generatePDF(company);
+
+                $("#counter-id").text("");
+                  counter = 0;
+                  sale = [];
+                  $('#dta').empty();
+                  setAmount();
               }
           }
           else
@@ -553,9 +562,12 @@ function getFormattedDate() {
 
 
 // Print invoice
-async function generatePDF(data) {
+async function generatePDF(company) {
+  
 
-  const htmlContent = `
+const todayDate = getFormattedDate(); 
+
+  const  htmlContent = `
   <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -564,7 +576,7 @@ async function generatePDF(data) {
   <title>Receipt</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: "Poppins", sans-serif !important;
       
     }
 
@@ -624,11 +636,6 @@ async function generatePDF(data) {
       font-weight: bold;
     }
 
-    .c-name{
-      margin-bottom: 20px;
-      display: flex;
-      justify-content: center;
-    }
 
     table {
       border-collapse: collapse;
@@ -639,65 +646,49 @@ async function generatePDF(data) {
       text-align: left;
       padding: 8px 0;
   }
+  #price {margin-top: 20px;}
   </style>
 </head>
 <body>
 
 <div class="receipt" id="receipt">
-<div class="c-name">
-  <h3>WEB SOLUÇÕES</h3>
+<div>
+  <h3>${company.name}</h3>
 </div>
 <div class="divider"></div>
-<div>Recibo nr 738784734</div>
+<div style="font-size: 17px;"> Recibo N. 738784734</div>
 
 <div class="company-info">
-
-
   <table>
-
-<tbody>
-<tr>
-  <td>Recibo n. 95487874</td>
-  </tr>
-    <tr>
-        <td>Data</td>
-        <td>12-03-2023</td>
-    </tr>
- 
-   
-</tbody>
-</table>
+    <tbody>
+        <tr><td>Data: ${todayDate}</td></tr>
+        <tr><td>Contacto: ${company.contact}</td></tr>
+        <tr><td>Endereço: ${company.zone}</td></tr>
+    </tbody>
+    </table>
   
 </div>
-
 
 
 <div class="item">
 <table>
 
 <tbody>
-    <tr>
-        <td>Computador</td>
-        <td> 25000</td>
+` +
+  sale.forEach((item) => `
+    <tr> 
+      
+      <td>${item.name}</td>
+      <td>${item.sell}</td>
     </tr>
-    <tr>
-        <td>Mouse Wireless</td>
-        <td> 750.00</td>
-    </tr>
-    <tr>
-        <td>Computador</td>
-        <td> 25000</td>
-    </tr>
-    <tr>
-        <td>Mouse Wireless</td>
-        <td> 750.00</td>
-    </tr>
+  `).join('\n') +
+  `
 </tbody>
 </table>
 </div>
 
 
-  <h4 class="total">Total pago: MZN 250000.00</h4>
+  <div id="price">Total pago: <strong class="total"> MZN ${sumAmount()}</strong></div>
 
 </div>
 
@@ -705,14 +696,13 @@ async function generatePDF(data) {
 </html>
 
 `;
-
 // Options for PDF generation
 const options = {
 filename: 'document.pdf', // Name of the PDF file
 html2canvas: {}, // Options for html2canvas library
 jsPDF: {} // Options for jsPDF library
 };
-
+ 
 // Generate PDF from HTML content
 html2pdf().from(htmlContent).set(options).toPdf().get('pdf').then(function(pdf) {
 // Create a blob URL for the PDF
@@ -721,4 +711,58 @@ const blobUrl = URL.createObjectURL(pdf.output('blob'));
 // Open PDF in a new window
 window.open(blobUrl, '_blank');
 });
+}
+
+ function sumAmount(){
+    var total = 0;
+    sale.map((item) => {
+        total += parseFloat(item.subtotal);
+    });
+    return parseFloat(total).toFixed(2); 
+}
+
+
+async function getCompany() {
+  try {
+      const reqToken = {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              // Include the Authorization header with the token
+              'Authorization': `Bearer ${token}`,
+              // Add any other headers if needed
+          },
+      };
+
+      // Fetch company data
+      const response = await fetch(baseUrl + '/companies/1', reqToken);
+      if (!response.ok) {
+          throw new Error('Failed to fetch company data');
+      }
+
+      // Parse response body as JSON and return
+      return await response.json();
+  } catch (error) {
+      console.error('Error fetching company data:', error);
+      throw error; // Rethrow the error to the caller
+  }
+}
+
+
+function getFormattedDate() {
+  // Create a new Date object for today's date
+  const currentDate = new Date();
+
+  // Define options for formatting the date
+  const options = { 
+      month: 'long', // Full month name (e.g., January)
+      day: 'numeric', // Day of the month (e.g., 26)
+      year: 'numeric' // Full year (e.g., 2023)
+  };
+
+  // Format the date according to the options
+  const formattedDate = currentDate.toLocaleDateString('pt-PT', options);
+
+  // Return the formatted date
+  return formattedDate;
 }
