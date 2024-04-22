@@ -103,6 +103,14 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Todas Vendas</h4>
+                                <div>
+                                    {# <select name="report_time" class="time">
+                                    <option value="">Hoje</option>
+                                    <option value="">Este més</option>
+                                    <option value="">ano</option>
+                                </select> #}
+                                <button class="exportBtn" id="exportToExcel">Exportar para excel <i class="fas fa-circle-down"></i></button>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -205,6 +213,9 @@
         </div>
     </div>
 </div> 
+
+
+
 <!-- Modal edit end -->
         <!--**********************************
             Content body end
@@ -215,14 +226,13 @@
                 
             </div>
         </div>
- 
 
-        
     </div>
    
 
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <script src="../../vendor/global/global.min.js"></script>
+
 <script src="../../js/sale/list.js"></script>
 <!-- <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script> -->
 <script src="../../js/datatable/datatable.js"></script> 
@@ -235,6 +245,15 @@
 <script src="../../vendor/datatables/js/jquery.dataTables.min.js"></script> 
 <!-- <script src="../../js/plugins-init/datatables.init.js"></script>  -->
 <script src="../../js/sweetalert.min.js"></script>
+
+{# <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script> #}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.0/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+
+
+
 </body>
 
 </html>

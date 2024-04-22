@@ -385,4 +385,74 @@ var reqToken = {
   }    
 
 
+  $("#exportToExcel").click(function(){
+    // Fetch data from the API
+    fetch(baseUrl + '/sales', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    })
+    .then(response => {
+        // Check if response is successful
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Extract necessary data from the API response
+        var allData = [];
+        data.sale.forEach(function(sale) {
+            let invoice = sale.invoice;
+            let totalAmount = sale.totalAmount;
+            let createdDate = new Date(sale.createdAt).toLocaleDateString('pt-PT');
+
+            sale.items.forEach(function(item) {
+                let productName = item.product.name;
+                let quantity = item.quantity;
+                let sell = item.sell;
+                
+                // Add data to allData array
+                allData.push([
+                    invoice,
+                    productName,
+                    quantity,
+                    sell,
+                    totalAmount,
+                    createdDate
+                ]);
+            });
+        });
+
+        // Add headers to the data
+        allData.unshift(["Recibo", "Produto", "Quantidade", "Preço", "Total pago", "Data venda"]);
+
+        // Convert data to Excel
+        var ws = XLSX.utils.aoa_to_sheet(allData);
+        var wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Sales");
+
+        // Save the workbook as a binary Excel file
+        var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+        function s2ab(s) {
+            var buf = new ArrayBuffer(s.length);
+            var view = new Uint8Array(buf);
+            for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+            return buf;
+        }
+        var blob = new Blob([s2ab(wbout)], { type: "application/octet-stream" });
+        saveAs(blob, "Sales.xlsx");
+    })
+    .catch(error => {
+        console.error('Error fetching data from API:', error);
+    });
+});
+
+
+
+
+
+
 });

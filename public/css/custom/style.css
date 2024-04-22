@@ -230,3 +230,17 @@ table .actions i:hover{cursor: pointer;color: var(--primary);}
     margin-right: 6px;
     top: 19px;
   }
+
+  .exportBtn{
+    padding: 5px 10px;
+    background-color: teal;
+    color: white;
+    border: none;
+    margin-left: 10px;
+    border-radius: 5px;
+  }
+
+  .time{
+    padding: 5px 10px;
+    
+  }
