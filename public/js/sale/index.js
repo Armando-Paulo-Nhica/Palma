@@ -560,151 +560,83 @@ function getFormattedDate() {
 
 
 // Print invoice
+
 async function generatePDF() {
-  await getCompany().then(company => {
+  try {
+      // Fetch company data
+      const company = await getCompany();
 
-const todayDate = getFormattedDate(); 
+      // Get today's date
+      const todayDate = getFormattedDate();
 
-  const  htmlContent = `
+      // Generate HTML content for receipt
+      const htmlContent = `
           <!DOCTYPE html>
-        <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Receipt</title>
-          <style>
-            body {
-              font-family: "Poppins", sans-serif !important;
-              
-            }
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Receipt Printer</title>
+              <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+              <style>
+                  /* Add CSS styles for receipt formatting */
+                  /* Adjust styles for 80mm width */
+                  body {
+                      width: 80mm;
+                  }
+                  #receiptContent {
+                      /* Adjust receipt content styles */
+                  }
+                  /* Add any additional styles as needed */
+              </style>
+          </head>
+          <body>
+              <div id="receiptContent">
+                  <h1>Receipt</h1>
+                  <p>Date: ${todayDate}</p>
+                  <p>Product: Test Product</p>
+                  <p>Price: $19.99</p>
+                  <p>Quantity: 2</p>
+                  <p>Total: $39.98</p>
+              </div>
+              <script>
+                  // Function to print receipt
+                  function printReceipt() {
+                      window.print();
+                  }
 
-            .receipt {
-              max-width: 280px;
-              margin: 10% auto;
-              box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-              padding: 10px;
-            }
+                  // Attach print event listener
+                  $(document).ready(function() {
+                      printReceipt();
+                  });
+              </script>
+          </body>
+          </html>
+      `;
 
+      // Create a hidden iframe to load the HTML content for printing
+      var iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+      var iframeDoc = iframe.contentWindow.document;
+      iframeDoc.open();
+      iframeDoc.write(htmlContent);
+      iframeDoc.close();
 
-            .divider {
-              border-top: 1px solid rgba(49, 47, 47, 0.1);
-              margin: 10px 0;
-            }
-            
-            .header {
-              text-align: center;
-              font-size: 18px;
-              font-weight: bold;
-              margin-bottom: 10px;
-            }
-
-            .company-info {
-              margin-top: 10px;
-              margin-bottom: 25px;
-              font-size: 14px;
-            }
-
-            .company-info div, .info div{
-              margin-bottom: 10px;
-            }
-            .info {
-              margin-top: 10px;
-              font-size: 14px;
-            }
-
-            .bd-line {
-              border-bottom: 1px dotted #c0c0c0;
-            }
-          
-            .item {
-              margin-top: 10px;
-              font-size: 14px;
-            }
-
-            .item div{
-              margin-bottom: 13px;
-              font-size: 12px;
-          
-              
-            }
-
-            .total {
-              margin-top: 40px;
-              font-size: 16px;
-              font-weight: bold;
-            }
-
-
-            table {
-              border-collapse: collapse;
-              width: 100%;
-          }
-          th, td {
-              border: none;
-              text-align: left;
-              padding: 8px 0;
-          }
-          #price {margin-top: 20px;}
-          </style>
-        </head>
-        <body>
-
-        <div class="receipt" id="receipt">
-        <div>
-          <h3>${company.name}</h3>
-        </div>
-        <div class="divider"></div>
-        <div style="font-size: 17px;"> Recibo n. 738784734</div>
-
-        <div class="company-info">
-          <table>
-            <tbody>
-                <tr><td>Data: ${todayDate}</td></tr>
-                <tr><td>Contacto: ${company.contact}</td></tr>
-                <tr><td>Endereço: ${company.zone}</td></tr>
-            </tbody>
-            </table>
-          
-        </div>
-
-
-        <div class="item">
-        <table>
-          <tbody>
-            ${sale.map(item => `
-              <tr>
-                <td>${item.name}</td>
-                <td>${item.sell}</td>
-              </tr>
-            `).join('\n')}
-          </tbody>
-        </table>
-        </div>
-          <div id="price">Total pago: <strong class="total"> MZN ${sumAmount()}</strong></div>
-        </div>
-        </body>
-        </html>
-`
-
-;
-    // Options for PDF generation
-    const options = {
-    filename: 'document.pdf', // Name of the PDF file
-    html2canvas: {}, // Options for html2canvas library
-    jsPDF: {} // Options for jsPDF library
-    };
-    
-    // Generate PDF from HTML content
-    html2pdf().from(htmlContent).set(options).toPdf().get('pdf').then(function(pdf) {
-    // Create a blob URL for the PDF
-    const blobUrl = URL.createObjectURL(pdf.output('blob'));
-
-    // Open PDF in a new window
-    window.open(blobUrl, '_blank');
-    });
-
-  })
+      // Wait for iframe to finish loading content
+      iframe.onload = function() {
+          // Print the content
+          iframe.contentWindow.print();
+      };
+  } catch (error) {
+      console.error('Error generating PDF:', error);
+  }
 }
+
+
+
+
+
 
  function sumAmount(){
     var total = 0;
