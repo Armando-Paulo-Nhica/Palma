@@ -244,3 +244,14 @@ table .actions i:hover{cursor: pointer;color: var(--primary);}
     padding: 5px 10px;
     
   }
+
+  .header-right i{
+    padding: 6px 9px;
+    border-radius: 50%;
+    background-color: #edeef1;
+    color: #5666be;
+  }
+
+  .header-right i:hover{
+    color: rgba(65, 63, 63, 0.596);
+  }
