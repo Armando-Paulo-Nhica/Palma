@@ -1,4 +1,28 @@
+const baseUrl = 'http://localhost:3000/api';
 
+$("#login-btn").click(function(e){
+    e.preventDefault();
+    const username = $("#username");
+    const password = $("#password");
+// console.log("ok")
+    if(username.val() === "" || password.val() == ""){
+        $(".msg").text("");
+        $(".msg").addClass("resp").text("Preencha todos os campos!")
+        
+        setTimeout(function () {
+            $(".msg").removeClass("resp").text("");
+            $(".msg").addClass("msg").text("Mensagem de resposta");
+        }, 3000);
+    }
+    else{
+        var user = {
+            username: $("#username").val(),
+            password: $("#password").val()
+           }
+           console.log(user)
+        auth(user);
+    }
+});
 
 
 
@@ -17,9 +41,11 @@ function auth(user) {
       .then((response) => {
         
         if (!response.ok) {
-          swal("Mensagem", data.message, "error");
+            $(".msg").addClass("resp").text("Credenciais inválidas!")
+
           setTimeout(function () {
-            swal.close();
+            $(".msg").removeClass("resp").text("");
+            $(".msg").addClass("msg").text("Mensagem de resposta");
           }, 3000);
         }
         return response.json();
@@ -37,16 +63,32 @@ function auth(user) {
           }
           
         } else {
-          swal("Mensagem", "Credenciais inválidas", "error");
+
+            $(".msg").addClass("resp").text("Credenciais inválidas!")
           setTimeout(function () {
-            swal.close();
+            $(".msg").removeClass("resp").text("");
+            $(".msg").addClass("msg").text("Mensagem de resposta");
           }, 3000);
+
         }
       })
       .catch((error) => {
-        swal("Mensagem", "Credenciais inválidas", "error");
+
+        $(".msg").addClass("resp").text("Credenciais inválidas!")
         setTimeout(function () {
-          swal.close();
+          $(".msg").removeClass("resp").text("");
+          $(".msg").addClass("msg").text("Mensagem de resposta");
         }, 3000);
+
       }); 
+}
+
+
+
+function isAdmin(){
+    const token = localStorage.getItem('token');
+    const [header, payload, signature] = token.split('.');
+    const decodedPayload = atob(payload);
+    const payloadData = JSON.parse(decodedPayload);
+    return payloadData.user.isAdmin;
 }

@@ -34,6 +34,7 @@ a{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .form{
@@ -57,6 +58,7 @@ a{
     color: white;
     width: 100%;
     border-radius: 20px;
+    cursor: pointer;
 }
 
 .forgotPass{
@@ -141,4 +143,23 @@ a{
     background-color: var(--bgWhite);
     padding: 0 4px;
 
+}
+
+
+.msg{
+    margin-top: 15px;
+    padding: 10px;
+    font-size: 13px;
+    color: #fff;
+    background-color: #fff;
+    font-weight: normal;
+    font-weight: 400;
+    width: 300px;
+    border-radius: 10px;
+    text-align: center;
+}
+.resp{
+    background-color: #f1d7da;
+    transition: .6s;
+    color:  rgb(220, 53, 53);
 }

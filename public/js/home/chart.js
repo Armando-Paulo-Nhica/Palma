@@ -145,9 +145,11 @@ var saleData = await saleValues.then(data => {return data})
 
 
 var chartType = $("#chartType").val();
+var chartType2 = $("#chartType2").val();
 var graficoArea;
 var graficoArea2;
 var configArea = {}
+var configArea2 = {}
 
 
 function displayChart(data, months, revenue){
@@ -175,8 +177,13 @@ function displayChart(data, months, revenue){
         data: dadosArea
     };
 
+    configArea2 = {
+      type: chartType2,
+      data: dadosArea
+  };
+
     graficoArea = new Chart(document.getElementById('area'), configArea);
-    graficoArea2 = new Chart(document.getElementById('area2'), configArea);
+    graficoArea2 = new Chart(document.getElementById('area2'), configArea2);
 }
 
 $("#chartType").on("change", function(){
@@ -186,6 +193,13 @@ $("#chartType").on("change", function(){
   graficoArea = new Chart(document.getElementById('area'), configArea);
 });
 
+
+$("#chartType2").on("change", function(){
+  var newChartType = $(this).val();
+  configArea2.type = newChartType;
+  graficoArea2.destroy();
+  graficoArea2 = new Chart(document.getElementById('area2'), configArea2);
+});
 
 
 // Grafico circular
