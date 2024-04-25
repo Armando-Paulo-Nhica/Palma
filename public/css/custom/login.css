@@ -1,0 +1,144 @@
+
+@import url('../../public/fonts/font.poppins.css');
+:root{
+  --bg: #4F39BE;
+    /* --bgSoft: #a498dd; */
+    --text: white;
+    --textSoft: #b7bac1;
+    --bgWhite: #fff;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
+body{
+    background-color: var(--bgWhite);
+    color: var(--textSoft);
+}
+
+a{
+    color: inherit;
+    text-decoration: none;
+}
+
+
+.container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
+    width: 300px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 20px 10px;
+    border-radius: 10px;
+}
+
+
+.form .logo{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.button{
+    padding: 10px;
+    border: none;
+    background-color: var(--bg);
+    color: white;
+    width: 100%;
+    border-radius: 20px;
+}
+
+.forgotPass{
+    color: var(--textSoft);
+    text-transform: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    font-size: 13px;
+}
+
+
+.or{
+    color: var(--textSoft);
+    margin: 20px 0;
+    padding: 0 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.or::before,
+.or::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 43%; /* Adjust the width of the line */
+    height: 2px;
+    background-color: #f0ebeb;
+}
+
+.or::before {
+    left: 0;
+    transform: translateY(-50%);
+}
+
+.or::after {
+    right: 0;
+    transform: translateY(-50%);
+}
+
+
+.inputGroup{
+    position: relative;
+    /* background-color: red; */
+    margin-bottom: 20px;
+}
+.input{
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border: 2px solid #c0c0c0;
+    border-radius: 10px;
+    outline: none;
+    background-color: transparent;
+    color: #c0c0c0;
+}
+
+.inputGroup label{
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    color: var(--textSoft);
+    transform: translateY(-50%);
+    font-size: 16px;
+    cursor: text;
+    
+}
+
+.input:focus{
+    border: 2px solid var(--bg);
+}
+.input:focus~label,
+.input:valid~label{
+    color: var(--bg);
+    top: 0px;
+    left: 8px;
+    font-size: 12px;
+    transition: .7s;
+    background-color: var(--bgWhite);
+    padding: 0 4px;
+
+}

@@ -49,6 +49,11 @@
       return payloadData.user.isAdmin;
   }
 
+
+
+
+  
+
     function auth(user) {
         var requestOptions = {
             method: 'POST',
