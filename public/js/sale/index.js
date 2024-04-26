@@ -611,7 +611,7 @@ async function generatePDF() {
                             align-items: center;
                             background: gray;
                             margin-bottom: 10px;
-                            width: 100%
+                            width: 100%;
                           }
                           .logo {
                             display: flex;
