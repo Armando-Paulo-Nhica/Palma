@@ -385,6 +385,8 @@ var reqToken = {
   }    
 
 
+
+  
   $("#exportToExcel").click(function(){
     // Fetch data from the API
     fetch(baseUrl + '/sales', {

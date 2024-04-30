@@ -92,3 +92,9 @@ function isAdmin(){
     const payloadData = JSON.parse(decodedPayload);
     return payloadData.user.isAdmin;
 }
+
+
+
+$("#passBtn").click(function(){
+  
+})

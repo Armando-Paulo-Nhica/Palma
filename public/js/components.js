@@ -150,7 +150,7 @@ document.getElementById("quixnav").innerHTML = `<div class="quixnav-scroll">
 </div>`;
 
 document.getElementById("footer-info").innerHTML = `
-<p>By <a href="#" target="_blank"> Web Soluções Gráfica | </a> info@websolucoesgrafica.co.mz | 2024</p>
+<p>By <a href="https://websolucoesgrafica.co.mz/" target="_blank"> Web Soluções Gráfica | </a> info@websolucoesgrafica.co.mz | 2024</p>
 `;
 
 document.getElementById("_passwordModal").innerHTML =`<div class="modal fade" id="editPassModal">
