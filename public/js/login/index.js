@@ -7,11 +7,10 @@ $("#login-btn").click(function(e){
 // console.log("ok")
     if(username.val() === "" || password.val() == ""){
         $(".msg").text("");
-        $(".msg").addClass("resp").text("Preencha todos os campos!")
+        $(".msg").addClass("resp").html("Preencha todos os campos!")
         
         setTimeout(function () {
-            $(".msg").removeClass("resp").text("");
-            $(".msg").addClass("msg").text("Mensagem de resposta");
+            $(".msg").removeClass("resp").html("");
         }, 3000);
     }
     else{
@@ -41,11 +40,9 @@ function auth(user) {
       .then((response) => {
         
         if (!response.ok) {
-            $(".msg").addClass("resp").text("Credenciais inválidas!")
-
+          $(".msg").addClass("resp").html("Credenciais inválidas!")
           setTimeout(function () {
-            $(".msg").removeClass("resp").text("");
-            $(".msg").addClass("msg").text("Mensagem de resposta");
+            $(".msg").removeClass("resp").html("");
           }, 3000);
         }
         return response.json();
@@ -64,20 +61,18 @@ function auth(user) {
           
         } else {
 
-            $(".msg").addClass("resp").text("Credenciais inválidas!")
+          $(".msg").addClass("resp").html("Credenciais inválidas!")
           setTimeout(function () {
-            $(".msg").removeClass("resp").text("");
-            $(".msg").addClass("msg").text("Mensagem de resposta");
+            $(".msg").removeClass("resp").html("");
           }, 3000);
 
         }
       })
       .catch((error) => {
 
-        $(".msg").addClass("resp").text("Credenciais inválidas!")
+        $(".msg").addClass("resp").html("Credenciais inválidas!")
         setTimeout(function () {
-          $(".msg").removeClass("resp").text("");
-          $(".msg").addClass("msg").text("Mensagem de resposta");
+          $(".msg").removeClass("resp").html("");
         }, 3000);
 
       }); 
@@ -93,8 +88,3 @@ function isAdmin(){
     return payloadData.user.isAdmin;
 }
 
-
-
-$("#passBtn").click(function(){
-  
-})
