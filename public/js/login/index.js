@@ -1,4 +1,10 @@
-const baseUrl = 'http://localhost:3000/api';
+
+if (!localStorage.getItem('API_URL')) {
+  // Se não estiver definida, defina a variável API_URL e salve no localStorage
+  // const apiUrl = "{{ apiUrl }}";
+  localStorage.setItem('API_URL', window.API_URL);
+}
+const baseUrl = localStorage.getItem('API_URL');
 
 $("#login-btn").click(function(e){
     e.preventDefault();

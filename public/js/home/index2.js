@@ -1,6 +1,6 @@
 function sumTodaySales(){
     const token = localStorage.getItem('token');
-    const baseUrl = 'http://localhost:3000/api';
+    const baseUrl = localStorage.getItem('API_URL');
     var reqToken = {
         method: 'GET',
         headers: {
@@ -21,7 +21,7 @@ function sumTodaySales(){
 
   function calcCost(){
     const token = localStorage.getItem('token');
-    const baseUrl = 'http://localhost:3000/api';
+    
     var reqToken = {
         method: 'GET',
         headers: {

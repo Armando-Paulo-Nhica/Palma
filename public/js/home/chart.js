@@ -6,7 +6,7 @@
   var pieLabels = [];
   var myPieChart;
   var interval = $("#interval").val();
-
+  const baseUrl = localStorage.getItem('API_URL');
 
   $("#interval").on("change", async function(){
     myPieChart.destroy();
@@ -22,7 +22,7 @@
   // Last five manths
   async function lastFiveMonths(){
     const token = localStorage.getItem('token');
-    const baseUrl = 'http://localhost:3000/api';
+    
     var reqToken = {
         method: 'GET',
         headers: {
@@ -47,7 +47,7 @@
 
   async function costOfLast5Months(){
     const token = localStorage.getItem('token');
-    const baseUrl = 'http://localhost:3000/api';
+    
     var reqToken = {
         method: 'GET',
         headers: {
@@ -73,7 +73,7 @@
   
   async function top3(interval){
     const token = localStorage.getItem('token');
-    const baseUrl = 'http://localhost:3000/api';
+    
     var reqToken = {
         method: 'GET',
         headers: {

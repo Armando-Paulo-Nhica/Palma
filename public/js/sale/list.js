@@ -1,5 +1,5 @@
 const token = localStorage.getItem('token');
-const baseUrl = 'http://localhost:3000/api';
+const baseUrl = localStorage.getItem('API_URL');
 
 $(document).ready(function() {
 
@@ -106,7 +106,7 @@ function setSaleValues() {
 }
 
 
-// View purchase products
+// View sold products
 function viewSaleProducts() {
     fetch(`${baseUrl}/sales/${rowId}`, {
         method: 'GET',

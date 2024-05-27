@@ -1,6 +1,6 @@
 $(document).ready(function() {
 const token = localStorage.getItem('token');
-const baseUrl = 'http://localhost:3000/api';
+const baseUrl = localStorage.getItem('API_URL');
 
 $(document).ready(function() {
 

@@ -1,6 +1,6 @@
 // Global product var
 const token = localStorage.getItem('token');
-const baseUrl = 'http://localhost:3000/api';
+const baseUrl = localStorage.getItem('API_URL');
 var products = [];
 var counter = 1;
 var generatecode = false;

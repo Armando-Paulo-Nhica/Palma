@@ -1,4 +1,6 @@
 
+
+
 function checkToken() {
     // Get the token from localStorage
     const token = localStorage.getItem('token');
@@ -30,6 +32,9 @@ function checkToken() {
 
 // Call the checkToken function when the page loads
 document.addEventListener('DOMContentLoaded', checkToken);
+
+
+
 
 function isAdmin(){
     const token = localStorage.getItem('token');

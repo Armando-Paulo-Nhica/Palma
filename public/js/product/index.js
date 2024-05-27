@@ -1,5 +1,5 @@
 
-const baseUrl = 'http://localhost:3000/api';
+const baseUrl = localStorage.getItem('API_URL');
 
 
 // Load categories
