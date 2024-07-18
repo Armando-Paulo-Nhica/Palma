@@ -9,3 +9,4 @@
 9. npm install nodemon
 10. npm start
 11. Done
+12. To run migrations: npx prisma migrate dev --name init
